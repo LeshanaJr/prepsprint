@@ -7,25 +7,21 @@ const passages = [
       {
         prompt: "What is the author's main argument?",
         choices: [
-          "Education is unnecessary",
-          "Education should focus more on understanding",
-          "Memorization is the best method",
-          "Schools should be eliminated"
+          { text: "Education is unnecessary", correct: false, choiceExplanation: " is incorrect because..."},
+          { text: "Education should focus more on understanding", correct: true, choiceExplanation: " is correct because in the passage, the author criticizes memorization and supports deeper understanding."},
+          { text: "Memorization is the best method", correct: false, choiceExplanation: " is incorrect because..."},
+          { text: "Schools should be eliminated", correct: false, choiceExplanation: " is incorrect because..."}
         ],
-        answer: 1,
-        explanation: "The author criticizes memorization and supports deeper understanding.",
         category: "main idea"
       },
       {
         prompt: "What tone does the author use?",
         choices: [
-          "Angry",
-          "Neutral",
-          "Critical",
-          "Humorous"
+         { text: "Angry", correct: false, choiceExplanation: " is incorrect because..."},
+          { text: "Critical", correct: true, choiceExplanation: " is correct because in the passage, the author critiques current systems. This means that the tone is critical."},
+          { text: "Neutral", correct: false, choiceExplanation: " is incorrect because..."},
+          { text: "Humorous", correct: false, choiceExplanation: " is incorrect because..."}
         ],
-        answer: 2,
-        explanation: "The author critiques current systems, so the tone is critical.",
         category: "tone"
       }
     ]
@@ -43,44 +39,70 @@ let score = 0;
 
 startBtn.addEventListener("click", startQuiz);
 
+function shuffleArray(array) {
+  const copy = [...array];
+
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+
+  return copy;
+}
+
 function startQuiz() {
   currentQuestion = 0;
   score = 0;
   showQuestion();
 }
 
+let currentShuffledChoices = [];
+
 function showQuestion() {
   const passage = passages[currentPassage];
   const q = passage.questions[currentQuestion];
 
+  currentShuffledChoices = shuffleArray(q.choices);
+
   quizContainer.innerHTML = `
     <h2>${passage.title}</h2>
     <p>${passage.text}</p>
-
     <hr>
-
     <h3>Question ${currentQuestion + 1}</h3>
     <p>${q.prompt}</p>
 
-    ${q.choices.map((choice, i) => `
-      <button onclick="selectAnswer(${i})">
-      ${indexToLetters[i] + ": " + choice}
-      </button>
+    ${currentShuffledChoices.map((choice, i) => `
+      <button class ="answer-btn" onclick="selectAnswer(${i})">${choice.text}
+     ${indexToLetters[i] + ": " + choice.text} </button>
     `).join("")}
   `;
 }
 
 function selectAnswer(i) {
   const q = passages[currentPassage].questions[currentQuestion];
-
-  const buttons = quizContainer.querySelectorAll("button");
+  const buttons = quizContainer.querySelectorAll("answer-btn");
+  const selectedChoice = currentShuffledChoices[i];
+var correctIndex;
   
-  if (i === q.answer) score++;
+  buttons.forEach((btn, index) => {
+    if (currentShuffledChoices[index].correct) {
+      btn.style.backgroundColor = "green";
+      correctIndex = index;
+    } else if (index === i) {
+      btn.style.backgroundColor = "red";
+    }
 
-  quizContainer.innerHTML = `
-    <p><strong>Your Choice:</strong> ${indexToLetters[i]}</p>
-    <p><strong>Answer:</strong> ${indexToLetters[q.answer]}</p>
-    <p><strong>Explanation:</strong> ${q.explanation}</p>
+    btn.disabled = true;
+  });
+
+  if (selectedChoice.correct) {
+    score++;
+  }
+  
+  quizContainer.innerHTML += `
+  <p><strong>Your Choice:</strong> ${indexToLetters[i]}</p>
+    <p><strong>Answer:</strong> ${indexToLetters[correctIndex]}</p>
+    <p><strong>Explanation:</strong> ${"Answer choice" + indexToLetters[correctIndex] + q.choices[i].choiceExplanation}</p>
     <button onclick="nextQuestion()">Next</button>
   `;
 }
