@@ -72,7 +72,7 @@ function selectAnswer(i) {
   if (i === q.answer) score++;
 
   quizContainer.innerHTML = `
-    <p><strong>Answer:</strong> ${q[q.answer]}</p>
+    <p><strong>Answer:</strong> ${q.choices[q.answer]}</p>
     <p><strong>Explanation:</strong> ${q.explanation}</p>
     <button onclick="nextQuestion()">Next</button>
   `;
