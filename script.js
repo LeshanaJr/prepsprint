@@ -63,7 +63,9 @@ function showQuestion() {
     <p>${q.prompt}</p>
 
     ${q.choices.map((choice, i) => `
-      <button onclick="selectAnswer(${i})">${choice}</button>
+      <button onclick="selectAnswer(${i})">
+      ${indexToLetters[i] + ": " + choice}
+      </button>
     `).join("")}
   `;
 }
@@ -76,7 +78,7 @@ function selectAnswer(i) {
   if (i === q.answer) score++;
 
   quizContainer.innerHTML = `
-      <p><strong>Your Choice:</strong> ${indexToLetters[i]}</p>
+    <p><strong>Your Choice:</strong> ${indexToLetters[i]}</p>
     <p><strong>Answer:</strong> ${indexToLetters[q.answer]}</p>
     <p><strong>Explanation:</strong> ${q.explanation}</p>
     <button onclick="nextQuestion()">Next</button>
