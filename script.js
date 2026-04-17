@@ -32,6 +32,8 @@ const passages = [
   }
 ];
 
+const indexToLetters = ["A", "B", "C", "D"];
+
 const startBtn = document.getElementById("start-btn");
 const quizContainer = document.getElementById("quiz-container");
 
@@ -69,10 +71,12 @@ function showQuestion() {
 function selectAnswer(i) {
   const q = passages[currentPassage].questions[currentQuestion];
 
+  const buttons = quizContainer.querySelectorAll("button");
+  
   if (i === q.answer) score++;
 
   quizContainer.innerHTML = `
-    <p><strong>Answer:</strong> ${q.choices[q.answer]}</p>
+    <p><strong>Answer:</strong> ${indexToLetters[q.answer]}</p>
     <p><strong>Explanation:</strong> ${q.explanation}</p>
     <button onclick="nextQuestion()">Next</button>
   `;
