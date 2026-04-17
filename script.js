@@ -72,7 +72,7 @@ function showQuestion() {
     <p>${q.prompt}</p>
 
     ${currentShuffledChoices.map((choice, i) => `
-      <button class ="answer-btn" onclick="selectAnswer(${i})">${choice.text}
+      <button class ="answer-btn" onclick="selectAnswer(${i})">
      ${indexToLetters[i] + ": " + choice.text} </button>
     `).join("")}
   `;
@@ -102,7 +102,7 @@ var correctIndex;
   quizContainer.innerHTML += `
   <p><strong>Your Choice:</strong> ${indexToLetters[i]}</p>
     <p><strong>Answer:</strong> ${indexToLetters[correctIndex]}</p>
-    <p><strong>Explanation:</strong> ${"Answer choice" + indexToLetters[correctIndex] + q.choices[i].choiceExplanation}</p>
+    <p><strong>Explanation:</strong> ${"Answer choice " + indexToLetters[correctIndex] + q.choices[i].choiceExplanation}</p>
     <button onclick="nextQuestion()">Next</button>
   `;
 }
