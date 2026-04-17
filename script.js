@@ -82,7 +82,7 @@ function selectAnswer(i) {
   const q = passages[currentPassage].questions[currentQuestion];
   const buttons = quizContainer.querySelectorAll("answer-btn");
   const selectedChoice = currentShuffledChoices[i];
-var correctIndex;
+var correctIndex = "";
   
   buttons.forEach((btn, index) => {
     if (currentShuffledChoices[index].correct) {
