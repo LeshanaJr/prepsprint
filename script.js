@@ -205,10 +205,10 @@ function getTotalQuestionsForCurrentSubject() {
 function getResultMessage(score, total) {
   const percent = score / total;
 
-  if (percent === 1) return "Perfect score. Nice work.";
-  if (percent >= 0.8) return "Strong job. You’re in good shape.";
-  if (percent >= 0.6) return "Solid start. Review the ones you missed.";
-  return "Keep going. Practice a little more and you’ll improve.";
+  if (percent === 1) return "Perfect score! If these exact questions were on the real AP exam, you'd get a 5.";
+  if (percent >= 0.8) return "Good job! If these exact questions were on the real AP exam, you'd get a 4.";
+  if (percent >= 0.6) return "This is a solid start, make sure to review the ones you missed. If these exact questions were on the real AP exam, you'd get a 3.";
+  return "Remember that practice makes perfect. Keep studying and answering questions, and you'll definitely improve your score. You can retry this section, or test your knowledge on another AP class.";
 }
 
 function nextQuestion() {
