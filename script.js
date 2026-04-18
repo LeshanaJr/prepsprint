@@ -111,7 +111,7 @@ function showQuestion() {
   appContainer.innerHTML = `
     <h2>${subject.name}</h2>
     <h3>${passage.title}</h3>
-    <p>${passage.text}</p>
+    <p class="passage-text">${passage.text}</p>
     <hr>
     <p><strong>Question ${currentQuestion + 1}</strong></p>
     <p>${q.prompt}</p>
