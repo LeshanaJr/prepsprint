@@ -285,6 +285,8 @@ let rapidQuestionIndex = 0;
 let rapidAdvanceDelay = 1000;
 let rapidStreak = 0;
 let bestRapidStreak = 0;
+let weakAreaQuestions = [];
+let weakAreaQuestionIndex = 0;
 const indexToLetters = ["A", "B", "C", "D"];
 
 function showHomePage() {
@@ -345,17 +347,48 @@ function showSubjectPage() {
   document.getElementById("back-home-btn").addEventListener("click", showHomePage);
 }
 
+function getQuestionsByCategories(subjectIndex, categories) {
+  const subject = subjects[subjectIndex];
+  const matchingQuestions = [];
+
+  subject.passages.forEach((passage) => {
+    passage.questions.forEach((question) => {
+      if (categories.includes(question.category)) {
+        matchingQuestions.push({
+          ...question,
+          passageTitle: passage.title,
+          passageText: passage.text
+        });
+      }
+    });
+  });
+
+  return matchingQuestions;
+}
+
+function getTopWeakCategories(limit = 2) {
+  const entries = Object.entries(weakPoints);
+
+  if (entries.length === 0) {
+    return [];
+  }
+
+  entries.sort((a, b) => b[1] - a[1]);
+
+  return entries.slice(0, limit).map(([category]) => category);
+}
+
 function startSubject(subjectIndex, mode = "standard") {
   currentSubject = subjectIndex;
   currentPassage = 0;
   currentQuestion = 0;
   score = 0;
-  weakPoints = {};
   currentMode = mode;
   rapidStreak = 0;
   bestRapidStreak = 0;
 
   if (mode === "rapid") {
+    weakPoints = {};
     rapidQuestions = shuffleArray(subjects[subjectIndex].rapidQuestions || []);
     rapidQuestionIndex = 0;
 
@@ -373,7 +406,56 @@ function startSubject(subjectIndex, mode = "standard") {
     return;
   }
 
+  if (mode === "weak") {
+    const topCategories = getTopWeakCategories(2);
+    weakAreaQuestions = shuffleArray(getQuestionsByCategories(subjectIndex, topCategories));
+    weakAreaQuestionIndex = 0;
+    score = 0;
+
+    if (weakAreaQuestions.length === 0) {
+      appContainer.innerHTML = `
+        <h2>${subjects[subjectIndex].name}</h2>
+        <p>No weak-area questions are available yet.</p>
+        <button onclick="showSubjectPage()">Back to Subjects</button>
+        <button onclick="showHomePage()">Home</button>
+      `;
+      return;
+    }
+
+    showWeakAreaQuestion();
+    return;
+  }
+
+  weakPoints = {};
   showQuestion();
+}
+
+function showWeakAreaQuestion() {
+  const subject = subjects[currentSubject];
+  const q = weakAreaQuestions[weakAreaQuestionIndex];
+  const progressPercent = ((weakAreaQuestionIndex + 1) / weakAreaQuestions.length) * 100;
+
+  currentShuffledChoices = shuffleArray(q.choices);
+
+  appContainer.innerHTML = `
+    <h2>${subject.name}</h2>
+    <p class="progress-text">
+      Practice Weak Areas • Question ${weakAreaQuestionIndex + 1} of ${weakAreaQuestions.length}
+    </p>
+
+    <div class="progress-bar-container">
+      <div class="progress-bar-fill" style="width: ${progressPercent}%"></div>
+    </div>
+
+    <p><strong>Focus:</strong> ${q.category}</p>
+    <p>${q.prompt}</p>
+
+    ${currentShuffledChoices.map((choice, i) => `
+      <button class="answer-btn" onclick="selectWeakAreaAnswer(${i})">
+        ${indexToLetters[i]}: ${choice.text}
+      </button>
+    `).join("")}
+  `;
 }
 
 function showRapidQuestion() {
@@ -400,6 +482,56 @@ function showRapidQuestion() {
         ${indexToLetters[i]}: ${choice.text}
       </button>
     `).join("")}
+  `;
+}
+
+function selectWeakAreaAnswer(i) {
+  const q = weakAreaQuestions[weakAreaQuestionIndex];
+  const buttons = appContainer.querySelectorAll(".answer-btn");
+  const selectedChoice = currentShuffledChoices[i];
+  let correctIndex = -1;
+
+  buttons.forEach((btn, index) => {
+    if (currentShuffledChoices[index].correct) {
+      btn.classList.add("correct");
+      correctIndex = index;
+    } else if (index === i) {
+      btn.classList.add("wrong");
+    }
+
+    btn.disabled = true;
+  });
+
+  if (selectedChoice.correct) {
+    score++;
+  }
+
+  appContainer.innerHTML += `
+    <div class="feedback-box">
+      <p><strong>Your Choice:</strong> ${indexToLetters[i]}: ${currentShuffledChoices[i].text}</p>
+      <p><strong>Answer:</strong> ${indexToLetters[correctIndex]}: ${currentShuffledChoices[correctIndex].text}</p>
+      <p><strong>Explanation:</strong> Answer choice ${indexToLetters[i]}${selectedChoice.choiceExplanation}</p>
+    </div>
+    <button id="next-btn" onclick="nextWeakAreaQuestion()">Next</button>
+  `;
+}
+
+function nextWeakAreaQuestion() {
+  weakAreaQuestionIndex++;
+
+  if (weakAreaQuestionIndex < weakAreaQuestions.length) {
+    showWeakAreaQuestion();
+    return;
+  }
+
+  appContainer.innerHTML = `
+    <h2>${subjects[currentSubject].name} Weak Areas Complete</h2>
+    <p>Final Score: ${score}/${weakAreaQuestions.length}</p>
+    <p>${getResultMessage(score, weakAreaQuestions.length)}</p>
+    <button onclick="startSubject(currentSubject, 'weak')">Practice Weak Areas Again</button>
+    <button onclick="startSubject(currentSubject, 'standard')">Back to Standard Practice</button>
+    <button onclick="showSubjectPage()">Choose Another Subject</button>
+    <button onclick="showHomePage()">Home</button>
   `;
 }
 
@@ -457,6 +589,7 @@ function nextRapidQuestion() {
     <p>Best Streak: ${bestRapidStreak}</p>
     <p>${getResultMessage(score, rapidQuestions.length)}</p>
     <p><strong>Focus on:</strong> ${getWeakPointSummary()}</p>
+    <button onclick="startSubject(currentSubject, 'weak')">Practice Weak Areas</button>
     <button onclick="startSubject(currentSubject, 'rapid')">Retry Rapid Fire</button>
     <button onclick="startSubject(currentSubject, 'standard')">Try Standard Practice</button>
     <button onclick="showSubjectPage()">Choose Another Subject</button>
@@ -596,10 +729,11 @@ function nextQuestion() {
   <p>Final Score: ${score}/${getTotalQuestionsForCurrentSubject()}</p>
   <p>${getResultMessage(score, getTotalQuestionsForCurrentSubject())}</p>
   <p><strong>Focus on:</strong> ${getWeakPointSummary()}</p>
-  <p>You can retry this section, or test your knowledge on another AP class.</p>
-  <button onclick="startSubject(currentSubject, 'standard')">Retry Subject</button>
-  <button onclick="showSubjectPage()">Choose Another Subject</button>
-  <button onclick="showHomePage()">Home</button>
+  <p>You can retry this section, practice your weak areas, or test your knowledge on another AP class.</p>
+  <button onclick="startSubject(currentSubject, 'weak')">Practice Weak Areas</button>
+<button onclick="startSubject(currentSubject, 'standard')">Retry Subject</button>
+<button onclick="showSubjectPage()">Choose Another Subject</button>
+<button onclick="showHomePage()">Home</button>
 `;
 }
 
