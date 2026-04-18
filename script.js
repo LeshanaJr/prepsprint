@@ -178,11 +178,13 @@ function selectAnswer(i) {
   }
 
   appContainer.innerHTML += `
+  <div class="feedback-box">
     <p><strong>Your Choice:</strong> ${indexToLetters[i]}: ${currentShuffledChoices[i].text}</p>
     <p><strong>Answer:</strong> ${indexToLetters[correctIndex]}: ${currentShuffledChoices[correctIndex].text}</p>
     <p><strong>Explanation:</strong> Answer choice ${indexToLetters[i]}${selectedChoice.choiceExplanation}</p>
-    <button id="next-btn" onclick="nextQuestion()">Next</button>
-  `;
+  </div>
+  <button id="next-btn" onclick="nextQuestion()">Next</button>
+`;
 }
 
 function getTotalQuestionsForCurrentSubject() {
