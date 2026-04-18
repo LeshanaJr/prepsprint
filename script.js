@@ -1,6 +1,30 @@
 const subjects = [
   {
     name: "AP Lang",
+
+    rapidQuestions: [
+      {
+        prompt: "Which choice best describes a critical tone?",
+        choices: [
+          { text: "Strongly approving", correct: false, choiceExplanation: " is incorrect because approving is the opposite of critical." },
+          { text: "Evaluative and fault-finding", correct: true, choiceExplanation: " is correct because a critical tone evaluates and points out flaws." },
+          { text: "Playful and joking", correct: false, choiceExplanation: " is incorrect because playful does not mean critical." },
+          { text: "Confused and uncertain", correct: false, choiceExplanation: " is incorrect because critical does not necessarily mean confused." }
+        ],
+        category: "tone"
+      },
+      {
+        prompt: "Which choice best describes an author's main claim?",
+        choices: [
+          { text: "A random detail", correct: false, choiceExplanation: " is incorrect because a claim is the author's main point, not a random detail." },
+          { text: "The central argument being made", correct: true, choiceExplanation: " is correct because a claim is the author's main argument." },
+          { text: "A quote from another source", correct: false, choiceExplanation: " is incorrect because a claim is not just any quote." },
+          { text: "A grammar rule", correct: false, choiceExplanation: " is incorrect because a claim is about argument, not grammar." }
+        ],
+        category: "main idea"
+      }
+    ],
+    
     passages: [
       {
         title: "Passage 1",
@@ -32,6 +56,20 @@ const subjects = [
   },
   {
     name: "AP World",
+
+  rapidQuestions: [
+    {
+      prompt: "Which development most directly increased cultural exchange across regions?",
+      choices: [
+        { text: "Isolation", correct: false, choiceExplanation: " is incorrect because isolation reduces exchange." },
+        { text: "Trade networks", correct: true, choiceExplanation: " is correct because trade networks connected different regions." },
+        { text: "Crop failure", correct: false, choiceExplanation: " is incorrect because crop failure does not directly increase cultural exchange." },
+        { text: "Local disputes", correct: false, choiceExplanation: " is incorrect because local disputes do not usually expand exchange." }
+      ],
+      category: "trade"
+    }
+  ],
+
     passages: [
       {
         title: "Passage 1",
@@ -127,23 +165,6 @@ function showSubjectPage() {
   document.getElementById("back-home-btn").addEventListener("click", showHomePage);
 }
 
-function getAllQuestionsForSubject(subjectIndex) {
-  const subject = subjects[subjectIndex];
-  const allQuestions = [];
-
-  subject.passages.forEach((passage) => {
-    passage.questions.forEach((question) => {
-      allQuestions.push({
-        ...question,
-        passageTitle: passage.title,
-        passageText: passage.text
-      });
-    });
-  });
-
-  return allQuestions;
-}
-
 function startSubject(subjectIndex, mode = "standard") {
   currentSubject = subjectIndex;
   currentPassage = 0;
@@ -155,8 +176,19 @@ function startSubject(subjectIndex, mode = "standard") {
   bestRapidStreak = 0;
 
   if (mode === "rapid") {
-    rapidQuestions = shuffleArray(getAllQuestionsForSubject(subjectIndex));
+    rapidQuestions = shuffleArray(subjects[subjectIndex].rapidQuestions || []);
     rapidQuestionIndex = 0;
+
+    if (rapidQuestions.length === 0) {
+      appContainer.innerHTML = `
+        <h2>${subjects[subjectIndex].name}</h2>
+        <p>Rapid Fire questions are not available for this subject yet.</p>
+        <button onclick="showSubjectPage()">Back to Subjects</button>
+        <button onclick="showHomePage()">Home</button>
+      `;
+      return;
+    }
+
     showRapidQuestion();
     return;
   }
