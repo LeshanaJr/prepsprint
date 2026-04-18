@@ -54,9 +54,19 @@ const indexToLetters = ["A", "B", "C", "D"];
 
 function showHomePage() {
   appContainer.innerHTML = `
-    <h1>PrepSprint</h1>
-    <p>Quick AP practice on your phone.</p>
+    <div class="home-header">
+      <h1 class="app-title">PrepSprint</h1>
+      <p class="app-subtitle">Fast AP practice built for your phone.</p>
+    </div>
+
     <button id="go-subjects-btn">Choose Subject</button>
+
+    <div class="home-stats">
+      <p class="home-stats-title">What this app does</p>
+      <p class="home-stats-text">
+        Practice multiple-choice questions, review explanations, and study by subject.
+      </p>
+    </div>
   `;
 
   document.getElementById("go-subjects-btn").addEventListener("click", showSubjectPage);
@@ -64,8 +74,8 @@ function showHomePage() {
 
 function showSubjectPage() {
   appContainer.innerHTML = `
-    <h1>Select a Subject</h1>
-    <div id="subject-list"></div>
+    <h1 class="section-title">Select a Subject</h1>
+    <div id="subject-list" class="subject-list"></div>
     <button id="back-home-btn">Back</button>
   `;
 
@@ -73,8 +83,9 @@ function showSubjectPage() {
 
   subjects.forEach((subject, index) => {
     subjectList.innerHTML += `
-      <button class="subject-btn" onclick="startSubject(${index})">
-        ${subject.name}
+      <button class="subject-card" onclick="startSubject(${index})">
+        <div class="subject-card-title">${subject.name}</div>
+        <div class="subject-card-desc">Tap to start practice</div>
       </button>
     `;
   });
@@ -110,10 +121,15 @@ function showQuestion() {
 
   appContainer.innerHTML = `
     <h2>${subject.name}</h2>
+    <p style="color:#555; margin-top:4px;">
+      Question ${currentQuestion + 1} of ${passage.questions.length}
+    </p>
+
     <h3>${passage.title}</h3>
     <p class="passage-text">${passage.text}</p>
+
     <hr>
-    <p><strong>Question ${currentQuestion + 1}</strong></p>
+
     <p>${q.prompt}</p>
 
     ${currentShuffledChoices.map((choice, i) => `
@@ -165,6 +181,7 @@ function nextQuestion() {
   } else {
     appContainer.innerHTML = `
       <h2>${subject.name} Complete</h2>
+      <p style="margin-top: 12px;">${q.prompt}</p>
       <p>Score: ${score}/${passage.questions.length}</p>
       <button onclick="showSubjectPage()">Choose Another Subject</button>
       <button onclick="showHomePage()">Home</button>
