@@ -74,12 +74,17 @@ function showHomePage() {
     <div class="home-stats">
       <p class="home-stats-title">What is PrepSprint?</p>
       <p class="home-stats-text">
-        PrepSprint is a digital tool that I made to help people study for their AP exams. With PrepSprint, you can:<br>
-        • Practice multiple-choice questions<br>
+        PrepSprint is a digital tool that I made to help people study for their AP exams. With PrepSprint, you can:
+        </p>
+    
+      <p class="home-stats-text">  • Practice multiple-choice questions<br>
         • Review explanations<br>
-        • Study by subject<br>
-        As of right now, PrepSprint only has a very limited selection of AP Lang and AP World questions. Within the next week, I intend on adding more questions for not only these subjects, but other popular AP classes such as AP Chem, AP Precalc, AP Psych, and AP Bio.
+        • Study by subject</p>
+        
+      <p class="home-stats-text"> 
+      As of right now, PrepSprint only has a very limited selection of AP Lang and AP World questions. Within the next week, I intend on adding more questions for not only these subjects, but other popular AP classes such as AP Chem, AP Precalc, AP Psych, and AP Bio.
       </p>
+      
     </div>
   `;
 
