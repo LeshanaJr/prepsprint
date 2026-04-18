@@ -81,13 +81,12 @@ function showQuestion() {
 }
 
 function selectAnswer(i) {
-  const q = passages[currentPassage].questions[currentQuestion];
-  const buttons = quizContainer.querySelectorAll("answer-btn");
+  const buttons = quizContainer.querySelectorAll(".answer-btn");
   const selectedChoice = currentShuffledChoices[i];
-var correctIndex = "";
-  
+  let correctIndex = -1;
+
   buttons.forEach((btn, index) => {
-    if (currentShuffledChoices[index].correct === true) {
+    if (currentShuffledChoices[index].correct) {
       btn.style.backgroundColor = "green";
       correctIndex = index;
     } else if (index === i) {
@@ -100,11 +99,11 @@ var correctIndex = "";
   if (selectedChoice.correct) {
     score++;
   }
-  
+
   quizContainer.innerHTML += `
-  <p><strong>Your Choice:</strong> ${indexToLetters[i]}</p>
+    <p><strong>Your Choice:</strong> ${indexToLetters[i]}</p>
     <p><strong>Answer:</strong> ${indexToLetters[correctIndex]}</p>
-    <p><strong>Explanation:</strong> ${"Answer choice " + indexToLetters[i] + q.choices[i].choiceExplanation}</p>
+    <p><strong>Explanation:</strong> Answer choice ${indexToLetters[i]}${selectedChoice.choiceExplanation}</p>
     <button onclick="nextQuestion()">Next</button>
   `;
 }
