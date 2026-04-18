@@ -62,6 +62,8 @@ let score = 0;
 let currentShuffledChoices = [];
 let weakPoints = {};
 let currentMode = "";
+let rapidQuestions = [];
+let rapidQuestionIndex = 0;
 const indexToLetters = ["A", "B", "C", "D"];
 
 function showHomePage() {
@@ -103,15 +105,40 @@ function showSubjectPage() {
   const subjectList = document.getElementById("subject-list");
 
   subjects.forEach((subject, index) => {
-    subjectList.innerHTML += `
-      <button class="subject-card" onclick="startSubject(${index})">
-        <div class="subject-card-title">${subject.name}</div>
-        <div class="subject-card-desc">Tap to start practice</div>
+  subjectList.innerHTML += `
+    <div class="subject-card">
+      <div class="subject-card-title">${subject.name}</div>
+      <div class="subject-card-desc">Choose a study mode</div>
+
+      <button class="subject-btn" onclick="startSubject(${index}, 'standard')">
+        Standard Practice
       </button>
-    `;
-  });
+
+      <button class="subject-btn" onclick="startSubject(${index}, 'rapid')">
+        Rapid Fire
+      </button>
+    </div>
+  `;
+});
 
   document.getElementById("back-home-btn").addEventListener("click", showHomePage);
+}
+
+function getAllQuestionsForSubject(subjectIndex) {
+  const subject = subjects[subjectIndex];
+  const allQuestions = [];
+
+  subject.passages.forEach((passage) => {
+    passage.questions.forEach((question) => {
+      allQuestions.push({
+        ...question,
+        passageTitle: passage.title,
+        passageText: passage.text
+      });
+    });
+  });
+
+  return allQuestions;
 }
 
 function startSubject(subjectIndex, mode = "standard") {
@@ -121,7 +148,96 @@ function startSubject(subjectIndex, mode = "standard") {
   score = 0;
   weakPoints = {};
   currentMode = mode;
+
+  if (mode === "rapid") {
+    rapidQuestions = shuffleArray(getAllQuestionsForSubject(subjectIndex));
+    rapidQuestionIndex = 0;
+    showRapidQuestion();
+    return;
+  }
+
   showQuestion();
+}
+
+function showRapidQuestion() {
+  const subject = subjects[currentSubject];
+  const q = rapidQuestions[rapidQuestionIndex];
+  const progressPercent = ((rapidQuestionIndex + 1) / rapidQuestions.length) * 100;
+
+  currentShuffledChoices = shuffleArray(q.choices);
+
+  appContainer.innerHTML = `
+    <h2>${subject.name} - Rapid Fire</h2>
+    <p class="progress-text">
+      Question ${rapidQuestionIndex + 1} of ${rapidQuestions.length}
+    </p>
+
+    <div class="progress-bar-container">
+      <div class="progress-bar-fill" style="width: ${progressPercent}%"></div>
+    </div>
+
+    <p>${q.prompt}</p>
+
+    ${currentShuffledChoices.map((choice, i) => `
+      <button class="answer-btn" onclick="selectRapidAnswer(${i})">
+        ${indexToLetters[i]}: ${choice.text}
+      </button>
+    `).join("")}
+  `;
+}
+
+function selectRapidAnswer(i) {
+  const q = rapidQuestions[rapidQuestionIndex];
+  const buttons = appContainer.querySelectorAll(".answer-btn");
+  const selectedChoice = currentShuffledChoices[i];
+  let correctIndex = -1;
+
+  buttons.forEach((btn, index) => {
+    if (currentShuffledChoices[index].correct) {
+      btn.classList.add("correct");
+      correctIndex = index;
+    } else if (index === i) {
+      btn.classList.add("wrong");
+    }
+
+    btn.disabled = true;
+  });
+
+  if (selectedChoice.correct) {
+    score++;
+  } else {
+    const category = q.category;
+    weakPoints[category] = (weakPoints[category] || 0) + 1;
+  }
+
+  appContainer.innerHTML += `
+    <div class="feedback-box">
+      <p><strong>Your Choice:</strong> ${indexToLetters[i]}: ${currentShuffledChoices[i].text}</p>
+      <p><strong>Answer:</strong> ${indexToLetters[correctIndex]}: ${currentShuffledChoices[correctIndex].text}</p>
+      <p><strong>Explanation:</strong> Answer choice ${indexToLetters[i]}${selectedChoice.choiceExplanation}</p>
+    </div>
+    <button id="next-btn" onclick="nextRapidQuestion()">Next</button>
+  `;
+}
+
+function nextRapidQuestion() {
+  rapidQuestionIndex++;
+
+  if (rapidQuestionIndex < rapidQuestions.length) {
+    showRapidQuestion();
+    return;
+  }
+
+  appContainer.innerHTML = `
+    <h2>${subjects[currentSubject].name} Rapid Fire Complete</h2>
+    <p>Final Score: ${score}/${rapidQuestions.length}</p>
+    <p>${getResultMessage(score, rapidQuestions.length)}</p>
+    <p><strong>Focus on:</strong> ${getWeakPointSummary()}</p>
+    <button onclick="startSubject(currentSubject, 'rapid')">Retry Rapid Fire</button>
+    <button onclick="startSubject(currentSubject, 'standard')">Try Standard Practice</button>
+    <button onclick="showSubjectPage()">Choose Another Subject</button>
+    <button onclick="showHomePage()">Home</button>
+  `;
 }
 
 function shuffleArray(array) {
@@ -257,7 +373,7 @@ function nextQuestion() {
   <p>${getResultMessage(score, getTotalQuestionsForCurrentSubject())}</p>
   <p><strong>Focus on:</strong> ${getWeakPointSummary()}</p>
   <p>You can retry this section, or test your knowledge on another AP class.</p>
-  <button onclick="startSubject(currentSubject)">Retry Subject</button>
+  <button onclick="startSubject(currentSubject, 'standard')">Retry Subject</button>
   <button onclick="showSubjectPage()">Choose Another Subject</button>
   <button onclick="showHomePage()">Home</button>
 `;
