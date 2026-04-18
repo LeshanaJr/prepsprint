@@ -12,6 +12,73 @@ body {
   padding: 18px;
   border-radius: 16px;
   box-sizing: border-box;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+h1, h2, h3, p {
+  word-wrap: break-word;
+}
+
+p {
+  line-height: 1.5;
+}
+
+.home-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.app-title {
+  font-size: 32px;
+  margin: 0 0 8px 0;
+}
+
+.app-subtitle {
+  margin: 0;
+  color: #555;
+  font-size: 16px;
+}
+
+.section-title {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.passage-text {
+  background: #f8f8f8;
+  padding: 12px;
+  border-radius: 10px;
+  line-height: 1.6;
+}
+
+.subject-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.subject-card {
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  background: #111;
+  color: white;
+  padding: 16px;
+  text-align: left;
+  box-sizing: border-box;
+  transition: transform 0.08s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.subject-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.subject-card-desc {
+  font-size: 14px;
+  color: #d6d6d6;
 }
 
 .answer-btn,
@@ -19,7 +86,8 @@ body {
 .subject-btn,
 #go-subjects-btn,
 #back-home-btn,
-#next-btn {
+#next-btn,
+.subject-card {
   display: block;
   width: 100%;
   padding: 14px 16px;
@@ -55,7 +123,8 @@ body {
 .subject-btn:active,
 #go-subjects-btn:active,
 #back-home-btn:active,
-#next-btn:active {
+#next-btn:active,
+.subject-card:active {
   transform: scale(0.98);
 }
 
@@ -64,7 +133,8 @@ body {
 .subject-btn:focus,
 #go-subjects-btn:focus,
 #back-home-btn:focus,
-#next-btn:focus {
+#next-btn:focus,
+.subject-card:focus {
   box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.28);
 }
 
@@ -82,6 +152,24 @@ body {
   opacity: 1;
 }
 
+.home-stats {
+  background: #f8f8f8;
+  border-radius: 12px;
+  padding: 14px;
+  margin-top: 18px;
+}
+
+.home-stats-title {
+  margin: 0 0 6px 0;
+  font-weight: bold;
+}
+
+.home-stats-text {
+  margin: 0;
+  color: #555;
+  font-size: 14px;
+}
+
 @media (max-width: 480px) {
   body {
     padding: 12px;
@@ -92,30 +180,23 @@ body {
     border-radius: 14px;
   }
 
+  .app-title {
+    font-size: 28px;
+  }
+
   .answer-btn,
   #start-btn,
   .subject-btn,
   #go-subjects-btn,
   #back-home-btn,
-  #next-btn {
+  #next-btn,
+  .subject-card {
     font-size: 15px;
     padding: 13px 14px;
     border-radius: 10px;
   }
-}
 
-h1, h2, h3, p {
-  word-wrap: break-word;
+  .subject-card-title {
+    font-size: 17px;
+  }
 }
-
-p {
-  line-height: 1.5;
-}
-
-.passage-text {
-  background: #f8f8f8;
-  padding: 12px;
-  border-radius: 10px;
-  line-height: 1.6;
-}
-
