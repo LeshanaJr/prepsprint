@@ -447,6 +447,9 @@ function showWeakAreaQuestion() {
       <div class="progress-bar-fill" style="width: ${progressPercent}%"></div>
     </div>
 
+    ${q.passageTitle ? `<h3>${q.passageTitle}</h3>` : ""}
+    ${q.passageText ? `<p class="passage-text">${q.passageText}</p><hr>` : ""}
+
     <p><strong>Focus:</strong> ${q.category}</p>
     <p>${q.prompt}</p>
 
