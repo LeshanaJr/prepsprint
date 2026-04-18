@@ -66,15 +66,19 @@ function showHomePage() {
   appContainer.innerHTML = `
     <div class="home-header">
       <h1 class="app-title">PrepSprint</h1>
-      <p class="app-subtitle">Fast AP practice built for your phone.</p>
+      <p class="app-subtitle">A fast, free, and reliable way to study for your AP exams from the comfort of your phone.</p>
     </div>
 
     <button id="go-subjects-btn">Choose Subject</button>
 
     <div class="home-stats">
-      <p class="home-stats-title">What this app does</p>
+      <p class="home-stats-title">What is PrepSprint?</p>
       <p class="home-stats-text">
-        Practice multiple-choice questions, review explanations, and study by subject.
+        PrepSprint is a digital tool that I made to help people study for their AP exams. With PrepSprint, you can:<br>
+        • Practice multiple-choice questions<br>
+        • Review explanations<br>
+        • Study by subject<br>
+        As of right now, PrepSprint only has a very limited selection of AP Lang and AP World questions. Within the next week, I intend on adding more questions for not only these subjects, but other popular AP classes such as AP Chem, AP Precalc, AP Psych, and AP Bio.
       </p>
     </div>
   `;
