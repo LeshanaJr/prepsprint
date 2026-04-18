@@ -60,6 +60,7 @@ let currentPassage = 0;
 let currentQuestion = 0;
 let score = 0;
 let currentShuffledChoices = [];
+let weakPoints = {};
 const indexToLetters = ["A", "B", "C", "D"];
 
 function showHomePage() {
@@ -184,7 +185,10 @@ function selectAnswer(i) {
 
   if (selectedChoice.correct) {
     score++;
-  }
+  } else {
+  const category = q.category;
+  weakPoints[category] = (weakPoints[category] || 0) + 1;
+}
 
   appContainer.innerHTML += `
   <div class="feedback-box">
@@ -211,6 +215,20 @@ function getResultMessage(score, total) {
   return "Remember that practice makes perfect. Keep studying and answering questions, and you'll definitely improve your score.";
 }
 
+function getWeakPointSummary() {
+  const entries = Object.entries(weakPoints);
+
+  if (entries.length === 0) {
+    return "No major weak points so far.";
+  }
+
+  entries.sort((a, b) => b[1] - a[1]);
+
+  return entries
+    .map(([category, count]) => `${category} (${count} missed)`)
+    .join(", ");
+}
+
 function nextQuestion() {
   const subject = subjects[currentSubject];
   const passage = subject.passages[currentPassage];
@@ -234,6 +252,7 @@ function nextQuestion() {
   <h2>${subject.name} Complete</h2>
   <p>Final Score: ${score}/${getTotalQuestionsForCurrentSubject()}</p>
   <p>${getResultMessage(score, getTotalQuestionsForCurrentSubject())}</p>
+  <p><strong>Focus on:</strong> ${getWeakPointSummary()}</p>
   <p>You can retry this section, or test your knowledge on another AP class.</p>
   <button onclick="startSubject(currentSubject)">Retry Subject</button>
   <button onclick="showSubjectPage()">Choose Another Subject</button>
