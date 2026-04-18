@@ -87,10 +87,10 @@ function selectAnswer(i) {
 
   buttons.forEach((btn, index) => {
     if (currentShuffledChoices[index].correct) {
-      btn.style.backgroundColor = "green";
+      btn.classList.add("correct");
       correctIndex = index;
     } else if (index === i) {
-      btn.style.backgroundColor = "red";
+      btn.classList.add("wrong");
     }
 
     btn.disabled = true;
@@ -104,7 +104,7 @@ function selectAnswer(i) {
     <p><strong>Your Choice:</strong> ${indexToLetters[i]}</p>
     <p><strong>Answer:</strong> ${indexToLetters[correctIndex]}</p>
     <p><strong>Explanation:</strong> Answer choice ${indexToLetters[i]}${selectedChoice.choiceExplanation}</p>
-    <button onclick="nextQuestion()">Next</button>
+    <button id="next-btn" onclick="nextQuestion()">Next</button>
   `;
 }
 
