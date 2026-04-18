@@ -61,6 +61,7 @@ let currentQuestion = 0;
 let score = 0;
 let currentShuffledChoices = [];
 let weakPoints = {};
+let currentMode = "";
 const indexToLetters = ["A", "B", "C", "D"];
 
 function showHomePage() {
@@ -113,11 +114,13 @@ function showSubjectPage() {
   document.getElementById("back-home-btn").addEventListener("click", showHomePage);
 }
 
-function startSubject(subjectIndex) {
+function startSubject(subjectIndex, mode = "standard") {
   currentSubject = subjectIndex;
   currentPassage = 0;
   currentQuestion = 0;
   score = 0;
+  weakPoints = {};
+  currentMode = mode;
   showQuestion();
 }
 
