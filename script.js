@@ -90,8 +90,6 @@ function startSubject(subjectIndex) {
   showQuestion();
 }
 
-let currentShuffledChoices = [];
-
 function shuffleArray(array) {
   const copy = [...array];
 
@@ -149,8 +147,8 @@ function selectAnswer(i) {
   }
 
   appContainer.innerHTML += `
-    <p><strong>Your Choice:</strong> ${indexToLetters[i]}</p>
-    <p><strong>Answer:</strong> ${indexToLetters[correctIndex]}</p>
+    <p><strong>Your Choice:</strong> ${indexToLetters[i]}: ${currentShuffledChoices[i].text}</p>
+    <p><strong>Answer:</strong> ${indexToLetters[correctIndex]}: ${currentShuffledChoices[correctIndex].text}</p>
     <p><strong>Explanation:</strong> Answer choice ${indexToLetters[i]}${selectedChoice.choiceExplanation}</p>
     <button id="next-btn" onclick="nextQuestion()">Next</button>
   `;
