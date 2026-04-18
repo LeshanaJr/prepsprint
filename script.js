@@ -202,6 +202,15 @@ function getTotalQuestionsForCurrentSubject() {
   }, 0);
 }
 
+function getResultMessage(score, total) {
+  const percent = score / total;
+
+  if (percent === 1) return "Perfect score. Nice work.";
+  if (percent >= 0.8) return "Strong job. You’re in good shape.";
+  if (percent >= 0.6) return "Solid start. Review the ones you missed.";
+  return "Keep going. Practice a little more and you’ll improve.";
+}
+
 function nextQuestion() {
   const subject = subjects[currentSubject];
   const passage = subject.passages[currentPassage];
@@ -224,6 +233,7 @@ function nextQuestion() {
   appContainer.innerHTML = `
   <h2>${subject.name} Complete</h2>
   <p>Final Score: ${score}/${getTotalQuestionsForCurrentSubject()}</p>
+  <p>${getResultMessage(score, getTotalQuestionsForCurrentSubject())}</p>
   <button onclick="startSubject(currentSubject)">Retry Subject</button>
   <button onclick="showSubjectPage()">Choose Another Subject</button>
   <button onclick="showHomePage()">Home</button>
