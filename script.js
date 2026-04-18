@@ -64,6 +64,9 @@ let weakPoints = {};
 let currentMode = "";
 let rapidQuestions = [];
 let rapidQuestionIndex = 0;
+let rapidAdvanceDelay = 1000;
+let rapidStreak = 0;
+let bestRapidStreak = 0;
 const indexToLetters = ["A", "B", "C", "D"];
 
 function showHomePage() {
@@ -148,6 +151,8 @@ function startSubject(subjectIndex, mode = "standard") {
   score = 0;
   weakPoints = {};
   currentMode = mode;
+  rapidStreak = 0;
+  bestRapidStreak = 0;
 
   if (mode === "rapid") {
     rapidQuestions = shuffleArray(getAllQuestionsForSubject(subjectIndex));
@@ -167,10 +172,10 @@ function showRapidQuestion() {
   currentShuffledChoices = shuffleArray(q.choices);
 
   appContainer.innerHTML = `
-    <h2>${subject.name} - Rapid Fire</h2>
+    <h2>${subject.name}</h2>
     <p class="progress-text">
-      Question ${rapidQuestionIndex + 1} of ${rapidQuestions.length}
-    </p>
+  Rapid Fire • Question ${rapidQuestionIndex + 1} of ${rapidQuestions.length} • Streak: ${rapidStreak}
+</p>
 
     <div class="progress-bar-container">
       <div class="progress-bar-fill" style="width: ${progressPercent}%"></div>
@@ -204,20 +209,26 @@ function selectRapidAnswer(i) {
   });
 
   if (selectedChoice.correct) {
-    score++;
-  } else {
-    const category = q.category;
-    weakPoints[category] = (weakPoints[category] || 0) + 1;
+  score++;
+  rapidStreak++;
+  if (rapidStreak > bestRapidStreak) {
+    bestRapidStreak = rapidStreak;
   }
+} else {
+  const category = q.category;
+  weakPoints[category] = (weakPoints[category] || 0) + 1;
+  rapidStreak = 0;
+}
 
   appContainer.innerHTML += `
     <div class="feedback-box">
-      <p><strong>Your Choice:</strong> ${indexToLetters[i]}: ${currentShuffledChoices[i].text}</p>
-      <p><strong>Answer:</strong> ${indexToLetters[correctIndex]}: ${currentShuffledChoices[correctIndex].text}</p>
-      <p><strong>Explanation:</strong> Answer choice ${indexToLetters[i]}${selectedChoice.choiceExplanation}</p>
+      <p><strong>${selectedChoice.correct ? "Correct" : "Incorrect"}</strong></p>
     </div>
-    <button id="next-btn" onclick="nextRapidQuestion()">Next</button>
   `;
+
+  setTimeout(() => {
+    nextRapidQuestion();
+  }, rapidAdvanceDelay);
 }
 
 function nextRapidQuestion() {
@@ -231,6 +242,7 @@ function nextRapidQuestion() {
   appContainer.innerHTML = `
     <h2>${subjects[currentSubject].name} Rapid Fire Complete</h2>
     <p>Final Score: ${score}/${rapidQuestions.length}</p>
+    <p>Best Streak: ${bestRapidStreak}</p>
     <p>${getResultMessage(score, rapidQuestions.length)}</p>
     <p><strong>Focus on:</strong> ${getWeakPointSummary()}</p>
     <button onclick="startSubject(currentSubject, 'rapid')">Retry Rapid Fire</button>
