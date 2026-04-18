@@ -3,27 +3,207 @@ const subjects = [
     name: "AP Lang",
 
     rapidQuestions: [
-      {
-        prompt: "Which choice best describes a critical tone?",
-        choices: [
-          { text: "Strongly approving", correct: false, choiceExplanation: " is incorrect because approving is the opposite of critical." },
-          { text: "Evaluative and fault-finding", correct: true, choiceExplanation: " is correct because a critical tone evaluates and points out flaws." },
-          { text: "Playful and joking", correct: false, choiceExplanation: " is incorrect because playful does not mean critical." },
-          { text: "Confused and uncertain", correct: false, choiceExplanation: " is incorrect because critical does not necessarily mean confused." }
-        ],
-        category: "tone"
-      },
-      {
-        prompt: "Which choice best describes an author's main claim?",
-        choices: [
-          { text: "A random detail", correct: false, choiceExplanation: " is incorrect because a claim is the author's main point, not a random detail." },
-          { text: "The central argument being made", correct: true, choiceExplanation: " is correct because a claim is the author's main argument." },
-          { text: "A quote from another source", correct: false, choiceExplanation: " is incorrect because a claim is not just any quote." },
-          { text: "A grammar rule", correct: false, choiceExplanation: " is incorrect because a claim is about argument, not grammar." }
-        ],
-        category: "main idea"
-      }
-    ],
+{
+  prompt: "What does a 'critical' tone most nearly mean?",
+  choices: [
+    { text: "Strongly approving", correct: false, choiceExplanation: " is incorrect because approving is the opposite of critical." },
+    { text: "Evaluating and pointing out flaws", correct: true, choiceExplanation: " is correct because a critical tone analyzes and critiques ideas." },
+    { text: "Confused and uncertain", correct: false, choiceExplanation: " is incorrect because critical does not imply confusion." },
+    { text: "Playful and humorous", correct: false, choiceExplanation: " is incorrect because humor is not necessarily critical." }
+  ],
+  category: "tone"
+},
+{
+  prompt: "Which best describes an author's claim?",
+  choices: [
+    { text: "A minor detail", correct: false, choiceExplanation: " is incorrect because a claim is the main argument." },
+    { text: "The central argument", correct: true, choiceExplanation: " is correct because a claim is the main point being argued." },
+    { text: "A random quote", correct: false, choiceExplanation: " is incorrect because a claim is not just a quote." },
+    { text: "A background fact", correct: false, choiceExplanation: " is incorrect because a claim is argumentative." }
+  ],
+  category: "main idea"
+},
+{
+  prompt: "What is the purpose of a rhetorical question?",
+  choices: [
+    { text: "To confuse the reader", correct: false, choiceExplanation: " is incorrect because rhetorical questions clarify or persuade." },
+    { text: "To make the reader think", correct: true, choiceExplanation: " is correct because rhetorical questions engage the audience." },
+    { text: "To provide data", correct: false, choiceExplanation: " is incorrect because rhetorical questions are not evidence." },
+    { text: "To summarize", correct: false, choiceExplanation: " is incorrect because rhetorical questions are not summaries." }
+  ],
+  category: "rhetoric"
+},
+{
+  prompt: "Which appeal relies on credibility?",
+  choices: [
+    { text: "Pathos", correct: false, choiceExplanation: " is incorrect because pathos appeals to emotion." },
+    { text: "Logos", correct: false, choiceExplanation: " is incorrect because logos appeals to logic." },
+    { text: "Ethos", correct: true, choiceExplanation: " is correct because ethos establishes credibility." },
+    { text: "Syntax", correct: false, choiceExplanation: " is incorrect because syntax is sentence structure." }
+  ],
+  category: "rhetoric"
+},
+{
+  prompt: "What does 'diction' refer to?",
+  choices: [
+    { text: "Sentence length", correct: false, choiceExplanation: " is incorrect because that is syntax." },
+    { text: "Word choice", correct: true, choiceExplanation: " is correct because diction refers to word choice." },
+    { text: "Paragraph order", correct: false, choiceExplanation: " is incorrect because that is organization." },
+    { text: "Tone only", correct: false, choiceExplanation: " is incorrect because diction influences tone but is not the same." }
+  ],
+  category: "style"
+},
+{
+  prompt: "Which best describes 'syntax'?",
+  choices: [
+    { text: "Word meaning", correct: false, choiceExplanation: " is incorrect because that is diction." },
+    { text: "Sentence structure", correct: true, choiceExplanation: " is correct because syntax is how sentences are arranged." },
+    { text: "Tone", correct: false, choiceExplanation: " is incorrect because syntax contributes to tone but is not tone itself." },
+    { text: "Grammar errors", correct: false, choiceExplanation: " is incorrect because syntax is not just errors." }
+  ],
+  category: "style"
+},
+{
+  prompt: "Which best describes 'logos'?",
+  choices: [
+    { text: "Emotional appeal", correct: false, choiceExplanation: " is incorrect because that is pathos." },
+    { text: "Logical reasoning", correct: true, choiceExplanation: " is correct because logos appeals to logic." },
+    { text: "Speaker credibility", correct: false, choiceExplanation: " is incorrect because that is ethos." },
+    { text: "Humor", correct: false, choiceExplanation: " is incorrect because humor is not logos." }
+  ],
+  category: "rhetoric"
+},
+{
+  prompt: "A 'satirical' tone is best described as:",
+  choices: [
+    { text: "Serious and formal", correct: false, choiceExplanation: " is incorrect because satire is not purely serious." },
+    { text: "Mocking to expose flaws", correct: true, choiceExplanation: " is correct because satire criticizes through humor." },
+    { text: "Neutral and objective", correct: false, choiceExplanation: " is incorrect because satire is not neutral." },
+    { text: "Confused", correct: false, choiceExplanation: " is incorrect because satire is intentional." }
+  ],
+  category: "tone"
+},
+{
+  prompt: "What is a counterargument?",
+  choices: [
+    { text: "The author's main claim", correct: false, choiceExplanation: " is incorrect because a counterargument opposes the claim." },
+    { text: "An opposing viewpoint", correct: true, choiceExplanation: " is correct because it presents the other side." },
+    { text: "A summary", correct: false, choiceExplanation: " is incorrect because it is not a summary." },
+    { text: "A conclusion", correct: false, choiceExplanation: " is incorrect because it is not the ending." }
+  ],
+  category: "argument"
+},
+{
+  prompt: "What does 'pathos' appeal to?",
+  choices: [
+    { text: "Logic", correct: false, choiceExplanation: " is incorrect because that is logos." },
+    { text: "Emotion", correct: true, choiceExplanation: " is correct because pathos appeals to feelings." },
+    { text: "Credibility", correct: false, choiceExplanation: " is incorrect because that is ethos." },
+    { text: "Structure", correct: false, choiceExplanation: " is incorrect because structure is not pathos." }
+  ],
+  category: "rhetoric"
+},
+{
+  prompt: "Which best describes 'tone'?",
+  choices: [
+    { text: "The author's attitude", correct: true, choiceExplanation: " is correct because tone reflects attitude." },
+    { text: "The main idea", correct: false, choiceExplanation: " is incorrect because tone is not the claim." },
+    { text: "Sentence structure", correct: false, choiceExplanation: " is incorrect because that is syntax." },
+    { text: "Grammar rules", correct: false, choiceExplanation: " is incorrect because tone is not grammar." }
+  ],
+  category: "tone"
+},
+{
+  prompt: "What is the function of evidence?",
+  choices: [
+    { text: "To weaken the argument", correct: false, choiceExplanation: " is incorrect because evidence strengthens arguments." },
+    { text: "To support a claim", correct: true, choiceExplanation: " is correct because evidence backs up the argument." },
+    { text: "To confuse the reader", correct: false, choiceExplanation: " is incorrect because evidence clarifies." },
+    { text: "To summarize", correct: false, choiceExplanation: " is incorrect because evidence is not summary." }
+  ],
+  category: "argument"
+},
+{
+  prompt: "Which is an example of figurative language?",
+  choices: [
+    { text: "Literal statement", correct: false, choiceExplanation: " is incorrect because figurative language is non-literal." },
+    { text: "Metaphor", correct: true, choiceExplanation: " is correct because metaphor compares unlike things." },
+    { text: "Fact", correct: false, choiceExplanation: " is incorrect because facts are literal." },
+    { text: "Statistic", correct: false, choiceExplanation: " is incorrect because statistics are literal." }
+  ],
+  category: "style"
+},
+{
+  prompt: "What does 'bias' mean?",
+  choices: [
+    { text: "Complete neutrality", correct: false, choiceExplanation: " is incorrect because bias is not neutral." },
+    { text: "A preference or prejudice", correct: true, choiceExplanation: " is correct because bias reflects a leaning." },
+    { text: "A summary", correct: false, choiceExplanation: " is incorrect because bias is not summary." },
+    { text: "A tone", correct: false, choiceExplanation: " is incorrect because bias is not tone itself." }
+  ],
+  category: "argument"
+},
+{
+  prompt: "What is 'purpose' in rhetoric?",
+  choices: [
+    { text: "The audience", correct: false, choiceExplanation: " is incorrect because audience is separate." },
+    { text: "The reason the author writes", correct: true, choiceExplanation: " is correct because purpose is the author's goal." },
+    { text: "The structure", correct: false, choiceExplanation: " is incorrect because structure is different." },
+    { text: "The tone", correct: false, choiceExplanation: " is incorrect because tone is attitude." }
+  ],
+  category: "rhetoric"
+},
+{
+  prompt: "Which best describes a concession?",
+  choices: [
+    { text: "Ignoring the opposition", correct: false, choiceExplanation: " is incorrect because concession acknowledges it." },
+    { text: "Acknowledging opposing views", correct: true, choiceExplanation: " is correct because concession admits the other side." },
+    { text: "Ending the argument", correct: false, choiceExplanation: " is incorrect because concession is not the conclusion." },
+    { text: "Changing the topic", correct: false, choiceExplanation: " is incorrect because concession stays on topic." }
+  ],
+  category: "argument"
+},
+{
+  prompt: "What is 'audience'?",
+  choices: [
+    { text: "The author's tone", correct: false, choiceExplanation: " is incorrect because audience is the reader." },
+    { text: "The intended readers", correct: true, choiceExplanation: " is correct because audience is who the text targets." },
+    { text: "The argument", correct: false, choiceExplanation: " is incorrect because argument is separate." },
+    { text: "The evidence", correct: false, choiceExplanation: " is incorrect because evidence is support." }
+  ],
+  category: "rhetoric"
+},
+{
+  prompt: "Which choice best defines 'parallelism'?",
+  choices: [
+    { text: "Repeating structure for effect", correct: true, choiceExplanation: " is correct because parallelism repeats structure." },
+    { text: "Changing topics suddenly", correct: false, choiceExplanation: " is incorrect because that is not parallelism." },
+    { text: "Using only short sentences", correct: false, choiceExplanation: " is incorrect because parallelism is about structure." },
+    { text: "Adding emotion", correct: false, choiceExplanation: " is incorrect because that is pathos." }
+  ],
+  category: "style"
+},
+{
+  prompt: "What does 'exigence' mean?",
+  choices: [
+    { text: "The audience", correct: false, choiceExplanation: " is incorrect because exigence is the situation." },
+    { text: "The reason the text exists", correct: true, choiceExplanation: " is correct because exigence is what prompted the writing." },
+    { text: "The tone", correct: false, choiceExplanation: " is incorrect because tone is attitude." },
+    { text: "The structure", correct: false, choiceExplanation: " is incorrect because structure is different." }
+  ],
+  category: "rhetoric"
+},
+{
+  prompt: "Which best describes 'formal tone'?",
+  choices: [
+    { text: "Casual and slang-filled", correct: false, choiceExplanation: " is incorrect because formal tone avoids slang." },
+    { text: "Professional and structured", correct: true, choiceExplanation: " is correct because formal tone is polished." },
+    { text: "Joking and playful", correct: false, choiceExplanation: " is incorrect because that is informal." },
+    { text: "Angry and emotional", correct: false, choiceExplanation: " is incorrect because formal tone is controlled." }
+  ],
+  category: "tone"
+}
+],
     
     passages: [
       {
