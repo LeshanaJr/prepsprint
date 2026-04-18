@@ -208,7 +208,7 @@ function getResultMessage(score, total) {
   if (percent === 1) return "Perfect score! If these exact questions were on the real AP exam, you'd get a 5.";
   if (percent >= 0.8) return "Good job! If these exact questions were on the real AP exam, you'd get a 4.";
   if (percent >= 0.6) return "This is a solid start, make sure to review the ones you missed. If these exact questions were on the real AP exam, you'd get a 3.";
-  return "Remember that practice makes perfect. Keep studying and answering questions, and you'll definitely improve your score. You can retry this section, or test your knowledge on another AP class.";
+  return "Remember that practice makes perfect. Keep studying and answering questions, and you'll definitely improve your score.";
 }
 
 function nextQuestion() {
@@ -234,6 +234,7 @@ function nextQuestion() {
   <h2>${subject.name} Complete</h2>
   <p>Final Score: ${score}/${getTotalQuestionsForCurrentSubject()}</p>
   <p>${getResultMessage(score, getTotalQuestionsForCurrentSubject())}</p>
+  <p>You can retry this section, or test your knowledge on another AP class.</p>
   <button onclick="startSubject(currentSubject)">Retry Subject</button>
   <button onclick="showSubjectPage()">Choose Another Subject</button>
   <button onclick="showHomePage()">Home</button>
