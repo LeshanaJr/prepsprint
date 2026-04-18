@@ -222,11 +222,12 @@ function nextQuestion() {
   }
 
   appContainer.innerHTML = `
-    <h2>${subject.name} Complete</h2>
-    <p>Final Score: ${score}/${getTotalQuestionsForCurrentSubject()}</p>
-    <button onclick="showSubjectPage()">Choose Another Subject</button>
-    <button onclick="showHomePage()">Home</button>
-  `;
+  <h2>${subject.name} Complete</h2>
+  <p>Final Score: ${score}/${getTotalQuestionsForCurrentSubject()}</p>
+  <button onclick="startSubject(currentSubject)">Retry Subject</button>
+  <button onclick="showSubjectPage()">Choose Another Subject</button>
+  <button onclick="showHomePage()">Home</button>
+`;
 }
 
 showHomePage();
