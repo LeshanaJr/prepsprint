@@ -6,17 +6,27 @@ const subjects = [
         title: "Passage 1",
         text: `Education plays a crucial role in shaping society. It not only provides knowledge but also builds critical thinking skills. Many argue that modern education systems focus too much on memorization rather than understanding.`,
         questions: [
-          {
-            prompt: "What is the author's main argument?",
-            choices: [
-              { text: "Education is unnecessary", correct: false, choiceExplanation: " is incorrect because..." },
-              { text: "Education should focus more on understanding", correct: true, choiceExplanation: " is correct because the author criticizes memorization and supports deeper understanding." },
-              { text: "Memorization is the best method", correct: false, choiceExplanation: " is incorrect because..." },
-              { text: "Schools should be eliminated", correct: false, choiceExplanation: " is incorrect because..." }
-            ],
-            category: "main idea"
-          }
-        ]
+  {
+    prompt: "What is the author's main argument?",
+    choices: [
+      { text: "Education is unnecessary", correct: false, choiceExplanation: " is incorrect because..." },
+      { text: "Education should focus more on understanding", correct: true, choiceExplanation: " is correct because the author criticizes memorization and supports deeper understanding." },
+      { text: "Memorization is the best method", correct: false, choiceExplanation: " is incorrect because..." },
+      { text: "Schools should be eliminated", correct: false, choiceExplanation: " is incorrect because..." }
+    ],
+    category: "main idea"
+  },
+  {
+    prompt: "What tone does the author use?",
+    choices: [
+      { text: "Angry", correct: false, choiceExplanation: " is incorrect because..." },
+      { text: "Critical", correct: true, choiceExplanation: " is correct because the author critiques the current system." },
+      { text: "Neutral", correct: false, choiceExplanation: " is incorrect because..." },
+      { text: "Humorous", correct: false, choiceExplanation: " is incorrect because..." }
+    ],
+    category: "tone"
+  }
+]
       }
     ]
   },
