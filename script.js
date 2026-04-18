@@ -351,16 +351,28 @@ function getQuestionsByCategories(subjectIndex, categories) {
   const subject = subjects[subjectIndex];
   const matchingQuestions = [];
 
+  // Pull from standard passage questions
   subject.passages.forEach((passage) => {
     passage.questions.forEach((question) => {
       if (categories.includes(question.category)) {
         matchingQuestions.push({
           ...question,
+          sourceType: "standard",
           passageTitle: passage.title,
           passageText: passage.text
         });
       }
     });
+  });
+
+  // Pull from rapid fire questions
+  (subject.rapidQuestions || []).forEach((question) => {
+    if (categories.includes(question.category)) {
+      matchingQuestions.push({
+        ...question,
+        sourceType: "rapid"
+      });
+    }
   });
 
   return matchingQuestions;
