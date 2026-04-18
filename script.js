@@ -72,7 +72,7 @@ function showQuestion() {
     <p>${q.prompt}</p>
 
     ${currentShuffledChoices.map((choice, i) => `
-      <button>
+      <button
       class= "answer-btn"
       onclick="selectAnswer(${i})">
      ${indexToLetters[i] + ": " + choice.text} </button>
