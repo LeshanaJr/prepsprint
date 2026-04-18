@@ -182,23 +182,37 @@ function selectAnswer(i) {
   `;
 }
 
-function nextQuestion() {
-  currentQuestion++;
+function getTotalQuestionsForCurrentSubject() {
+  return subjects[currentSubject].passages.reduce((total, passage) => {
+    return total + passage.questions.length;
+  }, 0);
+}
 
+function nextQuestion() {
   const subject = subjects[currentSubject];
   const passage = subject.passages[currentPassage];
 
+  currentQuestion++;
+
   if (currentQuestion < passage.questions.length) {
     showQuestion();
-  } else {
-    appContainer.innerHTML = `
-      <h2>${subject.name} Complete</h2>
-      <p style="margin-top: 12px;">${q.prompt}</p>
-      <p>Score: ${score}/${passage.questions.length}</p>
-      <button onclick="showSubjectPage()">Choose Another Subject</button>
-      <button onclick="showHomePage()">Home</button>
-    `;
+    return;
   }
+
+  currentPassage++;
+  currentQuestion = 0;
+
+  if (currentPassage < subject.passages.length) {
+    showQuestion();
+    return;
+  }
+
+  appContainer.innerHTML = `
+    <h2>${subject.name} Complete</h2>
+    <p>Final Score: ${score}/${getTotalQuestionsForCurrentSubject()}</p>
+    <button onclick="showSubjectPage()">Choose Another Subject</button>
+    <button onclick="showHomePage()">Home</button>
+  `;
 }
 
 showHomePage();
