@@ -2,21 +2,75 @@ body {
   font-family: Arial, sans-serif;
   background: #f2f2f2;
   margin: 0;
-  padding: 20px;
+  padding: 16px;
 }
 
 .app {
-  max-width: 500px;
-  margin: auto;
+  max-width: 600px;
+  margin: 0 auto;
   background: white;
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
+  padding: 18px;
+  border-radius: 16px;
+  box-sizing: border-box;
 }
 
-button {
+.answer-btn,
+#start-btn {
+  display: block;
   width: 100%;
-  padding: 12px;
-  margin-top: 10px;
+  padding: 14px 16px;
+  margin-top: 12px;
   font-size: 16px;
+  line-height: 1.35;
+  text-align: left;
+  border: none;
+  border-radius: 12px;
+  background: #ececec;
+  color: #111;
+  outline: none;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease, transform 0.08s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.answer-btn:active,
+#start-btn:active {
+  transform: scale(0.98);
+}
+
+.answer-btn:focus,
+#start-btn:focus {
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.28);
+}
+
+.answer-btn.correct {
+  background: #4caf50;
+  color: white;
+}
+
+.answer-btn.wrong {
+  background: #e74c3c;
+  color: white;
+}
+
+.answer-btn:disabled {
+  opacity: 1;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+
+  .app {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .answer-btn,
+  #start-btn {
+    font-size: 15px;
+    padding: 13px 14px;
+    border-radius: 10px;
+  }
 }
