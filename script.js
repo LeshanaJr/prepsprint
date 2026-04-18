@@ -126,6 +126,7 @@ function showQuestion() {
   const subject = subjects[currentSubject];
   const passage = subject.passages[currentPassage];
   const q = passage.questions[currentQuestion];
+  const progressPercent = ((currentQuestion + 1) / passage.questions.length) * 100;
 
   currentShuffledChoices = shuffleArray(q.choices);
 
@@ -134,6 +135,10 @@ function showQuestion() {
     <p class="progress-text">
       Question ${currentQuestion + 1} of ${passage.questions.length}
     </p>
+
+    <div class="progress-bar-container">
+  <div class="progress-bar-fill" style="width: ${progressPercent}%"></div>
+</div>
 
     <h3>${passage.title}</h3>
     <p class="passage-text">${passage.text}</p>
