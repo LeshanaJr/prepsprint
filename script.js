@@ -135,8 +135,6 @@ function showQuestion() {
       Question ${currentQuestion + 1} of ${passage.questions.length}
     </p>
 
-<p>DEBUG: ${passage.questions.length}</p>
-
     <h3>${passage.title}</h3>
     <p class="passage-text">${passage.text}</p>
 
