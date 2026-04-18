@@ -74,7 +74,6 @@ function showQuestion() {
     ${currentShuffledChoices.map((choice, i) => `
       <button>
       class= "answer-btn"
-      data-correct = "${choice.correct}"
       onclick="selectAnswer(${i})">
      ${indexToLetters[i] + ": " + choice.text} </button>
     `).join("")}
@@ -88,7 +87,7 @@ function selectAnswer(i) {
 var correctIndex = "";
   
   buttons.forEach((btn, index) => {
-    if (currentShuffledChoices[index].correct == true) {
+    if (currentShuffledChoices[index].correct === true) {
       btn.style.backgroundColor = "green";
       correctIndex = index;
     } else if (index === i) {
