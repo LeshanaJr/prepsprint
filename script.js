@@ -131,7 +131,7 @@ function showQuestion() {
 
   appContainer.innerHTML = `
     <h2>${subject.name}</h2>
-    <p style="color:#555; margin-top:4px;">
+    <p class="progress-text">
       Question ${currentQuestion + 1} of ${passage.questions.length}
     </p>
 
