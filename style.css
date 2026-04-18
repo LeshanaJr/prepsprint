@@ -199,4 +199,10 @@ p {
   .subject-card-title {
     font-size: 17px;
   }
+
+  .progress-text {
+  color: #555;
+  margin-top: 4px;
+  font-size: 14px;
+  }
 }
