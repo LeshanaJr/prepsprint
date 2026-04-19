@@ -340,7 +340,9 @@ function showSubjectPage() {
   appContainer.innerHTML = `
     <div class="subject-page-header">
       <h1 class="section-title">Choose a Subject</h1>
-      <p class="subject-page-subtitle">Pick a class, then choose how you want to practice.</p>
+      <p class="subject-page-subtitle">
+        Pick a class, then choose how you want to practice.
+      </p>
     </div>
 
     <div id="subject-list" class="subject-list"></div>
@@ -354,10 +356,8 @@ function showSubjectPage() {
     subjectList.innerHTML += `
       <div class="subject-card">
         <div class="subject-card-top">
-          <div>
-<div class="subject-card-title">${getSubjectIcon(subject.name)} ${subject.name}</div>
-            <div class="subject-card-desc">${getSubjectDescription(subject.name)}</div>
-          </div>
+          <div class="subject-card-title">${getSubjectIcon(subject.name)} ${subject.name}</div>
+          <div class="subject-card-desc">${getSubjectDescription(subject.name)}</div>
         </div>
 
         <div class="subject-mode-group">
