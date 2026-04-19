@@ -318,31 +318,60 @@ function showHomePage() {
   document.getElementById("go-subjects-btn").addEventListener("click", showSubjectPage);
 }
 
+function getSubjectDescription(subjectName) {
+  if (subjectName === "AP Lang") {
+    return "Questions on rhetoric, argument, tone, and style.";
+  }
+
+  if (subjectName === "AP World") {
+    return "Questions on historical thinking, trade, and global change.";
+  }
+
+  return "Practice questions by subject";
+}
+
+function getSubjectIcon(subjectName) {
+  if (subjectName === "AP Lang") return "📘";
+  if (subjectName === "AP World") return "🌍";
+  return "📚";
+}
+
 function showSubjectPage() {
   appContainer.innerHTML = `
-    <h1 class="section-title">Select a Subject</h1>
+    <div class="subject-page-header">
+      <h1 class="section-title">Choose a Subject</h1>
+      <p class="subject-page-subtitle">Pick a class, then choose how you want to practice.</p>
+    </div>
+
     <div id="subject-list" class="subject-list"></div>
+
     <button id="back-home-btn">Back</button>
   `;
 
   const subjectList = document.getElementById("subject-list");
 
   subjects.forEach((subject, index) => {
-  subjectList.innerHTML += `
-    <div class="subject-card">
-      <div class="subject-card-title">${subject.name}</div>
-      <div class="subject-card-desc">Choose a study mode</div>
+    subjectList.innerHTML += `
+      <div class="subject-card">
+        <div class="subject-card-top">
+          <div>
+<div class="subject-card-title">${getSubjectIcon(subject.name)} ${subject.name}</div>
+            <div class="subject-card-desc">${getSubjectDescription(subject.name)}</div>
+          </div>
+        </div>
 
-      <button class="subject-btn" onclick="startSubject(${index}, 'standard')">
-        Standard Practice
-      </button>
+        <div class="subject-mode-group">
+          <button class="mode-btn standard-btn" onclick="startSubject(${index}, 'standard')">
+            Standard Practice
+          </button>
 
-      <button class="subject-btn" onclick="startSubject(${index}, 'rapid')">
-        Rapid Fire
-      </button>
-    </div>
-  `;
-});
+          <button class="mode-btn rapid-btn" onclick="startSubject(${index}, 'rapid')">
+            Rapid Fire
+          </button>
+        </div>
+      </div>
+    `;
+  });
 
   document.getElementById("back-home-btn").addEventListener("click", showHomePage);
 }
