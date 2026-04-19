@@ -293,30 +293,35 @@ function showHomePage() {
   appContainer.innerHTML = `
     <div class="home-header">
       <h1 class="app-title">PrepSprint</h1>
-      <p class="app-subtitle">A fast, free, and reliable way to study for your AP exams from the comfort of your phone.</p>
+      <p class="app-subtitle">
+        Fast, free AP practice built for your phone.
+      </p>
     </div>
-
-    <button id="go-subjects-btn">Choose Subject</button>
 
     <div class="home-stats">
       <p class="home-stats-title">What is PrepSprint?</p>
       <p class="home-stats-text">
-        PrepSprint is a digital tool that I made to help people study for their AP exams. With PrepSprint, you can:
-        </p>
-    
-      <p class="home-stats-text">  • Practice multiple-choice questions<br>
-        • Review explanations<br>
-        • Study by subject</p>
-        
-      <p class="home-stats-text"> 
-      As of right now, PrepSprint only has a very limited selection of AP Lang and AP World questions. Within the next week, I intend on adding more questions for not only these subjects, but other popular AP classes such as AP Chem, AP Precalc, AP Psych, and AP Bio.
+        PrepSprint helps you study with multiple-choice practice, explanations, and subject-based review modes.
       </p>
-      
+    </div>
+
+    <div class="subject-card" style="margin-top: 18px;">
+      <div class="subject-card-top">
+        <div class="subject-card-title">Start Practicing</div>
+        <div class="subject-card-desc">
+          Choose a subject and pick a mode that fits how you want to study.
+        </div>
+      </div>
+
+      <div class="subject-mode-group">
+        <button id="go-subjects-btn" class="mode-btn standard-btn">Choose Subject</button>
+      </div>
     </div>
   `;
 
   document.getElementById("go-subjects-btn").addEventListener("click", showSubjectPage);
 }
+
 
 function getSubjectDescription(subjectName) {
   if (subjectName === "AP Lang") {
