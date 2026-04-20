@@ -476,7 +476,7 @@ function renderResultsScreen(mode) {
     subtitle = "Speed round finished.";
     total = rapidQuestions.length;
     extraLine = `<p><strong>Best Streak:</strong> ${bestRapidStreak}</p>`;
-        buttons = `
+    buttons = `
       <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
         ❌ Review Missed Questions
       </button>
@@ -496,7 +496,7 @@ function renderResultsScreen(mode) {
         🏠 Home
       </button>
     `;
-  }   else if (mode === "weak") {
+  } else if (mode === "weak") {
     title = "Weak Areas Results";
     subtitle = "Focused review finished.";
     total = weakAreaQuestions.length;
@@ -517,7 +517,7 @@ function renderResultsScreen(mode) {
   } else if (mode === "missed") {
     title = "Missed Questions Results";
     subtitle = "Review session finished.";
-    total = missedReviewStartTotal;;
+    total = missedReviewStartTotal;
     buttons = `
       <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
         ❌ Review Missed Questions Again
@@ -536,7 +536,7 @@ function renderResultsScreen(mode) {
       </button>
     `;
   } else {
-        buttons = `
+    buttons = `
       <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
         ❌ Review Missed Questions
       </button>
