@@ -251,6 +251,34 @@ p {
   font-weight: 700;
 }
 
+.quiz-action-row {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 12px;
+}
+
+.top-action-btn {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  background: #f3f3f3;
+  color: #111;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease, transform 0.08s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.top-action-btn:active {
+  transform: scale(0.98);
+}
+
+.top-action-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.25);
+}
+
 @media (max-width: 480px) {
   body {
     padding: 12px;
@@ -263,6 +291,11 @@ p {
 
   .app-title {
     font-size: 28px;
+  }
+
+  .top-action-btn {
+    font-size: 13px;
+    padding: 9px 12px;
   }
 
   .answer-btn,
