@@ -56,6 +56,47 @@ let timeRemaining = 0;
 let timedStartTotal = 0;
 let timedDuration = 300;
 
+function getQuizActionButtons() {
+  if (currentMode === "timed") {
+    return `
+      <div class="quiz-action-row">
+        <button class="top-action-btn" onclick="exitTimedPractice()">Exit Timed Practice</button>
+      </div>
+    `;
+  }
+
+  if (currentMode === "standard") {
+    return `
+      <div class="quiz-action-row">
+        <button class="top-action-btn" onclick="showSubjectPage()">Back to Subjects</button>
+      </div>
+    `;
+  }
+
+  if (currentMode === "weak") {
+    return `
+      <div class="quiz-action-row">
+        <button class="top-action-btn" onclick="showSubjectPage()">Back to Subjects</button>
+      </div>
+    `;
+  }
+
+  if (currentMode === "missed") {
+    return `
+      <div class="quiz-action-row">
+        <button class="top-action-btn" onclick="showSubjectPage()">Back to Subjects</button>
+      </div>
+    `;
+  }
+
+  return "";
+}
+
+function exitTimedPractice() {
+  stopTimer();
+  showSubjectPage();
+}
+
 function getTimedLabel(seconds) {
   if (seconds === 300) return "5 Minutes";
   if (seconds === 600) return "10 Minutes";
@@ -300,6 +341,8 @@ function renderUnavailableScreen(subjectIndex, message) {
 }
 
 function showHomePage() {
+  stopTimer();
+
   appContainer.innerHTML = `
     <div class="home-header">
       <h1 class="app-title">PrepSprint</h1>
@@ -331,6 +374,8 @@ function showHomePage() {
 }
 
 function showSubjectPage() {
+  stopTimer();
+
   appContainer.innerHTML = `
     <div class="subject-page-header">
       <h1 class="section-title">Choose a Subject</h1>
@@ -361,8 +406,8 @@ function showSubjectPage() {
             Rapid Fire
           </button>
           <button class="mode-btn rapid-btn" onclick="showTimedModePage(${index})">
-  Timed Practice
-</button>
+            Timed Practice
+          </button>
         </div>
       </div>
     `;
@@ -458,34 +503,36 @@ function renderQuestionScreen() {
   const showPassage = config.showPassage && q.passageText;
 
   appContainer.innerHTML = `
-    <h2>${subject.name}</h2>
-    <p class="progress-text">
-      ${config.label} • Question ${questionIndex + 1} of ${questionList.length}
-      ${currentMode === "rapid" ? ` • Streak: ${rapidStreak}` : ""}
-    </p>
+  ${getQuizActionButtons()}
 
-    ${currentMode === "timed" ? `
-  <p id="timer-display" class="progress-text">
-    Timed Practice • ${getTimedLabel(timedDuration)} • Time Left: ${formatTime(timeRemaining)}
+  <h2>${subject.name}</h2>
+  <p class="progress-text">
+    ${config.label} • Question ${questionIndex + 1} of ${questionList.length}
+    ${currentMode === "rapid" ? ` • Streak: ${rapidStreak}` : ""}
   </p>
-` : ""}
 
-    <div class="progress-bar-container">
-      <div class="progress-bar-fill" style="width: ${progressPercent}%"></div>
-    </div>
+  ${currentMode === "timed" ? `
+    <p id="timer-display" class="progress-text">
+      Timed Practice • ${getTimedLabel(timedDuration)} • Time Left: ${formatTime(timeRemaining)}
+    </p>
+  ` : ""}
 
-    ${showPassage ? `<h3>${q.passageTitle || ""}</h3>` : ""}
-    ${showPassage ? `<p class="passage-text">${q.passageText}</p><hr>` : ""}
+  <div class="progress-bar-container">
+    <div class="progress-bar-fill" style="width: ${progressPercent}%"></div>
+  </div>
 
-    ${currentMode === "weak" ? `<p><strong>Focus:</strong> ${q.category}</p>` : ""}
-    <p>${q.prompt}</p>
+  ${showPassage ? `<h3>${q.passageTitle || ""}</h3>` : ""}
+  ${showPassage ? `<p class="passage-text">${q.passageText}</p><hr>` : ""}
 
-    ${currentShuffledChoices.map((choice, i) => `
-      <button class="answer-btn" onclick="handleAnswer(${i})">
-        ${indexToLetters[i]}: ${choice.text}
-      </button>
-    `).join("")}
-  `;
+  ${currentMode === "weak" ? `<p><strong>Focus:</strong> ${q.category}</p>` : ""}
+  <p>${q.prompt}</p>
+
+  ${currentShuffledChoices.map((choice, i) => `
+    <button class="answer-btn" onclick="handleAnswer(${i})">
+      ${indexToLetters[i]}: ${choice.text}
+    </button>
+  `).join("")}
+`;
 }
 
 function handleAnswer(i) {
