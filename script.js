@@ -18,6 +18,11 @@ const MODE_CONFIG = {
     label: "Review Missed Questions",
     autoAdvance: false,
     showPassage: true
+  },
+  timed: {
+    label: "Timed Practice",
+    autoAdvance: false,
+    showPassage: true
   }
 };
 
@@ -45,6 +50,83 @@ let weakAreaQuestionIndex = 0;
 let missedQuestions = [];
 let missedQuestionIndex = 0;
 let missedReviewStartTotal = 0;
+
+let timerInterval = null;
+let timeRemaining = 0;
+let timedStartTotal = 0;
+
+function startTimer(seconds) {
+  clearInterval(timerInterval);
+  timeRemaining = seconds;
+  timedStartTotal = seconds;
+
+  timerInterval = setInterval(() => {
+    timeRemaining--;
+
+    if (timeRemaining <= 0) {
+      clearInterval(timerInterval);
+      timeRemaining = 0;
+      renderTimedOutScreen();
+      return;
+    }
+
+    updateTimerDisplay();
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+  timerInterval = null;
+}
+
+function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${minutes}:${secs.toString().padStart(2, "0")}`;
+}
+
+function updateTimerDisplay() {
+  const timerEl = document.getElementById("timer-display");
+  if (timerEl) {
+    timerEl.textContent = `Time Left: ${formatTime(timeRemaining)}`;
+  }
+}
+
+function renderTimedOutScreen() {
+  const total = getTotalQuestionsForCurrentSubject();
+
+  appContainer.innerHTML = `
+    <div class="subject-page-header">
+      <h2 class="section-title">${subjects[currentSubject].name} Timed Practice Ended</h2>
+      <p class="subject-page-subtitle">Time ran out.</p>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top">
+        <div class="subject-card-title">⏰ Time's Up</div>
+        <div class="subject-card-desc">Score so far: ${score}/${total}</div>
+      </div>
+
+      <p>${getResultMessage(score, total)}</p>
+      <p><strong>Focus on:</strong> ${getWeakPointSummary()}</p>
+
+      <div class="subject-mode-group">
+        <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'timed')">
+          ⏱ Retry Timed Practice
+        </button>
+        <button class="mode-btn rapid-btn end-btn" onclick="startSubject(currentSubject, 'standard')">
+          📘 Standard Practice
+        </button>
+        <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
+          📚 Choose Another Subject
+        </button>
+        <button class="mode-btn rapid-btn end-btn" onclick="showHomePage()">
+          🏠 Home
+        </button>
+      </div>
+    </div>
+  `;
+}
 
 function shuffleArray(array) {
   const copy = [...array];
@@ -225,6 +307,9 @@ function showSubjectPage() {
           <button class="mode-btn rapid-btn" onclick="startSubject(${index}, 'rapid')">
             Rapid Fire
           </button>
+          <button class="mode-btn rapid-btn" onclick="startSubject(${index}, 'timed')">
+            Timed Practice
+          </button>
         </div>
       </div>
     `;
@@ -234,6 +319,8 @@ function showSubjectPage() {
 }
 
 function startSubject(subjectIndex, mode = "standard") {
+  stopTimer();
+
   currentSubject = subjectIndex;
   currentPassage = 0;
   currentQuestion = 0;
@@ -281,17 +368,28 @@ function startSubject(subjectIndex, mode = "standard") {
     return;
   }
 
- if (mode === "missed") {
-  missedQuestionIndex = 0;
+  if (mode === "missed") {
+    missedQuestionIndex = 0;
 
-  if (!missedQuestions.length) {
-    renderUnavailableScreen(subjectIndex, "No missed questions are available yet.");
+    if (!missedQuestions.length) {
+      renderUnavailableScreen(subjectIndex, "No missed questions are available yet.");
+      return;
+    }
+
+    missedReviewStartTotal = missedQuestions.length;
+    renderQuestionScreen();
     return;
   }
 
-  missedReviewStartTotal = missedQuestions.length;
-  renderQuestionScreen();
-}
+  if (mode === "timed") {
+    weakPoints = {};
+    missedQuestions = [];
+    missedQuestionIndex = 0;
+
+    // 5 minutes for now; change later as needed
+    startTimer(300);
+    renderQuestionScreen();
+  }
 }
 
 function renderQuestionScreen() {
@@ -312,6 +410,8 @@ function renderQuestionScreen() {
       ${config.label} • Question ${questionIndex + 1} of ${questionList.length}
       ${currentMode === "rapid" ? ` • Streak: ${rapidStreak}` : ""}
     </p>
+
+    ${currentMode === "timed" ? `<p id="timer-display" class="progress-text">Time Left: ${formatTime(timeRemaining)}</p>` : ""}
 
     <div class="progress-bar-container">
       <div class="progress-bar-fill" style="width: ${progressPercent}%"></div>
@@ -460,6 +560,12 @@ function goToNextQuestion() {
     return;
   }
 
+    if (currentMode === "timed") {
+    stopTimer();
+    renderResultsScreen("timed");
+    return;
+  }
+
   renderResultsScreen("standard");
 }
 
@@ -528,6 +634,28 @@ function renderResultsScreen(mode) {
       </button>
       <button class="mode-btn rapid-btn end-btn" onclick="startSubject(currentSubject, 'standard')">
         📘 Standard Practice
+      </button>
+      <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
+        📚 Choose Another Subject
+      </button>
+      <button class="mode-btn rapid-btn end-btn" onclick="showHomePage()">
+        🏠 Home
+      </button>
+    `;
+  } else if (mode === "timed") {
+    title = "Timed Practice Results";
+    subtitle = "Timed session finished.";
+    total = getTotalQuestionsForCurrentSubject();
+    extraLine = `<p><strong>Time Used:</strong> ${formatTime(timedStartTotal - timeRemaining)}</p>`;
+    buttons = `
+      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'timed')">
+        ⏱ Retry Timed Practice
+      </button>
+      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
+        ❌ Review Missed Questions
+      </button>
+      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'weak')">
+        🎯 Practice Weak Areas
       </button>
       <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
         📚 Choose Another Subject
