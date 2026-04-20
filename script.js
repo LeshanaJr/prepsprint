@@ -818,7 +818,7 @@ function nextQuestion() {
     return;
   }
 
-  appContainer.innerHTML = `
+ appContainer.innerHTML = `
   <div class="subject-page-header">
     <h2 class="section-title">${subject.name} Complete</h2>
     <p class="subject-page-subtitle">Here’s how you did.</p>
@@ -826,7 +826,7 @@ function nextQuestion() {
 
   <div class="subject-card">
     <div class="subject-card-top">
-      <div class="subject-card-title">Results</div>
+      <div class="subject-card-title">✅ Results</div>
       <div class="subject-card-desc">
         Final Score: ${score}/${getTotalQuestionsForCurrentSubject()}
       </div>
@@ -834,20 +834,22 @@ function nextQuestion() {
 
     <p>${getResultMessage(score, getTotalQuestionsForCurrentSubject())}</p>
     <p><strong>Focus on:</strong> ${getWeakPointSummary()}</p>
-    <p>You can retry this section, practice weak areas, or choose another subject.</p>
 
     <div class="subject-mode-group">
-      <button class="mode-btn standard-btn" onclick="startSubject(currentSubject, 'weak')">
-        Practice Weak Areas
+      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'weak')">
+        🎯 Practice Weak Areas
       </button>
-      <button class="mode-btn standard-btn" onclick="startSubject(currentSubject, 'standard')">
-        Retry Subject
+
+      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'standard')">
+        🔁 Retry Subject
       </button>
-      <button class="mode-btn rapid-btn" onclick="showSubjectPage()">
-        Choose Another Subject
+
+      <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
+        📚 Choose Another Subject
       </button>
-      <button class="mode-btn rapid-btn" onclick="showHomePage()">
-        Home
+
+      <button class="mode-btn rapid-btn end-btn" onclick="showHomePage()">
+        🏠 Home
       </button>
     </div>
   </div>
