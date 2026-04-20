@@ -44,6 +44,7 @@ let weakAreaQuestionIndex = 0;
 
 let missedQuestions = [];
 let missedQuestionIndex = 0;
+let missedReviewStartTotal = 0;
 
 function shuffleArray(array) {
   const copy = [...array];
@@ -279,16 +280,17 @@ function startSubject(subjectIndex, mode = "standard") {
     return;
   }
 
-  if (mode === "missed") {
-    missedQuestionIndex = 0;
+ if (mode === "missed") {
+  missedQuestionIndex = 0;
 
-    if (!missedQuestions.length) {
-      renderUnavailableScreen(subjectIndex, "No missed questions are available yet.");
-      return;
-    }
-
-    renderQuestionScreen();
+  if (!missedQuestions.length) {
+    renderUnavailableScreen(subjectIndex, "No missed questions are available yet.");
+    return;
   }
+
+  missedReviewStartTotal = missedQuestions.length;
+  renderQuestionScreen();
+}
 }
 
 function renderQuestionScreen() {
@@ -347,30 +349,38 @@ function handleAnswer(i) {
     btn.disabled = true;
   });
 
-  if (selectedChoice.correct) {
-    score++;
+ if (selectedChoice.correct) {
+  score++;
 
-    if (currentMode === "rapid") {
-      rapidStreak++;
-      if (rapidStreak > bestRapidStreak) {
-        bestRapidStreak = rapidStreak;
-      }
-    }
-  }   } else {
-    weakPoints[q.category] = (weakPoints[q.category] || 0) + 1;
-
-    if (currentMode === "rapid") {
-      rapidStreak = 0;
-    }
-
-    const alreadySaved = missedQuestions.some((question) => question.prompt === q.prompt);
-
-    if (!alreadySaved) {
-      missedQuestions.push({
-        ...q
-      });
+  if (currentMode === "rapid") {
+    rapidStreak++;
+    if (rapidStreak > bestRapidStreak) {
+      bestRapidStreak = rapidStreak;
     }
   }
+
+  if (currentMode === "missed") {
+    missedQuestions = missedQuestions.filter((question) => question.prompt !== q.prompt);
+  }
+} else {
+  weakPoints[q.category] = (weakPoints[q.category] || 0) + 1;
+
+  if (currentMode === "rapid") {
+    rapidStreak = 0;
+  }
+
+  const alreadySaved = missedQuestions.some((question) => question.prompt === q.prompt);
+
+  if (!alreadySaved) {
+    missedQuestions.push({
+      ...q
+    });
+  }
+}
+
+  if (currentMode === "missed" && !selectedChoice.correct) {
+  missedQuestionIndex++;
+}
 
   if (currentMode === "rapid") {
     appContainer.innerHTML += `
@@ -422,16 +432,14 @@ function goToNextQuestion() {
   }
 
   if (currentMode === "missed") {
-    missedQuestionIndex++;
-
-    if (missedQuestionIndex < missedQuestions.length) {
-      renderQuestionScreen();
-      return;
-    }
-
+  if (missedQuestionIndex >= missedQuestions.length) {
     renderResultsScreen("missed");
     return;
   }
+
+  renderQuestionScreen();
+  return;
+}
 
   const subject = subjects[currentSubject];
   const passage = subject.passages[currentPassage];
@@ -509,7 +517,7 @@ function renderResultsScreen(mode) {
   } else if (mode === "missed") {
     title = "Missed Questions Results";
     subtitle = "Review session finished.";
-    total = missedQuestions.length;
+    total = missedReviewStartTotal;;
     buttons = `
       <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
         ❌ Review Missed Questions Again
