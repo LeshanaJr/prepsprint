@@ -62,7 +62,6 @@ function saveProgress() {
   }
 }
 
-
 const appContainer = document.getElementById("app-container");
 const indexToLetters = ["A", "B", "C", "D"];
 
@@ -97,176 +96,6 @@ let rapidTimeout = null;
 let savedProgress = loadProgress();
 timedDuration = savedProgress.lastTimedDuration || 300;
 
-function getQuizActionButtons() {
-  if (currentMode === "timed") {
-    return `
-      <div class="quiz-action-row">
-        <button class="top-action-btn" onclick="exitTimedPractice()">Exit Timed Practice</button>
-      </div>
-    `;
-  }
-
-  if (currentMode === "rapid") {
-    return `
-      <div class="quiz-action-row">
-        <button class="top-action-btn" onclick="exitRapidFire()">Exit Rapid Fire</button>
-      </div>
-    `;
-  }
-
-  // standard, weak, missed
-  return `
-    <div class="quiz-action-row">
-      <button class="top-action-btn" onclick="showSubjectPage()">Back to Subjects</button>
-    </div>
-  `;
-}
-
-function exitRapidFire() {
-  if (rapidTimeout) {
-    clearTimeout(rapidTimeout);
-    rapidTimeout = null;
-  }
-
-  rapidQuestionIndex = 0;
-  rapidStreak = 0;
-
-  showSubjectPage();
-}
-
-function exitTimedPractice() {
-  stopTimer();
-  showSubjectPage();
-}
-
-function getTimedLabel(seconds) {
-  if (seconds === 300) return "5 Minutes";
-  if (seconds === 600) return "10 Minutes";
-  if (seconds === 1500) return "25 Minutes";
-  return `${Math.floor(seconds / 60)} Minutes`;
-}
-
-function showTimedModePage(subjectIndex) {
-  const subject = subjects[subjectIndex];
-
-  appContainer.innerHTML = `
-    <div class="subject-page-header">
-      <h1 class="section-title">${subject.name} Timed Practice</h1>
-      <p class="subject-page-subtitle">
-        Choose how long you want your timed session to be.
-      </p>
-    </div>
-
-    <div class="subject-card">
-      <div class="subject-card-top">
-        <div class="subject-card-title">⏱ Choose a Timer</div>
-        <div class="subject-card-desc">
-          Start a timed session and see how you do under pressure.
-        </div>
-      </div>
-
-      <div class="subject-mode-group">
-        <button class="mode-btn standard-btn end-btn" onclick="startTimedSubject(${subjectIndex}, 300)">
-          5 Minutes
-        </button>
-
-        <button class="mode-btn standard-btn end-btn" onclick="startTimedSubject(${subjectIndex}, 600)">
-          10 Minutes
-        </button>
-
-        <button class="mode-btn standard-btn end-btn" onclick="startTimedSubject(${subjectIndex}, 1500)">
-          25 Minutes
-        </button>
-
-        <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
-          Back
-        </button>
-      </div>
-    </div>
-  `;
-}
-
-function startTimedSubject(subjectIndex, seconds) {
-  timedDuration = seconds;
-  savedProgress.lastTimedDuration = seconds;
-  saveProgress();
-  startSubject(subjectIndex, "timed");
-}
-
-function startTimer(seconds) {
-  clearInterval(timerInterval);
-  timeRemaining = seconds;
-  timedStartTotal = seconds;
-
-  timerInterval = setInterval(() => {
-    timeRemaining--;
-
-    if (timeRemaining <= 0) {
-      clearInterval(timerInterval);
-      timeRemaining = 0;
-      renderTimedOutScreen();
-      return;
-    }
-
-    updateTimerDisplay();
-  }, 1000);
-}
-
-function stopTimer() {
-  clearInterval(timerInterval);
-  timerInterval = null;
-}
-
-function formatTime(seconds) {
-  const minutes = Math.floor(seconds / 60);
-  const secs = seconds % 60;
-  return `${minutes}:${secs.toString().padStart(2, "0")}`;
-}
-
-function updateTimerDisplay() {
-  const timerEl = document.getElementById("timer-display");
-  if (timerEl) {
-    timerEl.textContent = `Time Left: ${formatTime(timeRemaining)}`;
-  }
-}
-
-function renderTimedOutScreen() {
-  const total = getTotalQuestionsForCurrentSubject();
-  recordCompletedQuiz("timed", score, total);
-
-  appContainer.innerHTML = `
-    <div class="subject-page-header">
-      <h2 class="section-title">${subjects[currentSubject].name} Timed Practice Ended</h2>
-      <p class="subject-page-subtitle">Time ran out.</p>
-    </div>
-
-    <div class="subject-card">
-      <div class="subject-card-top">
-        <div class="subject-card-title">⏰ Time's Up</div>
-        <div class="subject-card-desc">Score so far: ${score}/${total}</div>
-      </div>
-
-      <p>${getResultMessage(score, total)}</p>
-      <p><strong>Focus on:</strong> ${getWeakPointSummary()}</p>
-
-      <div class="subject-mode-group">
-        <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'timed')">
-          ⏱ Retry Timed Practice
-        </button>
-        <button class="mode-btn rapid-btn end-btn" onclick="startSubject(currentSubject, 'standard')">
-          📘 Standard Practice
-        </button>
-        <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
-          📚 Choose Another Subject
-        </button>
-        <button class="mode-btn rapid-btn end-btn" onclick="showHomePage()">
-          🏠 Home
-        </button>
-      </div>
-    </div>
-  `;
-}
-
 function shuffleArray(array) {
   const copy = [...array];
 
@@ -288,6 +117,24 @@ function getSubjectIcon(subjectName) {
   if (subjectName === "AP Lang") return "📘";
   if (subjectName === "AP World") return "🌍";
   return "📚";
+}
+
+function getSubjectStats(subjectIndex) {
+  const subjectName = subjects[subjectIndex].name;
+
+  if (!savedProgress.subjectStats[subjectName]) {
+    savedProgress.subjectStats[subjectName] = {
+      standardBestScore: 0,
+      rapidBestScore: 0,
+      weakBestScore: 0,
+      missedBestScore: 0,
+      timedBestScore: 0,
+      bestRapidStreak: 0,
+      quizzesCompleted: 0
+    };
+  }
+
+  return savedProgress.subjectStats[subjectName];
 }
 
 function getTotalQuestionsForCurrentSubject() {
@@ -314,9 +161,7 @@ function getWeakPointSummary() {
 
   entries.sort((a, b) => b[1] - a[1]);
 
-  return entries
-    .map(([category, count]) => `${category} (${count} missed)`)
-    .join(", ");
+  return entries.map(([category, count]) => `${category} (${count} missed)`).join(", ");
 }
 
 function getTopWeakCategories(limit = 2) {
@@ -376,6 +221,35 @@ function getCurrentQuestionIndex() {
   return currentQuestion;
 }
 
+function getTimedLabel(seconds) {
+  if (seconds === 300) return "5 Minutes";
+  if (seconds === 600) return "10 Minutes";
+  if (seconds === 1500) return "25 Minutes";
+  return `${Math.floor(seconds / 60)} Minutes`;
+}
+
+function recordCompletedQuiz(mode, scoreValue, total) {
+  savedProgress.totalQuizzesCompleted++;
+
+  const stats = getSubjectStats(currentSubject);
+  stats.quizzesCompleted++;
+
+  if (mode === "standard") {
+    stats.standardBestScore = Math.max(stats.standardBestScore, scoreValue);
+  } else if (mode === "rapid") {
+    stats.rapidBestScore = Math.max(stats.rapidBestScore, scoreValue);
+    stats.bestRapidStreak = Math.max(stats.bestRapidStreak, bestRapidStreak);
+  } else if (mode === "weak") {
+    stats.weakBestScore = Math.max(stats.weakBestScore, scoreValue);
+  } else if (mode === "missed") {
+    stats.missedBestScore = Math.max(stats.missedBestScore, scoreValue);
+  } else if (mode === "timed") {
+    stats.timedBestScore = Math.max(stats.timedBestScore, scoreValue);
+  }
+
+  saveProgress();
+}
+
 function renderUnavailableScreen(subjectIndex, message) {
   appContainer.innerHTML = `
     <h2>${subjects[subjectIndex].name}</h2>
@@ -385,10 +259,87 @@ function renderUnavailableScreen(subjectIndex, message) {
   `;
 }
 
+function stopTimer() {
+  clearInterval(timerInterval);
+  timerInterval = null;
+}
+
+function startTimer(seconds) {
+  clearInterval(timerInterval);
+  timeRemaining = seconds;
+  timedStartTotal = seconds;
+
+  timerInterval = setInterval(() => {
+    timeRemaining--;
+
+    if (timeRemaining <= 0) {
+      clearInterval(timerInterval);
+      timeRemaining = 0;
+      renderTimedOutScreen();
+      return;
+    }
+
+    updateTimerDisplay();
+  }, 1000);
+}
+
+function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${minutes}:${secs.toString().padStart(2, "0")}`;
+}
+
+function updateTimerDisplay() {
+  const timerEl = document.getElementById("timer-display");
+  if (timerEl) {
+    timerEl.textContent = `Time Left: ${formatTime(timeRemaining)}`;
+  }
+}
+
+function exitRapidFire() {
+  if (rapidTimeout) {
+    clearTimeout(rapidTimeout);
+    rapidTimeout = null;
+  }
+
+  rapidQuestionIndex = 0;
+  rapidStreak = 0;
+  showSubjectPage();
+}
+
+function exitTimedPractice() {
+  stopTimer();
+  showSubjectPage();
+}
+
+function getQuizActionButtons() {
+  if (currentMode === "timed") {
+    return `
+      <div class="quiz-action-row">
+        <button class="top-action-btn" onclick="exitTimedPractice()">Exit Timed Practice</button>
+      </div>
+    `;
+  }
+
+  if (currentMode === "rapid") {
+    return `
+      <div class="quiz-action-row">
+        <button class="top-action-btn" onclick="exitRapidFire()">Exit Rapid Fire</button>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="quiz-action-row">
+      <button class="top-action-btn" onclick="showSubjectPage()">Back to Subjects</button>
+    </div>
+  `;
+}
+
 function showHomePage() {
   stopTimer();
 
-  const lastSubjectName = subjects[savedProgress.lastSubjectIndex]?.name || "None yet";
+  const lastSubjectName = subjects?.[savedProgress.lastSubjectIndex]?.name || "None yet";
 
   appContainer.innerHTML = `
     <div class="home-header">
@@ -445,20 +396,20 @@ function showSubjectPage() {
   const subjectList = document.getElementById("subject-list");
 
   subjects.forEach((subject, index) => {
-  const stats = getSubjectStats(index);
+    const stats = getSubjectStats(index);
 
-  subjectList.innerHTML += `
-    <div class="subject-card">
-      <div class="subject-card-top">
-        <div class="subject-card-title">${getSubjectIcon(subject.name)} ${subject.name}</div>
-        <div class="subject-card-desc">${getSubjectDescription(subject.name)}</div>
-        <div class="subject-card-desc" style="margin-top: 8px;">
-          Best Standard: ${stats.standardBestScore} • Best Rapid: ${stats.rapidBestScore}
+    subjectList.innerHTML += `
+      <div class="subject-card">
+        <div class="subject-card-top">
+          <div class="subject-card-title">${getSubjectIcon(subject.name)} ${subject.name}</div>
+          <div class="subject-card-desc">${getSubjectDescription(subject.name)}</div>
+          <div class="subject-card-desc" style="margin-top: 8px;">
+            Best Standard: ${stats.standardBestScore} • Best Rapid: ${stats.rapidBestScore}
+          </div>
+          <div class="subject-card-desc">
+            Best Timed: ${stats.timedBestScore} • Best Streak: ${stats.bestRapidStreak}
+          </div>
         </div>
-        <div class="subject-card-desc">
-          Best Timed: ${stats.timedBestScore} • Best Streak: ${stats.bestRapidStreak}
-        </div>
-      </div>
 
         <div class="subject-mode-group">
           <button class="mode-btn standard-btn" onclick="startSubject(${index}, 'standard')">
@@ -478,26 +429,48 @@ function showSubjectPage() {
   document.getElementById("back-home-btn").addEventListener("click", showHomePage);
 }
 
-function recordCompletedQuiz(mode, scoreValue, total) {
-  savedProgress.totalQuizzesCompleted++;
+function showTimedModePage(subjectIndex) {
+  const subject = subjects[subjectIndex];
 
-  const stats = getSubjectStats(currentSubject);
-  stats.quizzesCompleted++;
+  appContainer.innerHTML = `
+    <div class="subject-page-header">
+      <h1 class="section-title">${subject.name} Timed Practice</h1>
+      <p class="subject-page-subtitle">
+        Choose how long you want your timed session to be.
+      </p>
+    </div>
 
-  if (mode === "standard") {
-    stats.standardBestScore = Math.max(stats.standardBestScore, scoreValue);
-  } else if (mode === "rapid") {
-    stats.rapidBestScore = Math.max(stats.rapidBestScore, scoreValue);
-    stats.bestRapidStreak = Math.max(stats.bestRapidStreak, bestRapidStreak);
-  } else if (mode === "weak") {
-    stats.weakBestScore = Math.max(stats.weakBestScore, scoreValue);
-  } else if (mode === "missed") {
-    stats.missedBestScore = Math.max(stats.missedBestScore, scoreValue);
-  } else if (mode === "timed") {
-    stats.timedBestScore = Math.max(stats.timedBestScore, scoreValue);
-  }
+    <div class="subject-card">
+      <div class="subject-card-top">
+        <div class="subject-card-title">⏱ Choose a Timer</div>
+        <div class="subject-card-desc">
+          Start a timed session and see how you do under pressure.
+        </div>
+      </div>
 
+      <div class="subject-mode-group">
+        <button class="mode-btn standard-btn end-btn" onclick="startTimedSubject(${subjectIndex}, 300)">
+          5 Minutes
+        </button>
+        <button class="mode-btn standard-btn end-btn" onclick="startTimedSubject(${subjectIndex}, 600)">
+          10 Minutes
+        </button>
+        <button class="mode-btn standard-btn end-btn" onclick="startTimedSubject(${subjectIndex}, 1500)">
+          25 Minutes
+        </button>
+        <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
+          Back
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function startTimedSubject(subjectIndex, seconds) {
+  timedDuration = seconds;
+  savedProgress.lastTimedDuration = seconds;
   saveProgress();
+  startSubject(subjectIndex, "timed");
 }
 
 function startSubject(subjectIndex, mode = "standard") {
@@ -568,14 +541,13 @@ function startSubject(subjectIndex, mode = "standard") {
     return;
   }
 
-    if (mode === "timed") {
+  if (mode === "timed") {
     weakPoints = {};
     missedQuestions = [];
     missedQuestionIndex = 0;
 
     startTimer(timedDuration);
     renderQuestionScreen();
-    return;
   }
 }
 
@@ -592,36 +564,36 @@ function renderQuestionScreen() {
   const showPassage = config.showPassage && q.passageText;
 
   appContainer.innerHTML = `
-  ${getQuizActionButtons()}
+    ${getQuizActionButtons()}
 
-  <h2>${subject.name}</h2>
-  <p class="progress-text">
-    ${config.label} • Question ${questionIndex + 1} of ${questionList.length}
-    ${currentMode === "rapid" ? ` • Streak: ${rapidStreak}` : ""}
-  </p>
-
-  ${currentMode === "timed" ? `
-    <p id="timer-display" class="progress-text">
-      Timed Practice • ${getTimedLabel(timedDuration)} • Time Left: ${formatTime(timeRemaining)}
+    <h2>${subject.name}</h2>
+    <p class="progress-text">
+      ${config.label} • Question ${questionIndex + 1} of ${questionList.length}
+      ${currentMode === "rapid" ? ` • Streak: ${rapidStreak}` : ""}
     </p>
-  ` : ""}
 
-  <div class="progress-bar-container">
-    <div class="progress-bar-fill" style="width: ${progressPercent}%"></div>
-  </div>
+    ${currentMode === "timed" ? `
+      <p id="timer-display" class="progress-text">
+        Timed Practice • ${getTimedLabel(timedDuration)} • Time Left: ${formatTime(timeRemaining)}
+      </p>
+    ` : ""}
 
-  ${showPassage ? `<h3>${q.passageTitle || ""}</h3>` : ""}
-  ${showPassage ? `<p class="passage-text">${q.passageText}</p><hr>` : ""}
+    <div class="progress-bar-container">
+      <div class="progress-bar-fill" style="width: ${progressPercent}%"></div>
+    </div>
 
-  ${currentMode === "weak" ? `<p><strong>Focus:</strong> ${q.category}</p>` : ""}
-  <p>${q.prompt}</p>
+    ${showPassage ? `<h3>${q.passageTitle || ""}</h3>` : ""}
+    ${showPassage ? `<p class="passage-text">${q.passageText}</p><hr>` : ""}
 
-  ${currentShuffledChoices.map((choice, i) => `
-    <button class="answer-btn" onclick="handleAnswer(${i})">
-      ${indexToLetters[i]}: ${choice.text}
-    </button>
-  `).join("")}
-`;
+    ${currentMode === "weak" ? `<p><strong>Focus:</strong> ${q.category}</p>` : ""}
+    <p>${q.prompt}</p>
+
+    ${currentShuffledChoices.map((choice, i) => `
+      <button class="answer-btn" onclick="handleAnswer(${i})">
+        ${indexToLetters[i]}: ${choice.text}
+      </button>
+    `).join("")}
+  `;
 }
 
 function handleAnswer(i) {
@@ -643,38 +615,36 @@ function handleAnswer(i) {
     btn.disabled = true;
   });
 
- if (selectedChoice.correct) {
-  score++;
+  if (selectedChoice.correct) {
+    score++;
 
-  if (currentMode === "rapid") {
-    rapidStreak++;
-    if (rapidStreak > bestRapidStreak) {
-      bestRapidStreak = rapidStreak;
+    if (currentMode === "rapid") {
+      rapidStreak++;
+      if (rapidStreak > bestRapidStreak) {
+        bestRapidStreak = rapidStreak;
+      }
+    }
+
+    if (currentMode === "missed") {
+      missedQuestions = missedQuestions.filter((question) => question.prompt !== q.prompt);
+    }
+  } else {
+    weakPoints[q.category] = (weakPoints[q.category] || 0) + 1;
+
+    if (currentMode === "rapid") {
+      rapidStreak = 0;
+    }
+
+    const alreadySaved = missedQuestions.some((question) => question.prompt === q.prompt);
+
+    if (!alreadySaved) {
+      missedQuestions.push({ ...q });
     }
   }
 
-  if (currentMode === "missed") {
-    missedQuestions = missedQuestions.filter((question) => question.prompt !== q.prompt);
-  }
-} else {
-  weakPoints[q.category] = (weakPoints[q.category] || 0) + 1;
-
-  if (currentMode === "rapid") {
-    rapidStreak = 0;
-  }
-
-  const alreadySaved = missedQuestions.some((question) => question.prompt === q.prompt);
-
-  if (!alreadySaved) {
-    missedQuestions.push({
-      ...q
-    });
-  }
-}
-
   if (currentMode === "missed" && !selectedChoice.correct) {
-  missedQuestionIndex++;
-}
+    missedQuestionIndex++;
+  }
 
   if (currentMode === "rapid") {
     appContainer.innerHTML += `
@@ -684,8 +654,8 @@ function handleAnswer(i) {
     `;
 
     rapidTimeout = setTimeout(() => {
-  goToNextQuestion();
-}, rapidAdvanceDelay);
+      goToNextQuestion();
+    }, rapidAdvanceDelay);
 
     return;
   }
@@ -726,14 +696,14 @@ function goToNextQuestion() {
   }
 
   if (currentMode === "missed") {
-  if (missedQuestionIndex >= missedQuestions.length) {
-    renderResultsScreen("missed");
+    if (missedQuestionIndex >= missedQuestions.length) {
+      renderResultsScreen("missed");
+      return;
+    }
+
+    renderQuestionScreen();
     return;
   }
-
-  renderQuestionScreen();
-  return;
-}
 
   const subject = subjects[currentSubject];
   const passage = subject.passages[currentPassage];
@@ -753,13 +723,50 @@ function goToNextQuestion() {
     return;
   }
 
-    if (currentMode === "timed") {
+  if (currentMode === "timed") {
     stopTimer();
     renderResultsScreen("timed");
     return;
   }
 
   renderResultsScreen("standard");
+}
+
+function renderTimedOutScreen() {
+  const total = getTotalQuestionsForCurrentSubject();
+  recordCompletedQuiz("timed", score, total);
+
+  appContainer.innerHTML = `
+    <div class="subject-page-header">
+      <h2 class="section-title">${subjects[currentSubject].name} Timed Practice Ended</h2>
+      <p class="subject-page-subtitle">Time ran out.</p>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top">
+        <div class="subject-card-title">⏰ Time's Up</div>
+        <div class="subject-card-desc">Score so far: ${score}/${total}</div>
+      </div>
+
+      <p>${getResultMessage(score, total)}</p>
+      <p><strong>Focus on:</strong> ${getWeakPointSummary()}</p>
+
+      <div class="subject-mode-group">
+        <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'timed')">
+          ⏱ Retry Timed Practice
+        </button>
+        <button class="mode-btn rapid-btn end-btn" onclick="startSubject(currentSubject, 'standard')">
+          📘 Standard Practice
+        </button>
+        <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
+          📚 Choose Another Subject
+        </button>
+        <button class="mode-btn rapid-btn end-btn" onclick="showHomePage()">
+          🏠 Home
+        </button>
+      </div>
+    </div>
+  `;
 }
 
 function renderResultsScreen(mode) {
@@ -839,14 +846,17 @@ function renderResultsScreen(mode) {
     title = "Timed Practice Results";
     subtitle = "Timed session finished.";
     total = getTotalQuestionsForCurrentSubject();
-    extraLine = `<p><strong>Time Used:</strong> ${formatTime(timedStartTotal - timeRemaining)}</p>`;
+    extraLine = `
+      <p><strong>Timer:</strong> ${getTimedLabel(timedDuration)}</p>
+      <p><strong>Time Used:</strong> ${formatTime(timedStartTotal - timeRemaining)}</p>
+    `;
     buttons = `
       <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'timed')">
         ⏱ Retry Timed Practice
       </button>
       <button class="mode-btn standard-btn end-btn" onclick="showTimedModePage(currentSubject)">
-  ⏱ Choose Another Timer
-</button>
+        ⏱ Choose Another Timer
+      </button>
       <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
         ❌ Review Missed Questions
       </button>
@@ -880,7 +890,7 @@ function renderResultsScreen(mode) {
     `;
   }
 
-    recordCompletedQuiz(mode, score, total);
+  recordCompletedQuiz(mode, score, total);
 
   appContainer.innerHTML = `
     <div class="subject-page-header">
