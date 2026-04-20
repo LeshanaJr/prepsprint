@@ -150,6 +150,7 @@ function getCurrentQuestionList() {
 function getCurrentQuestionIndex() {
   if (currentMode === "rapid") return rapidQuestionIndex;
   if (currentMode === "weak") return weakAreaQuestionIndex;
+  if (currentMode === "missed") return missedQuestionIndex;
 
   return currentQuestion;
 }
