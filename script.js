@@ -572,14 +572,37 @@ function nextWeakAreaQuestion() {
   }
 
   appContainer.innerHTML = `
-    <h2>${subjects[currentSubject].name} Weak Areas Complete</h2>
-    <p>Final Score: ${score}/${weakAreaQuestions.length}</p>
+  <div class="subject-page-header">
+    <h2 class="section-title">${subjects[currentSubject].name} Weak Areas Complete</h2>
+    <p class="subject-page-subtitle">Focused review finished.</p>
+  </div>
+
+  <div class="subject-card">
+    <div class="subject-card-top">
+      <div class="subject-card-title">Weak Areas Results</div>
+      <div class="subject-card-desc">
+        Final Score: ${score}/${weakAreaQuestions.length}
+      </div>
+    </div>
+
     <p>${getResultMessage(score, weakAreaQuestions.length)}</p>
-    <button onclick="startSubject(currentSubject, 'weak')">Practice Weak Areas Again</button>
-    <button onclick="startSubject(currentSubject, 'standard')">Back to Standard Practice</button>
-    <button onclick="showSubjectPage()">Choose Another Subject</button>
-    <button onclick="showHomePage()">Home</button>
-  `;
+
+    <div class="subject-mode-group">
+      <button class="mode-btn standard-btn" onclick="startSubject(currentSubject, 'weak')">
+        Practice Weak Areas Again
+      </button>
+      <button class="mode-btn standard-btn" onclick="startSubject(currentSubject, 'standard')">
+        Back to Standard Practice
+      </button>
+      <button class="mode-btn rapid-btn" onclick="showSubjectPage()">
+        Choose Another Subject
+      </button>
+      <button class="mode-btn rapid-btn" onclick="showHomePage()">
+        Home
+      </button>
+    </div>
+  </div>
+`;
 }
 
 function selectRapidAnswer(i) {
@@ -630,18 +653,42 @@ function nextRapidQuestion() {
     return;
   }
 
-  appContainer.innerHTML = `
-    <h2>${subjects[currentSubject].name} Rapid Fire Complete</h2>
-    <p>Final Score: ${score}/${rapidQuestions.length}</p>
-    <p>Best Streak: ${bestRapidStreak}</p>
+ appContainer.innerHTML = `
+  <div class="subject-page-header">
+    <h2 class="section-title">${subjects[currentSubject].name} Rapid Fire Complete</h2>
+    <p class="subject-page-subtitle">Speed round finished.</p>
+  </div>
+
+  <div class="subject-card">
+    <div class="subject-card-top">
+      <div class="subject-card-title">Rapid Fire Results</div>
+      <div class="subject-card-desc">
+        Final Score: ${score}/${rapidQuestions.length} • Best Streak: ${bestRapidStreak}
+      </div>
+    </div>
+
     <p>${getResultMessage(score, rapidQuestions.length)}</p>
     <p><strong>Focus on:</strong> ${getWeakPointSummary()}</p>
-    <button onclick="startSubject(currentSubject, 'weak')">Practice Weak Areas</button>
-    <button onclick="startSubject(currentSubject, 'rapid')">Retry Rapid Fire</button>
-    <button onclick="startSubject(currentSubject, 'standard')">Try Standard Practice</button>
-    <button onclick="showSubjectPage()">Choose Another Subject</button>
-    <button onclick="showHomePage()">Home</button>
-  `;
+
+    <div class="subject-mode-group">
+      <button class="mode-btn standard-btn" onclick="startSubject(currentSubject, 'weak')">
+        Practice Weak Areas
+      </button>
+      <button class="mode-btn standard-btn" onclick="startSubject(currentSubject, 'rapid')">
+        Retry Rapid Fire
+      </button>
+      <button class="mode-btn rapid-btn" onclick="startSubject(currentSubject, 'standard')">
+        Try Standard Practice
+      </button>
+      <button class="mode-btn rapid-btn" onclick="showSubjectPage()">
+        Choose Another Subject
+      </button>
+      <button class="mode-btn rapid-btn" onclick="showHomePage()">
+        Home
+      </button>
+    </div>
+  </div>
+`;
 }
 
 function shuffleArray(array) {
@@ -772,15 +819,38 @@ function nextQuestion() {
   }
 
   appContainer.innerHTML = `
-  <h2>${subject.name} Complete</h2>
-  <p>Final Score: ${score}/${getTotalQuestionsForCurrentSubject()}</p>
-  <p>${getResultMessage(score, getTotalQuestionsForCurrentSubject())}</p>
-  <p><strong>Focus on:</strong> ${getWeakPointSummary()}</p>
-  <p>You can retry this section, practice your weak areas, or test your knowledge on another AP class.</p>
-  <button onclick="startSubject(currentSubject, 'weak')">Practice Weak Areas</button>
-<button onclick="startSubject(currentSubject, 'standard')">Retry Subject</button>
-<button onclick="showSubjectPage()">Choose Another Subject</button>
-<button onclick="showHomePage()">Home</button>
+  <div class="subject-page-header">
+    <h2 class="section-title">${subject.name} Complete</h2>
+    <p class="subject-page-subtitle">Here’s how you did.</p>
+  </div>
+
+  <div class="subject-card">
+    <div class="subject-card-top">
+      <div class="subject-card-title">Results</div>
+      <div class="subject-card-desc">
+        Final Score: ${score}/${getTotalQuestionsForCurrentSubject()}
+      </div>
+    </div>
+
+    <p>${getResultMessage(score, getTotalQuestionsForCurrentSubject())}</p>
+    <p><strong>Focus on:</strong> ${getWeakPointSummary()}</p>
+    <p>You can retry this section, practice weak areas, or choose another subject.</p>
+
+    <div class="subject-mode-group">
+      <button class="mode-btn standard-btn" onclick="startSubject(currentSubject, 'weak')">
+        Practice Weak Areas
+      </button>
+      <button class="mode-btn standard-btn" onclick="startSubject(currentSubject, 'standard')">
+        Retry Subject
+      </button>
+      <button class="mode-btn rapid-btn" onclick="showSubjectPage()">
+        Choose Another Subject
+      </button>
+      <button class="mode-btn rapid-btn" onclick="showHomePage()">
+        Home
+      </button>
+    </div>
+  </div>
 `;
 }
 
