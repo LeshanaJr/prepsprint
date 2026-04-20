@@ -54,6 +54,59 @@ let missedReviewStartTotal = 0;
 let timerInterval = null;
 let timeRemaining = 0;
 let timedStartTotal = 0;
+let timedDuration = 300;
+
+function getTimedLabel(seconds) {
+  if (seconds === 300) return "5 Minutes";
+  if (seconds === 600) return "10 Minutes";
+  if (seconds === 1500) return "25 Minutes";
+  return `${Math.floor(seconds / 60)} Minutes`;
+}
+
+function showTimedModePage(subjectIndex) {
+  const subject = subjects[subjectIndex];
+
+  appContainer.innerHTML = `
+    <div class="subject-page-header">
+      <h1 class="section-title">${subject.name} Timed Practice</h1>
+      <p class="subject-page-subtitle">
+        Choose how long you want your timed session to be.
+      </p>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top">
+        <div class="subject-card-title">⏱ Choose a Timer</div>
+        <div class="subject-card-desc">
+          Start a timed session and see how you do under pressure.
+        </div>
+      </div>
+
+      <div class="subject-mode-group">
+        <button class="mode-btn standard-btn end-btn" onclick="startTimedSubject(${subjectIndex}, 300)">
+          5 Minutes
+        </button>
+
+        <button class="mode-btn standard-btn end-btn" onclick="startTimedSubject(${subjectIndex}, 600)">
+          10 Minutes
+        </button>
+
+        <button class="mode-btn standard-btn end-btn" onclick="startTimedSubject(${subjectIndex}, 1500)">
+          25 Minutes
+        </button>
+
+        <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
+          Back
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function startTimedSubject(subjectIndex, seconds) {
+  timedDuration = seconds;
+  startSubject(subjectIndex, "timed");
+}
 
 function startTimer(seconds) {
   clearInterval(timerInterval);
@@ -307,9 +360,9 @@ function showSubjectPage() {
           <button class="mode-btn rapid-btn" onclick="startSubject(${index}, 'rapid')">
             Rapid Fire
           </button>
-          <button class="mode-btn rapid-btn" onclick="startSubject(${index}, 'timed')">
-            Timed Practice
-          </button>
+          <button class="mode-btn rapid-btn" onclick="showTimedModePage(${index})">
+  Timed Practice
+</button>
         </div>
       </div>
     `;
@@ -381,14 +434,14 @@ function startSubject(subjectIndex, mode = "standard") {
     return;
   }
 
-  if (mode === "timed") {
+    if (mode === "timed") {
     weakPoints = {};
     missedQuestions = [];
     missedQuestionIndex = 0;
 
-    // 5 minutes for now; change later as needed
-    startTimer(300);
+    startTimer(timedDuration);
     renderQuestionScreen();
+    return;
   }
 }
 
@@ -411,7 +464,11 @@ function renderQuestionScreen() {
       ${currentMode === "rapid" ? ` • Streak: ${rapidStreak}` : ""}
     </p>
 
-    ${currentMode === "timed" ? `<p id="timer-display" class="progress-text">Time Left: ${formatTime(timeRemaining)}</p>` : ""}
+    ${currentMode === "timed" ? `
+  <p id="timer-display" class="progress-text">
+    Timed Practice • ${getTimedLabel(timedDuration)} • Time Left: ${formatTime(timeRemaining)}
+  </p>
+` : ""}
 
     <div class="progress-bar-container">
       <div class="progress-bar-fill" style="width: ${progressPercent}%"></div>
@@ -582,7 +639,10 @@ function renderResultsScreen(mode) {
     title = "Rapid Fire Results";
     subtitle = "Speed round finished.";
     total = rapidQuestions.length;
-    extraLine = `<p><strong>Best Streak:</strong> ${bestRapidStreak}</p>`;
+    extraLine = `
+  <p><strong>Timer:</strong> ${getTimedLabel(timedDuration)}</p>
+  <p><strong>Time Used:</strong> ${formatTime(timedStartTotal - timeRemaining)}</p>
+`;
     buttons = `
       <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
         ❌ Review Missed Questions
@@ -651,6 +711,9 @@ function renderResultsScreen(mode) {
       <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'timed')">
         ⏱ Retry Timed Practice
       </button>
+      <button class="mode-btn standard-btn end-btn" onclick="showTimedModePage(currentSubject)">
+  ⏱ Choose Another Timer
+</button>
       <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
         ❌ Review Missed Questions
       </button>
