@@ -13,6 +13,11 @@ const MODE_CONFIG = {
     label: "Practice Weak Areas",
     autoAdvance: false,
     showPassage: true
+  },
+  missed: {
+    label: "Review Missed Questions",
+    autoAdvance: false,
+    showPassage: true
   }
 };
 
@@ -36,6 +41,9 @@ let bestRapidStreak = 0;
 
 let weakAreaQuestions = [];
 let weakAreaQuestionIndex = 0;
+
+let missedQuestions = [];
+let missedQuestionIndex = 0;
 
 function shuffleArray(array) {
   const copy = [...array];
@@ -133,12 +141,15 @@ function getQuestionsByCategories(subjectIndex, categories) {
 function getCurrentQuestionList() {
   if (currentMode === "rapid") return rapidQuestions;
   if (currentMode === "weak") return weakAreaQuestions;
+  if (currentMode === "missed") return missedQuestions;
+
   return subjects[currentSubject].passages[currentPassage].questions;
 }
 
 function getCurrentQuestionIndex() {
   if (currentMode === "rapid") return rapidQuestionIndex;
   if (currentMode === "weak") return weakAreaQuestionIndex;
+
   return currentQuestion;
 }
 
@@ -232,12 +243,16 @@ function startSubject(subjectIndex, mode = "standard") {
 
   if (mode === "standard") {
     weakPoints = {};
+    missedQuestions = [];
+    missedQuestionIndex = 0;
     renderQuestionScreen();
     return;
   }
 
   if (mode === "rapid") {
     weakPoints = {};
+    missedQuestions = [];
+    missedQuestionIndex = 0;
     rapidQuestions = shuffleArray(subjects[subjectIndex].rapidQuestions || []);
     rapidQuestionIndex = 0;
 
@@ -257,6 +272,18 @@ function startSubject(subjectIndex, mode = "standard") {
 
     if (!weakAreaQuestions.length) {
       renderUnavailableScreen(subjectIndex, "No weak-area questions are available yet.");
+      return;
+    }
+
+    renderQuestionScreen();
+    return;
+  }
+
+  if (mode === "missed") {
+    missedQuestionIndex = 0;
+
+    if (!missedQuestions.length) {
+      renderUnavailableScreen(subjectIndex, "No missed questions are available yet.");
       return;
     }
 
@@ -329,11 +356,19 @@ function handleAnswer(i) {
         bestRapidStreak = rapidStreak;
       }
     }
-  } else {
+  }   } else {
     weakPoints[q.category] = (weakPoints[q.category] || 0) + 1;
 
     if (currentMode === "rapid") {
       rapidStreak = 0;
+    }
+
+    const alreadySaved = missedQuestions.some((question) => question.prompt === q.prompt);
+
+    if (!alreadySaved) {
+      missedQuestions.push({
+        ...q
+      });
     }
   }
 
@@ -386,6 +421,18 @@ function goToNextQuestion() {
     return;
   }
 
+  if (currentMode === "missed") {
+    missedQuestionIndex++;
+
+    if (missedQuestionIndex < missedQuestions.length) {
+      renderQuestionScreen();
+      return;
+    }
+
+    renderResultsScreen("missed");
+    return;
+  }
+
   const subject = subjects[currentSubject];
   const passage = subject.passages[currentPassage];
 
@@ -421,7 +468,10 @@ function renderResultsScreen(mode) {
     subtitle = "Speed round finished.";
     total = rapidQuestions.length;
     extraLine = `<p><strong>Best Streak:</strong> ${bestRapidStreak}</p>`;
-    buttons = `
+        buttons = `
+      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
+        ❌ Review Missed Questions
+      </button>
       <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'weak')">
         🎯 Practice Weak Areas
       </button>
@@ -436,9 +486,9 @@ function renderResultsScreen(mode) {
       </button>
       <button class="mode-btn rapid-btn end-btn" onclick="showHomePage()">
         🏠 Home
-      </button>
+      </buttonf>
     `;
-  } else if (mode === "weak") {
+  }   } else if (mode === "weak") {
     title = "Weak Areas Results";
     subtitle = "Focused review finished.";
     total = weakAreaQuestions.length;
@@ -456,8 +506,32 @@ function renderResultsScreen(mode) {
         🏠 Home
       </button>
     `;
-  } else {
+  } else if (mode === "missed") {
+    title = "Missed Questions Results";
+    subtitle = "Review session finished.";
+    total = missedQuestions.length;
     buttons = `
+      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
+        ❌ Review Missed Questions Again
+      </button>
+      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'weak')">
+        🎯 Practice Weak Areas
+      </button>
+      <button class="mode-btn rapid-btn end-btn" onclick="startSubject(currentSubject, 'standard')">
+        📘 Standard Practice
+      </button>
+      <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
+        📚 Choose Another Subject
+      </button>
+      <button class="mode-btn rapid-btn end-btn" onclick="showHomePage()">
+        🏠 Home
+      </button>
+    `;
+  } else {
+        buttons = `
+      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
+        ❌ Review Missed Questions
+      </button>
       <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'weak')">
         🎯 Practice Weak Areas
       </button>
