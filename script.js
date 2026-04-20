@@ -336,10 +336,53 @@ function getQuizActionButtons() {
   `;
 }
 
+function resetSavedProgress() {
+  const confirmed = confirm("Are you sure you want to reset all saved progress on this device?");
+
+  if (!confirmed) return;
+
+  localStorage.removeItem(STORAGE_KEY);
+  savedProgress = structuredClone(defaultProgress);
+
+  currentSubject = 0;
+  currentPassage = 0;
+  currentQuestion = 0;
+  currentMode = "standard";
+  score = 0;
+  currentShuffledChoices = [];
+  weakPoints = {};
+
+  rapidQuestions = [];
+  rapidQuestionIndex = 0;
+  rapidStreak = 0;
+  bestRapidStreak = 0;
+
+  weakAreaQuestions = [];
+  weakAreaQuestionIndex = 0;
+
+  missedQuestions = [];
+  missedQuestionIndex = 0;
+  missedReviewStartTotal = 0;
+
+  stopTimer();
+  timeRemaining = 0;
+  timedStartTotal = 0;
+  timedDuration = savedProgress.lastTimedDuration || 300;
+
+  if (rapidTimeout) {
+    clearTimeout(rapidTimeout);
+    rapidTimeout = null;
+  }
+
+  showHomePage();
+}
+
+
 function showHomePage() {
   stopTimer();
 
   const lastSubjectName = subjects?.[savedProgress.lastSubjectIndex]?.name || "None yet";
+  const hasSavedProgress = savedProgress.totalQuizzesCompleted > 0;
 
   appContainer.innerHTML = `
     <div class="home-header">
@@ -371,11 +414,16 @@ function showHomePage() {
 
       <div class="subject-mode-group">
         <button id="go-subjects-btn" class="mode-btn standard-btn">Choose Subject</button>
+        ${hasSavedProgress ? `<button id="reset-progress-btn" class="mode-btn rapid-btn">Reset Progress</button>` : ""}
       </div>
     </div>
   `;
 
   document.getElementById("go-subjects-btn").addEventListener("click", showSubjectPage);
+
+  if (hasSavedProgress) {
+    document.getElementById("reset-progress-btn").addEventListener("click", resetSavedProgress);
+  }
 }
 
 function showSubjectPage() {
