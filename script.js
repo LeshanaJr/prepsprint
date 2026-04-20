@@ -494,9 +494,9 @@ function renderResultsScreen(mode) {
       </button>
       <button class="mode-btn rapid-btn end-btn" onclick="showHomePage()">
         🏠 Home
-      </buttonf>
+      </button>
     `;
-  }   } else if (mode === "weak") {
+  }   else if (mode === "weak") {
     title = "Weak Areas Results";
     subtitle = "Focused review finished.";
     total = weakAreaQuestions.length;
