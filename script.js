@@ -55,6 +55,7 @@ let timerInterval = null;
 let timeRemaining = 0;
 let timedStartTotal = 0;
 let timedDuration = 300;
+let rapidTimeout = null;
 
 function getQuizActionButtons() {
   if (currentMode === "timed") {
@@ -65,31 +66,32 @@ function getQuizActionButtons() {
     `;
   }
 
-  if (currentMode === "standard") {
+  if (currentMode === "rapid") {
     return `
       <div class="quiz-action-row">
-        <button class="top-action-btn" onclick="showSubjectPage()">Back to Subjects</button>
+        <button class="top-action-btn" onclick="exitRapidFire()">Exit Rapid Fire</button>
       </div>
     `;
   }
 
-  if (currentMode === "weak") {
-    return `
-      <div class="quiz-action-row">
-        <button class="top-action-btn" onclick="showSubjectPage()">Back to Subjects</button>
-      </div>
-    `;
+  // standard, weak, missed
+  return `
+    <div class="quiz-action-row">
+      <button class="top-action-btn" onclick="showSubjectPage()">Back to Subjects</button>
+    </div>
+  `;
+}
+
+function exitRapidFire() {
+  if (rapidTimeout) {
+    clearTimeout(rapidTimeout);
+    rapidTimeout = null;
   }
 
-  if (currentMode === "missed") {
-    return `
-      <div class="quiz-action-row">
-        <button class="top-action-btn" onclick="showSubjectPage()">Back to Subjects</button>
-      </div>
-    `;
-  }
+  rapidQuestionIndex = 0;
+  rapidStreak = 0;
 
-  return "";
+  showSubjectPage();
 }
 
 function exitTimedPractice() {
@@ -594,9 +596,9 @@ function handleAnswer(i) {
       </div>
     `;
 
-    setTimeout(() => {
-      goToNextQuestion();
-    }, rapidAdvanceDelay);
+    rapidTimeout = setTimeout(() => {
+  goToNextQuestion();
+}, rapidAdvanceDelay);
 
     return;
   }
