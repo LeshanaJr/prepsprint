@@ -26,6 +26,43 @@ const MODE_CONFIG = {
   }
 };
 
+const STORAGE_KEY = "prepsprint_progress_v1";
+
+const defaultProgress = {
+  totalQuizzesCompleted: 0,
+  lastSubjectIndex: 0,
+  lastMode: "standard",
+  lastTimedDuration: 300,
+  subjectStats: {}
+};
+
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return structuredClone(defaultProgress);
+
+    const parsed = JSON.parse(raw);
+
+    return {
+      ...structuredClone(defaultProgress),
+      ...parsed,
+      subjectStats: parsed.subjectStats || {}
+    };
+  } catch (error) {
+    console.error("Failed to load progress:", error);
+    return structuredClone(defaultProgress);
+  }
+}
+
+function saveProgress() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(savedProgress));
+  } catch (error) {
+    console.error("Failed to save progress:", error);
+  }
+}
+
+
 const appContainer = document.getElementById("app-container");
 const indexToLetters = ["A", "B", "C", "D"];
 
@@ -56,6 +93,9 @@ let timeRemaining = 0;
 let timedStartTotal = 0;
 let timedDuration = 300;
 let rapidTimeout = null;
+
+let savedProgress = loadProgress();
+timedDuration = savedProgress.lastTimedDuration || 300;
 
 function getQuizActionButtons() {
   if (currentMode === "timed") {
@@ -148,6 +188,8 @@ function showTimedModePage(subjectIndex) {
 
 function startTimedSubject(subjectIndex, seconds) {
   timedDuration = seconds;
+  savedProgress.lastTimedDuration = seconds;
+  saveProgress();
   startSubject(subjectIndex, "timed");
 }
 
@@ -190,6 +232,7 @@ function updateTimerDisplay() {
 
 function renderTimedOutScreen() {
   const total = getTotalQuestionsForCurrentSubject();
+  recordCompletedQuiz("timed", score, total);
 
   appContainer.innerHTML = `
     <div class="subject-page-header">
@@ -345,6 +388,8 @@ function renderUnavailableScreen(subjectIndex, message) {
 function showHomePage() {
   stopTimer();
 
+  const lastSubjectName = subjects[savedProgress.lastSubjectIndex]?.name || "None yet";
+
   appContainer.innerHTML = `
     <div class="home-header">
       <h1 class="app-title">PrepSprint</h1>
@@ -356,6 +401,13 @@ function showHomePage() {
       <p class="home-stats-text">
         PrepSprint helps you study with multiple-choice practice, explanations, and subject-based review modes.
       </p>
+    </div>
+
+    <div class="home-stats" style="margin-top: 14px;">
+      <p class="home-stats-title">Your Progress</p>
+      <p class="home-stats-text">Total quizzes completed: ${savedProgress.totalQuizzesCompleted}</p>
+      <p class="home-stats-text">Last subject practiced: ${lastSubjectName}</p>
+      <p class="home-stats-text">Last timer used: ${getTimedLabel(savedProgress.lastTimedDuration)}</p>
     </div>
 
     <div class="subject-card" style="margin-top: 18px;">
@@ -393,12 +445,20 @@ function showSubjectPage() {
   const subjectList = document.getElementById("subject-list");
 
   subjects.forEach((subject, index) => {
-    subjectList.innerHTML += `
-      <div class="subject-card">
-        <div class="subject-card-top">
-          <div class="subject-card-title">${getSubjectIcon(subject.name)} ${subject.name}</div>
-          <div class="subject-card-desc">${getSubjectDescription(subject.name)}</div>
+  const stats = getSubjectStats(index);
+
+  subjectList.innerHTML += `
+    <div class="subject-card">
+      <div class="subject-card-top">
+        <div class="subject-card-title">${getSubjectIcon(subject.name)} ${subject.name}</div>
+        <div class="subject-card-desc">${getSubjectDescription(subject.name)}</div>
+        <div class="subject-card-desc" style="margin-top: 8px;">
+          Best Standard: ${stats.standardBestScore} • Best Rapid: ${stats.rapidBestScore}
         </div>
+        <div class="subject-card-desc">
+          Best Timed: ${stats.timedBestScore} • Best Streak: ${stats.bestRapidStreak}
+        </div>
+      </div>
 
         <div class="subject-mode-group">
           <button class="mode-btn standard-btn" onclick="startSubject(${index}, 'standard')">
@@ -418,6 +478,28 @@ function showSubjectPage() {
   document.getElementById("back-home-btn").addEventListener("click", showHomePage);
 }
 
+function recordCompletedQuiz(mode, scoreValue, total) {
+  savedProgress.totalQuizzesCompleted++;
+
+  const stats = getSubjectStats(currentSubject);
+  stats.quizzesCompleted++;
+
+  if (mode === "standard") {
+    stats.standardBestScore = Math.max(stats.standardBestScore, scoreValue);
+  } else if (mode === "rapid") {
+    stats.rapidBestScore = Math.max(stats.rapidBestScore, scoreValue);
+    stats.bestRapidStreak = Math.max(stats.bestRapidStreak, bestRapidStreak);
+  } else if (mode === "weak") {
+    stats.weakBestScore = Math.max(stats.weakBestScore, scoreValue);
+  } else if (mode === "missed") {
+    stats.missedBestScore = Math.max(stats.missedBestScore, scoreValue);
+  } else if (mode === "timed") {
+    stats.timedBestScore = Math.max(stats.timedBestScore, scoreValue);
+  }
+
+  saveProgress();
+}
+
 function startSubject(subjectIndex, mode = "standard") {
   stopTimer();
 
@@ -429,6 +511,11 @@ function startSubject(subjectIndex, mode = "standard") {
   currentShuffledChoices = [];
   rapidStreak = 0;
   bestRapidStreak = 0;
+
+  savedProgress.lastSubjectIndex = subjectIndex;
+  savedProgress.lastMode = mode;
+  savedProgress.lastTimedDuration = timedDuration;
+  saveProgress();
 
   if (mode === "standard") {
     weakPoints = {};
@@ -688,10 +775,7 @@ function renderResultsScreen(mode) {
     title = "Rapid Fire Results";
     subtitle = "Speed round finished.";
     total = rapidQuestions.length;
-    extraLine = `
-  <p><strong>Timer:</strong> ${getTimedLabel(timedDuration)}</p>
-  <p><strong>Time Used:</strong> ${formatTime(timedStartTotal - timeRemaining)}</p>
-`;
+    extraLine = `<p><strong>Best Streak:</strong> ${bestRapidStreak}</p>`;
     buttons = `
       <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
         ❌ Review Missed Questions
@@ -795,6 +879,8 @@ function renderResultsScreen(mode) {
       </button>
     `;
   }
+
+    recordCompletedQuiz(mode, score, total);
 
   appContainer.innerHTML = `
     <div class="subject-page-header">
