@@ -247,6 +247,10 @@ p {
   margin-top: 14px;
 }
 
+#timer-display {
+  font-weight: 700;
+}
+
 @media (max-width: 480px) {
   body {
     padding: 12px;
