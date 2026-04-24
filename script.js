@@ -651,12 +651,14 @@ function handleAnswer(i) {
   const buttons = appContainer.querySelectorAll(".answer-btn");
   const selectedChoice = currentShuffledChoices[i];
  
+  if (typeof trackQuestionAnswered === "function") {
   trackQuestionAnswered(
-  subjects[currentSubject].name,
-  currentMode,
-  q.category,
-  selectedChoice.correct
-);
+    subjects[currentSubject].name,
+    currentMode,
+    q.category,
+    selectedChoice.correct
+  );
+}
   
   let correctIndex = -1;
 
