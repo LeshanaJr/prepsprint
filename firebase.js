@@ -109,25 +109,17 @@ window.trackUniqueUser = async function() {
 };
 
 window.submitReviewToFirebase = async function(rating, comment) {
-
   try {
+    const userId = getGlobalUserId();
 
-    await addDoc(collection(db, "reviews"), {
-
-      userId: getGlobalUserId(),
-
+    await setDoc(doc(db, "reviews", userId), {
+      userId,
       rating,
-
       comment,
-
       createdAt: serverTimestamp()
-
     });
 
   } catch (error) {
-
     console.error("Failed to submit review:", error);
-
   }
-
 };
