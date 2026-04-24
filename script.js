@@ -948,7 +948,7 @@ function renderResultsScreen(mode) {
 
   recordCompletedQuiz(mode, score, total);
 
-  appContainer.innerHTML = `
+    appContainer.innerHTML = `
     <div class="subject-page-header">
       <h2 class="section-title">${subject.name} Complete</h2>
       <p class="subject-page-subtitle">${subtitle}</p>
@@ -967,23 +967,28 @@ function renderResultsScreen(mode) {
       <div class="subject-mode-group">
         ${buttons}
       </div>
-      
-<div id="review-container">
-      ${showReviewForm()}
-      </div>
+
+      <div id="review-container"></div>
     </div>
   `;
+
+  showReviewForm();
+}
 }
 
 function showReviewForm() {
-  appContainer.innerHTML += `
+  const reviewContainer = document.getElementById("review-container");
+
+  if (!reviewContainer) return;
+
+  reviewContainer.innerHTML = `
     <div class="feedback-box">
       <p><strong>On a scale of 1 to 5, how much has PrepSprint helped you study?</strong></p>
-      <button onclick="submitAppReview(5)">5 - The best study resource I've used</button>
-      <button onclick="submitAppReview(4)">4 - A lot</button>
-      <button onclick="submitAppReview(3)">3 - A little bit</button>
-      <button onclick="submitAppReview(2)">2 - Very little</button>
-      <button onclick="submitAppReview(1)">1 - Not at all</button>
+      <button class="mode-btn rapid-btn" onclick="submitAppReview(5)">5 - The best study resource I've used</button>
+      <button class="mode-btn rapid-btn" onclick="submitAppReview(4)">4 - A lot</button>
+      <button class="mode-btn rapid-btn" onclick="submitAppReview(3)">3 - A little bit</button>
+      <button class="mode-btn rapid-btn" onclick="submitAppReview(2)">2 - Very little</button>
+      <button class="mode-btn rapid-btn" onclick="submitAppReview(1)">1 - Not at all</button>
     </div>
   `;
 }
