@@ -974,7 +974,6 @@ function renderResultsScreen(mode) {
 
   showReviewForm();
 }
-}
 
 function showReviewForm() {
   const reviewContainer = document.getElementById("review-container");
