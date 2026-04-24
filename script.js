@@ -978,26 +978,30 @@ function renderResultsScreen(mode) {
 }
 
 function showReviewForm() {
-  const reviewContainer = document.getElementById("review-container");
-
-  if (!reviewContainer) return;
-
-  reviewContainer.innerHTML = `
+  return `
     <div class="feedback-box">
       <p><strong>On a scale of 1 to 5, how much has PrepSprint helped you study?</strong></p>
-      <button class="mode-btn rapid-btn" onclick="submitAppReview(5)">5 - The best study resource I've used</button>
-      <button class="mode-btn rapid-btn" onclick="submitAppReview(4)">4 - A lot</button>
-      <button class="mode-btn rapid-btn" onclick="submitAppReview(3)">3 - A little bit</button>
-      <button class="mode-btn rapid-btn" onclick="submitAppReview(2)">2 - Very little</button>
-      <button class="mode-btn rapid-btn" onclick="submitAppReview(1)">1 - Not at all</button>
+
+      <textarea 
+        id="review-comment" 
+        placeholder="Optional: Tell us how we can improve..."
+        style="width: 100%; margin: 10px 0; padding: 8px;"
+      ></textarea>
+
+      <button onclick="submitAppReview(5)">5 - The best study resource I've used</button>
+      <button onclick="submitAppReview(4)">4 - A lot</button>
+      <button onclick="submitAppReview(3)">3 - A little bit</button>
+      <button onclick="submitAppReview(2)">2 - Very little</button>
+      <button onclick="submitAppReview(1)">1 - Not at all</button>
     </div>
   `;
 }
 
 function submitAppReview(rating) {
-  if (typeof submitReviewToFirebase === "function") {
-    submitReviewToFirebase(rating, "");
-  }
+  const commentEl = document.getElementById("review-comment");
+  const comment = commentEl ? commentEl.value.trim() : "";
+
+  submitReviewToFirebase(rating, comment);
 
   alert("Thanks for the feedback!");
 }
