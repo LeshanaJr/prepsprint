@@ -604,6 +604,14 @@ function renderQuestionScreen() {
   const questionList = getCurrentQuestionList();
   const questionIndex = getCurrentQuestionIndex();
   const q = questionList[questionIndex];
+  if (currentMode === "standard" || currentMode === "timed") {
+  const passage = subjects[currentSubject].passages[currentPassage];
+  q.passageTitle = passage.title;
+  q.passageText = passage.text;
+  q.passageImage = passage.image;
+  q.passageImageAlt = passage.imageAlt;
+}
+  
   const config = MODE_CONFIG[currentMode];
   const progressPercent = ((questionIndex + 1) / questionList.length) * 100;
 
@@ -630,8 +638,15 @@ function renderQuestionScreen() {
       <div class="progress-bar-fill" style="width: ${progressPercent}%"></div>
     </div>
 
-    ${showPassage ? `<h3>${q.passageTitle || ""}</h3>` : ""}
-    ${showPassage ? `<p class="passage-text">${q.passageText}</p><hr>` : ""}
+   ${showPassage ? `<h3>${q.passageTitle || ""}</h3>` : ""}
+${showPassage && q.passageImage ? `
+  <img 
+    src="${q.passageImage}" 
+    alt="${q.passageImageAlt || "Passage image"}" 
+    class="passage-image"
+  >
+` : ""}
+${showPassage ? `<p class="passage-text">${q.passageText}</p><hr>` : ""}
 
     ${currentMode === "weak" ? `<p><strong>Focus:</strong> ${q.category}</p>` : ""}
     <p>${q.prompt}</p>
