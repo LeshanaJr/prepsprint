@@ -650,6 +650,14 @@ function handleAnswer(i) {
   const q = questionList[questionIndex];
   const buttons = appContainer.querySelectorAll(".answer-btn");
   const selectedChoice = currentShuffledChoices[i];
+ 
+  trackQuestionAnswered(
+  subjects[currentSubject].name,
+  currentMode,
+  q.category,
+  selectedChoice.correct
+);
+  
   let correctIndex = -1;
 
   buttons.forEach((btn, index) => {
@@ -959,8 +967,30 @@ function renderResultsScreen(mode) {
       <div class="subject-mode-group">
         ${buttons}
       </div>
+      
+<div id="review-container">
+      ${showReviewForm()}
+      </div>
     </div>
   `;
+}
+
+function showReviewForm() {
+  appContainer.innerHTML += `
+    <div class="feedback-box">
+      <p><strong>On a scale of 1 to 5, how much has PrepSprint helped you study?</strong></p>
+      <button onclick="submitAppReview(5)">5 - The best study resource I've used</button>
+      <button onclick="submitAppReview(4)">4 - A lot</button>
+      <button onclick="submitAppReview(3)">3 - A little bit</button>
+      <button onclick="submitAppReview(2)">2 - Very little</button>
+      <button onclick="submitAppReview(1)">1 - Not at all</button>
+    </div>
+  `;
+}
+
+function submitAppReview(rating) {
+  submitReviewToFirebase(rating, "");
+  alert("Thanks for the feedback!");
 }
 
 trackUniqueUser();
