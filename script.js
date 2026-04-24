@@ -963,4 +963,5 @@ function renderResultsScreen(mode) {
   `;
 }
 
+trackUniqueUser();
 showHomePage();
