@@ -1001,5 +1001,19 @@ function submitAppReview(rating) {
   alert("Thanks for the feedback!");
 }
 
-trackUniqueUser();
-showHomePage();
+try {
+  if (typeof trackUniqueUser === "function") {
+    trackUniqueUser();
+  }
+
+  showHomePage();
+} catch (error) {
+  document.body.innerHTML = `
+    <div style="font-family: Arial; padding: 20px;">
+      <h2>PrepSprint failed to load</h2>
+      <p><strong>Error:</strong> ${error.message}</p>
+    </div>
+  `;
+
+  console.error(error);
+}
