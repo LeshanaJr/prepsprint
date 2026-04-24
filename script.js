@@ -994,7 +994,10 @@ function showReviewForm() {
 }
 
 function submitAppReview(rating) {
-  submitReviewToFirebase(rating, "");
+  if (typeof submitReviewToFirebase === "function") {
+    submitReviewToFirebase(rating, "");
+  }
+
   alert("Thanks for the feedback!");
 }
 
