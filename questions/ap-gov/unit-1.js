@@ -1,6 +1,8 @@
-window.subjects = window.subjects || [];
+window.questionBanks = window.questionBanks || {};
 
-window.subjects.push({
+window.questionBanks.apGov = window.questionBanks.apGov || [];
+
+window.questionBanks.apGov.push({
 
 name: "Unit 1",
    
