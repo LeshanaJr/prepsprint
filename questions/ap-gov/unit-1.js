@@ -1,8 +1,6 @@
 window.subjects = window.subjects || [];
 
-window.subjects.push(
-
-{
+window.subjects.push({
 
 name: "Unit 1",
    
@@ -514,7 +512,7 @@ The king has refused laws, dissolved legislatures, imposed taxes without consent
             { text: "Trade restrictions", correct: false, choiceExplanation: " is incorrect because it is economic." },
             { text: "Courts", correct: false, choiceExplanation: " is incorrect because it is not specific." }
           ],
-          Category: "Unit 1: Foundations of American Democracy"
+          category: "Unit 1: Foundations of American Democracy"
         }
       ]
     },
@@ -1082,7 +1080,4 @@ Modern federalism involves shared responsibilities between national and state go
     ]
   }
 ]
-}
-
- 
-); 
+}); 
