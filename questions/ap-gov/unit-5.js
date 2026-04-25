@@ -1,4 +1,7 @@
-{
+window.questionBanks = window.questionBanks || {};
+window.questionBanks.apGov = window.questionBanks.apGov || [];
+
+window.questionBanks.apGov.push({
 name: "Unit 5",
 
 rapidQuestions: [
@@ -1585,3 +1588,4 @@ category: "Unit 5: Political Participation"
 }
 ]
 }
+);
