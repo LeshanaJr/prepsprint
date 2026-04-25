@@ -1,4 +1,7 @@
-{
+window.questionBanks = window.questionBanks || {};
+window.questionBanks.apGov = window.questionBanks.apGov || [];
+
+window.questionBanks.apGov.push({
   name: "Unit 2",
 
 rapidQuestions: [
@@ -1810,3 +1813,4 @@ A president attempts to enforce a controversial policy through executive action.
   }
 ]
 }
+);
