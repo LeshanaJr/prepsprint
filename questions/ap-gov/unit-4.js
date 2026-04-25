@@ -1,4 +1,7 @@
-{
+window.questionBanks = window.questionBanks || {};
+window.questionBanks.apGov = window.questionBanks.apGov || [];
+
+window.questionBanks.apGov.push({
   name: "Unit 4",
 
   rapidQuestions: [
@@ -1199,3 +1202,4 @@ category: "Unit 4: American Political Ideologies and Beliefs"
 ]
     
 }
+);
