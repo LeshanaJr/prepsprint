@@ -34,11 +34,11 @@ const QUIZ_LIMITS = {
   missed: 20
 };
 
-function buildApGovSubject() {
-  const units = window.subjects || [];
+function buildSubject(subjectName, bankKey) {
+  const units = window.questionBanks?.[bankKey] || [];
 
   return {
-    name: "AP Gov",
+    name: subjectName,
     rapidQuestions: units.flatMap(unit => unit.rapidQuestions || []),
     passages: units.flatMap(unit => unit.passages || [])
   };
@@ -1069,8 +1069,13 @@ try {
 
   loadUnitFiles()
   .then(() => {
-    window.subjects = [buildApGovSubject()];
-    showHomePage();
+    window.subjects = [
+  buildSubject("AP Gov", "apGov"),
+  buildSubject("AP Lang", "apLang"),
+  buildSubject("AP World", "apWorld")
+];
+
+showHomePage();
   })
   .catch((error) => {
     document.body.innerHTML = `
