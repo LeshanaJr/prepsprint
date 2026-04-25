@@ -1,4 +1,8 @@
- {
+window.subjects = window.subjects || [];
+
+window.subjects.push(
+
+{
 
 name: "Unit 1",
    
@@ -1079,3 +1083,6 @@ Modern federalism involves shared responsibilities between national and state go
   }
 ]
 }
+
+ 
+); 
