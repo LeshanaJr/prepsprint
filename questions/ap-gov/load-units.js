@@ -1,10 +1,15 @@
-window.subjects = window.subjects || [];
+function loadUnitFiles() {
+  const files = window.questionManifest || [];
 
-const basePath = "questions/ap-gov/";
-
-for (const file of window.AP_GOV_UNIT_FILES) {
-  const script = document.createElement("script");
-  script.src = basePath + file;
-  script.async = false;
-  document.head.appendChild(script);
+  return Promise.all(
+    files.map((file) => {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = file;
+        script.onload = resolve;
+        script.onerror = () => reject(new Error(`Failed to load ${file}`));
+        document.body.appendChild(script);
+      });
+    })
+  );
 }
