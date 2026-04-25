@@ -99,6 +99,7 @@ function saveProgress() {
 
 const appContainer = document.getElementById("app-container");
 const indexToLetters = ["A", "B", "C", "D"];
+let subjects = [];
 
 let currentSubject = 0;
 let currentPassage = 0;
@@ -220,12 +221,14 @@ function getQuestionsByCategories(subjectIndex, categories) {
   subject.passages.forEach((passage) => {
     passage.questions.forEach((question) => {
       if (categories.includes(question.category)) {
-        matchingQuestions.push({
-          ...question,
-          sourceType: "standard",
-          passageTitle: passage.title,
-          passageText: passage.text
-        });
+       matchingQuestions.push({
+  ...question,
+  sourceType: "standard",
+  passageTitle: passage.title,
+  passageText: passage.text,
+  passageImage: passage.image,
+  passageImageAlt: passage.imageAlt
+});
       }
     });
   });
@@ -959,7 +962,7 @@ function renderResultsScreen(mode) {
   } else if (mode === "timed") {
     title = "Timed Practice Results";
     subtitle = "Timed session finished.";
-    total = getTotalQuestionsForCurrentSubject();
+    total = standardQuestions.length;
     extraLine = `
       <p><strong>Timer:</strong> ${getTimedLabel(timedDuration)}</p>
       <p><strong>Time Used:</strong> ${formatTime(timedStartTotal - timeRemaining)}</p>
@@ -1030,7 +1033,7 @@ function renderResultsScreen(mode) {
     </div>
   `;
 
-  showReviewForm();
+  document.getElementById("review-container").innerHTML = showReviewForm();
 }
 
 function showReviewForm() {
@@ -1057,7 +1060,9 @@ function submitAppReview(rating) {
   const commentEl = document.getElementById("review-comment");
   const comment = commentEl ? commentEl.value.trim() : "";
 
+  if (typeof submitReviewToFirebase === "function") {
   submitReviewToFirebase(rating, comment);
+}
 
   alert("Thanks for the feedback!");
 }
@@ -1069,11 +1074,13 @@ try {
 
   loadUnitFiles()
   .then(() => {
-    window.subjects = [
+   window.subjects = [
   buildSubject("AP Gov", "apGov"),
-  buildSubject("AP Lang", "apLang"),
-  buildSubject("AP World", "apWorld")
+ // buildSubject("AP Lang", "apLang"),
+ // buildSubject("AP World", "apWorld")
 ];
+
+subjects = window.subjects;
 
 showHomePage();
   })
