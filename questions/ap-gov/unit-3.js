@@ -1,4 +1,7 @@
-{
+window.questionBanks = window.questionBanks || {};
+window.questionBanks.apGov = window.questionBanks.apGov || [];
+
+window.questionBanks.apGov.push({
   name: "Unit 3",
 
   rapidQuestions: [
@@ -1796,3 +1799,4 @@ choices: [
 ]
     
     }
+);
