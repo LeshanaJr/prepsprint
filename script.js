@@ -663,13 +663,7 @@ function renderQuestionScreen() {
   const questionList = getCurrentQuestionList();
   const questionIndex = getCurrentQuestionIndex();
   const q = questionList[questionIndex];
-  if (currentMode === "standard" || currentMode === "timed") {
-  const passage = subjects[currentSubject].passages[currentPassage];
-  q.passageTitle = passage.title;
-  q.passageText = passage.text;
-  q.passageImage = passage.image;
-  q.passageImageAlt = passage.imageAlt;
-}
+  
   
   const config = MODE_CONFIG[currentMode];
   const progressPercent = ((questionIndex + 1) / questionList.length) * 100;
@@ -837,41 +831,23 @@ function goToNextQuestion() {
     return;
   }
 
-  const subject = subjects[currentSubject];
-  const passage = subject.passages[currentPassage];
-
-  currentQuestion++;
-
-  if (currentQuestion < passage.questions.length) {
-    renderQuestionScreen();
-    return;
-  }
-
-  currentPassage++;
-  currentQuestion = 0;
-
-  if (currentPassage < subject.passages.length) {
-    renderQuestionScreen();
-    return;
-  }
-
   if (currentMode === "standard" || currentMode === "timed") {
-  standardQuestionIndex++;
+    standardQuestionIndex++;
 
-  if (standardQuestionIndex < standardQuestions.length) {
-    renderQuestionScreen();
+    if (standardQuestionIndex < standardQuestions.length) {
+      renderQuestionScreen();
+      return;
+    }
+
+    if (currentMode === "timed") stopTimer();
+
+    renderResultsScreen(currentMode);
     return;
   }
-
-  if (currentMode === "timed") stopTimer();
-
-  renderResultsScreen(currentMode);
-  return;
-}
 }
 
 function renderTimedOutScreen() {
-  const total = getTotalQuestionsForCurrentSubject();
+  const total = getCurrentQuestionList().length;
   recordCompletedQuiz("timed", score, total);
 
   appContainer.innerHTML = `
@@ -912,7 +888,7 @@ function renderResultsScreen(mode) {
 
   let title = "Results";
   let subtitle = "Here’s how you did.";
-  let total = getTotalQuestionsForCurrentSubject();
+  let total = getCurrentQuestionList().length;
   let extraLine = "";
   let buttons = "";
 
