@@ -26,6 +26,41 @@ const MODE_CONFIG = {
   }
 };
 
+const QUIZ_LIMITS = {
+  standard: 30,
+  rapid: 25,
+  timed: 40,
+  weak: 20,
+  missed: 20
+};
+
+function buildApGovSubject() {
+  const units = window.subjects || [];
+
+  return {
+    name: "AP Gov",
+    rapidQuestions: units.flatMap(unit => unit.rapidQuestions || []),
+    passages: units.flatMap(unit => unit.passages || [])
+  };
+}
+
+function getAllPassageQuestions(subject) {
+  return subject.passages.flatMap((passage) =>
+    passage.questions.map((question) => ({
+      ...question,
+      sourceType: "standard",
+      passageTitle: passage.title,
+      passageText: passage.text,
+      passageImage: passage.image,
+      passageImageAlt: passage.imageAlt
+    }))
+  );
+}
+
+function getRandomQuestions(questions, limit) {
+  return shuffleArray(questions).slice(0, Math.min(limit, questions.length));
+}
+
 const STORAGE_KEY = "prepsprint_progress_v1";
 
 const defaultProgress = {
@@ -69,6 +104,8 @@ let currentSubject = 0;
 let currentPassage = 0;
 let currentQuestion = 0;
 let currentMode = "standard";
+let standardQuestions = [];
+let standardQuestionIndex = 0;
 
 let score = 0;
 let currentShuffledChoices = [];
@@ -115,7 +152,7 @@ function getSubjectDescription(subjectName) {
 
 function getSubjectIcon(subjectName) {
   if (subjectName === "AP Lang") return "📘";
-  if (subjectName === "AP World") return "🌍";
+  if (subjectName === "AP World" || subjectName === "AP Gov") return "🌍";
   return "📚";
 }
 
@@ -209,16 +246,18 @@ function getCurrentQuestionList() {
   if (currentMode === "rapid") return rapidQuestions;
   if (currentMode === "weak") return weakAreaQuestions;
   if (currentMode === "missed") return missedQuestions;
+  if (currentMode === "standard" || currentMode === "timed") return standardQuestions;
 
-  return subjects[currentSubject].passages[currentPassage].questions;
+  return [];
 }
 
 function getCurrentQuestionIndex() {
   if (currentMode === "rapid") return rapidQuestionIndex;
   if (currentMode === "weak") return weakAreaQuestionIndex;
   if (currentMode === "missed") return missedQuestionIndex;
+  if (currentMode === "standard" || currentMode === "timed") return standardQuestionIndex;
 
-  return currentQuestion;
+  return 0;
 }
 
 function getTimedLabel(seconds) {
@@ -539,18 +578,28 @@ function startSubject(subjectIndex, mode = "standard") {
   saveProgress();
 
   if (mode === "standard") {
-    weakPoints = {};
-    missedQuestions = [];
-    missedQuestionIndex = 0;
-    renderQuestionScreen();
-    return;
-  }
+  weakPoints = {};
+  missedQuestions = [];
+  missedQuestionIndex = 0;
+
+  standardQuestions = getRandomQuestions(
+    getAllPassageQuestions(subjects[subjectIndex]),
+    QUIZ_LIMITS.standard
+  );
+  standardQuestionIndex = 0;
+
+  renderQuestionScreen();
+  return;
+}
 
   if (mode === "rapid") {
     weakPoints = {};
     missedQuestions = [];
     missedQuestionIndex = 0;
-    rapidQuestions = shuffleArray(subjects[subjectIndex].rapidQuestions || []);
+    rapidQuestions = getRandomQuestions(
+  subjects[subjectIndex].rapidQuestions || [],
+  QUIZ_LIMITS.rapid
+);
     rapidQuestionIndex = 0;
 
     if (!rapidQuestions.length) {
@@ -564,7 +613,10 @@ function startSubject(subjectIndex, mode = "standard") {
 
   if (mode === "weak") {
     const topCategories = getTopWeakCategories(2);
-    weakAreaQuestions = shuffleArray(getQuestionsByCategories(subjectIndex, topCategories));
+    weakAreaQuestions = getRandomQuestions(
+  getQuestionsByCategories(subjectIndex, topCategories),
+  QUIZ_LIMITS.weak
+);
     weakAreaQuestionIndex = 0;
 
     if (!weakAreaQuestions.length) {
@@ -584,19 +636,26 @@ function startSubject(subjectIndex, mode = "standard") {
       return;
     }
 
-    missedReviewStartTotal = missedQuestions.length;
+missedQuestions = getRandomQuestions(missedQuestions, QUIZ_LIMITS.missed);
+missedReviewStartTotal = missedQuestions.length;
     renderQuestionScreen();
     return;
   }
 
   if (mode === "timed") {
-    weakPoints = {};
-    missedQuestions = [];
-    missedQuestionIndex = 0;
+  weakPoints = {};
+  missedQuestions = [];
+  missedQuestionIndex = 0;
 
-    startTimer(timedDuration);
-    renderQuestionScreen();
-  }
+  standardQuestions = getRandomQuestions(
+    getAllPassageQuestions(subjects[subjectIndex]),
+    QUIZ_LIMITS.timed
+  );
+  standardQuestionIndex = 0;
+
+  startTimer(timedDuration);
+  renderQuestionScreen();
+}
 }
 
 function renderQuestionScreen() {
@@ -796,13 +855,19 @@ function goToNextQuestion() {
     return;
   }
 
-  if (currentMode === "timed") {
-    stopTimer();
-    renderResultsScreen("timed");
+  if (currentMode === "standard" || currentMode === "timed") {
+  standardQuestionIndex++;
+
+  if (standardQuestionIndex < standardQuestions.length) {
+    renderQuestionScreen();
     return;
   }
 
-  renderResultsScreen("standard");
+  if (currentMode === "timed") stopTimer();
+
+  renderResultsScreen(currentMode);
+  return;
+}
 }
 
 function renderTimedOutScreen() {
@@ -1026,7 +1091,20 @@ try {
     trackUniqueUser();
   }
 
-  showHomePage();
+  loadUnitFiles()
+  .then(() => {
+    window.subjects = [buildApGovSubject()];
+    showHomePage();
+  })
+  .catch((error) => {
+    document.body.innerHTML = `
+      <div style="font-family: Arial; padding: 20px;">
+        <h2>PrepSprint failed to load questions</h2>
+        <p><strong>Error:</strong> ${error.message}</p>
+      </div>
+    `;
+    console.error(error);
+  });
 } catch (error) {
   document.body.innerHTML = `
     <div style="font-family: Arial; padding: 20px;">
