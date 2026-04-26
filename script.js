@@ -1076,6 +1076,7 @@ try {
   .then(() => {
    window.subjects = [
   buildSubject("AP Gov", "apGov"),
+     buildSubject("AP Java", "apJava")
  // buildSubject("AP Lang", "apLang"),
  // buildSubject("AP World", "apWorld")
 ];
