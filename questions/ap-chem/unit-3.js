@@ -2,7 +2,7 @@ window.questionBanks = window.questionBanks || {};
 window.questionBanks.apChem = window.questionBanks.apChem || [];
 
 window.questionBanks.apChem.push({
-  name: "",
+  name: "Unit 3: Intermolecular Forces and Properties",
 
   rapidQuestions: [
 
