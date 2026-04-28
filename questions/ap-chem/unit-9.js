@@ -2,7 +2,7 @@ window.questionBanks = window.questionBanks || {};
 window.questionBanks.apChem = window.questionBanks.apChem || [];
 
 window.questionBanks.apChem.push({
-  name: "Unit 5: Kinetics",
+  name: "Unit 9: Applications of Thermodynamics",
 
 rapidQuestions: [
 
@@ -1004,12 +1004,544 @@ rapidQuestions: [
 
   category: "Unit 9: Applications of Thermodynamics"
 
-}
+},
+
+ {
+
+  prompt: "Given E°(Cu²⁺/Cu) = +0.34 V and E°(Zn²⁺/Zn) = −0.76 V, what is E°cell for Zn | Zn²⁺ || Cu²⁺ | Cu?",
+
+  choices: [
+
+    { text: "+1.10 V", correct: true, choiceExplanation: " is correct because E°cell = cathode − anode = 0.34 − (−0.76)." },
+
+    { text: "−1.10 V", correct: false, choiceExplanation: " is incorrect because sign reversed." },
+
+    { text: "+0.42 V", correct: false, choiceExplanation: " is incorrect because wrong subtraction." },
+
+    { text: "−0.42 V", correct: false, choiceExplanation: " is incorrect because incorrect math." }
+
+  ],
+
+  category: "Unit 9: Applications of Thermodynamics"
+
+},
+
+{
+
+  prompt: "Which species is oxidized in the cell above?",
+
+  choices: [
+
+    { text: "Cu²⁺", correct: false, choiceExplanation: " is incorrect because it is reduced." },
+
+    { text: "Zn(s)", correct: true, choiceExplanation: " is correct because Zn loses electrons." },
+
+    { text: "Cu(s)", correct: false, choiceExplanation: " is incorrect because it gains electrons." },
+
+    { text: "Zn²⁺", correct: false, choiceExplanation: " is incorrect because already oxidized." }
+
+  ],
+
+  category: "Unit 9: Applications of Thermodynamics"
+
+},
+
+{
+
+  prompt: "What does a positive E°cell indicate?",
+
+  choices: [
+
+    { text: "Nonspontaneous reaction", correct: false, choiceExplanation: " is incorrect because opposite." },
+
+    { text: "Spontaneous reaction", correct: true, choiceExplanation: " is correct because ΔG < 0." },
+
+    { text: "No electron flow", correct: false, choiceExplanation: " is incorrect because current flows." },
+
+    { text: "Equilibrium only", correct: false, choiceExplanation: " is incorrect because reaction proceeds." }
+
+  ],
+
+  category: "Unit 9: Applications of Thermodynamics"
+
+},
+
+{
+
+  prompt: "Which equation relates ΔG° and E°cell?",
+
+  choices: [
+
+    { text: "ΔG° = −nFE°cell", correct: true, choiceExplanation: " is correct relationship." },
+
+    { text: "ΔG° = nFE°cell", correct: false, choiceExplanation: " is incorrect because missing negative sign." },
+
+    { text: "E°cell = nFΔG°", correct: false, choiceExplanation: " is incorrect because rearranged wrong." },
+
+    { text: "ΔG° = E°cell/F", correct: false, choiceExplanation: " is incorrect because incomplete." }
+
+  ],
+
+  category: "Unit 9: Applications of Thermodynamics"
+
+},
+
+{
+
+  prompt: "What is the effect of increasing [Zn²⁺] in the Zn–Cu cell?",
+
+  choices: [
+
+    { text: "Ecell increases", correct: false, choiceExplanation: " is incorrect because shifts toward reactants." },
+
+    { text: "Ecell decreases", correct: true, choiceExplanation: " is correct because reaction shifts left." },
+
+    { text: "Ecell unchanged", correct: false, choiceExplanation: " is incorrect because nonstandard conditions." },
+
+    { text: "Cell stops working", correct: false, choiceExplanation: " is incorrect because still functions." }
+
+  ],
+
+  category: "Unit 9: Applications of Thermodynamics"
+
+},
+
+{
+
+  prompt: "Which is the correct Nernst equation form?",
+
+  choices: [
+
+    { text: "E = E° − (0.0592/n) log Q", correct: true, choiceExplanation: " is correct at 25°C." },
+
+    { text: "E = E° + (0.0592/n) log Q", correct: false, choiceExplanation: " is incorrect sign." },
+
+    { text: "E = E° − n log Q", correct: false, choiceExplanation: " is incorrect missing constant." },
+
+    { text: "E = log Q", correct: false, choiceExplanation: " is incorrect because incomplete." }
+
+  ],
+
+  category: "Unit 9: Applications of Thermodynamics"
+
+},
+
+{
+
+  prompt: "At equilibrium, what is true about Ecell and Q?",
+
+  choices: [
+
+    { text: "Ecell = 0 and Q = K", correct: true, choiceExplanation: " is correct because no net reaction." },
+
+    { text: "Ecell > 0", correct: false, choiceExplanation: " is incorrect because reaction stops." },
+
+    { text: "Q = 0", correct: false, choiceExplanation: " is incorrect because concentrations exist." },
+
+    { text: "K = 0", correct: false, choiceExplanation: " is incorrect because equilibrium constant positive." }
+
+  ],
+
+  category: "Unit 9: Applications of Thermodynamics"
+
+},
+
+{
+
+  prompt: "Which electrode is positive in a galvanic cell?",
+
+  choices: [
+
+    { text: "Anode", correct: false, choiceExplanation: " is incorrect because oxidation occurs." },
+
+    { text: "Cathode", correct: true, choiceExplanation: " is correct because reduction occurs." },
+
+    { text: "Both", correct: false, choiceExplanation: " is incorrect because polarity differs." },
+
+    { text: "Salt bridge", correct: false, choiceExplanation: " is incorrect because not electrode." }
+
+  ],
+
+  category: "Unit 9: Applications of Thermodynamics"
+
+},
+
+{
+
+  prompt: "How many moles of electrons are required to deposit 1 mol of Cu²⁺?",
+
+  choices: [
+
+    { text: "1 mol", correct: false, choiceExplanation: " is incorrect because Cu²⁺ needs 2 electrons." },
+
+    { text: "2 mol", correct: true, choiceExplanation: " is correct because Cu²⁺ + 2e⁻ → Cu." },
+
+    { text: "3 mol", correct: false, choiceExplanation: " is incorrect because not stoichiometric." },
+
+    { text: "0.5 mol", correct: false, choiceExplanation: " is incorrect because not fractional." }
+
+  ],
+
+  category: "Unit 9: Applications of Thermodynamics"
+
+},
+
+{
+
+  prompt: "What is the biggest AP trap in electrochemistry problems?",
+
+  choices: [
+
+    { text: "Forgetting units", correct: false, choiceExplanation: " is incorrect because not main issue." },
+
+    { text: "Reversing sign of E° incorrectly", correct: true, choiceExplanation: " is correct because oxidation/reduction confusion is common." },
+
+    { text: "Writing equations", correct: false, choiceExplanation: " is incorrect because straightforward." },
+
+    { text: "Using logs", correct: false, choiceExplanation: " is incorrect because required." }
+
+  ],
+
+  category: "Unit 9: Applications of Thermodynamics"
+
+} 
   
 ],
   
   passages: [
 
+{
+
+  title: "Galvanic Cell Analysis",
+
+  image: "",
+
+  imageAlt: "",
+
+  text: `
+
+A galvanic cell is constructed using a Zn electrode in Zn²⁺ solution and a Cu electrode in Cu²⁺ solution.
+
+Zn(s) → Zn²⁺ + 2e⁻     E° = −0.76 V  
+
+Cu²⁺ + 2e⁻ → Cu(s)     E° = +0.34 V
+
+  `,
+
+  questions: [
+
+    {
+
+      prompt: "Which electrode is the anode?",
+
+      choices: [
+
+        { text: "Cu", correct: false, choiceExplanation: " is incorrect because Cu is reduced." },
+
+        { text: "Zn", correct: true, choiceExplanation: " is correct because oxidation occurs at Zn." },
+
+        { text: "Both", correct: false, choiceExplanation: " is incorrect because roles differ." },
+
+        { text: "Neither", correct: false, choiceExplanation: " is incorrect because redox occurs." }
+
+      ],
+
+      category: "Unit 9: Applications of Thermodynamics"
+
+    },
+
+    {
+
+      prompt: "What is E°cell?",
+
+      choices: [
+
+        { text: "+1.10 V", correct: true, choiceExplanation: " is correct because 0.34 − (−0.76)." },
+
+        { text: "−1.10 V", correct: false, choiceExplanation: " is incorrect because sign reversed." },
+
+        { text: "+0.42 V", correct: false, choiceExplanation: " is incorrect because wrong subtraction." },
+
+        { text: "0 V", correct: false, choiceExplanation: " is incorrect because not equilibrium." }
+
+      ],
+
+      category: "Unit 9: Applications of Thermodynamics"
+
+    },
+
+    {
+
+      prompt: "What happens to the mass of the Zn electrode?",
+
+      choices: [
+
+        { text: "Increases", correct: false, choiceExplanation: " is incorrect because Zn dissolves." },
+
+        { text: "Decreases", correct: true, choiceExplanation: " is correct because oxidation produces Zn²⁺." },
+
+        { text: "Stays constant", correct: false, choiceExplanation: " is incorrect because reaction occurs." },
+
+        { text: "Becomes zero", correct: false, choiceExplanation: " is incorrect because not fully consumed instantly." }
+
+      ],
+
+      category: "Unit 9: Applications of Thermodynamics"
+
+    }
+
+  ]
+
+},
+
+{
+
+  title: "Nernst Equation + Reaction Direction",
+
+  image: "",
+
+  imageAlt: "",
+
+  text: `
+
+A galvanic cell operates under nonstandard conditions. The reaction quotient Q is greater than K.
+
+E = E° − (0.0592/n) log Q
+
+  `,
+
+  questions: [
+
+    {
+
+      prompt: "What is true about Ecell?",
+
+      choices: [
+
+        { text: "Ecell > E°", correct: false, choiceExplanation: " is incorrect because Q > K." },
+
+        { text: "Ecell < E°", correct: true, choiceExplanation: " is correct because log Q is positive." },
+
+        { text: "Ecell = E°", correct: false, choiceExplanation: " is incorrect because not standard." },
+
+        { text: "Ecell = 0 always", correct: false, choiceExplanation: " is incorrect because not equilibrium yet." }
+
+      ],
+
+      category: "Unit 9: Applications of Thermodynamics"
+
+    },
+
+    {
+
+      prompt: "What is true about the reaction direction?",
+
+      choices: [
+
+        { text: "Proceeds forward strongly", correct: false, choiceExplanation: " is incorrect because Q > K." },
+
+        { text: "Proceeds in reverse direction", correct: true, choiceExplanation: " is correct because system shifts toward reactants." },
+
+        { text: "At equilibrium", correct: false, choiceExplanation: " is incorrect because Q ≠ K." },
+
+        { text: "Stops completely", correct: false, choiceExplanation: " is incorrect because reaction adjusts." }
+
+      ],
+
+      category: "Unit 9: Applications of Thermodynamics"
+
+    }
+
+  ]
+
+},
+
+{
+
+  title: "Electrolytic Cell + Energy Input",
+
+  image: "",
+
+  imageAlt: "",
+
+  text: `
+
+A nonspontaneous reaction is driven using an external power source in an electrolytic cell.
+
+  `,
+
+  questions: [
+
+    {
+
+      prompt: "Which statement is TRUE?",
+
+      choices: [
+
+        { text: "Ecell is positive", correct: false, choiceExplanation: " is incorrect because nonspontaneous." },
+
+        { text: "Ecell is negative", correct: true, choiceExplanation: " is correct because energy is required." },
+
+        { text: "ΔG is negative", correct: false, choiceExplanation: " is incorrect because reaction not spontaneous." },
+
+        { text: "No electrons flow", correct: false, choiceExplanation: " is incorrect because current is forced." }
+
+      ],
+
+      category: "Unit 9: Applications of Thermodynamics"
+
+    },
+
+    {
+
+      prompt: "Where does oxidation occur?",
+
+      choices: [
+
+        { text: "Cathode", correct: false, choiceExplanation: " is incorrect because reduction occurs there." },
+
+        { text: "Anode", correct: true, choiceExplanation: " is correct ALWAYS (same rule as galvanic)." },
+
+        { text: "Power source", correct: false, choiceExplanation: " is incorrect because electrode site." },
+
+        { text: "Solution", correct: false, choiceExplanation: " is incorrect because electrode reaction." }
+
+      ],
+
+      category: "Unit 9: Applications of Thermodynamics"
+
+    }
+
+  ]
+
+},
+
+{
+
+  title: "Faraday’s Law + Stoichiometry",
+
+  image: "",
+
+  imageAlt: "",
+
+  text: `
+
+A current is passed through a solution containing Cu²⁺ ions, causing copper metal to plate onto an electrode.
+
+Cu²⁺ + 2e⁻ → Cu(s)
+
+  `,
+
+  questions: [
+
+    {
+
+      prompt: "How many moles of electrons are required to produce 2 moles of Cu?",
+
+      choices: [
+
+        { text: "1 mol", correct: false, choiceExplanation: " is incorrect because each Cu needs 2 electrons." },
+
+        { text: "2 mol", correct: false, choiceExplanation: " is incorrect because insufficient." },
+
+        { text: "4 mol", correct: true, choiceExplanation: " is correct because 2 mol Cu × 2 e⁻ each." },
+
+        { text: "8 mol", correct: false, choiceExplanation: " is incorrect because double counted." }
+
+      ],
+
+      category: "Unit 9: Applications of Thermodynamics"
+
+    },
+
+    {
+
+      prompt: "If current increases, what happens to plating rate?",
+
+      choices: [
+
+        { text: "Decreases", correct: false, choiceExplanation: " is incorrect because more electrons flow." },
+
+        { text: "Increases", correct: true, choiceExplanation: " is correct because electron flow increases." },
+
+        { text: "Stays constant", correct: false, choiceExplanation: " is incorrect because current matters." },
+
+        { text: "Stops", correct: false, choiceExplanation: " is incorrect because reaction continues." }
+
+      ],
+
+      category: "Unit 9: Applications of Thermodynamics"
+
+    }
+
+  ]
+
+},
+
+{
+
+  title: "Final Boss: Linking E°, ΔG°, and K",
+
+  image: "",
+
+  imageAlt: "",
+
+  text: `
+
+A reaction has a large positive E°cell value.
+
+ΔG° = −nFE°cell  
+
+E°cell = (0.0592/n) log K
+
+  `,
+
+  questions: [
+
+    {
+
+      prompt: "What is true about ΔG°?",
+
+      choices: [
+
+        { text: "Positive", correct: false, choiceExplanation: " is incorrect because E° is positive." },
+
+        { text: "Negative", correct: true, choiceExplanation: " is correct because ΔG° = −nFE°." },
+
+        { text: "Zero", correct: false, choiceExplanation: " is incorrect because not equilibrium." },
+
+        { text: "Undefined", correct: false, choiceExplanation: " is incorrect because calculable." }
+
+      ],
+
+      category: "Unit 9: Applications of Thermodynamics"
+
+    },
+
+    {
+
+      prompt: "What is true about equilibrium constant K?",
+
+      choices: [
+
+        { text: "K < 1", correct: false, choiceExplanation: " is incorrect because reaction favored." },
+
+        { text: "K ≫ 1", correct: true, choiceExplanation: " is correct because large E°." },
+
+        { text: "K = 1", correct: false, choiceExplanation: " is incorrect because not equilibrium." },
+
+        { text: "K = 0", correct: false, choiceExplanation: " is incorrect because impossible." }
+
+      ],
+
+      category: "Unit 9: Applications of Thermodynamics"
+
+    }
+
+  ]
+
+},
+    
 {
 
   title: "Solubility Equilibrium Basics",
