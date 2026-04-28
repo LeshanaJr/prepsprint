@@ -2,7 +2,7 @@ window.questionBanks = window.questionBanks || {};
 window.questionBanks.apChem = window.questionBanks.apChem || [];
 
 window.questionBanks.apChem.push({
-  name: "Unit 5: Thermodynamics",
+  name: "Unit 6: Thermodynamics",
 
 rapidQuestions: [
 
@@ -22,7 +22,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -42,7 +42,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -62,7 +62,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -82,7 +82,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -102,7 +102,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -122,7 +122,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -142,7 +142,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -162,7 +162,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -182,7 +182,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -202,7 +202,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -222,7 +222,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -242,7 +242,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -262,7 +262,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -282,7 +282,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -302,7 +302,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -322,7 +322,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -342,7 +342,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -362,7 +362,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -382,7 +382,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -402,7 +402,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -422,7 +422,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -442,7 +442,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -462,7 +462,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -482,7 +482,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -502,7 +502,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -522,7 +522,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -542,7 +542,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -562,7 +562,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -582,7 +582,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -602,7 +602,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 {
@@ -613,7 +613,7 @@ rapidQuestions: [
     { text: "-350 kJ", correct: false, choiceExplanation: " is incorrect because values are not both negative." },
     { text: "+350 kJ", correct: false, choiceExplanation: " is incorrect because signs are incorrect." }
   ],
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 },
 
 {
@@ -624,7 +624,7 @@ rapidQuestions: [
     { text: "-360 kJ", correct: false, choiceExplanation: " is incorrect because sign must change." },
     { text: "-120 kJ", correct: false, choiceExplanation: " is incorrect because both changes were ignored." }
   ],
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 },
 
 {
@@ -635,7 +635,7 @@ rapidQuestions: [
     { text: "-5000 J", correct: false, choiceExplanation: " is incorrect because ΔT is 50, not 100." },
     { text: "+5000 J", correct: false, choiceExplanation: " is incorrect because both magnitude and sign are wrong." }
   ],
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 },
 
 {
@@ -646,7 +646,7 @@ rapidQuestions: [
     { text: "It stays constant", correct: false, choiceExplanation: " is incorrect because heat transfer occurs." },
     { text: "It becomes zero", correct: false, choiceExplanation: " is incorrect because temperature cannot be zero here." }
   ],
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 },
 
 {
@@ -657,7 +657,7 @@ rapidQuestions: [
     { text: "ΔH = 0, no heat", correct: false, choiceExplanation: " is incorrect because reaction has no enthalpy change." },
     { text: "ΔH < 0, heat absorbed", correct: false, choiceExplanation: " is incorrect because signs mismatch." }
   ],
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 },
 
 {
@@ -668,7 +668,7 @@ rapidQuestions: [
     { text: "Breaking strong bonds only", correct: false, choiceExplanation: " is incorrect because forming bonds must be considered." },
     { text: "Forming weak bonds only", correct: false, choiceExplanation: " is incorrect because insufficient energy is released." }
   ],
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 },
 
 {
@@ -679,7 +679,7 @@ rapidQuestions: [
     { text: "The surroundings gain heat", correct: false, choiceExplanation: " is incorrect because surroundings lose heat." },
     { text: "Temperature must increase", correct: false, choiceExplanation: " is incorrect because depends on setup." }
   ],
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 },
 
 {
@@ -690,7 +690,7 @@ rapidQuestions: [
     { text: "Double magnitude and opposite sign", correct: true, choiceExplanation: " is correct because scaling and reversing both apply." },
     { text: "Opposite sign only", correct: false, choiceExplanation: " is incorrect because magnitude also changes." }
   ],
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 },
 
 {
@@ -701,7 +701,7 @@ rapidQuestions: [
     { text: "Reactions must occur in one step", correct: false, choiceExplanation: " is incorrect because multi-step reactions are valid." },
     { text: "Temperature determines ΔH", correct: false, choiceExplanation: " is incorrect because ΔH depends on states." }
   ],
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 },
 
 {
@@ -712,7 +712,7 @@ rapidQuestions: [
     { text: "0 J", correct: false, choiceExplanation: " is incorrect because energy transfer occurred." },
     { text: "+150 J", correct: false, choiceExplanation: " is incorrect because values are equal in magnitude." }
   ],
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 },
 
   {
@@ -731,7 +731,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -751,7 +751,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -771,7 +771,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -791,7 +791,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -811,7 +811,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -831,7 +831,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -851,7 +851,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -871,7 +871,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -891,7 +891,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 },
 
@@ -911,7 +911,7 @@ rapidQuestions: [
 
   ],
 
-  category: "Unit 5: Thermodynamics"
+  category: "Unit 6: Thermodynamics"
 
 }
   
@@ -951,7 +951,7 @@ A 100.0 g sample of water (c = 4.18 J/g°C) is heated from 20.0°C to 30.0°C by
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -971,7 +971,7 @@ A 100.0 g sample of water (c = 4.18 J/g°C) is heated from 20.0°C to 30.0°C by
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -991,7 +991,7 @@ A 100.0 g sample of water (c = 4.18 J/g°C) is heated from 20.0°C to 30.0°C by
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     }
 
@@ -1037,7 +1037,7 @@ Reaction 3: C → D      ΔH = -50 kJ
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1057,7 +1057,7 @@ Reaction 3: C → D      ΔH = -50 kJ
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     }
 
@@ -1097,7 +1097,7 @@ In a reaction, 400 kJ is required to break bonds and 600 kJ is released when new
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1117,7 +1117,7 @@ In a reaction, 400 kJ is required to break bonds and 600 kJ is released when new
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     }
 
@@ -1157,7 +1157,7 @@ A reaction absorbs 300 J of heat from its surroundings.
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1177,7 +1177,7 @@ A reaction absorbs 300 J of heat from its surroundings.
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1197,7 +1197,7 @@ A reaction absorbs 300 J of heat from its surroundings.
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     }
 
@@ -1237,7 +1237,7 @@ A reaction is carried out in a calorimeter containing 200.0 g of water (c = 4.18
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1257,7 +1257,7 @@ A reaction is carried out in a calorimeter containing 200.0 g of water (c = 4.18
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1277,7 +1277,7 @@ A reaction is carried out in a calorimeter containing 200.0 g of water (c = 4.18
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     }
 
@@ -1323,7 +1323,7 @@ The student wants ΔH for A → C.
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1343,7 +1343,7 @@ The student wants ΔH for A → C.
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1363,7 +1363,7 @@ The student wants ΔH for A → C.
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     }
 
@@ -1407,7 +1407,7 @@ Reaction Y: 900 kJ required to break bonds, 1000 kJ released forming bonds
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1427,7 +1427,7 @@ Reaction Y: 900 kJ required to break bonds, 1000 kJ released forming bonds
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1447,7 +1447,7 @@ Reaction Y: 900 kJ required to break bonds, 1000 kJ released forming bonds
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     }
 
@@ -1487,7 +1487,7 @@ A reaction releases 250 J of heat. The experiment is repeated with double the am
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1507,7 +1507,7 @@ A reaction releases 250 J of heat. The experiment is repeated with double the am
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1527,7 +1527,7 @@ A reaction releases 250 J of heat. The experiment is repeated with double the am
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     }
 
@@ -1567,7 +1567,7 @@ A reaction is carried out in a calorimeter with 150.0 g of water (c = 4.18 J/g°
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1587,7 +1587,7 @@ A reaction is carried out in a calorimeter with 150.0 g of water (c = 4.18 J/g°
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1607,7 +1607,7 @@ A reaction is carried out in a calorimeter with 150.0 g of water (c = 4.18 J/g°
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     }
 
@@ -1653,7 +1653,7 @@ Reaction 3: 2C → D     ΔH = -200 kJ
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1673,7 +1673,7 @@ Reaction 3: 2C → D     ΔH = -200 kJ
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1693,7 +1693,7 @@ Reaction 3: 2C → D     ΔH = -200 kJ
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     }
 
@@ -1737,7 +1737,7 @@ Reaction Y: Bonds broken = 800 kJ, bonds formed = 900 kJ
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1757,7 +1757,7 @@ Reaction Y: Bonds broken = 800 kJ, bonds formed = 900 kJ
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1777,7 +1777,7 @@ Reaction Y: Bonds broken = 800 kJ, bonds formed = 900 kJ
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     }
 
@@ -1817,7 +1817,7 @@ A reaction releases 400 J of heat. The experiment is repeated using three times 
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1837,7 +1837,7 @@ A reaction releases 400 J of heat. The experiment is repeated using three times 
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     },
 
@@ -1857,7 +1857,7 @@ A reaction releases 400 J of heat. The experiment is repeated using three times 
 
       ],
 
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
 
     }
 
@@ -1881,7 +1881,7 @@ A 0.0400 mol reaction is performed in a calorimeter containing 150.0 g of water 
         { text: "2510 J", correct: false, choiceExplanation: " is incorrect because mass is larger." },
         { text: "1500 J", correct: false, choiceExplanation: " is incorrect because factors are missing." }
       ],
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
     },
     {
       prompt: "What is qreaction?",
@@ -1891,7 +1891,7 @@ A 0.0400 mol reaction is performed in a calorimeter containing 150.0 g of water 
         { text: "0 J", correct: false, choiceExplanation: " is incorrect because heat transfer occurs." },
         { text: "+1881 J", correct: false, choiceExplanation: " is incorrect because magnitude is wrong." }
       ],
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
     },
     {
       prompt: "What is ΔH (kJ/mol)?",
@@ -1901,7 +1901,7 @@ A 0.0400 mol reaction is performed in a calorimeter containing 150.0 g of water 
         { text: "-3.76 kJ/mol", correct: false, choiceExplanation: " is incorrect because moles were not considered." },
         { text: "-188 kJ/mol", correct: false, choiceExplanation: " is incorrect because value was doubled." }
       ],
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
     },
     {
       prompt: "If the reaction were performed with twice the moles, what would happen to ΔH (kJ/mol)?",
@@ -1911,7 +1911,7 @@ A 0.0400 mol reaction is performed in a calorimeter containing 150.0 g of water 
         { text: "It halves", correct: false, choiceExplanation: " is incorrect because amount does not affect molar value." },
         { text: "It becomes zero", correct: false, choiceExplanation: " is incorrect because reaction still releases energy." }
       ],
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
     }
   ]
 },
@@ -1938,7 +1938,7 @@ Find ΔH for A → 1/2D.
         { text: "Divide it", correct: false, choiceExplanation: " is incorrect because coefficients already match." },
         { text: "Ignore it", correct: false, choiceExplanation: " is incorrect because it links B to C." }
       ],
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
     },
     {
       prompt: "What must be done to Reaction 3?",
@@ -1948,7 +1948,7 @@ Find ΔH for A → 1/2D.
         { text: "Double it", correct: false, choiceExplanation: " is incorrect because that produces too much D." },
         { text: "Change sign only", correct: false, choiceExplanation: " is incorrect because scaling is required." }
       ],
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
     },
     {
       prompt: "What is ΔH for A → 1/2D?",
@@ -1958,7 +1958,7 @@ Find ΔH for A → 1/2D.
         { text: "-100 kJ", correct: false, choiceExplanation: " is incorrect because signs were mishandled." },
         { text: "+200 kJ", correct: false, choiceExplanation: " is incorrect because scaling was ignored." }
       ],
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
     }
   ]
 },
@@ -1979,7 +1979,7 @@ A reaction requires 1100 kJ to break bonds and releases 1400 kJ when bonds form.
         { text: "-2500 kJ", correct: false, choiceExplanation: " is incorrect because values are not added." },
         { text: "+2500 kJ", correct: false, choiceExplanation: " is incorrect because sign is wrong." }
       ],
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
     },
     {
       prompt: "Which energy diagram is correct?",
@@ -1989,7 +1989,7 @@ A reaction requires 1100 kJ to break bonds and releases 1400 kJ when bonds form.
         { text: "Same energy level", correct: false, choiceExplanation: " is incorrect because ΔH ≠ 0." },
         { text: "No activation energy", correct: false, choiceExplanation: " is incorrect because all reactions require activation energy." }
       ],
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
     },
     {
       prompt: "Which statement BEST explains the result?",
@@ -1999,7 +1999,7 @@ A reaction requires 1100 kJ to break bonds and releases 1400 kJ when bonds form.
         { text: "Temperature determines ΔH", correct: false, choiceExplanation: " is incorrect because ΔH depends on bond energies." },
         { text: "Mass determines ΔH", correct: false, choiceExplanation: " is incorrect because energy changes matter." }
       ],
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
     }
   ]
 },
@@ -2020,7 +2020,7 @@ A reaction absorbs 500 J of heat from the surroundings while doing work on the s
         { text: "0 J", correct: false, choiceExplanation: " is incorrect because heat transfer occurs." },
         { text: "+250 J", correct: false, choiceExplanation: " is incorrect because value is given." }
       ],
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
     },
     {
       prompt: "Which best describes the reaction?",
@@ -2030,7 +2030,7 @@ A reaction absorbs 500 J of heat from the surroundings while doing work on the s
         { text: "Neutral", correct: false, choiceExplanation: " is incorrect because energy changes." },
         { text: "Impossible", correct: false, choiceExplanation: " is incorrect because work and heat can both occur." }
       ],
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
     },
     {
       prompt: "Which statement BEST explains a common mistake here?",
@@ -2040,7 +2040,7 @@ A reaction absorbs 500 J of heat from the surroundings while doing work on the s
         { text: "Forgetting bond energies", correct: false, choiceExplanation: " is incorrect because this is not bond-based." },
         { text: "Ignoring mass", correct: false, choiceExplanation: " is incorrect because mass is not the issue." }
       ],
-      category: "Unit 5: Thermodynamics"
+      category: "Unit 6: Thermodynamics"
     }
   ]
 } 
