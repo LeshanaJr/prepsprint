@@ -653,10 +653,10 @@ window.questionBanks.apJava.push({
 {
   title: "Variable Assignment and Arithmetic",
   text: `
-int a = 5;
-int b = 2;
-int c = a / b;
-double d = a / b;
+int a = 5;\n
+int b = 2;\n
+int c = a / b;\n
+double d = a / b;\n
 double e = a / (double) b;
 `,
   questions: [
@@ -696,7 +696,7 @@ double e = a / (double) b;
 {
   title: "Order of Operations",
   text: `
-int x = 4 + 3 * 2;
+int x = 4 + 3 * 2;\n
 int y = (4 + 3) * 2;
 `,
   questions: [
@@ -726,7 +726,7 @@ int y = (4 + 3) * 2;
 {
   title: "Object Creation and Methods",
   text: `
-String name = new String("Alex");
+String name = new String("Alex");\n
 System.out.println(name.length());
 `,
   questions: [
@@ -756,8 +756,8 @@ System.out.println(name.length());
 {
   title: "Method Calls and Parameters",
   text: `
-public void printSum(int a, int b) {
-    System.out.println(a + b);
+public void printSum(int a, int b) {\n
+    System.out.println(a + b);\n
 }
 
 printSum(3, 5);
@@ -808,8 +808,8 @@ boolean result = (5 > 3) && (2 < 4);
  {
   title: "String Method Calls",
   text: `
-String word = "computer";
-String part = word.substring(1, 4);
+String word = "computer";\n
+String part = word.substring(1, 4);\n
 int len = word.length();
 `,
   questions: [
@@ -839,8 +839,8 @@ int len = word.length();
 {
   title: "Math API",
   text: `
-double a = Math.pow(2, 3);
-double b = Math.sqrt(25);
+double a = Math.pow(2, 3);\n
+double b = Math.sqrt(25);\n
 double c = Math.abs(-7);
 `,
   questions: [
@@ -880,9 +880,9 @@ double c = Math.abs(-7);
 {
   title: "Assignment Statements",
   text: `
-int x = 6;
-int y = x;
-x = x + 4;
+int x = 6;\n
+int y = x;\n
+x = x + 4;\n
 y = y * 2;
 `,
   questions: [
@@ -912,7 +912,7 @@ y = y * 2;
 {
   title: "Constructor Calls",
   text: `
-Scanner input = new Scanner(System.in);
+Scanner input = new Scanner(System.in);\n
 String message = new String("hello");
 `,
   questions: [
@@ -942,19 +942,19 @@ String message = new String("hello");
 {
   title: "Void Method Calls",
   text: `
-public class Dog {
-    public void bark() {
-        System.out.println("woof");
-    }
-
-    public void repeatBark(int times) {
-        System.out.println("woof " + times);
-    }
-}
-
-Dog pet = new Dog();
-pet.bark();
-pet.repeatBark(3);
+public class Dog {\n
+    public void bark() {\n
+        System.out.println("woof");\n
+    }\n
+\n
+    public void repeatBark(int times) {\n
+        System.out.println("woof " + times);\n
+    }\n
+}\n
+\n
+Dog pet = new Dog();\n
+pet.bark();\n
+pet.repeatBark(3);\n
 `,
   questions: [
     {
@@ -983,10 +983,10 @@ pet.repeatBark(3);
     {
   title: "Integer Division and Remainders",
   text: `
-int total = 17;
-int groups = 5;
-
-int each = total / groups;
+int total = 17;\n
+int groups = 5;\n
+\n
+int each = total / groups;\n
 int leftOver = total % groups;
 `,
   questions: [
@@ -1016,9 +1016,9 @@ int leftOver = total % groups;
 {
   title: "Boolean Variables",
   text: `
-int age = 16;
-boolean hasPermit = true;
-boolean canDriveAlone = age >= 18 && hasPermit;
+int age = 16;\n
+boolean hasPermit = true;\n
+boolean canDriveAlone = age >= 18 && hasPermit;\n
 boolean canPractice = age >= 15 && hasPermit;
 `,
   questions: [
@@ -1048,8 +1048,8 @@ boolean canPractice = age >= 15 && hasPermit;
 {
   title: "Object References",
   text: `
-String first = new String("cat");
-String second = first;
+String first = new String("cat");\n
+String second = first;\n
 first = new String("dog");
 `,
   questions: [
@@ -1079,24 +1079,24 @@ first = new String("dog");
 {
   title: "Non-Static Void Methods",
   text: `
-public class Counter {
-    private int value;
-
-    public Counter() {
-        value = 0;
-    }
-
-    public void addOne() {
-        value++;
-    }
-
-    public void addAmount(int amount) {
-        value += amount;
-    }
-}
-
-Counter c = new Counter();
-c.addOne();
+public class Counter {\n
+    private int value;\n
+\n
+    public Counter() {\n
+        value = 0;\n
+    }\n
+\n
+    public void addOne() {\n
+        value++;\n
+    }\n
+\n
+    public void addAmount(int amount) {\n
+        value += amount;\n
+    }\n
+}\n
+\n
+Counter c = new Counter();\n
+c.addOne();\n
 c.addAmount(4);
 `,
   questions: [
@@ -1126,13 +1126,13 @@ c.addAmount(4);
 {
   title: "Using API Documentation",
   text: `
-A student reads documentation for a method:
-
-public int indexOf(String str)
-
-The documentation says the method returns the index of the first occurrence of str, or -1 if str is not found.
-
-String phrase = "blueberry";
+A student reads documentation for a method:\n
+\n
+public int indexOf(String str)\n
+\n
+The documentation says the method returns the index of the first occurrence of str, or -1 if str is not found.\n
+\n
+String phrase = "blueberry";\n
 int result = phrase.indexOf("berry");
 `,
   questions: [
@@ -1162,9 +1162,9 @@ int result = phrase.indexOf("berry");
   {
   title: "Compound Assignment",
   text: `
-int score = 10;
-score += 5;
-score /= 3;
+int score = 10;\n
+score += 5;\n
+score /= 3;\n
 score *= 4;
 `,
   questions: [
@@ -1194,21 +1194,21 @@ score *= 4;
 {
   title: "Constructor With Parameters",
   text: `
-public class Player {
-    private String name;
-    private int points;
-
-    public Player(String n, int p) {
-        name = n;
-        points = p;
-    }
-
-    public void addPoints(int amount) {
-        points += amount;
-    }
-}
-
-Player p1 = new Player("Maya", 12);
+public class Player {\n
+    private String name;\n
+    private int points;\n
+\n
+    public Player(String n, int p) {\n
+        name = n;\n
+        points = p;\n
+    }\n
+\n
+    public void addPoints(int amount) {\n
+        points += amount;\n
+    }\n
+}\n
+\n
+Player p1 = new Player("Maya", 12);\n
 p1.addPoints(8);
 `,
   questions: [
@@ -1238,13 +1238,13 @@ p1.addPoints(8);
 {
   title: "Method Parameters and Local Variables",
   text: `
-public void update(int x) {
-    x = x + 10;
-    System.out.println(x);
-}
-
-int num = 7;
-update(num);
+public void update(int x) {\n
+    x = x + 10;\n
+    System.out.println(x);\n
+}\n
+\n
+int num = 7;\n
+update(num);\n
 System.out.println(num);
 `,
   questions: [
@@ -1274,11 +1274,11 @@ System.out.println(num);
 {
   title: "Mixed Types in Expressions",
   text: `
-int a = 9;
-int b = 4;
-double c = 2.0;
-
-double result1 = a / b;
+int a = 9;\n
+int b = 4;\n
+double c = 2.0;\n
+\n
+double result1 = a / b;\n
 double result2 = a / c;
 `,
   questions: [
@@ -1308,12 +1308,12 @@ double result2 = a / c;
 {
   title: "Reading a Method Signature",
   text: `
-A class named Timer has the following method:
-
-public void setTime(int hours, int minutes)
-
-A program contains this object declaration:
-
+A class named Timer has the following method:\n
+\n
+public void setTime(int hours, int minutes)\n
+\n
+A program contains this object declaration:\n
+\n
 Timer alarm = new Timer();
 `,
   questions: [
@@ -1343,7 +1343,7 @@ Timer alarm = new Timer();
     {
   title: "Using Math.random",
   text: `
-double r = Math.random();
+double r = Math.random();\n
 int num = (int)(Math.random() * 6) + 1;
 `,
   questions: [
@@ -1373,10 +1373,10 @@ int num = (int)(Math.random() * 6) + 1;
 {
   title: "String Concatenation",
   text: `
-int a = 3;
-int b = 4;
-
-String first = "Answer: " + a + b;
+int a = 3;\n
+int b = 4;\n
+\n
+String first = "Answer: " + a + b;\n
 String second = "Answer: " + (a + b);
 `,
   questions: [
@@ -1406,24 +1406,24 @@ String second = "Answer: " + (a + b);
 {
   title: "Calling Object Methods",
   text: `
-public class Light {
-    private boolean on;
-
-    public Light() {
-        on = false;
-    }
-
-    public void turnOn() {
-        on = true;
-    }
-
-    public void turnOff() {
-        on = false;
-    }
-}
-
-Light lamp = new Light();
-lamp.turnOn();
+public class Light {\n
+    private boolean on;\n
+\n
+    public Light() {\n
+        on = false;\n
+    }\n
+\n
+    public void turnOn() {\n
+        on = true;\n
+    }\n
+\n
+    public void turnOff() {\n
+        on = false;\n
+    }\n
+}\n
+\n
+Light lamp = new Light();\n
+lamp.turnOn();\n
 lamp.turnOff();
 `,
   questions: [
@@ -1453,19 +1453,19 @@ lamp.turnOff();
 {
   title: "Constructor Without Parameters",
   text: `
-public class Book {
-    private int pages;
-
-    public Book() {
-        pages = 100;
-    }
-
-    public void addPages(int amount) {
-        pages += amount;
-    }
-}
-
-Book novel = new Book();
+public class Book {\n
+    private int pages;\n
+\n
+    public Book() {\n
+        pages = 100;\n
+    }\n
+\n
+    public void addPages(int amount) {\n
+        pages += amount;\n
+    }\n
+}\n
+\n
+Book novel = new Book();\n
 novel.addPages(50);
 `,
   questions: [
@@ -1495,8 +1495,8 @@ novel.addPages(50);
 {
   title: "API Return Values",
   text: `
-String item = "notebook";
-int location = item.indexOf("book");
+String item = "notebook";\n
+int location = item.indexOf("book");\n
 String ending = item.substring(location);
 `,
   questions: [
