@@ -2,7 +2,7 @@ window.questionBanks = window.questionBanks || {};
 window.questionBanks.apChem = window.questionBanks.apChem || [];
 
 window.questionBanks.apChem.push({
-  name: "Unit 4: Kinetics",
+  name: "Unit 5: Kinetics",
 
  rapidQuestions: [
 
@@ -22,7 +22,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -42,7 +42,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -62,7 +62,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -82,7 +82,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -102,7 +102,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -122,7 +122,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -142,7 +142,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -162,7 +162,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -182,7 +182,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -202,7 +202,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -222,7 +222,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -242,7 +242,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -262,7 +262,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -282,7 +282,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -302,7 +302,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -322,7 +322,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -342,7 +342,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -362,7 +362,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -382,7 +382,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -402,7 +402,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -422,7 +422,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -442,7 +442,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -462,7 +462,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -482,7 +482,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -502,7 +502,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -522,7 +522,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -542,7 +542,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -562,7 +562,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -582,7 +582,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -602,7 +602,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -622,7 +622,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -642,7 +642,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -662,7 +662,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -682,7 +682,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -702,7 +702,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -722,7 +722,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -742,7 +742,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -762,7 +762,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -782,7 +782,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -802,7 +802,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -822,7 +822,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -842,7 +842,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -862,7 +862,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -882,7 +882,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -902,7 +902,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -922,7 +922,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -942,7 +942,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -962,7 +962,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -982,7 +982,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -1002,7 +1002,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -1022,7 +1022,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -1042,7 +1042,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -1062,7 +1062,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -1082,7 +1082,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -1102,7 +1102,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -1122,7 +1122,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -1142,7 +1142,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -1162,7 +1162,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -1182,7 +1182,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 },
 
@@ -1202,7 +1202,7 @@ window.questionBanks.apChem.push({
 
   ],
 
-  category: "Unit 4: Kinetics"
+  category: "Unit 5: Kinetics"
 
 }
    
@@ -1248,7 +1248,7 @@ Experiment 3: [A]=0.10 M, [B]=0.20 M → rate=0.020 M/s
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1268,7 +1268,7 @@ Experiment 3: [A]=0.10 M, [B]=0.20 M → rate=0.020 M/s
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1288,7 +1288,7 @@ Experiment 3: [A]=0.10 M, [B]=0.20 M → rate=0.020 M/s
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -1328,7 +1328,7 @@ A student increases the temperature of a reaction and observes that the reaction
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1348,7 +1348,7 @@ A student increases the temperature of a reaction and observes that the reaction
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1368,7 +1368,7 @@ A student increases the temperature of a reaction and observes that the reaction
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -1408,7 +1408,7 @@ A catalyst is added to a reaction, and the reaction rate increases without chang
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1428,7 +1428,7 @@ A catalyst is added to a reaction, and the reaction rate increases without chang
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1448,7 +1448,7 @@ A catalyst is added to a reaction, and the reaction rate increases without chang
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -1488,7 +1488,7 @@ A reaction is determined experimentally to follow the rate law: rate = k[A]²[B]
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1508,7 +1508,7 @@ A reaction is determined experimentally to follow the rate law: rate = k[A]²[B]
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1528,7 +1528,7 @@ A reaction is determined experimentally to follow the rate law: rate = k[A]²[B]
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -1546,13 +1546,13 @@ A reaction is determined experimentally to follow the rate law: rate = k[A]²[B]
 
   text: `
 
-A student studies the reaction A + B → products and collects the following data:
+A student studies the reaction A + B → products and collects the following data:\n
 
-Experiment 1: [A]=0.10 M, [B]=0.10 M → rate=0.010 M/s  
+Experiment 1: [A]=0.10 M, [B]=0.10 M → rate=0.010 M/s\n
 
-Experiment 2: [A]=0.20 M, [B]=0.10 M → rate=0.040 M/s  
+Experiment 2: [A]=0.20 M, [B]=0.10 M → rate=0.040 M/s\n 
 
-Experiment 3: [A]=0.10 M, [B]=0.20 M → rate=0.020 M/s
+Experiment 3: [A]=0.10 M, [B]=0.20 M → rate=0.020 M/s\n
 
   `,
 
@@ -1574,7 +1574,7 @@ Experiment 3: [A]=0.10 M, [B]=0.20 M → rate=0.020 M/s
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1594,7 +1594,7 @@ Experiment 3: [A]=0.10 M, [B]=0.20 M → rate=0.020 M/s
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1614,7 +1614,7 @@ Experiment 3: [A]=0.10 M, [B]=0.20 M → rate=0.020 M/s
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -1654,7 +1654,7 @@ A student investigates how concentration and temperature affect a reaction. They
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1674,7 +1674,7 @@ A student investigates how concentration and temperature affect a reaction. They
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1694,7 +1694,7 @@ A student investigates how concentration and temperature affect a reaction. They
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -1712,11 +1712,11 @@ A student investigates how concentration and temperature affect a reaction. They
 
   text: `
 
-A proposed mechanism for a reaction is:
+A proposed mechanism for a reaction is:\n
+\n
+Step 1 (slow): A + B → C\n
 
-Step 1 (slow): A + B → C  
-
-Step 2 (fast): C + B → products
+Step 2 (fast): C + B → products\n
 
   `,
 
@@ -1738,7 +1738,7 @@ Step 2 (fast): C + B → products
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1758,7 +1758,7 @@ Step 2 (fast): C + B → products
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1778,7 +1778,7 @@ Step 2 (fast): C + B → products
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -1818,7 +1818,7 @@ A reaction follows rate = k[A]²[B]. A student performs several changes to conce
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1838,7 +1838,7 @@ A reaction follows rate = k[A]²[B]. A student performs several changes to conce
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1858,7 +1858,7 @@ A reaction follows rate = k[A]²[B]. A student performs several changes to conce
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -1904,7 +1904,7 @@ Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.080 M/s
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1924,7 +1924,7 @@ Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.080 M/s
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1944,7 +1944,7 @@ Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.080 M/s
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -1964,7 +1964,7 @@ Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.080 M/s
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -2004,7 +2004,7 @@ A student performs a reaction at two different temperatures. At the higher tempe
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2024,7 +2024,7 @@ A student performs a reaction at two different temperatures. At the higher tempe
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2044,7 +2044,7 @@ A student performs a reaction at two different temperatures. At the higher tempe
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -2062,13 +2062,13 @@ A student performs a reaction at two different temperatures. At the higher tempe
 
   text: `
 
-A proposed mechanism is:
+A proposed mechanism is:\n
+\n
+Step 1 (slow): A + B → C\n
 
-Step 1 (slow): A + B → C  
+Step 2 (fast): C + B → D\n
 
-Step 2 (fast): C + B → D  
-
-Step 3 (fast): D → products
+Step 3 (fast): D → products\n
 
   `,
 
@@ -2090,7 +2090,7 @@ Step 3 (fast): D → products
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2110,7 +2110,7 @@ Step 3 (fast): D → products
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2130,7 +2130,7 @@ Step 3 (fast): D → products
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -2172,7 +2172,7 @@ A student performs multiple simultaneous changes to concentration.
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2192,7 +2192,7 @@ A student performs multiple simultaneous changes to concentration.
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2212,7 +2212,7 @@ A student performs multiple simultaneous changes to concentration.
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -2230,13 +2230,13 @@ A student performs multiple simultaneous changes to concentration.
 
   text: `
 
-A reaction A + B → products is studied. The following data is obtained:
+A reaction A + B → products is studied. The following data is obtained:\n
+\n
+Experiment 1: [A]=0.10 M, [B]=0.10 M → rate=0.010 M/s\n
 
-Experiment 1: [A]=0.10 M, [B]=0.10 M → rate=0.010 M/s  
+Experiment 2: [A]=0.20 M, [B]=0.10 M → rate=0.040 M/s\n
 
-Experiment 2: [A]=0.20 M, [B]=0.10 M → rate=0.040 M/s  
-
-Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.080 M/s
+Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.080 M/s\n
 
   `,
 
@@ -2258,7 +2258,7 @@ Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.080 M/s
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2278,7 +2278,7 @@ Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.080 M/s
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2298,7 +2298,7 @@ Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.080 M/s
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2318,7 +2318,7 @@ Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.080 M/s
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -2336,13 +2336,13 @@ Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.080 M/s
 
   text: `
 
-A reaction has an experimentally determined rate law: rate = k[A][B]².
+A reaction has an experimentally determined rate law: rate = k[A][B]².\n
+\n
+A proposed mechanism is:\n
+\n
+Step 1 (slow): A + B → C\n
 
-A proposed mechanism is:
-
-Step 1 (slow): A + B → C  
-
-Step 2 (fast): C + B → products
+Step 2 (fast): C + B → products\n
 
   `,
 
@@ -2364,7 +2364,7 @@ Step 2 (fast): C + B → products
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2384,7 +2384,7 @@ Step 2 (fast): C + B → products
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2404,7 +2404,7 @@ Step 2 (fast): C + B → products
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -2444,7 +2444,7 @@ A reaction is studied at two temperatures. At higher temperature, the rate const
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2464,7 +2464,7 @@ A reaction is studied at two temperatures. At higher temperature, the rate const
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2484,7 +2484,7 @@ A reaction is studied at two temperatures. At higher temperature, the rate const
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -2524,7 +2524,7 @@ A reaction follows rate = k[A]²[B]. A student performs multiple simultaneous ch
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2544,7 +2544,7 @@ A reaction follows rate = k[A]²[B]. A student performs multiple simultaneous ch
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2564,7 +2564,7 @@ A reaction follows rate = k[A]²[B]. A student performs multiple simultaneous ch
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -2610,7 +2610,7 @@ Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.160 M/s
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2630,7 +2630,7 @@ Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.160 M/s
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2650,7 +2650,7 @@ Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.160 M/s
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -2668,13 +2668,13 @@ Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.160 M/s
 
   text: `
 
-A reaction has experimental rate law: rate = k[A][B]².
+A reaction has experimental rate law: rate = k[A][B]².\n
+\n
+Proposed mechanism:\n
+\n
+Step 1 (slow): A + B → C\n
 
-Proposed mechanism:
-
-Step 1 (slow): A + B → C  
-
-Step 2 (fast): C + B → products
+Step 2 (fast): C + B → products\n
 
   `,
 
@@ -2696,7 +2696,7 @@ Step 2 (fast): C + B → products
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2716,7 +2716,7 @@ Step 2 (fast): C + B → products
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2736,7 +2736,7 @@ Step 2 (fast): C + B → products
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -2776,7 +2776,7 @@ A reaction is performed at two temperatures. At higher temperature, the rate con
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2796,7 +2796,7 @@ A reaction is performed at two temperatures. At higher temperature, the rate con
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2816,7 +2816,7 @@ A reaction is performed at two temperatures. At higher temperature, the rate con
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
@@ -2856,7 +2856,7 @@ A reaction follows rate = k[A]³[B]. A student performs multiple changes simulta
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2876,7 +2876,7 @@ A reaction follows rate = k[A]³[B]. A student performs multiple changes simulta
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     },
 
@@ -2896,7 +2896,7 @@ A reaction follows rate = k[A]³[B]. A student performs multiple changes simulta
 
       ],
 
-      category: "Unit 4: Kinetics"
+      category: "Unit 5: Kinetics"
 
     }
 
