@@ -27,7 +27,7 @@ const MODE_CONFIG = {
 };
 
 const QUIZ_LIMITS = {
-  standard: 30,
+  standard: 45,
   rapid: 25,
   timed: 40,
   weak: 20,
@@ -68,7 +68,8 @@ const defaultProgress = {
   lastSubjectIndex: 0,
   lastMode: "standard",
   lastTimedDuration: 300,
-  subjectStats: {}
+  subjectStats: {},
+  activeQuiz: null
 };
 
 function loadProgress() {
@@ -95,6 +96,84 @@ function saveProgress() {
   } catch (error) {
     console.error("Failed to save progress:", error);
   }
+}
+
+function getModeQuestionIndexKey(mode) {
+  if (mode === "rapid") return "rapidQuestionIndex";
+  if (mode === "weak") return "weakAreaQuestionIndex";
+  if (mode === "missed") return "missedQuestionIndex";
+  return "standardQuestionIndex";
+}
+
+function saveActiveQuiz() {
+  const questionList = getCurrentQuestionList();
+
+  if (!questionList.length) return;
+
+  savedProgress.activeQuiz = {
+    subjectIndex: currentSubject,
+    mode: currentMode,
+    score,
+    weakPoints,
+    missedQuestions,
+    rapidStreak,
+    bestRapidStreak,
+    timedDuration,
+    timeRemaining,
+    standardQuestions,
+    standardQuestionIndex,
+    rapidQuestions,
+    rapidQuestionIndex,
+    weakAreaQuestions,
+    weakAreaQuestionIndex,
+    missedQuestionIndex,
+    missedReviewStartTotal
+  };
+
+  saveProgress();
+}
+
+function clearActiveQuiz() {
+  savedProgress.activeQuiz = null;
+  saveProgress();
+}
+
+function resumeActiveQuiz() {
+  const active = savedProgress.activeQuiz;
+
+  if (!active) return;
+
+  stopTimer();
+
+  currentSubject = active.subjectIndex;
+  currentMode = active.mode;
+  score = active.score || 0;
+  weakPoints = active.weakPoints || {};
+  missedQuestions = active.missedQuestions || [];
+
+  rapidStreak = active.rapidStreak || 0;
+  bestRapidStreak = active.bestRapidStreak || 0;
+
+  timedDuration = active.timedDuration || 300;
+  timeRemaining = active.timeRemaining || timedDuration;
+
+  standardQuestions = active.standardQuestions || [];
+  standardQuestionIndex = active.standardQuestionIndex || 0;
+
+  rapidQuestions = active.rapidQuestions || [];
+  rapidQuestionIndex = active.rapidQuestionIndex || 0;
+
+  weakAreaQuestions = active.weakAreaQuestions || [];
+  weakAreaQuestionIndex = active.weakAreaQuestionIndex || 0;
+
+  missedQuestionIndex = active.missedQuestionIndex || 0;
+  missedReviewStartTotal = active.missedReviewStartTotal || missedQuestions.length;
+
+  if (currentMode === "timed") {
+    startTimer(timeRemaining);
+  }
+
+  renderQuestionScreen();
 }
 
 const appContainer = document.getElementById("app-container");
@@ -425,6 +504,7 @@ function showHomePage() {
 
   const lastSubjectName = subjects?.[savedProgress.lastSubjectIndex]?.name || "None yet";
   const hasSavedProgress = savedProgress.totalQuizzesCompleted > 0;
+const hasActiveQuiz = !!savedProgress.activeQuiz;
 
   appContainer.innerHTML = `
     <div class="home-header">
@@ -455,14 +535,17 @@ function showHomePage() {
       </div>
 
       <div class="subject-mode-group">
-        <button id="go-subjects-btn" class="mode-btn standard-btn">Choose Subject</button>
-        ${hasSavedProgress ? `<button id="reset-progress-btn" class="mode-btn rapid-btn">Reset Progress</button>` : ""}
+        ${hasActiveQuiz ? `<button id="resume-quiz-btn" class="mode-btn standard-btn">Resume Quiz</button>` : ""}
+<button id="go-subjects-btn" class="mode-btn standard-btn">Choose Subject</button>
+${hasSavedProgress || hasActiveQuiz ? `<button id="reset-progress-btn" class="mode-btn rapid-btn">Reset Progress</button>` : ""}
       </div>
     </div>
   `;
 
   document.getElementById("go-subjects-btn").addEventListener("click", showSubjectPage);
-
+if (hasActiveQuiz) {
+  document.getElementById("resume-quiz-btn").addEventListener("click", resumeActiveQuiz);
+}
   if (hasSavedProgress) {
     document.getElementById("reset-progress-btn").addEventListener("click", resetSavedProgress);
   }
@@ -565,7 +648,8 @@ function startTimedSubject(subjectIndex, seconds) {
 
 function startSubject(subjectIndex, mode = "standard") {
   stopTimer();
-
+clearActiveQuiz();
+  
   currentSubject = subjectIndex;
   currentPassage = 0;
   currentQuestion = 0;
@@ -666,7 +750,7 @@ function renderQuestionScreen() {
   const questionList = getCurrentQuestionList();
   const questionIndex = getCurrentQuestionIndex();
   const q = questionList[questionIndex];
-  
+  saveActiveQuiz();
   
   const config = MODE_CONFIG[currentMode];
   const progressPercent = ((questionIndex + 1) / questionList.length) * 100;
@@ -744,6 +828,7 @@ function handleAnswer(i) {
     btn.disabled = true;
   });
 
+  saveActiveQuiz();
   if (selectedChoice.correct) {
     score++;
 
@@ -800,6 +885,7 @@ function handleAnswer(i) {
 }
 
 function goToNextQuestion() {
+  saveActiveQuiz();
   if (currentMode === "rapid") {
     rapidQuestionIndex++;
 
@@ -851,7 +937,8 @@ function goToNextQuestion() {
 
 function renderTimedOutScreen() {
   const total = getCurrentQuestionList().length;
-  recordCompletedQuiz("timed", score, total);
+  clearActiveQuiz();
+recordCompletedQuiz("timed", score, total);
 
   appContainer.innerHTML = `
     <div class="subject-page-header">
@@ -1007,7 +1094,8 @@ function renderResultsScreen(mode) {
     `;
   }
 
-  recordCompletedQuiz(mode, score, total);
+  clearActiveQuiz();
+recordCompletedQuiz(mode, score, total);
 
     appContainer.innerHTML = `
     <div class="subject-page-header">
