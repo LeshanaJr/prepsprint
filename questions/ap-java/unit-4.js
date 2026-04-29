@@ -655,13 +655,13 @@ window.questionBanks.apJava.push({
   image: "",
   imageAlt: "",
   text: `
-int[] scores = {85, 90, 78, 92};
-
-int total = 0;
-for (int i = 0; i < scores.length; i++) {
-  total += scores[i];
-}
-
+int[] scores = {85, 90, 78, 92};\n
+\n
+int total = 0;\n
+for (int i = 0; i < scores.length; i++) {\n
+  total += scores[i];\n
+}\n
+\n
 System.out.print(total);
   `,
   questions: [
@@ -693,15 +693,15 @@ System.out.print(total);
   image: "",
   imageAlt: "",
   text: `
-int[] nums = {3, 7, 11, 15};
-boolean found = false;
-
-for (int i = 0; i < nums.length; i++) {
-  if (nums[i] == 11) {
-    found = true;
-  }
-}
-
+int[] nums = {3, 7, 11, 15};\n
+boolean found = false;\n
+\n
+for (int i = 0; i < nums.length; i++) {\n
+  if (nums[i] == 11) {\n
+    found = true;\n
+  }\n
+}\n
+\n
 System.out.print(found);
   `,
   questions: [
@@ -733,16 +733,16 @@ System.out.print(found);
   image: "",
   imageAlt: "",
   text: `
-ArrayList<Integer> list = new ArrayList<Integer>();
-list.add(5);
-list.add(10);
-list.add(15);
-
-int sum = 0;
-for (int i = 0; i < list.size(); i++) {
-  sum += list.get(i);
-}
-
+ArrayList<Integer> list = new ArrayList<Integer>();\n
+list.add(5);\n
+list.add(10);\n
+list.add(15);\n
+\n
+int sum = 0;\n
+for (int i = 0; i < list.size(); i++) {\n
+  sum += list.get(i);\n
+}\n
+\n
 System.out.print(sum);
   `,
   questions: [
@@ -774,19 +774,19 @@ System.out.print(sum);
   image: "",
   imageAlt: "",
   text: `
-int[][] grid = {
-  {1, 2},
-  {3, 4}
-};
-
-int sum = 0;
-
-for (int i = 0; i < grid.length; i++) {
-  for (int j = 0; j < grid[i].length; j++) {
-    sum += grid[i][j];
-  }
-}
-
+int[][] grid = {\n
+  {1, 2},\n
+  {3, 4}\n
+};\n
+\n
+int sum = 0;\n
+\n
+for (int i = 0; i < grid.length; i++) {\n
+  for (int j = 0; j < grid[i].length; j++) {\n
+    sum += grid[i][j];\n
+  }\n
+}\n
+\n
 System.out.print(sum);
   `,
   questions: [
@@ -818,26 +818,26 @@ System.out.print(sum);
   image: "",
   imageAlt: "",
   text: `
-int[] nums = {2, 4, 6, 8, 10};
-
-int target = 6;
-int low = 0;
-int high = nums.length - 1;
-boolean found = false;
-
-while (low <= high) {
-  int mid = (low + high) / 2;
-
-  if (nums[mid] == target) {
-    found = true;
-    break;
-  } else if (nums[mid] < target) {
-    low = mid + 1;
-  } else {
-    high = mid - 1;
-  }
-}
-
+int[] nums = {2, 4, 6, 8, 10};\n
+\n
+int target = 6;\n
+int low = 0;\n
+int high = nums.length - 1;\n
+boolean found = false;\n
+\n
+while (low <= high) {\n
+  int mid = (low + high) / 2;\n
+\n
+  if (nums[mid] == target) {\n
+    found = true;\n
+    break;\n
+  } else if (nums[mid] < target) {\n
+    low = mid + 1;\n
+  } else {\n
+    high = mid - 1;\n
+  }\n
+}\n
+\n
 System.out.print(found);
   `,
   questions: [
@@ -869,16 +869,16 @@ System.out.print(found);
   image: "",
   imageAlt: "",
   text: `
-int[] values = {12, 7, 25, 19};
-
-int max = values[0];
-
-for (int i = 1; i < values.length; i++) {
-  if (values[i] > max) {
-    max = values[i];
-  }
-}
-
+int[] values = {12, 7, 25, 19};\n
+\n
+int max = values[0];\n
+\n
+for (int i = 1; i < values.length; i++) {\n
+  if (values[i] > max) {\n
+    max = values[i];\n
+  }\n
+}\n
+\n
 System.out.print(max);
   `,
   questions: [
@@ -910,20 +910,20 @@ System.out.print(max);
   image: "",
   imageAlt: "",
   text: `
-ArrayList<String> names = new ArrayList<String>();
-names.add("Alex");
-names.add("Jordan");
-names.add("Alex");
-names.add("Taylor");
-
-int count = 0;
-
-for (int i = 0; i < names.size(); i++) {
-  if (names.get(i).equals("Alex")) {
-    count++;
-  }
-}
-
+ArrayList<String> names = new ArrayList<String>();\n
+names.add("Alex");\n
+names.add("Jordan");\n
+names.add("Alex");\n
+names.add("Taylor");\n
+\n
+int count = 0;\n
+\n
+for (int i = 0; i < names.size(); i++) {\n
+  if (names.get(i).equals("Alex")) {\n
+    count++;\n
+  }\n
+}\n
+\n
 System.out.print(count);
   `,
   questions: [
@@ -955,14 +955,14 @@ System.out.print(count);
   image: "",
   imageAlt: "",
   text: `
-int[] nums = {2, 4, 6, 8};
-
-int sum = 0;
-
-for (int n : nums) {
-  sum += n;
-}
-
+int[] nums = {2, 4, 6, 8};\n
+\n
+int sum = 0;\n
+\n
+for (int n : nums) {\n
+  sum += n;\n
+}\n
+\n
 System.out.print(sum);
   `,
   questions: [
@@ -994,21 +994,21 @@ System.out.print(sum);
   image: "",
   imageAlt: "",
   text: `
-int[][] grid = {
-  {1, 2, 3},
-  {4, 5, 6}
-};
-
-int count = 0;
-
-for (int i = 0; i < grid.length; i++) {
-  for (int j = 0; j < grid[i].length; j++) {
-    if (grid[i][j] % 2 == 0) {
-      count++;
-    }
-  }
-}
-
+int[][] grid = {\n
+  {1, 2, 3},\n
+  {4, 5, 6}\n
+};\n
+\n
+int count = 0;\n
+\n
+for (int i = 0; i < grid.length; i++) {\n
+  for (int j = 0; j < grid[i].length; j++) {\n
+    if (grid[i][j] % 2 == 0) {\n
+      count++;\n
+    }\n
+  }\n
+}\n
+\n
 System.out.print(count);
   `,
   questions: [
@@ -1040,13 +1040,13 @@ System.out.print(count);
   image: "",
   imageAlt: "",
   text: `
-ArrayList<Integer> nums = new ArrayList<Integer>();
-nums.add(10);
-nums.add(20);
-nums.add(30);
-
-nums.remove(1);
-
+ArrayList<Integer> nums = new ArrayList<Integer>();\n
+nums.add(10);\n
+nums.add(20);\n
+nums.add(30);\n
+\n
+nums.remove(1);\n
+\n
 System.out.print(nums);
   `,
   questions: [
@@ -1078,31 +1078,31 @@ System.out.print(nums);
   image: "",
   imageAlt: "",
   text: `
-class Book {
-  private String title;
-  private int pages;
-
-  public Book(String t, int p) {
-    title = t;
-    pages = p;
-  }
-
-  public int getPages() {
-    return pages;
-  }
-}
-
-Book[] shelf = {
-  new Book("A", 120),
-  new Book("B", 200),
-  new Book("C", 150)
-};
-
-int total = 0;
-for (int i = 0; i < shelf.length; i++) {
-  total += shelf[i].getPages();
-}
-
+class Book {\n
+  private String title;\n
+  private int pages;\n
+\n
+  public Book(String t, int p) {\n
+    title = t;\n
+    pages = p;\n
+  }\n
+\n
+  public int getPages() {\n
+    return pages;\n
+  }\n
+}\n
+\n
+Book[] shelf = {\n
+  new Book("A", 120),\n
+  new Book("B", 200),\n
+  new Book("C", 150)\n
+};\n
+\n
+int total = 0;\n
+for (int i = 0; i < shelf.length; i++) {\n
+  total += shelf[i].getPages();\n
+}\n
+\n
 System.out.print(total);
   `,
   questions: [
@@ -1134,31 +1134,31 @@ System.out.print(total);
   image: "",
   imageAlt: "",
   text: `
-class Student {
-  private String name;
-
-  public Student(String n) {
-    name = n;
-  }
-
-  public String getName() {
-    return name;
-  }
-}
-
-ArrayList<Student> roster = new ArrayList<Student>();
-roster.add(new Student("Ava"));
-roster.add(new Student("Noah"));
-roster.add(new Student("Mia"));
-
-boolean found = false;
-
-for (int i = 0; i < roster.size(); i++) {
-  if (roster.get(i).getName().equals("Noah")) {
-    found = true;
-  }
-}
-
+class Student {\n
+  private String name;\n
+\n
+  public Student(String n) {\n
+    name = n;\n
+  }\n
+\n
+  public String getName() {\n
+    return name;\n
+  }\n
+}\n
+\n
+ArrayList<Student> roster = new ArrayList<Student>();\n
+roster.add(new Student("Ava"));\n
+roster.add(new Student("Noah"));\n
+roster.add(new Student("Mia"));\n
+\n
+boolean found = false;\n
+\n
+for (int i = 0; i < roster.size(); i++) {\n
+  if (roster.get(i).getName().equals("Noah")) {\n
+    found = true;\n
+  }\n
+}\n
+\n
 System.out.print(found);
   `,
   questions: [
@@ -1190,19 +1190,19 @@ System.out.print(found);
   image: "",
   imageAlt: "",
   text: `
-int[] nums = {5, 2, 8, 1};
-
-int minIndex = 0;
-for (int i = 1; i < nums.length; i++) {
-  if (nums[i] < nums[minIndex]) {
-    minIndex = i;
-  }
-}
-
-int temp = nums[0];
-nums[0] = nums[minIndex];
-nums[minIndex] = temp;
-
+int[] nums = {5, 2, 8, 1};\n
+\n
+int minIndex = 0;\n
+for (int i = 1; i < nums.length; i++) {\n
+  if (nums[i] < nums[minIndex]) {\n
+    minIndex = i;\n
+  }\n
+}\n
+\n
+int temp = nums[0];\n
+nums[0] = nums[minIndex];\n
+nums[minIndex] = temp;\n
+\n
 System.out.print(nums[0]);
   `,
   questions: [
@@ -1234,13 +1234,13 @@ System.out.print(nums[0]);
   image: "",
   imageAlt: "",
   text: `
-public static int factorial(int n) {
-  if (n == 1) {
-    return 1;
-  }
-  return n * factorial(n - 1);
-}
-
+public static int factorial(int n) {\n
+  if (n == 1) {\n
+    return 1;\n
+  }\n
+  return n * factorial(n - 1);\n
+}\n
+\n
 System.out.print(factorial(4));
   `,
   questions: [
@@ -1303,23 +1303,23 @@ A student wants to build a study app that recommends practice questions based on
   image: "",
   imageAlt: "",
   text: `
-int[] nums = {2, 4, 6, 8, 10, 12};
-
-int target = 8;
-int left = 0;
-int right = nums.length - 1;
-
-while (left <= right) {
-  int mid = (left + right) / 2;
-
-  if (nums[mid] == target) {
-    System.out.print(mid);
-    break;
-  } else if (nums[mid] < target) {
-    left = mid + 1;
-  } else {
-    right = mid - 1;
-  }
+int[] nums = {2, 4, 6, 8, 10, 12};\n
+\n
+int target = 8;\n
+int left = 0;\n
+int right = nums.length - 1;\n
+\n
+while (left <= right) {\n
+  int mid = (left + right) / 2;\n
+\n
+  if (nums[mid] == target) {\n
+    System.out.print(mid);\n
+    break;\n
+  } else if (nums[mid] < target) {\n
+    left = mid + 1;\n
+  } else {\n
+    right = mid - 1;\n
+  }\n
 }
   `,
   questions: [
@@ -1351,9 +1351,9 @@ while (left <= right) {
   image: "",
   imageAlt: "",
   text: `
-Merge sort works by splitting an array into smaller parts, sorting each part, and then merging them back together in order.
-
-Example:
+Merge sort works by splitting an array into smaller parts, sorting each part, and then merging them back together in order.\n
+\n
+Example:\n
 [8, 3, 5, 2] → [8, 3] + [5, 2] → [3, 8] + [2, 5] → [2, 3, 5, 8]
   `,
   questions: [
@@ -1385,20 +1385,20 @@ Example:
   image: "",
   imageAlt: "",
   text: `
-int[][] matrix = {
-  {1, 2},
-  {3, 4},
-  {5, 6}
-};
-
-int total = 0;
-
-for (int i = 0; i < matrix.length; i++) {
-  for (int j = 0; j < matrix[i].length; j++) {
-    total += matrix[i][j];
-  }
-}
-
+int[][] matrix = {\n
+  {1, 2},\n
+  {3, 4},\n
+  {5, 6}\n
+};\n
+\n
+int total = 0;\n
+\n
+for (int i = 0; i < matrix.length; i++) {\n
+  for (int j = 0; j < matrix[i].length; j++) {\n
+    total += matrix[i][j];\n
+  }\n
+}\n
+\n
 System.out.print(total);
   `,
   questions: [
@@ -1430,11 +1430,11 @@ System.out.print(total);
   image: "",
   imageAlt: "",
   text: `
-Integer a = 10;
-Integer b = 5;
-
-double result = a.doubleValue() / b.doubleValue();
-
+Integer a = 10;\n
+Integer b = 5;\n
+\n
+double result = a.doubleValue() / b.doubleValue();\n
+\n
 System.out.print(result);
   `,
   questions: [
@@ -1466,9 +1466,9 @@ System.out.print(result);
   image: "",
   imageAlt: "",
   text: `
-Algorithm A: Checks each element one by one to find a value.
-Algorithm B: Uses binary search on a sorted array.
-
+Algorithm A: Checks each element one by one to find a value.\n
+Algorithm B: Uses binary search on a sorted array.\n
+\n
 Both are used to find a target value.
   `,
   questions: [
@@ -1500,14 +1500,14 @@ Both are used to find a target value.
   image: "",
   imageAlt: "",
   text: `
-public static int sumToN(int n) {
-  if (n == 1) {
-    return 1;
-  }
-
-  return n + sumToN(n - 1);
-}
-
+public static int sumToN(int n) {\n
+  if (n == 1) {\n
+    return 1;\n
+  }\n
+\n
+  return n + sumToN(n - 1);\n
+}\n
+\n
 System.out.print(sumToN(5));
   `,
   questions: [
@@ -1539,20 +1539,20 @@ System.out.print(sumToN(5));
   image: "",
   imageAlt: "",
   text: `
-ArrayList<Integer> nums = new ArrayList<Integer>();
-nums.add(4);
-nums.add(7);
-nums.add(10);
-nums.add(13);
-
-int count = 0;
-
-for (int i = 0; i < nums.size(); i++) {
-  if (nums.get(i) > 6) {
-    count++;
-  }
-}
-
+ArrayList<Integer> nums = new ArrayList<Integer>();\n
+nums.add(4);\n
+nums.add(7);\n
+nums.add(10);\n
+nums.add(13);\n
+\n
+int count = 0;\n
+\n
+for (int i = 0; i < nums.size(); i++) {\n
+  if (nums.get(i) > 6) {\n
+    count++;\n
+  }\n
+}\n
+\n
 System.out.print(count);
   `,
   questions: [
@@ -1615,20 +1615,20 @@ A program stores thousands of student ID numbers in an array. The programmer wan
   image: "",
   imageAlt: "",
   text: `
-int[][] sales = {
-  {10, 20, 30},
-  {15, 25, 35},
-  {12, 22, 32}
-};
-
-int total = 0;
-
-for (int row = 0; row < sales.length; row++) {
-  for (int col = 0; col < sales[row].length; col++) {
-    total += sales[row][col];
-  }
-}
-
+int[][] sales = {\n
+  {10, 20, 30},\n
+  {15, 25, 35},\n
+  {12, 22, 32}\n
+};\n
+\n
+int total = 0;\n
+\n
+for (int row = 0; row < sales.length; row++) {\n
+  for (int col = 0; col < sales[row].length; col++) {\n
+    total += sales[row][col];\n
+  }\n
+}\n
+\n
 System.out.print(total);
   `,
   questions: [
