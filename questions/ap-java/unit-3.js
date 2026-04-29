@@ -686,16 +686,16 @@ A class named Car stores information about a vehicle. It has private instance va
   image: "",
   imageAlt: "",
   text: `
-class Student {
-  private String name;
-
-  public Student(String n) {
-    name = n;
-  }
-
-  public String getName() {
-    return name;
-  }
+class Student {\n
+  private String name;\n
+\n
+  public Student(String n) {\n
+    name = n;\n
+  }\n
+\n
+  public String getName() {\n
+    return name;\n
+  }\n
 }
   `,
   questions: [
@@ -726,20 +726,20 @@ class Student {
   image: "",
   imageAlt: "",
   text: `
-class Counter {
-  private int count;
-
-  public Counter() {
-    count = 0;
-  }
-
-  public void increment() {
-    count++;
-  }
-
-  public int getCount() {
-    return count;
-  }
+class Counter {\n
+  private int count;\n
+\n
+  public Counter() {\n
+    count = 0;\n
+  }\n
+\n
+  public void increment() {\n
+    count++;\n
+  }\n
+\n
+  public int getCount() {\n
+    return count;\n
+  }\n
 }
   `,
   questions: [
@@ -770,14 +770,14 @@ class Counter {
   image: "",
   imageAlt: "",
   text: `
-class Dog {
-  private String name;
-
-  public Dog(String n) {
-    name = n;
-  }
-}
-
+class Dog {\n
+  private String name;\n
+\n
+  public Dog(String n) {\n
+    name = n;\n
+  }\n
+}\n
+\n
 Dog d = new Dog("Max");
   `,
   questions: [
@@ -839,30 +839,30 @@ A program calculates the total price of items by splitting the task into smaller
   image: "",
   imageAlt: "",
   text: `
-class Player {
-  private String name;
-  private int score;
+class Player {\n
+  private String name;\n
+  private int score;\n
+\n
+  public Player(String n, int s) {\n
+    name = n;\n
+    score = s;\n
+  }\n
+\n
+  public void addPoints(int amount) {\n
+    score += amount;\n
+  }\n
+\n
+  public int getScore() {\n
+    return score;\n
+  }\n
+}\n
 
-  public Player(String n, int s) {
-    name = n;
-    score = s;
-  }
-
-  public void addPoints(int amount) {
-    score += amount;
-  }
-
-  public int getScore() {
-    return score;
-  }
-}
-
-Player p1 = new Player("Kai", 10);
-Player p2 = new Player("Mia", 20);
-
-p1.addPoints(5);
-p2.addPoints(10);
-
+Player p1 = new Player("Kai", 10);\n
+Player p2 = new Player("Mia", 20);\n
+\n
+p1.addPoints(5);\n
+p2.addPoints(10);\n
+\n
 System.out.print(p1.getScore() + " " + p2.getScore());
   `,
   questions: [
@@ -894,18 +894,18 @@ System.out.print(p1.getScore() + " " + p2.getScore());
   image: "",
   imageAlt: "",
   text: `
-class Laptop {
-  private String model;
-  private int year;
+class Laptop {\n
+  private String model;\n
+  private int year;\n
+\n
+  public Laptop(String model, int year) {\n
+    this.model = model;\n
+    this.year = year;\n
+  }\n
 
-  public Laptop(String model, int year) {
-    this.model = model;
-    this.year = year;
-  }
-
-  public String getModel() {
-    return model;
-  }
+  public String getModel() {\n
+    return model;\n
+  }\n
 }
   `,
   questions: [
@@ -937,20 +937,20 @@ class Laptop {
   image: "",
   imageAlt: "",
   text: `
-class BankAccount {
-  private double balance;
-
-  public BankAccount(double startingBalance) {
-    balance = startingBalance;
-  }
-
-  public double getBalance() {
-    return balance;
-  }
-
-  public void deposit(double amount) {
-    balance += amount;
-  }
+class BankAccount {\n
+  private double balance;\n
+\n
+  public BankAccount(double startingBalance) {\n
+    balance = startingBalance;\n
+  }\n
+\n
+  public double getBalance() {\n
+    return balance;\n
+  }\n
+\n
+  public void deposit(double amount) {\n
+    balance += amount;\n
+  }\n
 }
   `,
   questions: [
@@ -982,29 +982,29 @@ class BankAccount {
   image: "",
   imageAlt: "",
   text: `
-class Light {
-  private boolean on;
-
-  public Light() {
-    on = false;
-  }
-
-  public void turnOn() {
-    on = true;
-  }
-
-  public void turnOff() {
-    on = false;
-  }
-
-  public boolean isOn() {
-    return on;
-  }
-}
-
-Light lamp = new Light();
-lamp.turnOn();
-lamp.turnOff();
+class Light {\n
+  private boolean on;\n
+\n
+  public Light() {\n
+    on = false;\n
+  }\n
+\n
+  public void turnOn() {\n
+    on = true;\n
+  }\n
+\n
+  public void turnOff() {\n
+    on = false;\n
+  }\n
+\n
+  public boolean isOn() {\n
+    return on;\n
+  }\n
+}\n
+\n
+Light lamp = new Light();\n
+lamp.turnOn();\n
+lamp.turnOff();\n
 System.out.print(lamp.isOn());
   `,
   questions: [
@@ -1036,30 +1036,30 @@ System.out.print(lamp.isOn());
   image: "",
   imageAlt: "",
   text: `
-class Rectangle {
-  private int width;
-  private int height;
-
-  public Rectangle(int w, int h) {
-    width = w;
-    height = h;
-  }
-
-  public int area() {
-    return width * height;
-  }
-
-  public int perimeter() {
-    return 2 * (width + height);
-  }
-
-  public void printSummary() {
-    System.out.println(area());
-    System.out.println(perimeter());
-  }
-}
-
-Rectangle r = new Rectangle(3, 5);
+class Rectangle {\n
+  private int width;\n
+  private int height;\n
+\n
+  public Rectangle(int w, int h) {\n
+    width = w;\n
+    height = h;\n
+  }\n
+\n
+  public int area() {\n
+    return width * height;\n
+  }\n
+\n
+  public int perimeter() {\n
+    return 2 * (width + height);\n
+  }\n
+\n
+  public void printSummary() {\n
+    System.out.println(area());\n
+    System.out.println(perimeter());\n
+  }\n
+}\n
+\n
+Rectangle r = new Rectangle(3, 5);\n
 r.printSummary();
   `,
   questions: [
@@ -1091,33 +1091,33 @@ r.printSummary();
   image: "",
   imageAlt: "",
   text: `
-class GameCharacter {
-  private String name;
-  private int health;
+class GameCharacter {\n
+  private String name;\n
+  private int health;\n
+\n
+  public GameCharacter() {\n
+    name = "Unknown";\n
+    health = 100;\n
+  }\n
+\n
+  public GameCharacter(String n, int h) {\n
+    name = n;\n
+    health = h;\n
+  }\n
 
-  public GameCharacter() {
-    name = "Unknown";
-    health = 100;
-  }
+  public String getName() {\n
+    return name;\n
+  }\n
 
-  public GameCharacter(String n, int h) {
-    name = n;
-    health = h;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public int getHealth() {
+  public int getHealth() {\n
     return health;
-  }
-}
+  }\n
+}\n
 
-GameCharacter a = new GameCharacter();
-GameCharacter b = new GameCharacter("Hero", 75);
-
-System.out.print(a.getName() + " " + a.getHealth() + " ");
+GameCharacter a = new GameCharacter();\n
+GameCharacter b = new GameCharacter("Hero", 75);\n
+\n
+System.out.print(a.getName() + " " + a.getHealth() + " ");\n
 System.out.print(b.getName() + " " + b.getHealth());
   `,
   questions: [
@@ -1149,29 +1149,29 @@ System.out.print(b.getName() + " " + b.getHealth());
   image: "",
   imageAlt: "",
   text: `
-class Temperature {
-  private double degrees;
-
-  public Temperature(double d) {
-    degrees = d;
-  }
-
-  public void increase(double amount) {
-    degrees += amount;
-  }
-
-  public void decrease(double amount) {
-    degrees -= amount;
-  }
-
-  public double getDegrees() {
-    return degrees;
-  }
-}
-
-Temperature t = new Temperature(70.0);
-t.increase(5.5);
-t.decrease(2.0);
+class Temperature {\n
+  private double degrees;\n
+\n
+  public Temperature(double d) {\n
+    degrees = d;\n
+  }\n
+\n
+  public void increase(double amount) {\n
+    degrees += amount;\n
+  }\n
+\n
+  public void decrease(double amount) {\n
+    degrees -= amount;\n
+  }\n
+\n
+  public double getDegrees() {\n
+    return degrees;\n
+  }\n
+}\n
+\n
+Temperature t = new Temperature(70.0);\n
+t.increase(5.5);\n
+t.decrease(2.0);\n
 System.out.print(t.getDegrees());
   `,
   questions: [
@@ -1203,26 +1203,26 @@ System.out.print(t.getDegrees());
   image: "",
   imageAlt: "",
   text: `
-class Phone {
-  private String model;
-  private int battery;
-
-  public Phone(String m) {
-    model = m;
-    battery = 100;
-  }
-
-  public void useBattery(int amount) {
-    battery -= amount;
-  }
-
-  public int getBattery() {
-    return battery;
-  }
-}
-
-Phone p = new Phone("Nova");
-p.useBattery(30);
+class Phone {\n
+  private String model;\n
+  private int battery;\n
+\n
+  public Phone(String m) {\n
+    model = m;\n
+    battery = 100;\n
+  }\n
+\n
+  public void useBattery(int amount) {\n
+    battery -= amount;\n
+  }\n
+\n
+  public int getBattery() {\n
+    return battery;\n
+  }\n
+}\n
+\n
+Phone p = new Phone("Nova");\n
+p.useBattery(30);\n
 System.out.print(p.getBattery());
   `,
   questions: [
@@ -1254,23 +1254,23 @@ System.out.print(p.getBattery());
   image: "",
   imageAlt: "",
   text: `
-class Circle {
-  private double radius;
-
-  public Circle(double r) {
-    radius = r;
-  }
-
-  public double diameter() {
-    return radius * 2;
-  }
-
-  public double circumference() {
-    return 3.14 * diameter();
-  }
-}
-
-Circle c = new Circle(5.0);
+class Circle {\n
+  private double radius;\n
+\n
+  public Circle(double r) {\n
+    radius = r;\n
+  }\n
+\n
+  public double diameter() {\n
+    return radius * 2;\n
+  }\n
+\n
+  public double circumference() {\n
+    return 3.14 * diameter();\n
+  }\n
+}\n
+\n
+Circle c = new Circle(5.0);\n
 System.out.print(c.circumference());
   `,
   questions: [
@@ -1302,31 +1302,31 @@ System.out.print(c.circumference());
   image: "",
   imageAlt: "",
   text: `
-class Pet {
-  private String name;
-  private int age;
+class Pet {\n
+  private String name;\n
+  private int age;\n
+\n
+  public Pet(String n, int a) {\n
+    name = n;\n
+    age = a;\n
+  }\n
 
-  public Pet(String n, int a) {
-    name = n;
-    age = a;
-  }
+  public void birthday() {\n
+    age++;\n
+  }\n
 
-  public void birthday() {
-    age++;
-  }
-
-  public int getAge() {
-    return age;
-  }
-}
-
-Pet pet1 = new Pet("Luna", 2);
-Pet pet2 = new Pet("Rocky", 5);
-
-pet1.birthday();
-pet1.birthday();
-pet2.birthday();
-
+  public int getAge() {\n
+    return age;\n
+  }\n
+}\n
+\n
+Pet pet1 = new Pet("Luna", 2);\n
+Pet pet2 = new Pet("Rocky", 5);\n
+\n
+pet1.birthday();\n
+pet1.birthday();\n
+pet2.birthday();\n
+\n
 System.out.print(pet1.getAge() + " " + pet2.getAge());
   `,
   questions: [
@@ -1358,31 +1358,31 @@ System.out.print(pet1.getAge() + " " + pet2.getAge());
   image: "",
   imageAlt: "",
   text: `
-class Playlist {
-  private String title;
-  private int songCount;
-
-  public Playlist(String t) {
-    title = t;
-    songCount = 0;
-  }
-
-  public void addSong() {
-    songCount++;
-  }
-
-  public int getSongCount() {
-    return songCount;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-}
-
-Playlist p = new Playlist("Study Mix");
-p.addSong();
-p.addSong();
+class Playlist {\n
+  private String title;\n
+  private int songCount;\n
+\n
+  public Playlist(String t) {\n
+    title = t;\n
+    songCount = 0;\n
+  }\n
+\n
+  public void addSong() {\n
+    songCount++;\n
+  }\n
+\n
+  public int getSongCount() {\n
+    return songCount;\n
+  }\n
+\n
+  public String getTitle() {\n
+    return title;\n
+  }\n
+}\n
+\n
+Playlist p = new Playlist("Study Mix");\n
+p.addSong();\n
+p.addSong();\n
 System.out.print(p.getTitle() + ": " + p.getSongCount());
   `,
   questions: [
@@ -1414,27 +1414,27 @@ System.out.print(p.getTitle() + ": " + p.getSongCount());
   image: "",
   imageAlt: "",
   text: `
-class Player {
-  private int level;
-
-  public Player() {
-    level = 1;
-  }
-
-  public void setLevel(int newLevel) {
-    if (newLevel > 0) {
-      level = newLevel;
-    }
-  }
-
-  public int getLevel() {
-    return level;
-  }
-}
-
-Player p = new Player();
-p.setLevel(5);
-p.setLevel(-2);
+class Player {\n
+  private int level;\n
+\n
+  public Player() {\n
+    level = 1;\n
+  }\n
+\n
+  public void setLevel(int newLevel) {\n
+    if (newLevel > 0) {\n
+      level = newLevel;\n
+    }\n
+  }\n
+\n
+  public int getLevel() {\n
+    return level;\n
+  }\n
+}\n
+\n
+Player p = new Player();\n
+p.setLevel(5);\n
+p.setLevel(-2);\n
 System.out.print(p.getLevel());
   `,
   questions: [
@@ -1466,25 +1466,25 @@ System.out.print(p.getLevel());
   image: "",
   imageAlt: "",
   text: `
-class ReportCard {
-  private int grade1;
-  private int grade2;
-
-  public ReportCard(int g1, int g2) {
-    grade1 = g1;
-    grade2 = g2;
-  }
-
-  private double average() {
-    return (grade1 + grade2) / 2.0;
-  }
-
-  public boolean isPassing() {
-    return average() >= 60.0;
-  }
-}
-
-ReportCard r = new ReportCard(70, 80);
+class ReportCard {\n
+  private int grade1;\n
+  private int grade2;\n
+\n
+  public ReportCard(int g1, int g2) {\n
+    grade1 = g1;\n
+    grade2 = g2;\n
+  }\n
+\n
+  private double average() {\n
+    return (grade1 + grade2) / 2.0;\n
+  }\n
+\n
+  public boolean isPassing() {\n
+    return average() >= 60.0;\n
+  }\n
+}\n
+\n
+ReportCard r = new ReportCard(70, 80);\n
 System.out.print(r.isPassing());
   `,
   questions: [
@@ -1516,26 +1516,26 @@ System.out.print(r.isPassing());
   image: "",
   imageAlt: "",
   text: `
-class Movie {
-  private String title;
-  private int rating;
-
-  public Movie(String title, int rating) {
-    this.title = title;
-    this.rating = rating;
-  }
-
-  public void improveRating() {
-    rating++;
-  }
-
-  public int getRating() {
-    return rating;
-  }
-}
-
-Movie m = new Movie("Sky Quest", 7);
-m.improveRating();
+class Movie {\n
+  private String title;\n
+  private int rating;\n
+\n
+  public Movie(String title, int rating) {\n
+    this.title = title;\n
+    this.rating = rating;\n
+  }\n
+\n
+  public void improveRating() {\n
+    rating++;\n
+  }\n
+\n
+  public int getRating() {\n
+    return rating;\n
+  }\n
+}\n
+\n
+Movie m = new Movie("Sky Quest", 7);\n
+m.improveRating();\n
 System.out.print(m.getRating());
   `,
   questions: [
@@ -1567,27 +1567,27 @@ System.out.print(m.getRating());
   image: "",
   imageAlt: "",
   text: `
-class Order {
-  private double subtotal;
-
-  public Order(double s) {
-    subtotal = s;
-  }
-
-  public double tax() {
-    return subtotal * 0.06;
-  }
-
-  public double shipping() {
-    return 5.00;
-  }
-
-  public double total() {
-    return subtotal + tax() + shipping();
-  }
-}
-
-Order o = new Order(100.00);
+class Order {\n
+  private double subtotal;\n
+\n
+  public Order(double s) {\n
+    subtotal = s;\n
+  }\n
+\n
+  public double tax() {\n
+    return subtotal * 0.06;\n
+  }\n
+\n
+  public double shipping() {\n
+    return 5.00;\n
+  }\n
+\n
+  public double total() {\n
+    return subtotal + tax() + shipping();\n
+  }\n
+}\n
+\n
+Order o = new Order(100.00);\n
 System.out.print(o.total());
   `,
   questions: [
@@ -1619,31 +1619,31 @@ System.out.print(o.total());
   image: "",
   imageAlt: "",
   text: `
-class GameItem {
-  private String name;
-  private int durability;
-
-  public GameItem(String n, int d) {
-    name = n;
-    durability = d;
-  }
-
-  public void useItem() {
-    durability--;
-  }
-
-  public boolean isBroken() {
-    return durability <= 0;
-  }
-
-  public String getName() {
-    return name;
-  }
-}
-
-GameItem item = new GameItem("Shield", 2);
-item.useItem();
-item.useItem();
+class GameItem {\n
+  private String name;\n
+  private int durability;\n
+\n
+  public GameItem(String n, int d) {\n
+    name = n;\n
+    durability = d;\n
+  }\n
+\n
+  public void useItem() {\n
+    durability--;\n
+  }\n
+\n
+  public boolean isBroken() {\n
+    return durability <= 0;\n
+  }\n
+\n
+  public String getName() {\n
+    return name;\n
+  }\n
+}\n
+\n
+GameItem item = new GameItem("Shield", 2);\n
+item.useItem();\n
+item.useItem();\n
 System.out.print(item.getName() + " " + item.isBroken());
   `,
   questions: [
@@ -1675,23 +1675,23 @@ System.out.print(item.getName() + " " + item.isBroken());
   image: "",
   imageAlt: "",
   text: `
-class PasswordChecker {
-  private String password;
-
-  public PasswordChecker(String p) {
-    password = p;
-  }
-
-  private boolean hasEnoughCharacters() {
-    return password.length() >= 8;
-  }
-
-  public boolean isValid() {
-    return hasEnoughCharacters();
-  }
-}
-
-PasswordChecker checker = new PasswordChecker("prep1234");
+class PasswordChecker {\n
+  private String password;\n
+\n
+  public PasswordChecker(String p) {\n
+    password = p;\n
+  }\n
+\n
+  private boolean hasEnoughCharacters() {\n
+    return password.length() >= 8;\n
+  }\n
+\n
+  public boolean isValid() {\n
+    return hasEnoughCharacters();\n
+  }\n
+}\n
+\n
+PasswordChecker checker = new PasswordChecker("prep1234");\n
 System.out.print(checker.isValid());
   `,
   questions: [
@@ -1723,28 +1723,28 @@ System.out.print(checker.isValid());
   image: "",
   imageAlt: "",
   text: `
-class Badge {
-  private String label;
-  private int points;
-
-  public Badge() {
-    label = "Starter";
-    points = 0;
-  }
-
-  public Badge(String l, int p) {
-    label = l;
-    points = p;
-  }
-
-  public int getPoints() {
-    return points;
-  }
-}
-
-Badge b1 = new Badge();
-Badge b2 = new Badge("Expert", 50);
-
+class Badge {\n
+  private String label;\n
+  private int points;\n
+\n
+  public Badge() {\n
+    label = "Starter";\n
+    points = 0;\n
+  }\n
+\n
+  public Badge(String l, int p) {\n
+    label = l;\n
+    points = p;\n
+  }\n
+\n
+  public int getPoints() {\n
+    return points;\n
+  }\n
+}\n
+\n
+Badge b1 = new Badge();\n
+Badge b2 = new Badge("Expert", 50);\n
+\n
 System.out.print(b1.getPoints() + b2.getPoints());
   `,
   questions: [
@@ -1776,29 +1776,29 @@ System.out.print(b1.getPoints() + b2.getPoints());
   image: "",
   imageAlt: "",
   text: `
-class Locker {
-  private int code;
-  private boolean open;
-
-  public Locker(int c) {
-    code = c;
-    open = false;
-  }
-
-  public void tryCode(int guess) {
-    if (guess == code) {
-      open = true;
-    }
-  }
-
-  public boolean isOpen() {
-    return open;
-  }
-}
-
-Locker locker = new Locker(2468);
-locker.tryCode(1234);
-locker.tryCode(2468);
+class Locker {\n
+  private int code;\n
+  private boolean open;\n
+\n
+  public Locker(int c) {\n
+    code = c;\n
+    open = false;\n
+  }\n
+\n
+  public void tryCode(int guess) {\n
+    if (guess == code) {\n
+      open = true;\n
+    }\n
+  }\n
+\n
+  public boolean isOpen() {\n
+    return open;\n
+  }\n
+}\n
+\n
+Locker locker = new Locker(2468);\n
+locker.tryCode(1234);\n
+locker.tryCode(2468);\n
 System.out.print(locker.isOpen());
   `,
   questions: [
@@ -1830,25 +1830,25 @@ System.out.print(locker.isOpen());
   image: "",
   imageAlt: "",
   text: `
-class Workout {
-  private int pushups;
-  private int situps;
-
-  public Workout(int p, int s) {
-    pushups = p;
-    situps = s;
-  }
-
-  public int totalExercises() {
-    return pushups + situps;
-  }
-
-  public boolean completedGoal(int goal) {
-    return totalExercises() >= goal;
-  }
-}
-
-Workout w = new Workout(25, 30);
+class Workout {\n
+  private int pushups;\n
+  private int situps;\n
+\n
+  public Workout(int p, int s) {\n
+    pushups = p;\n
+    situps = s;\n
+  }\n
+\n
+  public int totalExercises() {\n
+    return pushups + situps;\n
+  }\n
+\n
+  public boolean completedGoal(int goal) {\n
+    return totalExercises() >= goal;\n
+  }\n
+}\n
+\n
+Workout w = new Workout(25, 30);\n
 System.out.print(w.completedGoal(50));
   `,
   questions: [
