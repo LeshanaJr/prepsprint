@@ -50,6 +50,7 @@ p {
   border-radius: 12px;
   line-height: 1.7;
   color: #222;
+  white-space: pre-line;
 }
 
 .progress-text {
