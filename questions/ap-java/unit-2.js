@@ -564,12 +564,12 @@ rapidQuestions: [
 {
   title: "Checking Number Ranges",
   text: `
-int num = 15;
-
-if (num > 10 && num < 20) {
-    System.out.println("In range");
-} else {
-    System.out.println("Out of range");
+int num = 15;\n
+\n
+if (num > 10 && num < 20) {\n
+    System.out.println("In range");\n
+} else {\n
+    System.out.println("Out of range");\n
 }
 `,
   questions: [
@@ -599,12 +599,12 @@ if (num > 10 && num < 20) {
 {
   title: "Even or Odd Check",
   text: `
-int value = 7;
-
-if (value % 2 == 0) {
-    System.out.println("Even");
-} else {
-    System.out.println("Odd");
+int value = 7;\n
+\n
+if (value % 2 == 0) {\n
+    System.out.println("Even");\n
+} else {\n
+    System.out.println("Odd");\n
 }
 `,
   questions: [
@@ -634,11 +634,11 @@ if (value % 2 == 0) {
 {
   title: "While Loop Counting",
   text: `
-int count = 1;
-
-while (count <= 3) {
-    System.out.print(count);
-    count++;
+int count = 1;\n
+\n
+while (count <= 3) {\n
+    System.out.print(count);\n
+    count++;\n
 }
 `,
   questions: [
@@ -668,8 +668,8 @@ while (count <= 3) {
 {
   title: "For Loop Basics",
   text: `
-for (int i = 0; i < 4; i++) {
-    System.out.print(i);
+for (int i = 0; i < 4; i++) {\n
+    System.out.print(i);\n
 }
 `,
   questions: [
@@ -699,14 +699,14 @@ for (int i = 0; i < 4; i++) {
 {
   title: "If-Else Ladder",
   text: `
-int score = 72;
-
-if (score >= 90) {
-    System.out.print("A");
-} else if (score >= 70) {
-    System.out.print("C");
-} else {
-    System.out.print("F");
+int score = 72;\n
+\n
+if (score >= 90) {\n
+    System.out.print("A");\n
+} else if (score >= 70) {\n
+    System.out.print("C");\n
+} else {\n
+    System.out.print("F");\n
 }
 `,
   questions: [
@@ -736,10 +736,10 @@ if (score >= 90) {
     {
   title: "Nested Loop Output",
   text: `
-for (int i = 1; i <= 2; i++) {
-    for (int j = 1; j <= 3; j++) {
-        System.out.print(i + "" + j + " ");
-    }
+for (int i = 1; i <= 2; i++) {\n
+    for (int j = 1; j <= 3; j++) {\n
+        System.out.print(i + "" + j + " ");\n
+    }\n
 }
 `,
   questions: [
@@ -769,10 +769,10 @@ for (int i = 1; i <= 2; i++) {
 {
   title: "String Traversal",
   text: `
-String word = "CODE";
-
-for (int i = 0; i < word.length(); i++) {
-    System.out.print(word.substring(i, i + 1));
+String word = "CODE";\n
+\n
+for (int i = 0; i < word.length(); i++) {\n
+    System.out.print(word.substring(i, i + 1));\n
 }
 `,
   questions: [
@@ -802,12 +802,12 @@ for (int i = 0; i < word.length(); i++) {
 {
   title: "Conditional String Check",
   text: `
-String text = "apple";
-
-if (text.length() > 3 && text.substring(0,1).equals("a")) {
-    System.out.println("Valid");
-} else {
-    System.out.println("Invalid");
+String text = "apple";\n
+\n
+if (text.length() > 3 && text.substring(0,1).equals("a")) {\n
+    System.out.println("Valid");\n
+} else {\n
+    System.out.println("Invalid");\n
 }
 `,
   questions: [
@@ -837,11 +837,11 @@ if (text.length() > 3 && text.substring(0,1).equals("a")) {
 {
   title: "While Loop with Condition",
   text: `
-int x = 10;
-
-while (x > 5) {
-    x -= 2;
-    System.out.print(x + " ");
+int x = 10;\n
+\n
+while (x > 5) {\n
+    x -= 2;|n
+    System.out.print(x + " ");\n
 }
 `,
   questions: [
@@ -871,8 +871,8 @@ while (x > 5) {
 {
   title: "Runtime Comparison",
   text: `
-for (int i = 0; i < n; i++) {
-    System.out.print(i);
+for (int i = 0; i < n; i++) {\n
+    System.out.print(i);\n
 }
 `,
   questions: [
@@ -902,15 +902,15 @@ for (int i = 0; i < n; i++) {
    {
   title: "Counting Matching Characters",
   text: `
-String word = "banana";
-int count = 0;
-
-for (int i = 0; i < word.length(); i++) {
-    if (word.substring(i, i + 1).equals("a")) {
-        count++;
-    }
-}
-
+String word = "banana";\n
+int count = 0;\n
+\n
+for (int i = 0; i < word.length(); i++) {\n
+    if (word.substring(i, i + 1).equals("a")) {\n
+        count++;\n
+    }\n
+}\n
+\n
 System.out.print(count);
 `,
   questions: [
@@ -940,16 +940,16 @@ System.out.print(count);
 {
   title: "Multiple Outcomes with Else-If",
   text: `
-int temp = 45;
-
-if (temp >= 80) {
-    System.out.print("Hot");
-} else if (temp >= 60) {
-    System.out.print("Warm");
-} else if (temp >= 40) {
-    System.out.print("Cool");
-} else {
-    System.out.print("Cold");
+int temp = 45;\n
+\n
+if (temp >= 80) {\n
+    System.out.print("Hot");\n
+} else if (temp >= 60) {\n
+    System.out.print("Warm");\n
+} else if (temp >= 40) {\n
+    System.out.print("Cool");\n
+} else {\n
+    System.out.print("Cold");\n
 }
 `,
   questions: [
@@ -979,11 +979,11 @@ if (temp >= 80) {
 {
   title: "Nested Loop Pattern",
   text: `
-for (int row = 1; row <= 3; row++) {
-    for (int col = 1; col <= row; col++) {
-        System.out.print("*");
-    }
-    System.out.println();
+for (int row = 1; row <= 3; row++) {\n
+    for (int col = 1; col <= row; col++) {\n
+        System.out.print("*");\n
+    }\n
+    System.out.println();|n
 }
 `,
   questions: [
@@ -1013,14 +1013,14 @@ for (int row = 1; row <= 3; row++) {
 {
   title: "Arithmetic Algorithm",
   text: `
-int n = 1234;
-int sum = 0;
-
-while (n > 0) {
-    sum += n % 10;
-    n /= 10;
-}
-
+int n = 1234;\n
+int sum = 0;\n
+\n
+while (n > 0) {\n
+    sum += n % 10;\n
+    n /= 10;\n
+}\n
+\n
 System.out.print(sum);
 `,
   questions: [
@@ -1050,10 +1050,10 @@ System.out.print(sum);
 {
   title: "Loop Runtime with Nested Loops",
   text: `
-for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) {
-        System.out.print("*");
-    }
+for (int i = 0; i < n; i++) {\n
+    for (int j = 0; j < n; j++) {\n
+        System.out.print("*");\n
+    }\n
 }
 `,
   questions: [
@@ -1083,15 +1083,15 @@ for (int i = 0; i < n; i++) {
     {
   title: "Finding a Maximum",
   text: `
-int[] nums = {4, 9, 2, 7};
-int max = nums[0];
-
-for (int i = 1; i < nums.length; i++) {
-    if (nums[i] > max) {
-        max = nums[i];
-    }
-}
-
+int[] nums = {4, 9, 2, 7};\n
+int max = nums[0];\n
+\n
+for (int i = 1; i < nums.length; i++) {\n
+    if (nums[i] > max) {\n
+        max = nums[i];\n
+    }\n
+}\n
+\n
 System.out.print(max);
 `,
   questions: [
@@ -1121,13 +1121,13 @@ System.out.print(max);
 {
   title: "String Building Algorithm",
   text: `
-String word = "java";
-String result = "";
-
-for (int i = 0; i < word.length(); i++) {
-    result = word.substring(i, i + 1) + result;
-}
-
+String word = "java";\n
+String result = "";\n
+\n
+for (int i = 0; i < word.length(); i++) {\n
+    result = word.substring(i, i + 1) + result;\n
+}\n
+\n
 System.out.print(result);
 `,
   questions: [
@@ -1157,16 +1157,16 @@ System.out.print(result);
 {
   title: "Input-Based Selection",
   text: `
-int choice = 2;
-
-if (choice == 1) {
-    System.out.print("Start");
-} else if (choice == 2) {
-    System.out.print("Settings");
-} else if (choice == 3) {
-    System.out.print("Quit");
-} else {
-    System.out.print("Invalid");
+int choice = 2;\n
+\n
+if (choice == 1) {\n
+    System.out.print("Start");\n
+} else if (choice == 2) {\n
+    System.out.print("Settings");\n
+} else if (choice == 3) {\n
+    System.out.print("Quit");\n
+} else {\n
+    System.out.print("Invalid");\n
 }
 `,
   questions: [
@@ -1196,14 +1196,14 @@ if (choice == 1) {
 {
   title: "While Loop Sentinel",
   text: `
-int input = 6;
-int total = 0;
-
-while (input != -1) {
-    total += input;
-    input -= 3;
-}
-
+int input = 6;\n
+int total = 0;\n
+\n
+while (input != -1) {\n
+    total += input;\n
+    input -= 3;\n
+}\n
+\n
 System.out.print(total);
 `,
   questions: [
@@ -1233,8 +1233,8 @@ System.out.print(total);
 {
   title: "Runtime with Changing Step Size",
   text: `
-for (int i = 0; i < n; i += 2) {
-    System.out.print(i);
+for (int i = 0; i < n; i += 2) {\n
+    System.out.print(i);\n
 }
 `,
   questions: [
@@ -1264,13 +1264,13 @@ for (int i = 0; i < n; i += 2) {
     {
   title: "Checking for a Factor",
   text: `
-int num = 24;
-int divisor = 6;
-
-if (num % divisor == 0) {
-    System.out.print("Factor");
-} else {
-    System.out.print("Not factor");
+int num = 24;\n
+int divisor = 6;\n
+\n
+if (num % divisor == 0) {\n
+    System.out.print("Factor");\n
+} else {\n
+    System.out.print("Not factor");\n
 }
 `,
   questions: [
@@ -1300,11 +1300,11 @@ if (num % divisor == 0) {
 {
   title: "Counting Down with a While Loop",
   text: `
-int x = 12;
-
-while (x > 3) {
-    System.out.print(x + " ");
-    x -= 3;
+int x = 12;\n
+\n
+while (x > 3) {\n
+    System.out.print(x + " ");\n
+    x -= 3;\n
 }
 `,
   questions: [
@@ -1334,14 +1334,14 @@ while (x > 3) {
 {
   title: "Nested Loop with Different Bounds",
   text: `
-int count = 0;
-
-for (int row = 0; row < 2; row++) {
-    for (int col = 0; col < 4; col++) {
-        count++;
-    }
-}
-
+int count = 0;\n
+\n
+for (int row = 0; row < 2; row++) {\n
+    for (int col = 0; col < 4; col++) {\n
+        count++;\n
+    }\n
+}\n
+\n
 System.out.print(count);
 `,
   questions: [
@@ -1371,13 +1371,13 @@ System.out.print(count);
 {
   title: "Building a String from Every Other Character",
   text: `
-String word = "selection";
-String result = "";
-
-for (int i = 0; i < word.length(); i += 2) {
-    result += word.substring(i, i + 1);
-}
-
+String word = "selection";\n
+String result = "";\n
+\n
+for (int i = 0; i < word.length(); i += 2) {\n
+    result += word.substring(i, i + 1);\n
+}\n
+\n
 System.out.print(result);
 `,
   questions: [
@@ -1407,16 +1407,16 @@ System.out.print(result);
 {
   title: "Comparing Runtime Patterns",
   text: `
-Algorithm A:
-for (int i = 0; i < n; i++) {
-    System.out.print(i);
-}
-
-Algorithm B:
-for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) {
-        System.out.print(i + j);
-    }
+Algorithm A:\n
+for (int i = 0; i < n; i++) {\n
+    System.out.print(i);\n
+}\n
+\n
+Algorithm B:\n
+for (int i = 0; i < n; i++) {\n
+    for (int j = 0; j < n; j++) {\n
+        System.out.print(i + j);\n
+    }\n
 }
 `,
   questions: [
