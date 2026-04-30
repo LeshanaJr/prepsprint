@@ -1992,7 +1992,7 @@ A student mixes 1.0 mol of CaCl₂(aq) with 1.0 mol of Na₂CO₃(aq), forming a
 
       choices: [
 
-        { text: "0.50 mol", correct: true, choiceExplanation: " is correct because HCl limits and produces equal CO₂." },
+        { text: "0.25 mol", correct: true, choiceExplanation: " is correct because 2 mol HCl produce 1 mol CO₂, so 0.50 mol HCl produces 0.25 mol CO₂." },
 
         { text: "1.0 mol", correct: false, choiceExplanation: " is incorrect because not enough HCl." },
 
