@@ -227,25 +227,15 @@ window.questionBanks.apChem.push({
 },
 
 {
-
-  prompt: "What is the pH of the solution above?",
-
+  prompt: "What is the pH of a solution with [H⁺] = 3.2 × 10⁻³ M?",
   choices: [
-
     { text: "2.5", correct: true, choiceExplanation: " is correct because pH = −log(3.2×10⁻³)." },
-
-    { text: "5", correct: false, choiceExplanation: " is incorrect because that is pKa region." },
-
-    { text: "7", correct: false, choiceExplanation: " is incorrect because not neutral." },
-
-    { text: "3", correct: false, choiceExplanation: " is incorrect because approximation closer to 2.5." }
-
+    { text: "5", correct: false, choiceExplanation: " is incorrect because that is much less acidic." },
+    { text: "7", correct: false, choiceExplanation: " is incorrect because that is neutral." },
+    { text: "3", correct: false, choiceExplanation: " is incorrect because the value is closer to 2.5." }
   ],
-
   category: "Unit 8: Acids and Bases"
-
 },
-
 {
 
   prompt: "For a weak base B, which expression represents Kb?",
@@ -327,23 +317,14 @@ window.questionBanks.apChem.push({
 },
 
 {
-
-  prompt: "What is the pH of the solution above?",
-
+  prompt: "What is the pH of a solution with [OH⁻] = 1.0 × 10⁻⁴ M?",
   choices: [
-
-    { text: "10", correct: true, choiceExplanation: " is correct because pH = 14 − 4." },
-
+    { text: "10", correct: true, choiceExplanation: " is correct because pOH = 4, so pH = 14 − 4." },
     { text: "4", correct: false, choiceExplanation: " is incorrect because that is pOH." },
-
-    { text: "7", correct: false, choiceExplanation: " is incorrect because not neutral." },
-
-    { text: "14", correct: false, choiceExplanation: " is incorrect because too high." }
-
+    { text: "7", correct: false, choiceExplanation: " is incorrect because the solution is basic." },
+    { text: "14", correct: false, choiceExplanation: " is incorrect because that would require much higher [OH⁻]." }
   ],
-
   category: "Unit 8: Acids and Bases"
-
 },
 
 {
@@ -648,7 +629,7 @@ window.questionBanks.apChem.push({
 
 {
 
-  prompt: "After the change above, which ratio is used in Henderson–Hasselbalch?",
+  prompt: "In a buffer solution, which ratio is used in the Henderson–Hasselbalch equation?",
 
   choices: [
 
