@@ -1137,11 +1137,11 @@ function showReviewForm() {
         style="width: 100%; margin: 10px 0; padding: 8px;"
       ></textarea>
 
-      <button onclick="submitAppReview(5)">5 - The best study resource I've used</button>
-      <button onclick="submitAppReview(4)">4 - A lot</button>
-      <button onclick="submitAppReview(3)">3 - A little bit</button>
-      <button onclick="submitAppReview(2)">2 - Very little</button>
-      <button onclick="submitAppReview(1)">1 - Not at all</button>
+      <button class="mode-btn standard-btn" onclick="submitAppReview(5)">5 - The best study resource I've used</button>
+<button class="mode-btn rapid-btn" onclick="submitAppReview(4)">4 - A lot</button>
+<button class="mode-btn dark-btn" onclick="submitAppReview(3)">3 - A little bit</button>
+<button class="mode-btn dark-btn" onclick="submitAppReview(2)">2 - Very little</button>
+<button class="mode-btn dark-btn" onclick="submitAppReview(1)">1 - Not at all</button>
     </div>
   `;
 }
