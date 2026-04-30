@@ -25,25 +25,15 @@ window.questionBanks.apChem.push({
   category: "Unit 1: Atomic Structure and Properties"
 
 },
-
 {
-
   prompt: "Which measurement has the greatest number of significant figures?",
-
   choices: [
-
-    { text: "0.00450", correct: true, choiceExplanation: " is correct because it has 3 significant figures." },
-
+    { text: "0.00450", correct: false, choiceExplanation: " is incorrect because it has 3 significant figures." },
     { text: "450", correct: false, choiceExplanation: " is incorrect because trailing zeros may not be significant." },
-
-    { text: "4.50", correct: false, choiceExplanation: " is incorrect because it has only 3 significant figures." },
-
+    { text: "4.500", correct: true, choiceExplanation: " is correct because it has 4 significant figures." },
     { text: "0.0450", correct: false, choiceExplanation: " is incorrect because it has 3 significant figures." }
-
   ],
-
   category: "Unit 1: Atomic Structure and Properties"
-
 },
 
 {
@@ -632,7 +622,11 @@ window.questionBanks.apChem.push({
 
   choices: [
 
-    { text: "Na⁺", correct: false, choiceExplanation: " is incorrect because it has fewer electrons pulling inward." },
+    {
+  text: "Na⁺",
+  correct: false,
+  choiceExplanation: " is incorrect because Na⁺ has a greater nuclear charge than O²⁻, so it is smaller."
+},
 
     { text: "O²⁻", correct: true, choiceExplanation: " is correct because it has the weakest effective nuclear charge among isoelectronic species." },
 
@@ -708,7 +702,7 @@ window.questionBanks.apChem.push({
 
 {
 
-  prompt: "Why does ionization energy increase moving from Mg to Al?",
+prompt: "Why does first ionization energy decrease moving from Mg to Al?",
 
   choices: [
 
@@ -927,23 +921,14 @@ window.questionBanks.apChem.push({
 },
 
 {
-
   prompt: "Which best explains why ionic radii increase when moving from cations to anions in an isoelectronic series?",
-
   choices: [
-
-    { text: "Protons increase", correct: false, choiceExplanation: " is incorrect because protons actually decrease." },
-
-    { text: "Electron-electron repulsion increases", correct: true, choiceExplanation: " is correct because added electrons increase repulsion." },
-
+    { text: "Protons decrease, so nuclear attraction weakens", correct: true, choiceExplanation: " is correct because isoelectronic species have the same number of electrons but different nuclear charges." },
+    { text: "Electron-electron repulsion increases", correct: false, choiceExplanation: " is incorrect because the number of electrons is the same in an isoelectronic series." },
     { text: "Energy levels increase", correct: false, choiceExplanation: " is incorrect because energy levels stay the same." },
-
-    { text: "Neutrons increase", correct: false, choiceExplanation: " is incorrect because neutrons do not affect radius significantly." }
-
+    { text: "Neutrons increase", correct: false, choiceExplanation: " is incorrect because neutrons do not significantly affect radius." }
   ],
-
   category: "Unit 1: Atomic Structure and Properties"
-
 },
 
 {
@@ -1020,16 +1005,16 @@ window.questionBanks.apChem.push({
 
   text: `
 
-The successive ionization energies for an unknown element are shown below (kJ/mol):
-
-IE₁ = 738  
-
-IE₂ = 1450  
-
-IE₃ = 7730  
-
-IE₄ = 10500  
-
+The successive ionization energies for an unknown element are shown below (kJ/mol):\n
+\n
+IE₁ = 738\n
+\n
+IE₂ = 1450\n
+\n
+IE₃ = 7730\n
+\n
+IE₄ = 10500\n
+\n
 A large jump occurs between IE₂ and IE₃.
 
   `,
@@ -1856,27 +1841,16 @@ A student compares 1.0 mol of CO₂, 1.0 mol of CH₄, and 1.0 mol of H₂O.
 
   questions: [
 
-    {
-
-      prompt: "Which sample contains the greatest number of atoms?",
-
-      choices: [
-
-        { text: "CO₂", correct: false, choiceExplanation: " is incorrect because it has 3 atoms per molecule." },
-
-        { text: "CH₄", correct: false, choiceExplanation: " is incorrect because it has 5 atoms per molecule." },
-
-        { text: "H₂O", correct: false, choiceExplanation: " is incorrect because it has 3 atoms per molecule." },
-
-        { text: "All are equal", correct: false, choiceExplanation: " is incorrect because molecules contain different numbers of atoms." },
-
-        { text: "CH₄ (corrected)", correct: true, choiceExplanation: " is correct because it has the most atoms per molecule (5)." }
-
-      ],
-
-      category: "Unit 1: Atomic Structure and Properties"
-
-    },
+   {
+  prompt: "Which sample contains the greatest number of atoms?",
+  choices: [
+    { text: "CO₂", correct: false, choiceExplanation: " is incorrect because it has 3 atoms per molecule." },
+    { text: "CH₄", correct: true, choiceExplanation: " is correct because it has 5 atoms per molecule." },
+    { text: "H₂O", correct: false, choiceExplanation: " is incorrect because it has 3 atoms per molecule." },
+    { text: "All are equal", correct: false, choiceExplanation: " is incorrect because molecules contain different numbers of atoms." }
+  ],
+  category: "Unit 1: Atomic Structure and Properties"
+},
 
     {
 
@@ -1947,8 +1921,8 @@ A student compares 1.0 mol of CO₂, 1.0 mol of CH₄, and 1.0 mol of H₂O.
   image: "",
   imageAlt: "",
   text: `
-A student compares the first ionization energies of Na, Mg, Al, and Si.
-
+A student compares the first ionization energies of Na, Mg, Al, and Si.\n
+\n
 The student notices that ionization energy generally increases from Na to Si, but Al has a lower first ionization energy than Mg.
   `,
   questions: [
@@ -2000,11 +1974,11 @@ The student notices that ionization energy generally increases from Na to Si, bu
   image: "",
   imageAlt: "",
   text: `
-A teacher shows students four particle diagrams.
-
-Diagram A contains only identical atoms.
-Diagram B contains only identical molecules made of two different elements.
-Diagram C contains two different types of molecules evenly distributed.
+A teacher shows students four particle diagrams.\n
+\n
+Diagram A contains only identical atoms.\n
+Diagram B contains only identical molecules made of two different elements.\n
+Diagram C contains two different types of molecules evenly distributed.\n
 Diagram D contains visible regions of different substances.
   `,
   questions: [
@@ -2056,11 +2030,11 @@ Diagram D contains visible regions of different substances.
   image: "",
   imageAlt: "",
   text: `
-A student analyzes two samples.
-
-Sample 1: 18.0 g of H₂O  
-Sample 2: 44.0 g of CO₂  
-
+A student analyzes two samples.\n
+\n
+Sample 1: 18.0 g of H₂O\n
+Sample 2: 44.0 g of CO₂\n
+\n
 Assume H = 1.0 g/mol, C = 12.0 g/mol, and O = 16.0 g/mol.
   `,
   questions: [
@@ -2112,8 +2086,8 @@ Assume H = 1.0 g/mol, C = 12.0 g/mol, and O = 16.0 g/mol.
   image: "",
   imageAlt: "",
   text: `
-A compound contains only carbon, hydrogen, and oxygen. A 9.00 g sample contains 3.60 g C, 0.60 g H, and 4.80 g O.
-
+A compound contains only carbon, hydrogen, and oxygen. A 9.00 g sample contains 3.60 g C, 0.60 g H, and 4.80 g O.\n
+\n
 Assume C = 12.0 g/mol, H = 1.0 g/mol, and O = 16.0 g/mol.
   `,
   questions: [
@@ -2196,13 +2170,13 @@ Two elements in the same period are analyzed using photoelectron spectroscopy. E
   image: "",
   imageAlt: "",
   text: `
-The successive ionization energies for an unknown element are shown below.
-
-IE₁ = 578 kJ/mol  
-IE₂ = 1817 kJ/mol  
-IE₃ = 2745 kJ/mol  
-IE₄ = 11580 kJ/mol  
-
+The successive ionization energies for an unknown element are shown below.\n
+\n
+IE₁ = 578 kJ/mol\n
+IE₂ = 1817 kJ/mol\n
+IE₃ = 2745 kJ/mol\n
+IE₄ = 11580 kJ/mol\n
+\n
 A very large jump occurs between IE₃ and IE₄.
   `,
   questions: [
