@@ -827,23 +827,14 @@ window.questionBanks.apChem.push({
 },
 
 {
-
-  prompt: "Using the same reaction above, what is the overall order?",
-
+  prompt: "For the rate law: rate = k[A]²[B], what is the overall reaction order?",
   choices: [
-
-    { text: "1", correct: false, choiceExplanation: " is incorrect because both reactants contribute." },
-
-    { text: "2", correct: false, choiceExplanation: " is incorrect because total order is higher." },
-
-    { text: "3", correct: true, choiceExplanation: " is correct because 1 + 2 = 3." },
-
-    { text: "Depends on temperature", correct: false, choiceExplanation: " is incorrect because order is fixed." }
-
+    { text: "1", correct: false, choiceExplanation: " is incorrect because both reactants contribute to the rate." },
+    { text: "2", correct: false, choiceExplanation: " is incorrect because the total order is the sum of exponents." },
+    { text: "3", correct: true, choiceExplanation: " is correct because 2 (from A) + 1 (from B) = 3." },
+    { text: "Depends on temperature", correct: false, choiceExplanation: " is incorrect because reaction order is determined experimentally, not by temperature." }
   ],
-
   category: "Unit 5: Kinetics"
-
 },
 
 {
