@@ -23,6 +23,17 @@ window.UNIT_MANIFEST = {
     "questions/ap-chem/unit-6.js",
     "questions/ap-chem/unit-7.js",
     "questions/ap-chem/unit-8.js",
-    "questions/ap-chem/unit-9.js",
-  ]
+    "questions/ap-chem/unit-9.js"
+  ],
+
+ apBio: [
+    "questions/ap-bio/unit-1.js",
+    "questions/ap-bio/unit-2.js",
+    "questions/ap-bio/unit-3.js",
+    "questions/ap-bio/unit-4.js",
+    "questions/ap-bio/unit-5.js",
+    "questions/ap-bio/unit-6.js",
+    "questions/ap-bio/unit-7.js",
+    "questions/ap-bio/unit-8.js"
+  ] 
 };
