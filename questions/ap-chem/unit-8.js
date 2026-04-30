@@ -1472,9 +1472,9 @@ A conjugate acid-base pair has Ka = 1.0 × 10⁻⁸ for the acid.
 
       choices: [
 
-        { text: "It is relatively strong", correct: true, choiceExplanation: " is correct because weak acid → stronger conjugate base." },
+{ text: "It is weak", correct: true, choiceExplanation: " is correct because Kb = 1.0 × 10⁻⁶, which is still much less than 1." },
 
-        { text: "It is weak", correct: false, choiceExplanation: " is incorrect because Kb is larger than Ka." },
+{ text: "It is relatively strong", correct: false, choiceExplanation: " is incorrect because although it is stronger than the conjugate base of a stronger acid, Kb = 10⁻⁶ still describes a weak base." },
 
         { text: "It is neutral", correct: false, choiceExplanation: " is incorrect because it reacts with water." },
 
@@ -2232,9 +2232,9 @@ A buffer contains 0.40 mol HA and 0.60 mol A⁻. Then 0.50 mol of HCl is added.
 
       choices: [
 
-        { text: "Still a buffer", correct: false, choiceExplanation: " is incorrect because A⁻ fully consumed." },
+        { text: "Still a buffer", correct: true, choiceExplanation: " is correct because A⁻ is not fully consumed; 0.10 mol A⁻ remains with 0.90 mol HA." },
 
-        { text: "Excess strong acid present", correct: true, choiceExplanation: " is correct because HCl > A⁻." },
+{ text: "Excess strong acid present", correct: false, choiceExplanation: " is incorrect because the 0.50 mol HCl is fully neutralized by A⁻." },
 
         { text: "Pure weak acid", correct: false, choiceExplanation: " is incorrect because HCl remains." },
 
@@ -2252,9 +2252,9 @@ A buffer contains 0.40 mol HA and 0.60 mol A⁻. Then 0.50 mol of HCl is added.
 
       choices: [
 
-        { text: "Buffer equation", correct: false, choiceExplanation: " is incorrect because buffer destroyed." },
+       { text: "Buffer equation", correct: true, choiceExplanation: " is correct because both HA and A⁻ remain after the reaction." },
 
-        { text: "Excess H⁺ from HCl", correct: true, choiceExplanation: " is correct because strong acid dominates." },
+{ text: "Excess H⁺ from HCl", correct: false, choiceExplanation: " is incorrect because no excess HCl remains." },
 
         { text: "Ka equilibrium", correct: false, choiceExplanation: " is incorrect because HCl dominates." },
 
