@@ -510,8 +510,8 @@ const hasActiveQuiz = !!savedProgress.activeQuiz;
 
   appContainer.innerHTML = `
     <div class="home-header">
-      <h1 class="app-title">PrepSprint</h1>
-      <p class="app-subtitle">Fast, free AP practice built for your phone.</p>
+     <h1 class="app-title">PrepSprint</h1>
+<p class="app-subtitle">Practice. Learn. Get ahead.</p>
     </div>
 
     <div class="home-stats">
