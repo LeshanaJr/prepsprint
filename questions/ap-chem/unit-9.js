@@ -679,7 +679,7 @@ rapidQuestions: [
 
 {
 
-  prompt: "After mixing above, how do you determine if precipitation occurs?",
+prompt: "After calculating ion concentrations when two solutions are mixed, how do you determine if precipitation occurs?",
 
   choices: [
 
@@ -819,7 +819,7 @@ rapidQuestions: [
 
 {
 
-  prompt: "After mixing above, what is the initial [Ag⁺] before precipitation?",
+prompt: "50.0 mL of 0.10 M AgNO₃ is mixed with 50.0 mL of water. What is the initial [Ag⁺] after mixing (before any reaction)?",
 
   choices: [
 
@@ -839,7 +839,7 @@ rapidQuestions: [
 
 {
 
-  prompt: "After precipitation reaches equilibrium, what determines final [Ag⁺]?",
+  prompt: "After precipitation reaches equilibrium in a saturated solution, what determines the final ion concentrations?",
 
   choices: [
 
