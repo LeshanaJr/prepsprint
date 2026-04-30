@@ -1009,12 +1009,12 @@ A 100.0 g sample of water (c = 4.18 J/g°C) is heated from 20.0°C to 30.0°C by
 
   text: `
 
-A student is given the following reactions:
-
-Reaction 1: A → B      ΔH = -120 kJ  
-
-Reaction 2: B → C      ΔH = +200 kJ  
-
+A student is given the following reactions:\n
+\n
+Reaction 1: A → B      ΔH = -120 kJ  \n
+\n
+Reaction 2: B → C      ΔH = +200 kJ  \n
+\n
 Reaction 3: C → D      ΔH = -50 kJ
 
   `,
@@ -1295,12 +1295,12 @@ A reaction is carried out in a calorimeter containing 200.0 g of water (c = 4.18
 
   text: `
 
-A student is given:
-
-Reaction 1: A → B      ΔH = -80 kJ  
-
-Reaction 2: C → B      ΔH = -120 kJ  
-
+A student is given:\n
+\n
+Reaction 1: A → B      ΔH = -80 kJ  \n
+\n
+Reaction 2: C → B      ΔH = -120 kJ \n 
+\n
 The student wants ΔH for A → C.
 
   `,
@@ -1381,11 +1381,11 @@ The student wants ΔH for A → C.
 
   text: `
 
-Two reactions are compared:
-
-Reaction X: 600 kJ required to break bonds, 800 kJ released forming bonds  
-
-Reaction Y: 900 kJ required to break bonds, 1000 kJ released forming bonds
+Two reactions are compared:\n
+\n
+Reaction X: 600 kJ required to break bonds, 800 kJ released forming bonds  \n
+\n
+Reaction Y: 900 kJ required to break bonds, 1000 kJ released forming bonds\n
 
   `,
 
@@ -1417,9 +1417,9 @@ Reaction Y: 900 kJ required to break bonds, 1000 kJ released forming bonds
 
       choices: [
 
-        { text: "Reaction X", correct: false, choiceExplanation: " is incorrect because Y releases more net energy." },
+        { text: "Reaction X", correct: true, choiceExplanation: " is correct because Y is only -100 kJ vs X's 200kJ, making X more endothermic." },
 
-        { text: "Reaction Y", correct: true, choiceExplanation: " is correct because ΔH = -100 kJ vs -200 kJ? Wait carefully → X = -200, Y = -100 → actually X is more exothermic." },
+        { text: "Reaction Y", correct: false, choiceExplanation: " is incorrect because ΔH = -100 kJ vs X's 200kJ, making X more endothermic." },
 
         { text: "Both equal", correct: false, choiceExplanation: " is incorrect because ΔH values differ." },
 
