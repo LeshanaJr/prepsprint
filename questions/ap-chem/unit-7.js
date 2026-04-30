@@ -323,11 +323,11 @@ window.questionBanks.apChem.push({
 
     { text: "0.50 M", correct: false, choiceExplanation: " is incorrect because K is small." },
 
-    { text: "0.40 M", correct: false, choiceExplanation: " is incorrect because overestimates." },
+{ text: "0.40 M", correct: true, choiceExplanation: " is correct because K = (2x)²/(1−x), giving x ≈ 0.20, so [B] ≈ 0.40 M." },
 
-    { text: "0.25 M", correct: true, choiceExplanation: " is correct using small-x approximation." },
+    { text: "0.25 M", correct: false, choiceExplanation: " is incorrect because it underestimates." },
 
-    { text: "1.0 M", correct: false, choiceExplanation: " is incorrect because cannot exceed initial A." }
+    { text: "1.0 M", correct: false, choiceExplanation: " is incorrect because it cannot exceed initial A." }
 
   ],
 
@@ -562,7 +562,7 @@ window.questionBanks.apChem.push({
 },
 
 {
-  prompt: "Which ICE setup is correct for A ⇌ B starting with both present?",
+prompt: "For A ⇌ B starting with [A] = 1.0 M and [B] = 1.0 M, if Q < K, which ICE setup is correct?",
   choices: [
     { text: "A: 1−x, B: 1+x", correct: true, choiceExplanation: " is correct if reaction shifts right." },
     { text: "A: 1+x, B: 1−x", correct: false, choiceExplanation: " is incorrect for forward shift." },
@@ -750,7 +750,7 @@ window.questionBanks.apChem.push({
 
 {
 
-  prompt: "For 2A ⇌ B, initial [A] = 1.0 M, K is unknown. Which must ALWAYS be true?",
+  prompt: "prompt: For 2A ⇌ B, starting with only A at [A] = 1.0 M and K is unknown, which must initially be true?",
 
   choices: [
 
@@ -2014,13 +2014,13 @@ For A ⇌ 2B, K = 1.0. Initially, [A] = 1.0 M and [B] = 0.0 M. The system reache
 
       choices: [
 
-        { text: "[A] ≈ 0.50, [B] ≈ 1.0", correct: true, choiceExplanation: " is correct because K = 1 and stoichiometry gives B ≈ 2x." },
+{ text: "[A] ≈ 0.64, [B] ≈ 0.72", correct: true, choiceExplanation: " is correct because K = (2x)²/(1−x) = 1, so x ≈ 0.36, giving [A] ≈ 0.64 and [B] ≈ 0.72." },
 
         { text: "[A] ≈ 1.0, [B] ≈ 0", correct: false, choiceExplanation: " is incorrect because reaction proceeds." },
 
         { text: "[A] ≈ 0, [B] ≈ 2.0", correct: false, choiceExplanation: " is incorrect because not complete reaction." },
 
-        { text: "[A] = [B]", correct: false, choiceExplanation: " is incorrect because coefficients differ." }
+       { text: "[A] ≈ 0.50, [B] ≈ 1.0", correct: false, choiceExplanation: " is incorrect because it does not satisfy K = [B]²/[A] for A ⇌ 2B." }
 
       ],
 
