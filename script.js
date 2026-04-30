@@ -233,8 +233,8 @@ function getSubjectDescription(subjectName) {
 function getSubjectIcon(subjectName) {
   if (subjectName === "AP Lang") return "📘";
   if (subjectName === "AP World" || subjectName === "AP Gov") return "🌍";
-  if (SubjectName === "AP Chem") return "🧪";
-  if (SubjectName === "AP Bio") return "🧬";
+  if (subjectName === "AP Chem") return "🧪";
+  if (subjectName === "AP Bio") return "🧬";
   return "📚";
 }
 
