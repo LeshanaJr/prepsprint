@@ -2621,11 +2621,10 @@ Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.160 M/s
 
         { text: "1", correct: false, choiceExplanation: " is incorrect because calculation is off." },
 
-        { text: "10", correct: true, choiceExplanation: " is correct because 0.010 = k(0.10²)(0.10²)." },
+       { text: "10", correct: false, choiceExplanation: " is incorrect because it underestimates k." },
+{ text: "100", correct: true, choiceExplanation: " is correct because 0.010 = k(0.10²)(0.10²), so k = 100." },
 
-        { text: "0.1", correct: false, choiceExplanation: " is incorrect because too small." },
-
-        { text: "100", correct: false, choiceExplanation: " is incorrect because too large." }
+        { text: "0.1", correct: false, choiceExplanation: " is incorrect because too small." }
 
       ],
 
