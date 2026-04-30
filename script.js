@@ -537,9 +537,9 @@ const hasActiveQuiz = !!savedProgress.activeQuiz;
       </div>
 
       <div class="subject-mode-group">
-        ${hasActiveQuiz ? `<button id="resume-quiz-btn" class="mode-btn standard-btn">Resume Quiz</button>` : ""}
-<button id="go-subjects-btn" class="mode-btn standard-btn">Choose Subject</button>
-${hasSavedProgress || hasActiveQuiz ? `<button id="reset-progress-btn" class="mode-btn rapid-btn">Reset Progress</button>` : ""}
+        ${hasActiveQuiz ? `<button id="resume-quiz-btn" class="mode-btn standard-btn">⚡ Resume Quiz</button>` : ""}
+<button id="go-subjects-btn" class="mode-btn dark-btn">📚 Choose Subject</button>
+${hasSavedProgress || hasActiveQuiz ? `<button id="reset-progress-btn" class="mode-btn rapid-btn">🔄 Reset Progress</button>` : ""}
       </div>
     </div>
   `;
