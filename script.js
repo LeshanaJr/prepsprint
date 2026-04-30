@@ -377,8 +377,8 @@ function renderUnavailableScreen(subjectIndex, message) {
   appContainer.innerHTML = `
     <h2>${subjects[subjectIndex].name}</h2>
     <p>${message}</p>
-    <button onclick="showSubjectPage()">Back to Subjects</button>
-    <button onclick="showHomePage()">Home</button>
+   <button class="mode-btn dark-btn" onclick="showSubjectPage()">Back to Subjects</button>
+<button class="mode-btn standard-btn" onclick="showHomePage()">Home</button>
   `;
 }
 
