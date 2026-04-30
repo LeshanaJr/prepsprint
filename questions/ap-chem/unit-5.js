@@ -1220,13 +1220,13 @@ window.questionBanks.apChem.push({
 
   text: `
 
-A student studies the reaction A + B → products and collects the following data:
-
-Experiment 1: [A]=0.10 M, [B]=0.10 M → rate=0.020 M/s  
-
-Experiment 2: [A]=0.20 M, [B]=0.10 M → rate=0.040 M/s  
-
-Experiment 3: [A]=0.10 M, [B]=0.20 M → rate=0.020 M/s
+A student studies the reaction A + B → products and collects the following data:\n
+\n
+Experiment 1: [A]=0.10 M, [B]=0.10 M → rate=0.020 M/s\n
+\n
+Experiment 2: [A]=0.20 M, [B]=0.10 M → rate=0.040 M/s\n
+\n
+Experiment 3: [A]=0.10 M, [B]=0.20 M → rate=0.020 M/s\n
 
   `,
 
@@ -1547,12 +1547,12 @@ A reaction is determined experimentally to follow the rate law: rate = k[A]²[B]
   text: `
 
 A student studies the reaction A + B → products and collects the following data:\n
-
+\n
 Experiment 1: [A]=0.10 M, [B]=0.10 M → rate=0.010 M/s\n
-
+\n
 Experiment 2: [A]=0.20 M, [B]=0.10 M → rate=0.040 M/s\n 
-
-Experiment 3: [A]=0.10 M, [B]=0.20 M → rate=0.020 M/s\n
+\n
+Experiment 3: [A]=0.10 M, [B]=0.20 M → rate=0.020 M/s
 
   `,
 
@@ -1715,8 +1715,8 @@ A student investigates how concentration and temperature affect a reaction. They
 A proposed mechanism for a reaction is:\n
 \n
 Step 1 (slow): A + B → C\n
-
-Step 2 (fast): C + B → products\n
+\n
+Step 2 (fast): C + B → products
 
   `,
 
@@ -1876,12 +1876,12 @@ A reaction follows rate = k[A]²[B]. A student performs several changes to conce
 
   text: `
 
-A student studies the reaction A + B → products and obtains the following data:
-
-Experiment 1: [A]=0.10 M, [B]=0.10 M → rate=0.005 M/s  
-
-Experiment 2: [A]=0.20 M, [B]=0.10 M → rate=0.020 M/s  
-
+A student studies the reaction A + B → products and obtains the following data:\n
+\n
+Experiment 1: [A]=0.10 M, [B]=0.10 M → rate=0.005 M/s\n
+\n
+Experiment 2: [A]=0.20 M, [B]=0.10 M → rate=0.020 M/s\n
+\n
 Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.080 M/s
 
   `,
@@ -2065,10 +2065,10 @@ A student performs a reaction at two different temperatures. At the higher tempe
 A proposed mechanism is:\n
 \n
 Step 1 (slow): A + B → C\n
-
+\n
 Step 2 (fast): C + B → D\n
-
-Step 3 (fast): D → products\n
+\n
+Step 3 (fast): D → products
 
   `,
 
@@ -2148,8 +2148,8 @@ Step 3 (fast): D → products\n
 
   text: `
 
-A reaction follows the rate law: rate = k[A]²[B].
-
+A reaction follows the rate law: rate = k[A]²[B].\n
+\n
 A student performs multiple simultaneous changes to concentration.
 
   `,
@@ -2233,11 +2233,10 @@ A student performs multiple simultaneous changes to concentration.
 A reaction A + B → products is studied. The following data is obtained:\n
 \n
 Experiment 1: [A]=0.10 M, [B]=0.10 M → rate=0.010 M/s\n
-
+\n
 Experiment 2: [A]=0.20 M, [B]=0.10 M → rate=0.040 M/s\n
-
-Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.080 M/s\n
-
+\n
+Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.080 M/s
   `,
 
   questions: [
@@ -2341,8 +2340,8 @@ A reaction has an experimentally determined rate law: rate = k[A][B]².\n
 A proposed mechanism is:\n
 \n
 Step 1 (slow): A + B → C\n
-
-Step 2 (fast): C + B → products\n
+\n
+Step 2 (fast): C + B → products
 
   `,
 
@@ -2582,12 +2581,12 @@ A reaction follows rate = k[A]²[B]. A student performs multiple simultaneous ch
 
   text: `
 
-A student studies the reaction A + B → products and collects:
-
-Experiment 1: [A]=0.10 M, [B]=0.10 M → rate=0.010 M/s  
-
-Experiment 2: [A]=0.20 M, [B]=0.10 M → rate=0.040 M/s  
-
+A student studies the reaction A + B → products and collects:\n
+\n
+Experiment 1: [A]=0.10 M, [B]=0.10 M → rate=0.010 M/s\n
+\n
+Experiment 2: [A]=0.20 M, [B]=0.10 M → rate=0.040 M/s\n
+\n
 Experiment 3: [A]=0.20 M, [B]=0.20 M → rate=0.160 M/s
 
   `,
@@ -2673,7 +2672,7 @@ A reaction has experimental rate law: rate = k[A][B]².\n
 Proposed mechanism:\n
 \n
 Step 1 (slow): A + B → C\n
-
+\n
 Step 2 (fast): C + B → products\n
 
   `,
