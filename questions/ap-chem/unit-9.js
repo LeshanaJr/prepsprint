@@ -367,23 +367,14 @@ rapidQuestions: [
 },
 
 {
-
-  prompt: "If molar solubility increases, what happens to Ksp?",
-
+  prompt: "For the same salt at the same temperature, what happens to Ksp if solubility changes due to a common ion?",
   choices: [
-
-    { text: "Ksp increases", correct: true, choiceExplanation: " is correct because more ions at equilibrium." },
-
-    { text: "Ksp decreases", correct: false, choiceExplanation: " is incorrect because relationship direct." },
-
-    { text: "Ksp stays the same", correct: false, choiceExplanation: " is incorrect because depends on system." },
-
-    { text: "Cannot determine", correct: false, choiceExplanation: " is incorrect because relationship known." }
-
+    { text: "Ksp increases", correct: false, choiceExplanation: " is incorrect because Ksp is constant at a given temperature." },
+    { text: "Ksp decreases", correct: false, choiceExplanation: " is incorrect because common ions affect solubility, not Ksp." },
+    { text: "Ksp stays the same", correct: true, choiceExplanation: " is correct because Ksp only changes with temperature." },
+    { text: "Ksp becomes zero", correct: false, choiceExplanation: " is incorrect because equilibrium still exists." }
   ],
-
   category: "Unit 9: Applications of Thermodynamics"
-
 },
 
 {
@@ -1220,10 +1211,10 @@ rapidQuestions: [
 
   text: `
 
-A galvanic cell is constructed using a Zn electrode in Zn²⁺ solution and a Cu electrode in Cu²⁺ solution.
-
-Zn(s) → Zn²⁺ + 2e⁻     E° = −0.76 V  
-
+A galvanic cell is constructed using a Zn electrode in Zn²⁺ solution and a Cu electrode in Cu²⁺ solution.\n
+\n
+Zn(s) → Zn²⁺ + 2e⁻     E° = −0.76 V  \n
+\n
 Cu²⁺ + 2e⁻ → Cu(s)     E° = +0.34 V
 
   `,
@@ -1304,8 +1295,8 @@ Cu²⁺ + 2e⁻ → Cu(s)     E° = +0.34 V
 
   text: `
 
-A galvanic cell operates under nonstandard conditions. The reaction quotient Q is greater than K.
-
+A galvanic cell operates under nonstandard conditions. The reaction quotient Q is greater than K.\n
+\n
 E = E° − (0.0592/n) log Q
 
   `,
@@ -1426,8 +1417,8 @@ A nonspontaneous reaction is driven using an external power source in an electro
 
   text: `
 
-A current is passed through a solution containing Cu²⁺ ions, causing copper metal to plate onto an electrode.
-
+A current is passed through a solution containing Cu²⁺ ions, causing copper metal to plate onto an electrode.\n
+\n
 Cu²⁺ + 2e⁻ → Cu(s)
 
   `,
@@ -1488,10 +1479,10 @@ Cu²⁺ + 2e⁻ → Cu(s)
 
   text: `
 
-A reaction has a large positive E°cell value.
-
-ΔG° = −nFE°cell  
-
+A reaction has a large positive E°cell value.\n
+\n
+ΔG° = −nFE°cell  \n
+\n
 E°cell = (0.0592/n) log K
 
   `,
@@ -1554,7 +1545,7 @@ E°cell = (0.0592/n) log K
 
 A sample of solid AB is placed in water. The following equilibrium is established:\n
 \n
-AB(s) ⇌ A⁺(aq) + B⁻(aq)\n
+AB(s) ⇌ A⁺(aq) + B⁻(aq)
 
   `,
 
