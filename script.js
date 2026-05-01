@@ -1168,8 +1168,8 @@ try {
   buildSubject("AP Gov", "apGov"),
      buildSubject("AP Java", "apJava"),
      buildSubject("AP Chem", "apChem"),
-     buildSubject("AP Bio", "apBio")
- // buildSubject("AP Lang", "apLang"),
+     buildSubject("AP Bio", "apBio"),
+     buildSubject("AP Lang", "apLang")
  // buildSubject("AP World", "apWorld")
 ];
 
