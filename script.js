@@ -619,9 +619,9 @@ const goalPercent = Math.min(
 if (hasActiveQuiz) {
   document.getElementById("resume-quiz-btn").addEventListener("click", resumeActiveQuiz);
 }
-  if (hasSavedProgress) {
-    document.getElementById("reset-progress-btn").addEventListener("click", resetSavedProgress);
-  }
+  if (hasSavedProgress || hasActiveQuiz) {
+  document.getElementById("reset-progress-btn").addEventListener("click", resetSavedProgress);
+}
 }
 
 function showSubjectPage() {
