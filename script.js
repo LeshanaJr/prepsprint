@@ -576,6 +576,38 @@ function getBottomNav(active = "home") {
   `;
 }
 
+function updateRecentSubjects(subjectIndex) {
+  savedProgress.recentSubjectIndexes = savedProgress.recentSubjectIndexes || [];
+
+  savedProgress.recentSubjectIndexes = [
+    subjectIndex,
+    ...savedProgress.recentSubjectIndexes.filter((index) => index !== subjectIndex)
+  ].slice(0, 3);
+
+  saveProgress();
+}
+
+function getQuickPracticeSubjects() {
+  const recent = savedProgress.recentSubjectIndexes || [];
+
+  const fallback = subjects
+    .map((subject, index) => index)
+    .filter((index) => !recent.includes(index));
+
+  return [...recent, ...fallback].slice(0, 2);
+}
+
+function startQuickPractice(subjectIndex) {
+  const subject = subjects[subjectIndex];
+
+  if (subject.rapidQuestions && subject.rapidQuestions.length > 0) {
+    startSubject(subjectIndex, "rapid");
+    return;
+  }
+
+  startSubject(subjectIndex, "standard");
+}
+
 function showHomePage() {
   stopTimer();
 
@@ -647,18 +679,20 @@ function showHomePage() {
     </div>
 
     <div class="quick-practice-section">
-      <p class="section-mini-title">Quick Practice</p>
+  <p class="section-mini-title">Quick Practice</p>
 
-      <button class="quick-practice-card" onclick="showSubjectPage()">
-        <span>📘 AP Lang</span>
-        <small>Rapid Fire • Passages</small>
-      </button>
+  ${getQuickPracticeSubjects().map((subjectIndex) => {
+    const subject = subjects[subjectIndex];
+    const hasRapid = subject.rapidQuestions && subject.rapidQuestions.length > 0;
 
-      <button class="quick-practice-card" onclick="showSubjectPage()">
-        <span>🧬 AP Bio</span>
-        <small>Practice questions</small>
+    return `
+      <button class="quick-practice-card" onclick="startQuickPractice(${subjectIndex})">
+        <span>${getSubjectIcon(subject.name)} ${subject.name}</span>
+        <small>${hasRapid ? "Rapid Fire practice" : "Standard practice"}</small>
       </button>
-    </div>
+    `;
+  }).join("")}
+</div>
 
     ${hasSavedProgress || hasActiveQuiz ? `
       <button id="reset-progress-btn" class="reset-link-btn">
@@ -835,10 +869,11 @@ clearActiveQuiz();
   rapidStreak = 0;
   bestRapidStreak = 0;
 
-  savedProgress.lastSubjectIndex = subjectIndex;
-  savedProgress.lastMode = mode;
-  savedProgress.lastTimedDuration = timedDuration;
-  saveProgress();
+savedProgress.lastSubjectIndex = subjectIndex;
+savedProgress.lastMode = mode;
+savedProgress.lastTimedDuration = timedDuration;
+updateRecentSubjects(subjectIndex);
+saveProgress();
 
   if (mode === "standard") {
   weakPoints = {};
