@@ -1009,8 +1009,1397 @@ rapidQuestions: [
 
   passages: [
 
+{
 
-    
+  title: "Qing Rule and Imperial Authority (Forbidden City)",
+
+  text: "The Qing dynasty consolidated power over China by maintaining traditional Confucian bureaucratic systems while also asserting Manchu authority. The Forbidden City in Beijing served as the political and ceremonial center of the empire, symbolizing imperial control and hierarchy. The emperor was viewed as the Son of Heaven, ruling through a centralized bureaucracy that relied on civil service examinations. At the same time, the Qing maintained distinct ethnic identities to preserve their dominance over the majority Han Chinese population.",
+
+  image: "images/ap-world/unit-3/forbiddencity.jpg",
+
+  imageAlt: "The Forbidden City in Beijing, imperial palace of the Ming and Qing dynasties symbolizing centralized authority (Source: Wikimedia Commons)",
+
+  questions: [
+
+{
+
+  prompt: "Which of the following best explains how Qing rulers maintained control over China?",
+
+  choices: [
+
+    { text: "They preserved Confucian bureaucratic systems while asserting Manchu authority", correct: true, choiceExplanation: " is correct because Qing rulers combined continuity with strategic differences.\n\nThey kept existing systems but ensured Manchu dominance." },
+
+    { text: "They eliminated all previous political systems", correct: false, choiceExplanation: " is incorrect because they maintained existing structures like the civil service system." },
+
+    { text: "They relied only on military conquest", correct: false, choiceExplanation: " is incorrect because governance depended heavily on bureaucracy." },
+
+    { text: "They adopted democratic reforms", correct: false, choiceExplanation: " is incorrect because China remained an imperial system." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "What was the primary function of the Forbidden City?",
+
+  choices: [
+
+    { text: "To serve as the political and ceremonial center of imperial authority", correct: true, choiceExplanation: " is correct because it symbolized centralized power.\n\nIt reinforced the emperor’s dominance." },
+
+    { text: "To act as a military training facility", correct: false, choiceExplanation: " is incorrect because it was not primarily military." },
+
+    { text: "To house foreign diplomats permanently", correct: false, choiceExplanation: " is incorrect because access was restricted." },
+
+    { text: "To function as a trade hub", correct: false, choiceExplanation: " is incorrect because it was political, not economic." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which belief system most influenced Qing governance?",
+
+  choices: [
+
+    { text: "Confucianism", correct: true, choiceExplanation: " is correct because Confucian ideals shaped bureaucracy and governance.\n\nCivil service exams were based on Confucian texts." },
+
+    { text: "Christianity", correct: false, choiceExplanation: " is incorrect because it was not dominant in governance." },
+
+    { text: "Hinduism", correct: false, choiceExplanation: " is incorrect because it is South Asian." },
+
+    { text: "Animism", correct: false, choiceExplanation: " is incorrect because it was not the governing ideology." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which broader theme is illustrated by this passage?",
+
+  choices: [
+
+    { text: "Continuation of traditional systems alongside new ruling elites", correct: true, choiceExplanation: " is correct because Qing rulers maintained systems while asserting new identity.\n\nThis is a key AP theme of continuity and change." },
+
+    { text: "Complete cultural isolation", correct: false, choiceExplanation: " is incorrect because interaction and adaptation occurred." },
+
+    { text: "Decline of centralized authority", correct: false, choiceExplanation: " is incorrect because authority remained strong." },
+
+    { text: "Rise of industrial economies", correct: false, choiceExplanation: " is incorrect because this is pre-industrial." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+}
+
+  ]
+
+},
+
+{
+
+  title: "Gunpowder Empires and Expansion (Ottoman Empire Map)",
+
+  text: "The Ottoman Empire expanded across southeastern Europe, the Middle East, and North Africa through a combination of military strength and administrative organization. Its use of gunpowder weapons, including cannons and muskets, allowed it to conquer fortified cities and maintain control over vast territories. The empire was organized into provinces governed by officials loyal to the sultan, and it relied on systems such as tax farming to generate revenue. Religious tolerance for non-Muslim communities helped stabilize the empire.",
+
+  image: "images/ap-world/unit-3/ottomanempire.png",
+
+  imageAlt: "Map of the Ottoman Empire at its height, showing expansion across Europe, Asia, and Africa (Source: Wikimedia Commons)",
+
+  questions: [
+
+{
+
+  prompt: "Which factor most contributed to Ottoman territorial expansion?",
+
+  choices: [
+
+    { text: "The use of gunpowder weapons such as cannons", correct: true, choiceExplanation: " is correct because gunpowder technology gave Ottomans military advantage.\n\nIt allowed them to conquer fortified cities." },
+
+    { text: "Isolation from other regions", correct: false, choiceExplanation: " is incorrect because expansion required interaction." },
+
+    { text: "Dependence on agriculture alone", correct: false, choiceExplanation: " is incorrect because military innovation was key." },
+
+    { text: "Elimination of bureaucracy", correct: false, choiceExplanation: " is incorrect because administration was essential." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "How did the Ottoman Empire maintain control over large territories?",
+
+  choices: [
+
+    { text: "By organizing provinces under loyal governors", correct: true, choiceExplanation: " is correct because administrative systems maintained control.\n\nGovernors ensured local order." },
+
+    { text: "By eliminating local leadership", correct: false, choiceExplanation: " is incorrect because local governance was used." },
+
+    { text: "By avoiding taxation", correct: false, choiceExplanation: " is incorrect because taxation was central." },
+
+    { text: "By relying only on trade", correct: false, choiceExplanation: " is incorrect because governance required more than trade." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which policy helped reduce conflict within the empire?",
+
+  choices: [
+
+    { text: "Religious tolerance for non-Muslims", correct: true, choiceExplanation: " is correct because tolerance reduced rebellion.\n\nIt allowed diverse populations to coexist." },
+
+    { text: "Forced cultural uniformity", correct: false, choiceExplanation: " is incorrect because that often leads to unrest." },
+
+    { text: "Elimination of religion", correct: false, choiceExplanation: " is incorrect because religion remained important." },
+
+    { text: "Complete isolation", correct: false, choiceExplanation: " is incorrect because the empire was interconnected." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which AP concept best applies to this empire’s growth?",
+
+  choices: [
+
+    { text: "State expansion through military innovation", correct: true, choiceExplanation: " is correct because new technology enabled expansion.\n\nGunpowder was key to empire-building." },
+
+    { text: "Agricultural revolution", correct: false, choiceExplanation: " is incorrect because this focuses on farming." },
+
+    { text: "Industrial capitalism", correct: false, choiceExplanation: " is incorrect because this occurs later." },
+
+    { text: "Feudal decentralization", correct: false, choiceExplanation: " is incorrect because the empire was centralized." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+}
+
+  ]
+
+},
+
+{
+
+  title: "Mughal Cultural Synthesis (Taj Mahal)",
+
+  text: "The Mughal Empire in South Asia demonstrated a high level of cultural synthesis, blending Persian, Islamic, and Indian traditions. The Taj Mahal, built by Shah Jahan, reflects this combination through its architectural design and artistic elements. Mughal rulers often supported the arts as a means of legitimizing their authority. Additionally, policies such as Akbar’s religious tolerance helped integrate diverse populations within the empire.",
+
+  image: "images/ap-world/unit-3/tajmahal.jpeg",
+
+  imageAlt: "The Taj Mahal, an example of Mughal architecture blending Islamic and Indian artistic traditions (Source: Wikimedia Commons)",
+
+  questions: [
+
+{
+
+  prompt: "Which concept best describes Mughal cultural development?",
+
+  choices: [
+
+    { text: "Syncretism", correct: true, choiceExplanation: " is correct because Mughal culture blended multiple traditions.\n\nThis created a unique cultural identity." },
+
+    { text: "Isolationism", correct: false, choiceExplanation: " is incorrect because cultures were interacting." },
+
+    { text: "Industrialization", correct: false, choiceExplanation: " is incorrect because this occurred later." },
+
+    { text: "Feudalism", correct: false, choiceExplanation: " is incorrect because it is not the focus." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "How did Mughal rulers use architecture politically?",
+
+  choices: [
+
+    { text: "To demonstrate power and legitimacy", correct: true, choiceExplanation: " is correct because monumental buildings reinforced authority.\n\nThey symbolized imperial strength." },
+
+    { text: "To eliminate cultural diversity", correct: false, choiceExplanation: " is incorrect because diversity was incorporated." },
+
+    { text: "To weaken their rule", correct: false, choiceExplanation: " is incorrect because it strengthened rule." },
+
+    { text: "To replace military power", correct: false, choiceExplanation: " is incorrect because military power remained important." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which policy helped unify the Mughal Empire?",
+
+  choices: [
+
+    { text: "Religious tolerance under Akbar", correct: true, choiceExplanation: " is correct because tolerance reduced internal conflict.\n\nIt allowed different groups to coexist." },
+
+    { text: "Strict religious enforcement", correct: false, choiceExplanation: " is incorrect because that often caused unrest." },
+
+    { text: "Complete isolation from other cultures", correct: false, choiceExplanation: " is incorrect because the empire was diverse." },
+
+    { text: "Elimination of trade networks", correct: false, choiceExplanation: " is incorrect because trade was important." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which broader trend is shown by the Taj Mahal?",
+
+  choices: [
+
+    { text: "Use of art and architecture to legitimize rule", correct: true, choiceExplanation: " is correct because rulers used culture to reinforce power.\n\nThis was common in land-based empires." },
+
+    { text: "Decline of centralized authority", correct: false, choiceExplanation: " is incorrect because authority remained strong." },
+
+    { text: "Rise of democratic systems", correct: false, choiceExplanation: " is incorrect because this was an empire." },
+
+    { text: "End of religious influence", correct: false, choiceExplanation: " is incorrect because religion was central." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+}
+
+  ]
+
+},
+
+  {
+
+  title: "Ottoman Administrative Systems",
+
+  text: "The Ottoman Empire governed a vast and diverse population through a centralized administrative system that combined military and bureaucratic elements. The sultan held absolute authority, but delegated power to officials who governed provinces. The devshirme system recruited Christian boys from the Balkans, converting them to Islam and training them for service in the Janissary corps or the bureaucracy. This system ensured loyalty directly to the sultan and helped maintain stability across the empire.",
+
+  questions: [
+
+{
+
+  prompt: "What was the primary purpose of the devshirme system?",
+
+  choices: [
+
+    { text: "To create a loyal administrative and military class", correct: true, choiceExplanation: " is correct because devshirme recruits were trained to serve the sultan.\n\nTheir loyalty strengthened central authority." },
+
+    { text: "To promote economic trade", correct: false, choiceExplanation: " is incorrect because it focused on governance, not trade." },
+
+    { text: "To eliminate religious diversity", correct: false, choiceExplanation: " is incorrect because diversity still existed." },
+
+    { text: "To decentralize authority", correct: false, choiceExplanation: " is incorrect because it strengthened centralization." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which of the following best describes Ottoman governance?",
+
+  choices: [
+
+    { text: "A centralized system with delegated provincial authority", correct: true, choiceExplanation: " is correct because the sultan ruled through appointed officials.\n\nThis allowed control over large territories." },
+
+    { text: "A purely democratic system", correct: false, choiceExplanation: " is incorrect because power was not shared with the population." },
+
+    { text: "A completely decentralized feudal system", correct: false, choiceExplanation: " is incorrect because authority was centralized." },
+
+    { text: "A system without bureaucracy", correct: false, choiceExplanation: " is incorrect because bureaucracy was essential." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "How did the devshirme system strengthen Ottoman rule?",
+
+  choices: [
+
+    { text: "By creating officials loyal only to the sultan", correct: true, choiceExplanation: " is correct because recruits depended entirely on the state.\n\nThis reduced the influence of local elites." },
+
+    { text: "By increasing local independence", correct: false, choiceExplanation: " is incorrect because it reduced local power." },
+
+    { text: "By encouraging religious rebellion", correct: false, choiceExplanation: " is incorrect because it aimed to maintain stability." },
+
+    { text: "By eliminating military forces", correct: false, choiceExplanation: " is incorrect because it strengthened them." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which broader pattern does this system represent?",
+
+  choices: [
+
+    { text: "States developing methods to centralize power over diverse populations", correct: true, choiceExplanation: " is correct because empires needed systems to maintain control.\n\nThis is a key Unit 3 theme." },
+
+    { text: "Decline of imperial authority", correct: false, choiceExplanation: " is incorrect because authority was strengthened." },
+
+    { text: "Rise of industrial economies", correct: false, choiceExplanation: " is incorrect because this predates industrialization." },
+
+    { text: "Shift to democratic governance", correct: false, choiceExplanation: " is incorrect because the empire remained autocratic." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+}
+
+  ]
+
+},
+
+{
+
+  title: "Safavid Religious Policy",
+
+  text: "The Safavid Empire established Twelver Shi’a Islam as the official state religion, marking a significant shift in the religious landscape of the Middle East. This policy helped unify the population under a single identity, but also created tensions with neighboring Sunni empires such as the Ottomans. Safavid rulers used religious institutions and leaders to reinforce their authority, integrating faith with governance.",
+
+  questions: [
+
+{
+
+  prompt: "Why did Safavid rulers promote Shi’a Islam as the state religion?",
+
+  choices: [
+
+    { text: "To unify the population and strengthen political identity", correct: true, choiceExplanation: " is correct because shared religion created cohesion.\n\nIt also distinguished them from rivals." },
+
+    { text: "To eliminate all conflict", correct: false, choiceExplanation: " is incorrect because conflict increased with Sunnis." },
+
+    { text: "To encourage trade", correct: false, choiceExplanation: " is incorrect because religion was the focus." },
+
+    { text: "To adopt foreign traditions", correct: false, choiceExplanation: " is incorrect because it emphasized local identity." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "What was a major consequence of Safavid religious policy?",
+
+  choices: [
+
+    { text: "Increased conflict with Sunni neighbors like the Ottomans", correct: true, choiceExplanation: " is correct because religious differences fueled rivalry.\n\nThis led to ongoing wars." },
+
+    { text: "Complete regional unity", correct: false, choiceExplanation: " is incorrect because divisions increased." },
+
+    { text: "Decline of religion", correct: false, choiceExplanation: " is incorrect because religion became more important." },
+
+    { text: "End of imperial expansion", correct: false, choiceExplanation: " is incorrect because expansion continued." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "How did religion function in Safavid governance?",
+
+  choices: [
+
+    { text: "As a tool to legitimize political authority", correct: true, choiceExplanation: " is correct because rulers linked religion with power.\n\nThis reinforced their rule." },
+
+    { text: "As a private matter only", correct: false, choiceExplanation: " is incorrect because it was public and political." },
+
+    { text: "As a replacement for military power", correct: false, choiceExplanation: " is incorrect because military remained important." },
+
+    { text: "As a minor influence", correct: false, choiceExplanation: " is incorrect because it was central." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which AP theme is best illustrated?",
+
+  choices: [
+
+    { text: "Religion shaping state identity and conflict", correct: true, choiceExplanation: " is correct because religion defined both unity and rivalry.\n\nThis is a major Unit 3 concept." },
+
+    { text: "Industrialization", correct: false, choiceExplanation: " is incorrect because this is pre-industrial." },
+
+    { text: "Economic globalization", correct: false, choiceExplanation: " is incorrect because this focuses on religion." },
+
+    { text: "Democratic reform", correct: false, choiceExplanation: " is incorrect because the empire was not democratic." }
+
+  ],
+
+  category: "Unit 3: Land-Based Emppires"
+
+}
+
+  ]
+
+},
+
+{
+
+  title: "Mughal Governance and Diversity",
+
+  text: "The Mughal Empire governed a highly diverse population in South Asia through a combination of administrative efficiency and cultural accommodation. Akbar the Great implemented policies of religious tolerance, allowing Hindus and Muslims to participate in government. He also reformed the tax system to make it more equitable. These strategies strengthened imperial authority and reduced the likelihood of rebellion among subject populations.",
+
+  questions: [
+
+{
+
+  prompt: "Which policy best helped Akbar maintain stability in the Mughal Empire?",
+
+  choices: [
+
+    { text: "Religious tolerance allowing multiple groups to participate in governance", correct: true, choiceExplanation: " is correct because inclusion reduced conflict.\n\nIt encouraged loyalty among diverse populations." },
+
+    { text: "Strict enforcement of one religion", correct: false, choiceExplanation: " is incorrect because that increases tension." },
+
+    { text: "Isolation from all other cultures", correct: false, choiceExplanation: " is incorrect because diversity was embraced." },
+
+    { text: "Elimination of taxation", correct: false, choiceExplanation: " is incorrect because taxation remained necessary." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "What was the purpose of Mughal tax reforms?",
+
+  choices: [
+
+    { text: "To create a more equitable system and increase stability", correct: true, choiceExplanation: " is correct because fair taxation reduced resentment.\n\nIt strengthened the state." },
+
+    { text: "To eliminate all economic activity", correct: false, choiceExplanation: " is incorrect because the economy remained active." },
+
+    { text: "To weaken imperial authority", correct: false, choiceExplanation: " is incorrect because it strengthened authority." },
+
+    { text: "To promote only elite interests", correct: false, choiceExplanation: " is incorrect because reforms aimed for balance." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which of the following best explains Mughal success in ruling a diverse population?",
+
+  choices: [
+
+    { text: "Policies that incorporated and accommodated different groups", correct: true, choiceExplanation: " is correct because inclusion helped maintain unity.\n\nThis reduced resistance." },
+
+    { text: "Complete cultural suppression", correct: false, choiceExplanation: " is incorrect because diversity was allowed." },
+
+    { text: "Isolation from trade networks", correct: false, choiceExplanation: " is incorrect because the empire was connected." },
+
+    { text: "Reliance only on military force", correct: false, choiceExplanation: " is incorrect because governance strategies were key." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which broader theme does this passage illustrate?",
+
+  choices: [
+
+    { text: "Empires using inclusive policies to maintain control", correct: true, choiceExplanation: " is correct because accommodation strengthened rule.\n\nThis is a key Unit 3 concept." },
+
+    { text: "Decline of centralized authority", correct: false, choiceExplanation: " is incorrect because authority remained strong." },
+
+    { text: "Rise of industrialization", correct: false, choiceExplanation: " is incorrect because this is pre-industrial." },
+
+    { text: "End of cultural diversity", correct: false, choiceExplanation: " is incorrect because diversity persisted." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+}
+
+  ]
+
+},
+
+{
+
+  title: "Ottoman Military and Political Authority",
+
+  text: "The Ottoman Empire relied heavily on its military strength to expand and maintain control over its territories. The development of gunpowder weapons allowed the Ottomans to defeat rival states and conquer fortified cities. At the same time, the empire established a sophisticated administrative system that enabled the sultan to exert authority across vast regions. Military success reinforced the legitimacy of the ruler, while administrative systems ensured long-term stability.",
+
+  questions: [
+
+{
+
+  prompt: "Which of the following best explains the relationship between military success and political legitimacy in the Ottoman Empire?",
+
+  choices: [
+
+    { text: "Military victories reinforced the sultan’s authority and justified continued rule", correct: true, choiceExplanation: " is correct because success in warfare strengthened perceptions of legitimacy.\n\nRulers were seen as powerful and deserving of authority." },
+
+    { text: "Military success weakened the government", correct: false, choiceExplanation: " is incorrect because it strengthened authority." },
+
+    { text: "Political legitimacy was unrelated to military strength", correct: false, choiceExplanation: " is incorrect because military success was central." },
+
+    { text: "The Ottomans avoided military expansion", correct: false, choiceExplanation: " is incorrect because expansion was key to their power." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which inference can be made about the role of gunpowder technology?",
+
+  choices: [
+
+    { text: "It shifted the balance of power toward centralized states with advanced military capabilities", correct: true, choiceExplanation: " is correct because gunpowder gave empires a decisive advantage.\n\nIt enabled territorial expansion and consolidation." },
+
+    { text: "It had little impact on warfare", correct: false, choiceExplanation: " is incorrect because it transformed warfare." },
+
+    { text: "It eliminated the need for armies", correct: false, choiceExplanation: " is incorrect because armies remained essential." },
+
+    { text: "It only affected naval battles", correct: false, choiceExplanation: " is incorrect because it was used on land as well." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which broader AP theme is reflected in the combination of military and administrative systems?",
+
+  choices: [
+
+    { text: "State-building through multiple forms of power", correct: true, choiceExplanation: " is correct because empires used both force and governance.\n\nThis reflects complexity in state development." },
+
+    { text: "Decline of empires", correct: false, choiceExplanation: " is incorrect because this describes expansion." },
+
+    { text: "Isolation from other regions", correct: false, choiceExplanation: " is incorrect because expansion implies interaction." },
+
+    { text: "Industrialization", correct: false, choiceExplanation: " is incorrect because this predates it." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which comparison could best be made with another empire?",
+
+  choices: [
+
+    { text: "Similar to the Qing, the Ottomans combined military strength with administrative control", correct: true, choiceExplanation: " is correct because both empires used multiple strategies.\n\nThis demonstrates a shared pattern in empire-building." },
+
+    { text: "Unlike all other empires, the Ottomans avoided bureaucracy", correct: false, choiceExplanation: " is incorrect because they relied heavily on bureaucracy." },
+
+    { text: "Only the Ottomans used military expansion", correct: false, choiceExplanation: " is incorrect because others did as well." },
+
+    { text: "The Ottomans relied solely on religion for control", correct: false, choiceExplanation: " is incorrect because military and administration were key." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+}
+
+  ]
+
+},
+
+{
+
+  title: "Safavid-Ottoman Rivalry",
+
+  text: "The Safavid and Ottoman Empires competed for control of territory and influence in the Middle East. One of the defining differences between the two was their religious orientation: the Safavids promoted Shi’a Islam, while the Ottomans adhered to Sunni Islam. This distinction intensified their rivalry and contributed to frequent conflicts. Despite these tensions, both empires developed strong centralized governments and relied on military power to sustain their dominance.",
+
+  questions: [
+
+{
+
+  prompt: "Which of the following best explains why religion intensified conflict between the Safavids and Ottomans?",
+
+  choices: [
+
+    { text: "Religious differences reinforced political and cultural divisions", correct: true, choiceExplanation: " is correct because religion shaped identity and loyalty.\n\nIt deepened rivalry between the empires." },
+
+    { text: "Religion had no impact on politics", correct: false, choiceExplanation: " is incorrect because it was central to conflict." },
+
+    { text: "Both empires practiced the same religion", correct: false, choiceExplanation: " is incorrect because they followed different branches." },
+
+    { text: "Religion reduced competition", correct: false, choiceExplanation: " is incorrect because it increased tension." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which inference can be made about the role of religion in empire-building?",
+
+  choices: [
+
+    { text: "Religion could unify internal populations while dividing neighboring states", correct: true, choiceExplanation: " is correct because it created cohesion internally.\n\nAt the same time, it caused external conflict." },
+
+    { text: "Religion only created unity everywhere", correct: false, choiceExplanation: " is incorrect because it also caused division." },
+
+    { text: "Religion was irrelevant to governance", correct: false, choiceExplanation: " is incorrect because it was highly relevant." },
+
+    { text: "Religion eliminated the need for military force", correct: false, choiceExplanation: " is incorrect because military remained necessary." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "What similarity existed between the Safavid and Ottoman Empires despite their rivalry?",
+
+  choices: [
+
+    { text: "Both developed centralized governments supported by military power", correct: true, choiceExplanation: " is correct because both empires relied on strong states.\n\nTheir rivalry did not prevent structural similarities." },
+
+    { text: "Both rejected religion entirely", correct: false, choiceExplanation: " is incorrect because religion was central." },
+
+    { text: "Both avoided territorial expansion", correct: false, choiceExplanation: " is incorrect because expansion was key." },
+
+    { text: "Both lacked administrative systems", correct: false, choiceExplanation: " is incorrect because they had strong systems." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which AP skill is most relevant to this passage?",
+
+  choices: [
+
+    { text: "Comparison", correct: true, choiceExplanation: " is correct because it examines similarities and differences.\n\nStudents must compare two empires." },
+
+    { text: "Chronological sequencing", correct: false, choiceExplanation: " is incorrect because time order is not emphasized." },
+
+    { text: "Periodization", correct: false, choiceExplanation: " is incorrect because it does not divide periods." },
+
+    { text: "Quantitative analysis", correct: false, choiceExplanation: " is incorrect because no data is used." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+}
+
+  ]
+
+},
+
+{
+
+  title: "Mughal Policies and Imperial Stability",
+
+  text: "The Mughal Empire’s success in governing South Asia was largely due to its ability to integrate diverse populations. Akbar implemented policies that allowed Hindus to hold positions in government and removed certain taxes that discriminated against non-Muslims. These measures strengthened loyalty to the empire. Later rulers, however, reversed some of these policies, contributing to internal tensions and weakening central authority over time.",
+
+  questions: [
+
+{
+
+  prompt: "Which of the following best explains why Akbar’s policies were effective?",
+
+  choices: [
+
+    { text: "They promoted inclusion and reduced resistance among diverse groups", correct: true, choiceExplanation: " is correct because inclusive policies built loyalty.\n\nThis strengthened imperial stability." },
+
+    { text: "They enforced strict religious uniformity", correct: false, choiceExplanation: " is incorrect because Akbar promoted tolerance." },
+
+    { text: "They eliminated all taxation", correct: false, choiceExplanation: " is incorrect because taxation continued." },
+
+    { text: "They reduced the size of the empire", correct: false, choiceExplanation: " is incorrect because the empire expanded." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "What can be inferred about the later Mughal rulers?",
+
+  choices: [
+
+    { text: "Their reversal of inclusive policies contributed to instability", correct: true, choiceExplanation: " is correct because removing tolerance increased tensions.\n\nThis weakened the empire." },
+
+    { text: "They strengthened religious tolerance further", correct: false, choiceExplanation: " is incorrect because the passage states the opposite." },
+
+    { text: "They expanded inclusion policies", correct: false, choiceExplanation: " is incorrect because policies were reversed." },
+
+    { text: "They eliminated conflict entirely", correct: false, choiceExplanation: " is incorrect because tensions increased." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which broader historical pattern is illustrated?",
+
+  choices: [
+
+    { text: "Inclusive governance can strengthen empires, while exclusion can weaken them", correct: true, choiceExplanation: " is correct because policy changes directly impacted stability.\n\nThis reflects a cause-and-effect relationship." },
+
+    { text: "Religion has no impact on politics", correct: false, choiceExplanation: " is incorrect because it clearly does." },
+
+    { text: "Empires remain stable regardless of policy", correct: false, choiceExplanation: " is incorrect because policy changes affected stability." },
+
+    { text: "Economic factors are always more important than social factors", correct: false, choiceExplanation: " is incorrect because social policies mattered here." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which comparison could be made with another empire?",
+
+  choices: [
+
+    { text: "Similar to the Ottomans, Mughal rulers used policies to manage diverse populations", correct: true, choiceExplanation: " is correct because both empires governed diverse societies.\n\nThey used strategies to maintain control." },
+
+    { text: "Unlike all other empires, the Mughals had no diversity", correct: false, choiceExplanation: " is incorrect because diversity was central." },
+
+    { text: "The Mughals relied only on military force", correct: false, choiceExplanation: " is incorrect because governance policies were key." },
+
+    { text: "The Mughals avoided administration entirely", correct: false, choiceExplanation: " is incorrect because administration was essential." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+}
+
+  ]
+
+},
+
+  {
+
+  title: "Ottoman Imperial Perspective",
+
+  text: "An Ottoman court historian writing in the sixteenth century described the empire as divinely favored, emphasizing the sultan’s role as both a political and religious leader. He highlighted military victories as evidence of God’s support and portrayed the empire’s expansion as a righteous mission. The historian also stressed the importance of loyalty to the sultan and obedience to imperial authority.",
+
+  questions: [
+
+{
+
+  prompt: "Which of the following best explains the author’s point of view?",
+
+  choices: [
+
+    { text: "The author supports the Ottoman state and seeks to legitimize its rule", correct: true, choiceExplanation: " is correct because the historian portrays expansion as divinely justified.\n\nThis reflects bias in favor of the empire." },
+
+    { text: "The author criticizes Ottoman authority", correct: false, choiceExplanation: " is incorrect because the tone is supportive." },
+
+    { text: "The author is neutral and objective", correct: false, choiceExplanation: " is incorrect because the passage shows clear bias." },
+
+    { text: "The author opposes religion in politics", correct: false, choiceExplanation: " is incorrect because religion is emphasized." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "What is the most likely purpose of this document?",
+
+  choices: [
+
+    { text: "To justify Ottoman expansion and reinforce loyalty to the sultan", correct: true, choiceExplanation: " is correct because it presents expansion as righteous.\n\nThis strengthens political legitimacy." },
+
+    { text: "To promote rebellion against the empire", correct: false, choiceExplanation: " is incorrect because it encourages obedience." },
+
+    { text: "To provide economic data", correct: false, choiceExplanation: " is incorrect because the focus is ideological." },
+
+    { text: "To compare different empires objectively", correct: false, choiceExplanation: " is incorrect because it is focused on one empire." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which historical situation most directly influenced this perspective?",
+
+  choices: [
+
+    { text: "Ottoman territorial expansion during the height of the empire", correct: true, choiceExplanation: " is correct because the passage references victories and expansion.\n\nThis reflects a period of growth." },
+
+    { text: "The decline of the Ottoman Empire", correct: false, choiceExplanation: " is incorrect because the tone is confident, not defensive." },
+
+    { text: "European industrialization", correct: false, choiceExplanation: " is incorrect because this predates it." },
+
+    { text: "The collapse of feudalism in Europe", correct: false, choiceExplanation: " is incorrect because it is unrelated." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which AP skill is most relevant to analyzing this document?",
+
+  choices: [
+
+    { text: "Sourcing (analyzing point of view and purpose)", correct: true, choiceExplanation: " is correct because understanding bias is key.\n\nThe author’s role shapes the narrative." },
+
+    { text: "Chronology", correct: false, choiceExplanation: " is incorrect because time sequence is not the focus." },
+
+    { text: "Quantitative reasoning", correct: false, choiceExplanation: " is incorrect because no data is used." },
+
+    { text: "Geographic analysis", correct: false, choiceExplanation: " is incorrect because location is not central." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+}
+
+  ]
+
+},
+
+{
+
+  title: "Safavid Religious Justification",
+
+  text: "A Safavid cleric argued that the establishment of Shi’a Islam as the state religion was necessary to preserve the spiritual purity of the empire. He claimed that unity in belief would strengthen the state and protect it from external threats, particularly from Sunni rivals. The cleric also emphasized the divine authority of Safavid rulers, portraying them as defenders of the true faith.",
+
+  questions: [
+
+{
+
+  prompt: "Which of the following best describes the author’s point of view?",
+
+  choices: [
+
+    { text: "The author supports the Safavid state and promotes Shi’a Islam", correct: true, choiceExplanation: " is correct because the cleric justifies religious policy.\n\nThis reflects alignment with Safavid leadership." },
+
+    { text: "The author opposes state religion", correct: false, choiceExplanation: " is incorrect because the author supports it." },
+
+    { text: "The author is neutral toward religion", correct: false, choiceExplanation: " is incorrect because the argument is strongly religious." },
+
+    { text: "The author supports Sunni Islam", correct: false, choiceExplanation: " is incorrect because the cleric promotes Shi’a Islam." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "What is the primary purpose of this passage?",
+
+  choices: [
+
+    { text: "To justify the use of religion as a tool for political unity", correct: true, choiceExplanation: " is correct because the author links religion to stability.\n\nIt defends state policy." },
+
+    { text: "To criticize Safavid leadership", correct: false, choiceExplanation: " is incorrect because it supports leadership." },
+
+    { text: "To describe economic systems", correct: false, choiceExplanation: " is incorrect because it focuses on religion." },
+
+    { text: "To promote trade networks", correct: false, choiceExplanation: " is incorrect because trade is not discussed." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which historical development is most directly reflected in this passage?",
+
+  choices: [
+
+    { text: "Religious conflict between Shi’a and Sunni states", correct: true, choiceExplanation: " is correct because the passage references Sunni rivals.\n\nThis reflects broader regional tensions." },
+
+    { text: "The rise of democratic systems", correct: false, choiceExplanation: " is incorrect because this is an imperial context." },
+
+    { text: "Industrialization in Asia", correct: false, choiceExplanation: " is incorrect because this predates it." },
+
+    { text: "The collapse of empires", correct: false, choiceExplanation: " is incorrect because this describes consolidation." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which inference can be made about the relationship between religion and state power?",
+
+  choices: [
+
+    { text: "Religion was used to legitimize and strengthen political authority", correct: true, choiceExplanation: " is correct because rulers tied authority to faith.\n\nThis reinforced their rule." },
+
+    { text: "Religion weakened all states", correct: false, choiceExplanation: " is incorrect because it strengthened authority here." },
+
+    { text: "Religion was separate from politics", correct: false, choiceExplanation: " is incorrect because it was integrated." },
+
+    { text: "Religion had no impact on conflict", correct: false, choiceExplanation: " is incorrect because it contributed to rivalry." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+}
+
+  ]
+
+},
+
+{
+
+  title: "Mughal Administrative Perspective",
+
+  text: "A Mughal official writing during Akbar’s reign praised the emperor’s policies of tolerance and inclusion, arguing that they ensured the loyalty of diverse populations. He noted that allowing Hindus to participate in government reduced resistance and strengthened the empire. The official also emphasized that just taxation policies contributed to economic stability and increased support for imperial rule.",
+
+  questions: [
+
+{
+
+  prompt: "Which of the following best explains the author’s purpose?",
+
+  choices: [
+
+    { text: "To praise Akbar’s policies and demonstrate their effectiveness", correct: true, choiceExplanation: " is correct because the author highlights positive outcomes.\n\nThis supports the ruler’s legitimacy." },
+
+    { text: "To criticize Mughal governance", correct: false, choiceExplanation: " is incorrect because the tone is supportive." },
+
+    { text: "To argue against tolerance", correct: false, choiceExplanation: " is incorrect because tolerance is praised." },
+
+    { text: "To promote isolationism", correct: false, choiceExplanation: " is incorrect because inclusion is emphasized." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "What does the author’s point of view suggest about Mughal governance?",
+
+  choices: [
+
+    { text: "It relied on inclusive policies to maintain stability", correct: true, choiceExplanation: " is correct because the author links inclusion to loyalty.\n\nThis shows a strategy for control." },
+
+    { text: "It depended only on military force", correct: false, choiceExplanation: " is incorrect because governance policies were key." },
+
+    { text: "It eliminated all diversity", correct: false, choiceExplanation: " is incorrect because diversity was incorporated." },
+
+    { text: "It avoided taxation", correct: false, choiceExplanation: " is incorrect because taxation remained important." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which broader historical trend is illustrated?",
+
+  choices: [
+
+    { text: "Empires using inclusive governance to strengthen authority", correct: true, choiceExplanation: " is correct because inclusion increased stability.\n\nThis is a major Unit 3 theme." },
+
+    { text: "The decline of imperial systems", correct: false, choiceExplanation: " is incorrect because this describes success." },
+
+    { text: "The rise of industrial economies", correct: false, choiceExplanation: " is incorrect because this predates it." },
+
+    { text: "The elimination of religion in governance", correct: false, choiceExplanation: " is incorrect because religion still mattered." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which AP skill is most relevant when analyzing this document?",
+
+  choices: [
+
+    { text: "Evaluating how point of view influences interpretation", correct: true, choiceExplanation: " is correct because the author is an official praising policy.\n\nThis affects how the information is presented." },
+
+    { text: "Chronological ordering", correct: false, choiceExplanation: " is incorrect because time sequence is not central." },
+
+    { text: "Geographic reasoning", correct: false, choiceExplanation: " is incorrect because location is not emphasized." },
+
+    { text: "Quantitative analysis", correct: false, choiceExplanation: " is incorrect because no data is used." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+}
+
+  ]
+
+},
+
+   {
+
+  title: "Comparative Imperial Legitimacy",
+
+  text: "An Ottoman historian, a Safavid cleric, and a Mughal official each wrote about the legitimacy of their respective rulers. The Ottoman emphasized divine favor and military success, the Safavid highlighted religious unity under Shi’a Islam, and the Mughal praised policies of tolerance and administrative inclusion. Each source reflects a different method of consolidating power across diverse populations.",
+
+  questions: [
+
+{
+
+  prompt: "Which of the following best explains a key difference between Safavid and Mughal approaches to governance?",
+
+  choices: [
+
+    { text: "Safavids enforced religious uniformity, while Mughals promoted religious tolerance", correct: true, choiceExplanation: " is correct because Safavids imposed Shi’a Islam.\n\nMughals under Akbar allowed multiple religions." },
+
+    { text: "Safavids avoided religion, while Mughals enforced it", correct: false, choiceExplanation: " is incorrect because Safavids heavily used religion." },
+
+    { text: "Safavids relied only on trade, while Mughals relied on warfare", correct: false, choiceExplanation: " is incorrect because both used multiple strategies." },
+
+    { text: "Safavids had no centralized government, while Mughals did", correct: false, choiceExplanation: " is incorrect because both had strong states." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which similarity is shared by all three empires?",
+
+  choices: [
+
+    { text: "They used ideology or belief systems to legitimize rule", correct: true, choiceExplanation: " is correct because all justified authority.\n\nReligion or policy reinforced legitimacy." },
+
+    { text: "They rejected centralized authority", correct: false, choiceExplanation: " is incorrect because all were centralized." },
+
+    { text: "They eliminated all diversity", correct: false, choiceExplanation: " is incorrect because diversity persisted." },
+
+    { text: "They avoided military expansion", correct: false, choiceExplanation: " is incorrect because expansion was common." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which broader historical process does this comparison best illustrate?",
+
+  choices: [
+
+    { text: "The development of diverse strategies for imperial consolidation", correct: true, choiceExplanation: " is correct because each empire used different tools.\n\nAll aimed to maintain control." },
+
+    { text: "The collapse of empires", correct: false, choiceExplanation: " is incorrect because this describes growth." },
+
+    { text: "The spread of industrialization", correct: false, choiceExplanation: " is incorrect because this predates it." },
+
+    { text: "The rise of democracy", correct: false, choiceExplanation: " is incorrect because these are autocratic states." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which inference best explains why these differences developed?",
+
+  choices: [
+
+    { text: "Each empire adapted to its unique cultural and religious context", correct: true, choiceExplanation: " is correct because populations differed.\n\nPolicies reflected regional diversity." },
+
+    { text: "All empires followed identical policies", correct: false, choiceExplanation: " is incorrect because approaches varied." },
+
+    { text: "Geography had no influence", correct: false, choiceExplanation: " is incorrect because geography shaped populations." },
+
+    { text: "Religion was irrelevant", correct: false, choiceExplanation: " is incorrect because religion was central." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+}
+
+  ]
+
+},
+
+{
+
+  title: "Gunpowder Empires and Power",
+
+  text: "Historians often refer to the Ottoman, Safavid, and Mughal states as 'gunpowder empires' because they effectively used firearms and artillery to expand and maintain their territories. However, military technology alone did not sustain these empires. Each developed administrative systems, taxation policies, and ideological frameworks to ensure long-term stability.",
+
+  questions: [
+
+{
+
+  prompt: "Which of the following best explains why the term 'gunpowder empires' is incomplete?",
+
+  choices: [
+
+    { text: "Because military technology alone did not ensure stability", correct: true, choiceExplanation: " is correct because governance mattered too.\n\nAdministration and ideology were essential." },
+
+    { text: "Because these empires did not use gunpowder", correct: false, choiceExplanation: " is incorrect because they did use it." },
+
+    { text: "Because they relied only on trade", correct: false, choiceExplanation: " is incorrect because military force was key." },
+
+    { text: "Because they were small states", correct: false, choiceExplanation: " is incorrect because they were large empires." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which development most directly contributed to the rise of these empires?",
+
+  choices: [
+
+    { text: "The diffusion of gunpowder technology across Eurasia", correct: true, choiceExplanation: " is correct because gunpowder spread from China.\n\nThis enabled new military strategies." },
+
+    { text: "The Industrial Revolution", correct: false, choiceExplanation: " is incorrect because it occurred later." },
+
+    { text: "The collapse of all trade networks", correct: false, choiceExplanation: " is incorrect because trade continued." },
+
+    { text: "The decline of agriculture", correct: false, choiceExplanation: " is incorrect because agriculture remained central." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which similarity best explains how these empires maintained power?",
+
+  choices: [
+
+    { text: "They combined military strength with administrative control", correct: true, choiceExplanation: " is correct because both were necessary.\n\nForce alone was insufficient." },
+
+    { text: "They relied only on religion", correct: false, choiceExplanation: " is incorrect because governance was also key." },
+
+    { text: "They avoided taxation", correct: false, choiceExplanation: " is incorrect because taxation funded states." },
+
+    { text: "They eliminated bureaucracy", correct: false, choiceExplanation: " is incorrect because bureaucracy expanded." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which AP historical thinking skill is most directly used here?",
+
+  choices: [
+
+    { text: "Causation (multiple factors contributing to outcomes)", correct: true, choiceExplanation: " is correct because it identifies multiple causes.\n\nMilitary + administrative factors explain success." },
+
+    { text: "Chronology", correct: false, choiceExplanation: " is incorrect because time order is not central." },
+
+    { text: "Periodization", correct: false, choiceExplanation: " is incorrect because no era shift is analyzed." },
+
+    { text: "Contextualization only", correct: false, choiceExplanation: " is incorrect because causation is primary." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+}
+
+  ]
+
+},
+
+{
+
+  title: "Religion and Conflict",
+
+  text: "Religious identity played a major role in shaping conflicts between land-based empires. The Safavid Empire’s promotion of Shi’a Islam created tension with the Sunni Ottoman Empire, while the Mughal Empire faced internal challenges balancing its Muslim leadership with a largely Hindu population. These dynamics influenced both domestic policies and foreign relations.",
+
+  questions: [
+
+{
+
+  prompt: "Which of the following best explains the cause of Ottoman-Safavid conflict?",
+
+  choices: [
+
+    { text: "Religious differences between Sunni and Shi’a Islam", correct: true, choiceExplanation: " is correct because sectarian divisions fueled rivalry.\n\nThis shaped political conflict." },
+
+    { text: "Competition over industrial resources", correct: false, choiceExplanation: " is incorrect because this predates industrialization." },
+
+    { text: "Lack of centralized governments", correct: false, choiceExplanation: " is incorrect because both were centralized." },
+
+    { text: "Isolation from trade networks", correct: false, choiceExplanation: " is incorrect because both were connected." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which Mughal policy best addressed internal religious diversity?",
+
+  choices: [
+
+    { text: "Akbar’s policy of religious tolerance", correct: true, choiceExplanation: " is correct because it reduced conflict.\n\nIt allowed inclusion of Hindus." },
+
+    { text: "Forced conversion to Islam", correct: false, choiceExplanation: " is incorrect because Akbar avoided this." },
+
+    { text: "Elimination of taxation", correct: false, choiceExplanation: " is incorrect because taxes continued." },
+
+    { text: "Isolation from other cultures", correct: false, choiceExplanation: " is incorrect because the empire was diverse." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which broader pattern does this passage illustrate?",
+
+  choices: [
+
+    { text: "Religion as both a unifying and divisive force in empires", correct: true, choiceExplanation: " is correct because it unified internally but caused conflict externally.\n\nThis dual role is key." },
+
+    { text: "Religion had no political impact", correct: false, choiceExplanation: " is incorrect because it clearly did." },
+
+    { text: "All empires adopted the same religion", correct: false, choiceExplanation: " is incorrect because they differed." },
+
+    { text: "Religion declined in importance", correct: false, choiceExplanation: " is incorrect because it remained central." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+},
+
+{
+
+  prompt: "Which inference best explains why rulers used religion in governance?",
+
+  choices: [
+
+    { text: "To legitimize authority and strengthen loyalty", correct: true, choiceExplanation: " is correct because belief systems reinforce power.\n\nThis helped maintain control." },
+
+    { text: "To weaken their own rule", correct: false, choiceExplanation: " is incorrect because it strengthened rule." },
+
+    { text: "To eliminate all conflict", correct: false, choiceExplanation: " is incorrect because conflict persisted." },
+
+    { text: "To avoid administration", correct: false, choiceExplanation: " is incorrect because governance remained complex." }
+
+  ],
+
+  category: "Unit 3: Land-Based Empires"
+
+}
+
+  ]
+
+}    
   ]
   
 });
