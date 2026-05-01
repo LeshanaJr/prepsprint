@@ -66,7 +66,8 @@ const STORAGE_KEY = "prepsprint_progress_v1";
 const defaultProgress = {
   totalQuizzesCompleted: 0,
   lastSubjectIndex: 0,
-  lastMode: "standard",
+recentSubjectIndexes: [],
+lastMode: "standard",
   lastTimedDuration: 300,
   subjectStats: {},
   activeQuiz: null,
