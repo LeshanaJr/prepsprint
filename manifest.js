@@ -35,5 +35,18 @@ window.UNIT_MANIFEST = {
     "questions/ap-bio/unit-6.js",
     "questions/ap-bio/unit-7.js",
     "questions/ap-bio/unit-8.js"
-  ] 
+  ],
+
+    apLang: [
+    "questions/ap-lang/unit-1.js",
+    "questions/ap-lang/unit-2.js",
+    "questions/ap-lang/unit-3.js",
+    "questions/ap-lang/unit-4.js",
+    "questions/ap-lang/unit-5.js",
+    "questions/ap-lang/unit-6.js",
+    "questions/ap-lang/unit-7.js",
+    "questions/ap-lang/unit-8.js",
+    "questions/ap-lang/unit-9.js"
+  ],
+
 };
