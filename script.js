@@ -552,6 +552,29 @@ function resetSavedProgress() {
 }
 
 
+function getBottomNav(active = "home") {
+  return `
+    <nav class="bottom-nav">
+      <button class="bottom-nav-btn ${active === "home" ? "active" : ""}" onclick="showHomePage()">
+        <small>Home</small>
+      </button>
+
+      <button class="bottom-nav-btn ${active === "practice" ? "active" : ""}" onclick="showSubjectPage()">
+        <small>Practice</small>
+      </button>
+
+      <button class="bottom-nav-btn ${active === "progress" ? "active" : ""}" onclick="showProgressPage()">
+        <small>Progress</small>
+      </button>
+
+      <button class="bottom-nav-btn ${active === "more" ? "active" : ""}" onclick="showMorePage()">
+        <span>☰</span>
+        <small>More</small>
+      </button>
+    </nav>
+  `;
+}
+
 function showHomePage() {
   stopTimer();
 
@@ -641,6 +664,8 @@ function showHomePage() {
         Reset Progress
       </button>
     ` : ""}
+
+    ${getBottomNav("home")}
   `;
 
   document.getElementById("go-subjects-btn").addEventListener("click", showSubjectPage);
@@ -652,6 +677,51 @@ function showHomePage() {
   if (hasSavedProgress || hasActiveQuiz) {
     document.getElementById("reset-progress-btn").addEventListener("click", resetSavedProgress);
   }
+}
+
+function showProgressPage() {
+  stopTimer();
+
+  const lastSubjectName = subjects?.[savedProgress.lastSubjectIndex]?.name || "None yet";
+
+  appContainer.innerHTML = `
+    <div class="subject-page-header">
+      <h1 class="section-title">Progress</h1>
+      <p class="subject-page-subtitle">Track how much you’ve practiced.</p>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-title">Your Stats</div>
+      <p class="home-stats-text">Total quizzes completed: ${savedProgress.totalQuizzesCompleted}</p>
+      <p class="home-stats-text">Last subject practiced: ${lastSubjectName}</p>
+      <p class="home-stats-text">Daily streak: 🔥 ${savedProgress.dailyStreak}</p>
+      <p class="home-stats-text">Today's goal: ${savedProgress.dailyAnswered}/${savedProgress.dailyGoal}</p>
+    </div>
+
+    ${getBottomNav("progress")}
+  `;
+}
+
+function showMorePage() {
+  stopTimer();
+
+  appContainer.innerHTML = `
+    <div class="subject-page-header">
+      <h1 class="section-title">More</h1>
+      <p class="subject-page-subtitle">App info and settings.</p>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-title">What is PrepSprint?</div>
+      <p class="home-stats-text">
+        PrepSprint helps you study with AP-style practice, explanations, and subject-based review modes.
+      </p>
+    </div>
+
+    <button class="reset-link-btn" onclick="resetSavedProgress()">Reset Progress</button>
+
+    ${getBottomNav("more")}
+  `;
 }
 
 function showSubjectPage() {
@@ -699,6 +769,8 @@ function showSubjectPage() {
           </button>
         </div>
       </div>
+
+      ${getBottomNav("practice")}
     `;
   });
 
