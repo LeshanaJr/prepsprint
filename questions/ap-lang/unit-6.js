@@ -2159,4 +2159,8 @@ Although globalization promotes exchange, it can also lead to the erosion of dis
 
   ] 
 
+}
+
+     ]
+
 });
