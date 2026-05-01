@@ -17,11 +17,17 @@ html, body {
 html {
   margin: 0;
   padding: 0;
-  min-height: 100%;
+    min-height: 100%;
+
   background:
+
     radial-gradient(circle at top left, rgba(124, 58, 237, 0.35), transparent 35%),
+
     radial-gradient(circle at top right, rgba(6, 182, 212, 0.25), transparent 35%),
+
     linear-gradient(135deg, #020617, #0f172a 55%, #111827);
+
+  overscroll-behavior: none;
 }
 
 * {
@@ -33,11 +39,17 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", sans-serif;
   margin: 0;
   padding: 0;
-  min-height: 100vh;
+    min-height: 100%;
+
   background:
+
     radial-gradient(circle at top left, rgba(124, 58, 237, 0.35), transparent 35%),
+
     radial-gradient(circle at top right, rgba(6, 182, 212, 0.25), transparent 35%),
+
     linear-gradient(135deg, #020617, #0f172a 55%, #111827);
+
+  overscroll-behavior: none;
   color: var(--text-light);
 }
 
@@ -46,9 +58,10 @@ body {
   letter-spacing: -0.2px;
 }
 
-..app {
+.app {
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 #app-container {
@@ -56,9 +69,8 @@ body {
   max-width: 430px;
   margin: 0 auto;
   min-height: 100vh;
-  padding: 22px;
-  padding-bottom: 110px;
- box-sizing: border-box;
+  min-height: 100dvh;
+  padding: calc(22px + env(safe-area-inset-top)) 22px calc(120px + env(safe-area-inset-bottom));
 }
 
 h1, h2, h3, p {
@@ -299,6 +311,25 @@ textarea {
   }
 }
 
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#app-container {
+  overflow-x: hidden;
+}
+
+button {
+  touch-action: manipulation;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+}
+
 .dark-btn {
   background: #0f172a;
   color: white;
@@ -468,7 +499,7 @@ textarea {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 18px;
+  bottom: calc(14px + env(safe-area-inset-bottom));
 
   margin: 0 auto;
   width: calc(100% - 24px);
@@ -481,12 +512,16 @@ textarea {
   grid-template-columns: repeat(4, 1fr);
   gap: 6px;
 
-  background: rgba(15, 23, 42, 0.82);
+  background: rgba(15, 23, 42, 0.78);
   border: 1px solid rgba(148, 163, 184, 0.22);
   border-radius: 26px;
 
-  backdrop-filter: blur(18px);
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 
   z-index: 999;
 }
