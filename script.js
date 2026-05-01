@@ -555,73 +555,103 @@ function resetSavedProgress() {
 function showHomePage() {
   stopTimer();
 
+  checkDailyGoalDate();
+
   const lastSubjectName = subjects?.[savedProgress.lastSubjectIndex]?.name || "None yet";
   const hasSavedProgress = savedProgress.totalQuizzesCompleted > 0;
-const hasActiveQuiz = !!savedProgress.activeQuiz;
+  const hasActiveQuiz = !!savedProgress.activeQuiz;
 
-checkDailyGoalDate();
+  const goalPercent = Math.min(
+    (savedProgress.dailyAnswered / savedProgress.dailyGoal) * 100,
+    100
+  );
 
-const goalPercent = Math.min(
-  (savedProgress.dailyAnswered / savedProgress.dailyGoal) * 100,
-  100
-);
-  
   appContainer.innerHTML = `
-    <div class="home-header">
-     <h1 class="app-title">PrepSprint</h1>
-<p class="app-subtitle">Practice. Learn. Get ahead.</p>
+    <div class="home-header compact-home-header">
+      <h1 class="app-title">PrepSprint</h1>
+      <p class="app-subtitle">Practice. Learn. Get ahead.</p>
     </div>
 
-    <div class="home-stats">
-      <p class="home-stats-title">What is PrepSprint?</p>
-      <p class="home-stats-text">
-        PrepSprint helps you study with multiple-choice practice, explanations, and subject-based review modes.
-      </p>
-    </div>
+    <div class="home-stats hero-progress-card">
+      <div class="goal-top-row">
+        <div>
+          <p class="home-stats-title">Today's Goal</p>
+          <p class="home-stats-text">
+            ${savedProgress.dailyAnswered}/${savedProgress.dailyGoal} questions answered
+          </p>
+        </div>
 
-    <div class="home-stats" style="margin-top: 14px;">
-      <p class="home-stats-title">Your Progress</p>
-      <p class="home-stats-text">Total quizzes completed: ${savedProgress.totalQuizzesCompleted}</p>
-      <p class="home-stats-text">Last subject practiced: ${lastSubjectName}</p>
-      <p class="home-stats-text">Last timer used: ${getTimedLabel(savedProgress.lastTimedDuration)}</p>
-    </div>
-
-<div class="home-stats" style="margin-top: 14px;">
-  <p class="home-stats-title">Today's Goal</p>
-  <p class="home-stats-text">
-    ${savedProgress.dailyAnswered}/${savedProgress.dailyGoal} questions answered
-  </p>
-
-  <div class="progress-bar-container">
-    <div class="progress-bar-fill" style="width: ${goalPercent}%"></div>
-  </div>
-
-  <p class="home-stats-text">Daily streak: 🔥 ${savedProgress.dailyStreak}</p>
-</div>
-
-    <div class="subject-card" style="margin-top: 18px;">
-      <div class="subject-card-top">
-        <div class="subject-card-title">Start Practicing</div>
-        <div class="subject-card-desc">
-          Choose a subject and pick a mode that fits how you want to study.
+        <div class="streak-pill">
+          🔥 ${savedProgress.dailyStreak}
         </div>
       </div>
 
-<div class="home-actions">
-  ${hasActiveQuiz ? `<button id="resume-quiz-btn" class="home-action-btn home-primary-btn">⚡ Resume Quiz</button>` : ""}
-  <button id="go-subjects-btn" class="home-action-btn home-secondary-btn">📚 Choose Subject</button>
-  ${hasSavedProgress || hasActiveQuiz ? `<button id="reset-progress-btn" class="home-action-btn home-danger-btn">🔄 Reset Progress</button>` : ""}
-</div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" style="width: ${goalPercent}%"></div>
+      </div>
+
+      <div class="mini-progress-grid">
+        <div class="mini-stat">
+          <span>${savedProgress.totalQuizzesCompleted}</span>
+          <small>Quizzes</small>
+        </div>
+
+        <div class="mini-stat">
+          <span>${lastSubjectName}</span>
+          <small>Last Subject</small>
+        </div>
+
+        <div class="mini-stat">
+          <span>${getTimedLabel(savedProgress.lastTimedDuration)}</span>
+          <small>Timer</small>
+        </div>
+      </div>
     </div>
+
+    <div class="subject-card start-card">
+      <div class="subject-card-top">
+        <div class="subject-card-title">Start Practicing</div>
+        <div class="subject-card-desc">
+          Jump back in or choose a subject to practice.
+        </div>
+      </div>
+
+      <div class="home-actions">
+        ${hasActiveQuiz ? `<button id="resume-quiz-btn" class="home-action-btn home-primary-btn">⚡ Resume Quiz</button>` : ""}
+        <button id="go-subjects-btn" class="home-action-btn home-secondary-btn">📚 Choose Subject</button>
+      </div>
+    </div>
+
+    <div class="quick-practice-section">
+      <p class="section-mini-title">Quick Practice</p>
+
+      <button class="quick-practice-card" onclick="showSubjectPage()">
+        <span>📘 AP Lang</span>
+        <small>Rapid Fire • Passages</small>
+      </button>
+
+      <button class="quick-practice-card" onclick="showSubjectPage()">
+        <span>🧬 AP Bio</span>
+        <small>Practice questions</small>
+      </button>
+    </div>
+
+    ${hasSavedProgress || hasActiveQuiz ? `
+      <button id="reset-progress-btn" class="reset-link-btn">
+        Reset Progress
+      </button>
+    ` : ""}
   `;
 
   document.getElementById("go-subjects-btn").addEventListener("click", showSubjectPage);
-if (hasActiveQuiz) {
-  document.getElementById("resume-quiz-btn").addEventListener("click", resumeActiveQuiz);
-}
+
+  if (hasActiveQuiz) {
+    document.getElementById("resume-quiz-btn").addEventListener("click", resumeActiveQuiz);
+  }
+
   if (hasSavedProgress || hasActiveQuiz) {
-  document.getElementById("reset-progress-btn").addEventListener("click", resetSavedProgress);
-}
+    document.getElementById("reset-progress-btn").addEventListener("click", resetSavedProgress);
+  }
 }
 
 function showSubjectPage() {
