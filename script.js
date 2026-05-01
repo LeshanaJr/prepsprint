@@ -29,7 +29,7 @@ const MODE_CONFIG = {
 const QUIZ_LIMITS = {
   standard: 45,
   rapid: 25,
-  timed: 40,
+  timed: 45,
   weak: 20,
   missed: 20
 };
@@ -69,7 +69,13 @@ const defaultProgress = {
   lastMode: "standard",
   lastTimedDuration: 300,
   subjectStats: {},
-  activeQuiz: null
+  activeQuiz: null,
+
+  dailyGoal: 20,
+  dailyAnswered: 0,
+  dailyStreak: 0,
+  lastGoalDate: null,
+  lastCompletedGoalDate: null
 };
 
 function loadProgress() {
@@ -96,6 +102,51 @@ function saveProgress() {
   } catch (error) {
     console.error("Failed to save progress:", error);
   }
+}
+
+function getTodayKey() {
+  return new Date().toISOString().split("T")[0];
+}
+
+function getYesterdayKey() {
+  const date = new Date();
+  date.setDate(date.getDate() - 1);
+  return date.toISOString().split("T")[0];
+}
+
+function checkDailyGoalDate() {
+  const today = getTodayKey();
+
+  if (savedProgress.lastGoalDate !== today) {
+    savedProgress.dailyAnswered = 0;
+    savedProgress.lastGoalDate = today;
+    saveProgress();
+  }
+}
+
+function recordDailyQuestionAnswered() {
+  checkDailyGoalDate();
+
+  if (savedProgress.dailyAnswered < savedProgress.dailyGoal) {
+    savedProgress.dailyAnswered++;
+  }
+
+  if (
+    savedProgress.dailyAnswered >= savedProgress.dailyGoal &&
+    savedProgress.lastCompletedGoalDate !== getTodayKey()
+  ) {
+    const yesterday = getYesterdayKey();
+
+    if (savedProgress.lastCompletedGoalDate === yesterday) {
+      savedProgress.dailyStreak++;
+    } else {
+      savedProgress.dailyStreak = 1;
+    }
+
+    savedProgress.lastCompletedGoalDate = getTodayKey();
+  }
+
+  saveProgress();
 }
 
 function getModeQuestionIndexKey(mode) {
@@ -508,6 +559,13 @@ function showHomePage() {
   const hasSavedProgress = savedProgress.totalQuizzesCompleted > 0;
 const hasActiveQuiz = !!savedProgress.activeQuiz;
 
+checkDailyGoalDate();
+
+const goalPercent = Math.min(
+  (savedProgress.dailyAnswered / savedProgress.dailyGoal) * 100,
+  100
+);
+  
   appContainer.innerHTML = `
     <div class="home-header">
      <h1 class="app-title">PrepSprint</h1>
@@ -527,6 +585,19 @@ const hasActiveQuiz = !!savedProgress.activeQuiz;
       <p class="home-stats-text">Last subject practiced: ${lastSubjectName}</p>
       <p class="home-stats-text">Last timer used: ${getTimedLabel(savedProgress.lastTimedDuration)}</p>
     </div>
+
+<div class="home-stats" style="margin-top: 14px;">
+  <p class="home-stats-title">Today's Goal</p>
+  <p class="home-stats-text">
+    ${savedProgress.dailyAnswered}/${savedProgress.dailyGoal} questions answered
+  </p>
+
+  <div class="progress-bar-container">
+    <div class="progress-bar-fill" style="width: ${goalPercent}%"></div>
+  </div>
+
+  <p class="home-stats-text">Daily streak: 🔥 ${savedProgress.dailyStreak}</p>
+</div>
 
     <div class="subject-card" style="margin-top: 18px;">
       <div class="subject-card-top">
@@ -807,7 +878,9 @@ function handleAnswer(i) {
   const q = questionList[questionIndex];
   const buttons = appContainer.querySelectorAll(".answer-btn");
   const selectedChoice = currentShuffledChoices[i];
- 
+
+recordDailyQuestionAnswered();
+  
   if (typeof trackQuestionAnswered === "function") {
   trackQuestionAnswered(
     subjects[currentSubject].name,
