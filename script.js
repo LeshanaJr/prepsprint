@@ -1380,8 +1380,8 @@ try {
      buildSubject("AP Java", "apJava"),
      buildSubject("AP Chem", "apChem"),
      buildSubject("AP Bio", "apBio"),
-     buildSubject("AP Lang", "apLang")
- // buildSubject("AP World", "apWorld")
+     buildSubject("AP Lang", "apLang"),
+     buildSubject("AP World", "apWorld")
 ];
 
 subjects = window.subjects;
