@@ -607,11 +607,11 @@ const goalPercent = Math.min(
         </div>
       </div>
 
-      <div class="subject-mode-group">
-        ${hasActiveQuiz ? `<button id="resume-quiz-btn" class="mode-btn standard-btn">⚡ Resume Quiz</button>` : ""}
-<button id="go-subjects-btn" class="mode-btn dark-btn">📚 Choose Subject</button>
-${hasSavedProgress || hasActiveQuiz ? `<button id="reset-progress-btn" class="mode-btn rapid-btn">🔄 Reset Progress</button>` : ""}
-      </div>
+<div class="home-actions">
+  ${hasActiveQuiz ? `<button id="resume-quiz-btn" class="home-action-btn home-primary-btn">⚡ Resume Quiz</button>` : ""}
+  <button id="go-subjects-btn" class="home-action-btn home-secondary-btn">📚 Choose Subject</button>
+  ${hasSavedProgress || hasActiveQuiz ? `<button id="reset-progress-btn" class="home-action-btn home-danger-btn">🔄 Reset Progress</button>` : ""}
+</div>
     </div>
   `;
 
