@@ -317,3 +317,122 @@ textarea {
   background: linear-gradient(135deg, #06B6D4, #22C55E);
   opacity: 0.78;
 }
+
+.compact-home-header {
+  margin-bottom: 18px;
+}
+
+.compact-home-header .app-title {
+  font-size: 40px;
+}
+
+.compact-home-header .app-subtitle {
+  font-size: 17px;
+  margin-top: 6px;
+}
+
+.hero-progress-card {
+  margin-top: 0;
+}
+
+.goal-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.streak-pill {
+  min-width: 70px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  text-align: center;
+  font-weight: 900;
+  background: rgba(15, 23, 42, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+}
+
+.mini-progress-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.mini-stat {
+  padding: 12px 10px;
+  border-radius: 16px;
+  background: rgba(2, 6, 23, 0.45);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.mini-stat span {
+  display: block;
+  color: white;
+  font-weight: 900;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-stat small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.start-card {
+  margin-top: 16px;
+}
+
+.quick-practice-section {
+  margin-top: 18px;
+}
+
+.section-mini-title {
+  margin: 0 0 10px;
+  color: white;
+  font-weight: 900;
+}
+
+.quick-practice-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-bottom: 12px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: rgba(15, 23, 42, 0.78);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: none;
+}
+
+.quick-practice-card span {
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.quick-practice-card small {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.reset-link-btn {
+  margin: 18px auto 30px;
+  width: auto;
+  display: block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-muted);
+  box-shadow: none;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.reset-link-btn:hover {
+  background: rgba(148, 163, 184, 0.08);
+}
