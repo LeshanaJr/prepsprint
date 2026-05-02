@@ -750,11 +750,14 @@ function showMorePage() {
       <div class="subject-card-title">What is PrepSprint?</div>
       <p class="home-stats-text">
         PrepSprint is a 100% free web app that was made to help people study and prepare for their AP exams. More subjects are actively getting added, so be on the lookout for them!\n\n
-        
-        PrepSprint currently supports passage-based questions, rapid-fire questions for memorizing FRQ concepts, and timed tests to simulate the real exams.\n\n
-
+        </p>
+     <p class="home-stats-text">
+     PrepSprint currently supports passage-based questions, rapid-fire questions for memorizing FRQ concepts, and timed tests to simulate the real exams.\n\n
+</p>
+<p class="home-stats-text">
         AP© is trademarked by CollegeBoard, who does not affiliate with or sponsor PrepSprint in any way.\n\n
-
+</p>
+<p class="home-stats-text">
         App created by Warren Grant
       </p>
     </div>
