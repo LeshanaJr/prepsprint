@@ -13,7 +13,7 @@ apPrecalc: [
     "questions/ap-precalc/unit-3.js"
   ],
 
-  apHug: [
+  apHumanGeo: [
     "questions/ap-human-geography/unit-1.js",
     "questions/ap-human-geography/unit-2.js",
     "questions/ap-human-geography/unit-3.js",
