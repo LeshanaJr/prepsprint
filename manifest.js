@@ -12,6 +12,16 @@ apPrecalc: [
     "questions/ap-precalc/unit-2.js",
     "questions/ap-precalc/unit-3.js"
   ],
+
+  apHug: [
+    "questions/ap-human-geography/unit-1.js",
+    "questions/ap-human-geography/unit-2.js",
+    "questions/ap-human-geography/unit-3.js",
+    "questions/ap-human-geography/unit-4.js",
+    "questions/ap-human-geography/unit-5.js",
+    "questions/ap-human-geography/unit-6.js",
+    "questions/ap-human-geography/unit-7.js"
+  ],
   
   apWorld: [
     "questions/ap-world/unit-1.js",
