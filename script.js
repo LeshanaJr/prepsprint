@@ -789,8 +789,9 @@ function showSubjectPage() {
       </p>
     </div>
 
-    <div id="subject-list" class="subject-list"></div>
-    <button id="back-home-btn">Back</button>
+    <div id="subject-list" class="subject-list compact-subject-list"></div>
+
+    ${getBottomNav("practice")}
   `;
 
   const subjectList = document.getElementById("subject-list");
@@ -798,37 +799,97 @@ function showSubjectPage() {
   subjects.forEach((subject, index) => {
     const stats = getSubjectStats(index);
 
-    subjectList.innerHTML += `
-      <div class="subject-card">
-        <div class="subject-card-top">
-          <div class="subject-card-title">${getSubjectIcon(subject.name)} ${subject.name}</div>
-          <div class="subject-card-desc">${getSubjectDescription(subject.name)}</div>
-          <div class="subject-card-desc" style="margin-top: 8px;">
-            Best Standard: ${stats.standardBestScore} • Best Rapid: ${stats.rapidBestScore}
-          </div>
-          <div class="subject-card-desc">
-            Best Timed: ${stats.timedBestScore} • Best Streak: ${stats.bestRapidStreak}
-          </div>
-        </div>
+    const card = document.createElement("button");
+    card.className = "compact-subject-card";
 
-        <div class="subject-mode-group">
-          <button class="mode-btn standard-btn" onclick="startSubject(${index}, 'standard')">
-            Standard Practice
-          </button>
-          <button class="mode-btn rapid-btn" onclick="startSubject(${index}, 'rapid')">
-            Rapid Fire
-          </button>
-          <button class="mode-btn rapid-btn" onclick="showTimedModePage(${index})">
-            Timed Practice
-          </button>
+    card.innerHTML = `
+      <div class="compact-subject-icon">${getSubjectIcon(subject.name)}</div>
+
+      <div class="compact-subject-info">
+        <div class="compact-subject-title">${subject.name}</div>
+        <div class="compact-subject-desc">${getSubjectDescription(subject.name)}</div>
+        <div class="compact-subject-stats">
+          Best Streak: ${stats.bestRapidStreak || 0}
         </div>
       </div>
 
-      ${getBottomNav("practice")}
+      <div class="compact-subject-arrow">›</div>
     `;
+
+    card.addEventListener("click", () => {
+      showSubjectModePage(index);
+    });
+
+    subjectList.appendChild(card);
+  });
+}
+
+function showSubjectModePage(index) {
+  stopTimer();
+
+  const subject = subjects[index];
+  const stats = getSubjectStats(index);
+
+  appContainer.innerHTML = `
+    <button class="subject-back-btn" id="back-subjects-btn">← Back</button>
+
+    <div class="selected-subject-card">
+      <div class="selected-subject-title">
+        ${getSubjectIcon(subject.name)} ${subject.name}
+      </div>
+
+      <div class="selected-subject-desc">
+        ${getSubjectDescription(subject.name)}
+      </div>
+
+      <div class="selected-subject-stats">
+        <div>
+          <span>Best Standard</span>
+          <strong>${stats.standardBestScore || 0}</strong>
+        </div>
+        <div>
+          <span>Best Rapid</span>
+          <strong>${stats.rapidBestScore || 0}</strong>
+        </div>
+        <div>
+          <span>Best Timed</span>
+          <strong>${stats.timedBestScore || 0}</strong>
+        </div>
+        <div>
+          <span>Best Streak</span>
+          <strong>${stats.bestRapidStreak || 0}</strong>
+        </div>
+      </div>
+
+      <button class="mode-btn standard-btn" id="standard-mode-btn">
+        Standard Practice
+      </button>
+
+      <button class="mode-btn rapid-btn" id="rapid-mode-btn">
+        Rapid Fire
+      </button>
+
+      <button class="mode-btn rapid-btn" id="timed-mode-btn">
+        Timed Practice
+      </button>
+    </div>
+
+    ${getBottomNav("practice")}
+  `;
+
+  document.getElementById("back-subjects-btn").addEventListener("click", showSubjectPage);
+
+  document.getElementById("standard-mode-btn").addEventListener("click", () => {
+    startSubject(index, "standard");
   });
 
-  document.getElementById("back-home-btn").addEventListener("click", showHomePage);
+  document.getElementById("rapid-mode-btn").addEventListener("click", () => {
+    startSubject(index, "rapid");
+  });
+
+  document.getElementById("timed-mode-btn").addEventListener("click", () => {
+    showTimedModePage(index);
+  });
 }
 
 function showTimedModePage(subjectIndex) {
