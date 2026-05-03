@@ -228,6 +228,16 @@ function resumeActiveQuiz() {
   renderQuestionScreen();
 }
 
+function formatMath(text) {
+  if (!text) return "";
+
+  return String(text)
+    .replace(/([A-Za-z])_(\d+)/g, "$1<sub>$2</sub>")
+    .replace(/log_(\d+)/g, "log<sub>$1</sub>")
+    .replace(/\^(\([^)]*\)|[A-Za-z0-9+\-*/π√]+)/g, "<sup>$1</sup>")
+    .replace(/<sup>\((.*?)\)<\/sup>/g, "<sup>$1</sup>");
+}
+
 const appContainer = document.getElementById("app-container");
 const indexToLetters = ["A", "B", "C", "D"];
 let subjects = [];
