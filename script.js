@@ -1463,7 +1463,7 @@ try {
      buildSubject("AP Lang", "apLang"),
      buildSubject("AP World", "apWorld"),
      buildSubject("AP Precalc", "apPrecalc"),
-     buildSubject("AP Human Geography", "apHug")
+     buildSubject("AP Human Geography", "apHumanGeo")
 ];
 
 subjects = window.subjects;
