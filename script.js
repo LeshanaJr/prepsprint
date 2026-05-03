@@ -635,7 +635,7 @@ function showHomePage() {
   appContainer.innerHTML = `
     <div class="home-header compact-home-header">
       <h1 class="app-title">PrepSprint</h1>
-      <p class="app-subtitle">Practice. Learn. Get ahead.</p>
+      <p class="app-subtitle">A 100% free web app that's designed to you get that 5.</p>
     </div>
 
     <div class="home-stats hero-progress-card">
@@ -678,7 +678,7 @@ function showHomePage() {
       <div class="subject-card-top">
         <div class="subject-card-title">Start Practicing</div>
         <div class="subject-card-desc">
-          Jump back in or choose a subject to practice.
+          Resume your last quiz or pick a new subject to practice.
         </div>
       </div>
 
@@ -851,14 +851,14 @@ function showTimedModePage(subjectIndex) {
       </div>
 
       <div class="subject-mode-group">
-        <button class="mode-btn standard-btn end-btn" onclick="startTimedSubject(${subjectIndex}, 300)">
-          5 Minutes
+        <button class="mode-btn standard-btn end-btn" onclick="startTimedSubject(${subjectIndex}, 2100)">
+          35 Minutes
         </button>
-        <button class="mode-btn standard-btn end-btn" onclick="startTimedSubject(${subjectIndex}, 600)">
-          10 Minutes
+        <button class="mode-btn standard-btn end-btn" onclick="startTimedSubject(${subjectIndex}, 2700)">
+          45 Minutes
         </button>
-        <button class="mode-btn standard-btn end-btn" onclick="startTimedSubject(${subjectIndex}, 1500)">
-          25 Minutes
+        <button class="mode-btn standard-btn end-btn" onclick="startTimedSubject(${subjectIndex}, 3600)">
+          60 Minutes
         </button>
         <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
           Back
@@ -1019,11 +1019,11 @@ ${showPassage && q.passageImage ? `
 ${showPassage ? `<p class="passage-text">${q.passageText}</p><hr>` : ""}
 
     ${currentMode === "weak" ? `<p><strong>Focus:</strong> ${q.category}</p>` : ""}
-    <p>${q.prompt}</p>
+    <p>${formatMath(q.prompt)}</p>
 
     ${currentShuffledChoices.map((choice, i) => `
       <button class="answer-btn" onclick="handleAnswer(${i})">
-        ${indexToLetters[i]}: ${choice.text}
+        ${indexToLetters[i]}: ${formatMath(choice.text)}
       </button>
     `).join("")}
   `;
@@ -1108,9 +1108,9 @@ recordDailyQuestionAnswered();
 
   appContainer.innerHTML += `
     <div class="feedback-box">
-      <p><strong>Your Choice:</strong> ${indexToLetters[i]}: ${currentShuffledChoices[i].text}</p>
-      <p><strong>Answer:</strong> ${indexToLetters[correctIndex]}: ${currentShuffledChoices[correctIndex].text}</p>
-      <p><strong>Explanation:</strong> Answer choice ${indexToLetters[i]}${selectedChoice.choiceExplanation}</p>
+      <p><strong>Your Choice:</strong> ${indexToLetters[i]}: ${formatMath(currentShuffledChoices[i].text)}</p>
+      <p><strong>Answer:</strong> ${indexToLetters[correctIndex]}: ${formatMath(currentShuffledChoices[correctIndex].text)}</p>
+      <p><strong>Explanation:</strong> Answer choice ${indexToLetters[i]}${formatMath(selectedChoice.choiceExplanation)}</p>
     </div>
     <button id="next-btn" onclick="goToNextQuestion()">Next</button>
   `;
