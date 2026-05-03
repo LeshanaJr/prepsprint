@@ -1784,6 +1784,150 @@ passages: [
 
   ]
 
+},
+
+   {
+
+  title: "Full Reconstruction of a Polynomial Function",
+
+  text: "A polynomial function f has degree 6 and a positive leading coefficient. The graph has a zero at x = -2 where it crosses the x-axis normally, a zero at x = 1 where it crosses and flattens, and a zero at x = 3 where it touches and turns around. The graph has exactly 4 turning points.",
+
+  questions: [
+
+{
+
+  prompt: "Which of the following is the most precise possible form of f(x), up to a positive constant factor?",
+
+  choices: [
+
+    { text: "f(x) = (x + 2)(x - 1)^3(x - 3)^2", correct: true, choiceExplanation: " is correct because crossing normally at x = -2 implies multiplicity 1, crossing with flattening at x = 1 implies odd multiplicity greater than 1 (most likely 3), and touching at x = 3 implies even multiplicity (2).\n\nThese multiplicities sum to 1 + 3 + 2 = 6, matching the degree. This configuration also allows up to 5 turning points, making 4 turning points feasible." },
+
+    { text: "f(x) = (x + 2)^2(x - 1)^3(x - 3)", correct: false, choiceExplanation: " is incorrect because multiplicity 2 at x = -2 would cause the graph to touch and turn.\n\nThe passage states the graph crosses normally at x = -2." },
+
+    { text: "f(x) = (x + 2)(x - 1)^2(x - 3)^3", correct: false, choiceExplanation: " is incorrect because multiplicity 2 at x = 1 would cause touching instead of crossing.\n\nAlso, multiplicity 3 at x = 3 would cause crossing instead of touching." },
+
+    { text: "f(x) = (x + 2)^3(x - 1)^1(x - 3)^2", correct: false, choiceExplanation: " is incorrect because flattening occurs at x = -2 here, not at x = 1.\n\nThe multiplicity assignments do not match the behavior described." }
+
+  ],
+
+  category: "Unit 1: Polynomial and Rational Functions"
+
+},
+
+{
+
+  prompt: "Which of the following must be true about the number and type of additional zeros of f(x)?",
+
+  choices: [
+
+    { text: "There are no additional real zeros, and any remaining zeros must be complex conjugates", correct: true, choiceExplanation: " is correct because the multiplicities already sum to 6, which matches the degree.\n\nThus, all zeros are accounted for, and no additional zeros exist. If additional roots were needed, they would occur in complex conjugate pairs." },
+
+    { text: "There must be at least one additional real zero", correct: false, choiceExplanation: " is incorrect because the multiplicities already sum to the full degree.\n\nNo additional zeros are required." },
+
+    { text: "There must be two additional real zeros", correct: false, choiceExplanation: " is incorrect because that would increase the total degree beyond 6.\n\nThe function already has the correct total multiplicity." },
+
+    { text: "There must be exactly one additional complex zero", correct: false, choiceExplanation: " is incorrect because non-real zeros occur in conjugate pairs.\n\nYou cannot have exactly one complex zero in a polynomial with real coefficients." }
+
+  ],
+
+  category: "Unit 1: Polynomial and Rational Functions"
+
+},
+
+{
+
+  prompt: "Which of the following statements best explains why exactly 4 turning points is consistent with the given structure?",
+
+  choices: [
+
+    { text: "A degree 6 polynomial can have up to 5 turning points, and multiplicity 3 at x = 1 reduces the number of distinct directional changes", correct: true, choiceExplanation: " is correct because the maximum number of turning points for degree 6 is 5.\n\nHigher multiplicity zeros, especially those that flatten, reduce the number of distinct turning points. Thus, 4 turning points is consistent with the structure." },
+
+    { text: "The number of turning points must equal the number of distinct zeros minus 1", correct: false, choiceExplanation: " is incorrect because turning points depend on degree and multiplicity, not just the number of distinct zeros.\n\nThis rule does not generally hold." },
+
+    { text: "Even-degree polynomials always have an even number of turning points", correct: false, choiceExplanation: " is incorrect because there is no such restriction.\n\nThe number of turning points can vary up to n - 1 regardless of parity." },
+
+    { text: "Multiplicity has no effect on turning points", correct: false, choiceExplanation: " is incorrect because multiplicity directly affects graph shape.\n\nHigher multiplicity can flatten the graph and reduce turning behavior." }
+
+  ],
+
+  category: "Unit 1: Polynomial and Rational Functions"
+
+}
+
+  ]
+
+},
+
+{
+
+  title: "Complete Rational Function Reconstruction Under Constraints",
+
+  text: "A rational function g(x) has vertical asymptotes at x = -2 and x = 5. The function has a removable discontinuity at x = 1. The horizontal asymptote is y = 3. The graph has an x-intercept at x = -4. The function has no other x-intercepts.",
+
+  questions: [
+
+{
+
+  prompt: "Which of the following is the most precise simplified form of g(x)?",
+
+  choices: [
+
+    { text: "g(x) = (3x + 12)/((x + 2)(x - 5))", correct: true, choiceExplanation: " is correct because the denominator gives vertical asymptotes at x = -2 and x = 5.\n\nThe numerator 3x + 12 = 3(x + 4) gives an x-intercept at x = -4. The degrees are equal, so the horizontal asymptote is y = 3. No additional factors create extra intercepts." },
+
+    { text: "g(x) = (3x^2 + 12)/((x + 2)(x - 5))", correct: false, choiceExplanation: " is incorrect because the numerator degree exceeds the denominator degree.\n\nThis would not produce a horizontal asymptote of y = 3." },
+
+    { text: "g(x) = (x + 4)/((x + 2)(x - 5))", correct: false, choiceExplanation: " is incorrect because the ratio of leading coefficients is 1.\n\nThis would give a horizontal asymptote of y = 1, not y = 3." },
+
+    { text: "g(x) = (3x + 12)/((x + 2)(x - 5)(x - 1))", correct: false, choiceExplanation: " is incorrect because the factor x - 1 remains in the denominator.\n\nThat would create a vertical asymptote at x = 1 instead of a removable discontinuity." }
+
+  ],
+
+  category: "Unit 1: Polynomial and Rational Functions"
+
+},
+
+{
+
+  prompt: "Which of the following represents a possible original (unsimplified) form of g(x)?",
+
+  choices: [
+
+    { text: "((3x + 12)(x - 1))/((x + 2)(x - 5)(x - 1))", correct: true, choiceExplanation: " is correct because the factor (x - 1) cancels, creating a removable discontinuity at x = 1.\n\nThe remaining factors produce the correct asymptotes and intercept." },
+
+    { text: "((3x + 12))/((x + 2)(x - 5)(x - 1))", correct: false, choiceExplanation: " is incorrect because the factor x - 1 does not cancel.\n\nThis would create a vertical asymptote at x = 1, not a hole." },
+
+    { text: "((3x + 12)(x - 1)^2)/((x + 2)(x - 5)(x - 1))", correct: false, choiceExplanation: " is incorrect because one factor of x - 1 remains after cancellation.\n\nThis would still produce a vertical asymptote at x = 1." },
+
+    { text: "((3x + 12)(x + 2))/((x + 2)(x - 5)(x - 1))", correct: false, choiceExplanation: " is incorrect because x + 2 would cancel.\n\nThat would remove the vertical asymptote at x = -2, contradicting the passage." }
+
+  ],
+
+  category: "Unit 1: Polynomial and Rational Functions"
+
+},
+
+{
+
+  prompt: "Which of the following is the most accurate explanation for why g(x) has exactly one x-intercept?",
+
+  choices: [
+
+    { text: "The numerator has exactly one distinct real zero that is not canceled or excluded by a vertical asymptote", correct: true, choiceExplanation: " is correct because x-intercepts occur when the numerator equals zero, provided the denominator is nonzero.\n\nThe factor x + 4 produces a single intercept, and no other factors contribute additional intercepts." },
+
+    { text: "The denominator has more factors than the numerator", correct: false, choiceExplanation: " is incorrect because the number of factors in the denominator does not determine the number of x-intercepts.\n\nOnly the numerator determines intercepts." },
+
+    { text: "The horizontal asymptote prevents additional intercepts", correct: false, choiceExplanation: " is incorrect because horizontal asymptotes do not restrict the number of x-intercepts.\n\nA function can cross the x-axis multiple times and still approach a constant." },
+
+    { text: "The removable discontinuity removes all but one intercept", correct: false, choiceExplanation: " is incorrect because a removable discontinuity only affects a single point.\n\nIt does not eliminate multiple intercepts unless they coincide exactly with that point." }
+
+  ],
+
+  category: "Unit 1: Polynomial and Rational Functions"
+
+}
+
+  ]
+
 } 
   
   ]
