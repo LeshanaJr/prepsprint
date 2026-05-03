@@ -56,12 +56,15 @@ body {
 body {
   font-weight: 500;
   letter-spacing: -0.2px;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .app {
   width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
+  background: linear-gradient(135deg, #24145f, 0%, #0b1f3f 45%, #071122 100%);
 }
 
 #app-container {
@@ -548,6 +551,13 @@ body {
   font-weight: 800;
 }
 
+.practice-screen,
+.subject-screen,
+.page,
+#app-container {
+min-height: 100vh;
+background: transparent;
+}
 .bottom-nav-btn.active {
   background: linear-gradient(135deg, rgba(124, 58, 237, 0.9), rgba(59, 130, 246, 0.9));
   color: white;
