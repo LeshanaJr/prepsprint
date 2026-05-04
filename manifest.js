@@ -25,7 +25,7 @@ apPrecalc: [
 
   apUSH: [
     "questions/ap-ush/unit-1.js",
-    "questions/ap-ushy/unit-2.js",
+    "questions/ap-ush/unit-2.js",
     "questions/ap-ush/unit-3.js",
     "questions/ap-ush/unit-4.js",
     "questions/ap-ush/unit-5.js",
