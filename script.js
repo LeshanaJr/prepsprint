@@ -635,7 +635,7 @@ function showHomePage() {
   appContainer.innerHTML = `
     <div class="home-header compact-home-header">
       <h1 class="app-title">PrepSprint</h1>
-      <p class="app-subtitle">A 100% free web app that's designed to you get that 5.</p>
+      <p class="app-subtitle">A 100% free web app that's designed to get you that 5.</p>
     </div>
 
     <div class="home-stats hero-progress-card">
