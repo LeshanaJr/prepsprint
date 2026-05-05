@@ -7,6 +7,58 @@ window.UNIT_MANIFEST = {
     "questions/ap-gov/unit-5.js"
   ],
 
+  apCalcAB: [
+  "questions/ap-calc-ab/unit-1.js",
+  "questions/ap-calc-ab/unit-2.js",
+  "questions/ap-calc-ab/unit-3.js",
+  "questions/ap-calc-ab/unit-4.js",
+  "questions/ap-calc-ab/unit-5.js",
+  "questions/ap-calc-ab/unit-6.js",
+  "questions/ap-calc-ab/unit-7.js",
+  "questions/ap-calc-ab/unit-8.js"
+],
+
+  apCalcBC: [
+  "questions/ap-calc-bc/unit-1.js",
+  "questions/ap-calc-bc/unit-2.js",
+  "questions/ap-calc-bc/unit-3.js",
+  "questions/ap-calc-bc/unit-4.js",
+  "questions/ap-calc-bc/unit-5.js",
+  "questions/ap-calc-bc/unit-6.js",
+  "questions/ap-calc-bc/unit-7.js",
+  "questions/ap-calc-bc/unit-8.js",
+  "questions/ap-calc-bc/unit-9.js",
+  "questions/ap-calc-bc/unit-10.js"
+],
+
+  apCSP: [
+  "questions/ap-csp/unit-1.js",
+  "questions/ap-csp/unit-2.js",
+  "questions/ap-csp/unit-3.js",
+  "questions/ap-csp/unit-4.js",
+  "questions/ap-csp/unit-5.js"
+],
+
+  apEnvironmentalScience: [
+  "questions/ap-environmental-science/unit-1.js",
+  "questions/ap-environmental-science/unit-2.js",
+  "questions/ap-environmental-science/unit-3.js",
+  "questions/ap-environmental-science/unit-4.js",
+  "questions/ap-environmental-science/unit-5.js",
+  "questions/ap-environmental-science/unit-6.js",
+  "questions/ap-environmental-science/unit-7.js",
+  "questions/ap-environmental-science/unit-8.js",
+  "questions/ap-environmental-science/unit-9.js"
+],
+
+  apPsych: [
+  "questions/ap-psych/unit-1.js",
+  "questions/ap-psych/unit-2.js",
+  "questions/ap-psych/unit-3.js",
+  "questions/ap-psych/unit-4.js",
+  "questions/ap-psych/unit-5.js"
+],
+
 apLit: [
   "questions/ap-lit/unit-1.js",
   "questions/ap-lit/unit-2.js",
