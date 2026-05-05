@@ -7,6 +7,18 @@ window.UNIT_MANIFEST = {
     "questions/ap-gov/unit-5.js"
   ],
 
+apLit: [
+  "questions/ap-lit/unit-1.js",
+  "questions/ap-lit/unit-2.js",
+  "questions/ap-lit/unit-3.js",
+  "questions/ap-lit/unit-4.js",
+  "questions/ap-lit/unit-5.js",
+  "questions/ap-lit/unit-6.js",
+  "questions/ap-lit/unit-7.js",
+  "questions/ap-lit/unit-8.js",
+  "questions/ap-lit/unit-9.js"
+],
+  
 apPrecalc: [
     "questions/ap-precalc/unit-1.js",
     "questions/ap-precalc/unit-2.js",
