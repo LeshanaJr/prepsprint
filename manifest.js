@@ -13,6 +13,37 @@ apPrecalc: [
     "questions/ap-precalc/unit-3.js"
   ],
 
+  apPhysicsCMechanics: [
+"questions/ap-physics-c-mechanics/unit-1.js",
+"questions/ap-physics-c-mechanics/unit-2.js",
+"questions/ap-physics-c-mechanics/unit-3.js",
+"questions/ap-physics-c-mechanics/unit-4.js",
+"questions/ap-physics-c-mechanics/unit-5.js",
+"questions/ap-physics-c-mechanics/unit-6.js",
+"questions/ap-physics-c-mechanics/unit-7.js"
+  ],
+
+  apStats: [
+    "questions/ap-stats/unit-1.js",
+    "questions/ap-stats/unit-2.js",
+    "questions/ap-stats/unit-3.js",
+    "questions/ap-stats/unit-4.js",
+    "questions/ap-stats/unit-5.js",
+    "questions/ap-stats/unit-6.js",
+    "questions/ap-stats/unit-7.js",
+    "questions/ap-stats/unit-8.js",
+    "questions/ap-stats/unit-9.js"
+  ],
+
+  apPhysicsCEM: [
+    "questions/ap-physics-c-em/unit-1.js",
+    "questions/ap-physics-c-em/unit-2.js",
+    "questions/ap-physics-c-em/unit-3.js",
+    "questions/ap-physics-c-em/unit-4.js",
+    "questions/ap-physics-c-em/unit-5.js",
+    "questions/ap-physics-c-em/unit-6.js"
+  ],
+
   apHumanGeo: [
     "questions/ap-human-geography/unit-1.js",
     "questions/ap-human-geography/unit-2.js",
