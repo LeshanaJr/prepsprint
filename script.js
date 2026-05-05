@@ -287,16 +287,63 @@ function shuffleArray(array) {
 }
 
 function getSubjectDescription(subjectName) {
-  if (subjectName === "AP Lang") return "Questions on rhetoric, argument, tone, and style.";
-  if (subjectName === "AP World") return "Questions on historical thinking, trade, and global change.";
-  return "Practice questions by subject.";
-}
+  const descriptions = {
+    "AP Lang": "Questions on rhetoric, argument, tone, style, and rhetorical situation.",
+    "AP World": "Questions on global history, trade networks, empire, revolution, conflict, and globalization.",
+    "AP U.S. History": "Questions on American history, historical evidence, causation, continuity, and change.",
+    "AP Literature": "Questions on poetry, fiction, drama, characterization, structure, tone, and theme.",
+    "AP Human Geography": "Questions on spatial patterns, population, culture, politics, agriculture, cities, and development.",
 
+    "AP Bio": "Questions on cells, genetics, evolution, ecology, physiology, and scientific reasoning.",
+    "AP Biology": "Questions on cells, genetics, evolution, ecology, physiology, and scientific reasoning.",
+
+    "AP Chem": "Questions on atomic structure, bonding, reactions, thermodynamics, equilibrium, acids/bases, and kinetics.",
+    "AP Chemistry": "Questions on atomic structure, bonding, reactions, thermodynamics, equilibrium, acids/bases, and kinetics.",
+
+    "AP Physics C: Mechanics": "Questions on motion, forces, energy, momentum, rotation, and oscillations.",
+    "AP Physics C: Electricity & Magnetism": "Questions on electric fields, circuits, magnetism, induction, and electromagnetic relationships.",
+
+    "AP Environmental Science": "Questions on ecosystems, biodiversity, populations, resources, pollution, energy, and global change.",
+    "APES": "Questions on ecosystems, biodiversity, populations, resources, pollution, energy, and global change.",
+
+    "AP Stats": "Questions on data analysis, probability, sampling, inference, chi-square tests, and regression.",
+    "AP Statistics": "Questions on data analysis, probability, sampling, inference, chi-square tests, and regression.",
+
+    "AP Calculus AB": "Questions on limits, derivatives, integrals, differential equations, and applications of calculus.",
+    "AP Calc AB": "Questions on limits, derivatives, integrals, differential equations, and applications of calculus.",
+
+    "AP Calculus BC": "Questions on AB calculus topics plus parametric, polar, vector-valued functions, and series.",
+    "AP Calc BC": "Questions on AB calculus topics plus parametric, polar, vector-valued functions, and series.",
+
+    "AP Precalc": "Questions on functions, modeling, trigonometry, exponential/logarithmic relationships, and analytical reasoning.",
+    "AP Precalculus": "Questions on functions, modeling, trigonometry, exponential/logarithmic relationships, and analytical reasoning.",
+
+    "AP Java": "Questions on Java programming, objects, arrays, ArrayLists, recursion, and algorithmic thinking.",
+    "AP Computer Science A": "Questions on Java programming, objects, arrays, ArrayLists, recursion, and algorithmic thinking.",
+
+    "AP CSP": "Questions on algorithms, data, programming, networks, cybersecurity, and computing impacts.",
+    "AP Computer Science Principles": "Questions on algorithms, data, programming, networks, cybersecurity, and computing impacts.",
+
+    "AP Gov": "Questions on constitutional principles, branches of government, civil liberties, political beliefs, and participation.",
+    "AP Government": "Questions on constitutional principles, branches of government, civil liberties, political beliefs, and participation.",
+
+    "AP Psych": "Questions on behavior, cognition, development, learning, social psychology, personality, and mental health.",
+    "AP Psychology": "Questions on behavior, cognition, development, learning, social psychology, personality, and mental health."
+  };
+
+  return descriptions[subjectName] || "Practice questions by subject.";
+}
 function getSubjectIcon(subjectName) {
-  if (subjectName === "AP Lang") return "📘";
-  if (subjectName === "AP World" || subjectName === "AP Gov") return "🌍";
+  if (subjectName === "AP Lang" || subjectName === "AP Lit") return "📘";
+  if (subjectName === "AP World" || subjectName === "AP Gov" || subjectName === "AP Human Geography") return "🌍";
+  if (subjectName === "AP U.S. History") return "🇺🇸";
   if (subjectName === "AP Chem") return "🧪";
+  if (subjectName === "AP Environmental Science") return "🌳";
+  if (subjectName === "AP Computer Science Principles" || subjectName === "AP Java") return "💻";
   if (subjectName === "AP Bio") return "🧬";
+  if (subjectName === "AP Physics C: Mechanics") return "🚀";
+  if (subjectName === "AP Physics C: Electromagnetics") return "🧲";
+  if (subjectName === "AP Stats") return "📈";
   return "📚";
 }
 
@@ -1456,19 +1503,29 @@ try {
   loadUnitFiles()
   .then(() => {
    window.subjects = [
-  buildSubject("AP Gov", "apGov"),
-     buildSubject("AP Java", "apJava"),
-     buildSubject("AP Chem", "apChem"),
-     buildSubject("AP Bio", "apBio"),
-     buildSubject("AP Lang", "apLang"),
-     buildSubject("AP Lit", "apLit"),
+     buildSubject("AP Gov", "apGov"),
      buildSubject("AP World", "apWorld"),
-     buildSubject("AP Precalc", "apPrecalc"),
      buildSubject("AP Human Geography", "apHumanGeo"),
      buildSubject("AP U.S. History", "apUSH"),
+
+     buildSubject("AP Environmental Science", "apEnvironmentalScience"),
+     buildSubject("AP Chem", "apChem"),
+     buildSubject("AP Bio", "apBio"),
+     buildSubject("AP Psychology", "apPsych"),
      buildSubject("AP Physics C: Electromagnetics", "apPhysicsCEM"),
      buildSubject("AP Physics C: Mechanics", "apPhysicsCMechanics"),
-     buildSubject("AP Stats", "apStats")
+
+     buildSubject("AP Precalc", "apPrecalc"),
+     buildSubject("AP Calculus AB", "apCalcAB"),
+     buildSubject("AP Calculus BC", "apCalcBC"),
+     
+     buildSubject("AP Computer Science Principles", "apCSP"),
+     buildSubject("AP Java", "apJava"),
+     buildSubject("AP Stats", "apStats"),
+     
+     buildSubject("AP Lang", "apLang"),
+     buildSubject("AP Lit", "apLit")
+   
 ];
 
 subjects = window.subjects;
