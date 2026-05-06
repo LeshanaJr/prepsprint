@@ -4,6 +4,16 @@ const MODE_CONFIG = {
     autoAdvance: false,
     showPassage: true
   },
+  unit: {
+    label: "Study by Unit",
+    autoAdvance: false,
+    showPassage: true
+  },
+  focus: {
+    label: "Focus Guide Practice",
+    autoAdvance: false,
+    showPassage: true
+  },
   rapid: {
     label: "Rapid Fire",
     autoAdvance: true,
@@ -28,6 +38,8 @@ const MODE_CONFIG = {
 
 const QUIZ_LIMITS = {
   standard: 45,
+  unit: 35,
+  focus: 45,
   rapid: 25,
   timed: 45,
   weak: 20,
@@ -39,6 +51,7 @@ function buildSubject(subjectName, bankKey) {
 
   return {
     name: subjectName,
+    units,
     rapidQuestions: units.flatMap(unit => unit.rapidQuestions || []),
     passages: units.flatMap(unit => unit.passages || [])
   };
@@ -61,13 +74,183 @@ function getRandomQuestions(questions, limit) {
   return shuffleArray(questions).slice(0, Math.min(limit, questions.length));
 }
 
+const focusGuides = {
+  "AP Chem": {
+    title: "AP Chemistry Focus Guide",
+    boostedCategories: [
+      "Unit 7: Equilibrium",
+      "Unit 8: Acids and Bases",
+      "Unit 9: Thermodynamics and Electrochemistry"
+    ],
+    boostedKeywords: [
+      "equilibrium",
+      "buffer",
+      "titration",
+      "pH",
+      "Ksp",
+      "Le Chatelier",
+      "Gibbs",
+      "cell potential",
+      "electrochemical",
+      "weak acid"
+    ]
+  },
+
+  "AP Bio": {
+    title: "AP Biology Focus Guide",
+    boostedCategories: [
+      "Unit 3: Cellular Energetics",
+      "Unit 5: Heredity",
+      "Unit 6: Gene Expression and Regulation",
+      "Unit 7: Natural Selection"
+    ],
+    boostedKeywords: [
+      "enzyme",
+      "photosynthesis",
+      "cellular respiration",
+      "genetics",
+      "meiosis",
+      "gene expression",
+      "natural selection",
+      "Hardy-Weinberg",
+      "evolution"
+    ]
+  },
+
+  "AP Gov": {
+    title: "AP Government Focus Guide",
+    boostedCategories: [
+      "Unit 2: Interactions Among Branches of Government",
+      "Unit 3: Civil Liberties and Civil Rights",
+      "Unit 5: Political Participation"
+    ],
+    boostedKeywords: [
+      "judicial review",
+      "federalism",
+      "selective incorporation",
+      "civil liberties",
+      "civil rights",
+      "campaign finance",
+      "voter turnout",
+      "interest groups"
+    ]
+  },
+
+  "AP World": {
+    title: "AP World Focus Guide",
+    boostedCategories: [
+      "Unit 2: Networks of Exchange",
+      "Unit 4: Transoceanic Interconnections",
+      "Unit 5: Revolutions",
+      "Unit 6: Consequences of Industrialization"
+    ],
+    boostedKeywords: [
+      "trade",
+      "empire",
+      "Mongol",
+      "Indian Ocean",
+      "Columbian Exchange",
+      "industrialization",
+      "imperialism",
+      "revolution",
+      "globalization"
+    ]
+  },
+
+  "AP Lang": {
+    title: "AP Lang Focus Guide",
+    boostedCategories: [
+      "Unit 1: Rhetorical Situation",
+      "Unit 2: Claims and Evidence",
+      "Unit 3: Reasoning and Organization",
+      "Unit 7: Complexity of Arguments"
+    ],
+    boostedKeywords: [
+      "rhetorical situation",
+      "claim",
+      "evidence",
+      "commentary",
+      "line of reasoning",
+      "audience",
+      "purpose",
+      "tone",
+      "argument"
+    ]
+  }
+};
+
+function getUnitPassageQuestions(unit) {
+  return (unit.passages || []).flatMap((passage) =>
+    passage.questions.map((question) => ({
+      ...question,
+      sourceType: "standard",
+      passageTitle: passage.title,
+      passageText: passage.text,
+      passageImage: passage.image,
+      passageImageAlt: passage.imageAlt
+    }))
+  );
+}
+
+function getAllUnitQuestions(unit) {
+  const passageQuestions = getUnitPassageQuestions(unit);
+
+  const rapidQs = (unit.rapidQuestions || []).map((question) => ({
+    ...question,
+    sourceType: "rapid"
+  }));
+
+  return [...passageQuestions, ...rapidQs];
+}
+
+function getQuestionWeight(question, focusGuide) {
+  if (!focusGuide) return 1;
+
+  let weight = 1;
+
+  const category = question.category || "";
+  const prompt = question.prompt || "";
+  const passageTitle = question.passageTitle || "";
+  const passageText = question.passageText || "";
+
+  const combinedText = `${category} ${prompt} ${passageTitle} ${passageText}`.toLowerCase();
+
+  if (focusGuide.boostedCategories?.includes(category)) {
+    weight += 5;
+  }
+
+  if (focusGuide.boostedKeywords) {
+    focusGuide.boostedKeywords.forEach((keyword) => {
+      if (combinedText.includes(keyword.toLowerCase())) {
+        weight += 2;
+      }
+    });
+  }
+
+  return weight;
+}
+
+function weightedShuffleQuestions(questions, focusGuide) {
+  return questions
+    .map((question) => {
+      const weight = getQuestionWeight(question, focusGuide);
+
+      return {
+        question,
+        randomScore: Math.random() ** (1 / weight)
+      };
+    })
+    .sort((a, b) => b.randomScore - a.randomScore)
+    .map((item) => item.question);
+}
+
 const STORAGE_KEY = "prepsprint_progress_v1";
 
 const defaultProgress = {
   totalQuizzesCompleted: 0,
   lastSubjectIndex: 0,
-recentSubjectIndexes: [],
-lastMode: "standard",
+  recentSubjectIndexes: [],
+  lastMode: "standard",
   lastTimedDuration: 300,
   subjectStats: {},
   activeQuiz: null,
@@ -76,8 +259,228 @@ lastMode: "standard",
   dailyAnswered: 0,
   dailyStreak: 0,
   lastGoalDate: null,
-  lastCompletedGoalDate: null
+  lastCompletedGoalDate: null,
+
+  userId: null,
+  displayName: ""
 };
+
+const USER_STATS_SYNC_EVERY = 15;
+
+function getUserTrackingId() {
+  let userId = localStorage.getItem("prepsprint_user_id");
+
+  if (!userId) {
+    userId = "user_" + Math.random().toString(36).slice(2, 10) + "_" + Date.now();
+    localStorage.setItem("prepsprint_user_id", userId);
+  }
+
+  return userId;
+}
+
+function loadUserStatsBuffer() {
+  try {
+    return JSON.parse(localStorage.getItem("prepsprint_user_stats_buffer")) || {
+      totalAnswered: 0,
+      totalCorrect: 0,
+      totalIncorrect: 0,
+      unsyncedAnswers: 0,
+      subjectStats: {}
+    };
+  } catch {
+    return {
+      totalAnswered: 0,
+      totalCorrect: 0,
+      totalIncorrect: 0,
+      unsyncedAnswers: 0,
+      subjectStats: {}
+    };
+  }
+}
+
+function trackUserQuestionAnsweredLocal(subjectName, mode, category, isCorrect) {
+  const buffer = loadUserStatsBuffer();
+
+  if (!buffer.subjectStats[subjectName]) {
+    buffer.subjectStats[subjectName] = {
+      answered: 0,
+      correct: 0,
+      incorrect: 0,
+      modes: {},
+      categories: {}
+    };
+  }
+
+  const subject = buffer.subjectStats[subjectName];
+
+  subject.answered++;
+  subject.correct += isCorrect ? 1 : 0;
+  subject.incorrect += isCorrect ? 0 : 1;
+
+  if (!subject.modes[mode]) {
+    subject.modes[mode] = {
+      answered: 0,
+      correct: 0,
+      incorrect: 0
+    };
+  }
+
+  subject.modes[mode].answered++;
+  subject.modes[mode].correct += isCorrect ? 1 : 0;
+  subject.modes[mode].incorrect += isCorrect ? 0 : 1;
+
+  if (!subject.categories[category]) {
+    subject.categories[category] = {
+      answered: 0,
+      correct: 0,
+      incorrect: 0
+    };
+  }
+
+  subject.categories[category].answered++;
+  subject.categories[category].correct += isCorrect ? 1 : 0;
+  subject.categories[category].incorrect += isCorrect ? 0 : 1;
+
+  buffer.totalAnswered++;
+  buffer.totalCorrect += isCorrect ? 1 : 0;
+  buffer.totalIncorrect += isCorrect ? 0 : 1;
+  buffer.unsyncedAnswers++;
+
+  buffer.lastSubject = subjectName;
+  buffer.lastMode = mode;
+  buffer.lastCategory = category;
+  buffer.lastAnsweredAt = new Date().toISOString();
+
+  saveUserStatsBuffer(buffer);
+
+  if (buffer.unsyncedAnswers >= USER_STATS_SYNC_EVERY) {
+    syncUserStatsToFirebase();
+  }
+}
+
+async function syncUserStatsToFirebase() {
+  if (typeof db === "undefined") return;
+
+  const buffer = loadUserStatsBuffer();
+
+  if (!buffer.unsyncedAnswers || buffer.unsyncedAnswers <= 0) {
+    return;
+  }
+
+  const userId = getUserTrackingId();
+  const displayName = localStorage.getItem("prepsprint_display_name") || "";
+
+  try {
+    await db.collection("users").doc(userId).set({
+      userId,
+      displayName,
+      totalAnswered: buffer.totalAnswered,
+      totalCorrect: buffer.totalCorrect,
+      totalIncorrect: buffer.totalIncorrect,
+      subjectStats: buffer.subjectStats,
+      lastSubject: buffer.lastSubject || "",
+      lastMode: buffer.lastMode || "",
+      lastCategory: buffer.lastCategory || "",
+      lastAnsweredAt: buffer.lastAnsweredAt || new Date().toISOString(),
+      lastSyncedAt: new Date().toISOString()
+    }, { merge: true });
+
+    buffer.unsyncedAnswers = 0;
+    saveUserStatsBuffer(buffer);
+  } catch (error) {
+    console.error("Failed to sync user stats:", error);
+  }
+}
+
+function saveUserStatsBuffer(buffer) {
+  localStorage.setItem("prepsprint_user_stats_buffer", JSON.stringify(buffer));
+}
+
+function generateUserId() {
+  return "user_" + Math.random().toString(36).slice(2, 10) + "_" + Date.now();
+}
+
+function getOrCreateUserId() {
+  if (!savedProgress.userId) {
+    savedProgress.userId = generateUserId();
+    saveProgress();
+  }
+
+  return savedProgress.userId;
+}
+
+function setDisplayName(name) {
+  savedProgress.displayName = name.trim();
+  saveProgress();
+
+  if (typeof saveUserProfileToFirebase === "function") {
+    saveUserProfileToFirebase();
+  }
+}
+
+function getUserTrackingId() {
+  let userId = localStorage.getItem("prepsprint_user_id");
+
+  if (!userId) {
+    userId = "user_" + Math.random().toString(36).slice(2, 10) + "_" + Date.now();
+    localStorage.setItem("prepsprint_user_id", userId);
+  }
+
+  return userId;
+}
+
+async function saveUserProfileToFirebase(displayName = "") {
+  if (typeof db === "undefined") return;
+
+  const userId = getUserTrackingId();
+
+  try {
+    await db.collection("users").doc(userId).set({
+      userId,
+      displayName,
+      lastSeenAt: new Date().toISOString()
+    }, { merge: true });
+  } catch (error) {
+    console.error("Failed to save user profile:", error);
+  }
+}
+
+async function trackUserQuestionAnswered(subjectName, mode, category, isCorrect) {
+  if (typeof db === "undefined") return;
+
+  const userId = getUserTrackingId();
+  const displayName = localStorage.getItem("prepsprint_display_name") || "";
+  const today = new Date().toISOString().split("T")[0];
+
+  const userRef = db.collection("users").doc(userId);
+  const subjectRef = userRef.collection("subjectStats").doc(subjectName);
+
+  try {
+    await db.runTransaction(async (transaction) => {
+      const subjectDoc = await transaction.get(subjectRef);
+      const current = subjectDoc.exists ? subjectDoc.data() : {};
+
+      transaction.set(userRef, {
+        userId,
+        displayName,
+        lastSeenAt: new Date().toISOString()
+      }, { merge: true });
+
+      transaction.set(subjectRef, {
+        subjectName,
+        answered: (current.answered || 0) + 1,
+        correct: (current.correct || 0) + (isCorrect ? 1 : 0),
+        incorrect: (current.incorrect || 0) + (isCorrect ? 0 : 1),
+        lastMode: mode,
+        lastCategory: category,
+        lastAnsweredDate: today,
+        lastAnsweredAt: new Date().toISOString()
+      }, { merge: true });
+    });
+  } catch (error) {
+    console.error("Failed to track user question:", error);
+  }
+}
 
 function loadProgress() {
   try {
@@ -162,7 +565,7 @@ function saveActiveQuiz() {
 
   if (!questionList.length) return;
 
-  savedProgress.activeQuiz = {
+   savedProgress.activeQuiz = {
     subjectIndex: currentSubject,
     mode: currentMode,
     score,
@@ -172,10 +575,20 @@ function saveActiveQuiz() {
     bestRapidStreak,
     timedDuration,
     timeRemaining,
+
     standardQuestions,
     standardQuestionIndex,
+
     rapidQuestions,
     rapidQuestionIndex,
+
+    unitQuestions,
+    unitQuestionIndex,
+    currentUnitIndex,
+
+    focusGuideQuestions,
+    focusGuideQuestionIndex,
+
     weakAreaQuestions,
     weakAreaQuestionIndex,
     missedQuestionIndex,
@@ -215,6 +628,20 @@ function resumeActiveQuiz() {
   rapidQuestions = active.rapidQuestions || [];
   rapidQuestionIndex = active.rapidQuestionIndex || 0;
 
+  unitQuestions = active.unitQuestions || [];
+  unitQuestionIndex = active.unitQuestionIndex || 0;
+  currentUnitIndex = active.currentUnitIndex || 0;
+
+  focusGuideQuestions = active.focusGuideQuestions || [];
+  focusGuideQuestionIndex = active.focusGuideQuestionIndex || 0;
+  
+  unitQuestions = active.unitQuestions || [];
+  unitQuestionIndex = active.unitQuestionIndex || 0;
+  currentUnitIndex = active.currentUnitIndex || 0;
+
+  focusGuideQuestions = active.focusGuideQuestions || [];
+  focusGuideQuestionIndex = active.focusGuideQuestionIndex || 0;
+  
   weakAreaQuestions = active.weakAreaQuestions || [];
   weakAreaQuestionIndex = active.weakAreaQuestionIndex || 0;
 
@@ -258,6 +685,13 @@ let rapidQuestionIndex = 0;
 let rapidAdvanceDelay = 1000;
 let rapidStreak = 0;
 let bestRapidStreak = 0;
+
+let unitQuestions = [];
+let unitQuestionIndex = 0;
+let currentUnitIndex = 0;
+
+let focusGuideQuestions = [];
+let focusGuideQuestionIndex = 0;
 
 let weakAreaQuestions = [];
 let weakAreaQuestionIndex = 0;
@@ -437,6 +871,8 @@ function getQuestionsByCategories(subjectIndex, categories) {
 
 function getCurrentQuestionList() {
   if (currentMode === "rapid") return rapidQuestions;
+  if (currentMode === "unit") return unitQuestions;
+  if (currentMode === "focus") return focusGuideQuestions;
   if (currentMode === "weak") return weakAreaQuestions;
   if (currentMode === "missed") return missedQuestions;
   if (currentMode === "standard" || currentMode === "timed") return standardQuestions;
@@ -446,6 +882,8 @@ function getCurrentQuestionList() {
 
 function getCurrentQuestionIndex() {
   if (currentMode === "rapid") return rapidQuestionIndex;
+  if (currentMode === "unit") return unitQuestionIndex;
+  if (currentMode === "focus") return focusGuideQuestionIndex;
   if (currentMode === "weak") return weakAreaQuestionIndex;
   if (currentMode === "missed") return missedQuestionIndex;
   if (currentMode === "standard" || currentMode === "timed") return standardQuestionIndex;
@@ -467,6 +905,10 @@ function recordCompletedQuiz(mode, scoreValue, total) {
   stats.quizzesCompleted++;
 
   if (mode === "standard") {
+    stats.standardBestScore = Math.max(stats.standardBestScore, scoreValue);
+  } else if (mode === "unit") {
+    stats.standardBestScore = Math.max(stats.standardBestScore, scoreValue);
+  } else if (mode === "focus") {
     stats.standardBestScore = Math.max(stats.standardBestScore, scoreValue);
   } else if (mode === "rapid") {
     stats.rapidBestScore = Math.max(stats.rapidBestScore, scoreValue);
@@ -819,10 +1261,49 @@ function showMorePage() {
       </p>
     </div>
 
+    <div class="subject-card">
+  <div class="subject-card-title">User Tracking</div>
+
+  <p class="home-stats-text">
+    Your User ID: <strong>${localStorage.getItem("prepsprint_user_id") || "Not created yet"}</strong>
+  </p>
+
+  <p class="home-stats-text">
+    Add a name or code so your progress can be identified.
+  </p>
+
+  <input
+    id="display-name-input"
+    value="${localStorage.getItem("prepsprint_display_name") || ""}"
+    placeholder="Example: Warren, WG-042, Period 3"
+    style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc;"
+  >
+
+  <button class="mode-btn standard-btn" onclick="saveDisplayNameFromInput()">
+    Save User Name / Code
+  </button>
+</div>
+
     <button class="reset-link-btn" onclick="resetSavedProgress()">Reset Progress</button>
 
     ${getBottomNav("more")}
   `;
+}
+
+function saveDisplayNameFromInput() {
+  const input = document.getElementById("display-name-input");
+  if (!input) return;
+
+  const displayName = input.value.trim();
+
+  localStorage.setItem("prepsprint_display_name", displayName);
+
+  if (typeof saveUserProfileToFirebase === "function") {
+    saveUserProfileToFirebase(displayName);
+  }
+
+  alert("User tracking name saved!");
+  showMorePage();
 }
 
 function showSubjectPage() {
@@ -908,8 +1389,16 @@ function showSubjectModePage(index) {
         </div>
       </div>
 
-      <button class="mode-btn standard-btn" id="standard-mode-btn">
+            <button class="mode-btn standard-btn" id="standard-mode-btn">
         Standard Practice
+      </button>
+
+      <button class="mode-btn standard-btn" id="unit-mode-btn">
+        Study by Unit
+      </button>
+
+      <button class="mode-btn standard-btn" id="focus-mode-btn">
+        Focus Guide Practice
       </button>
 
       <button class="mode-btn rapid-btn" id="rapid-mode-btn">
@@ -919,7 +1408,6 @@ function showSubjectModePage(index) {
       <button class="mode-btn rapid-btn" id="timed-mode-btn">
         Timed Practice
       </button>
-    </div>
 
     ${getBottomNav("practice")}
   `;
@@ -937,6 +1425,111 @@ function showSubjectModePage(index) {
   document.getElementById("timed-mode-btn").addEventListener("click", () => {
     showTimedModePage(index);
   });
+
+    document.getElementById("unit-mode-btn").addEventListener("click", () => {
+    showStudyByUnitPage(index);
+  });
+
+  document.getElementById("focus-mode-btn").addEventListener("click", () => {
+    startSubject(index, "focus");
+  });
+}
+
+function showStudyByUnitPage(subjectIndex) {
+  stopTimer();
+
+  const subject = subjects[subjectIndex];
+  const units = subject.units || [];
+
+  if (!units.length) {
+    renderUnavailableScreen(subjectIndex, "Unit practice is not available for this subject yet.");
+    return;
+  }
+
+  appContainer.innerHTML = `
+    <button class="subject-back-btn" onclick="showSubjectModePage(${subjectIndex})">← Back</button>
+
+    <div class="subject-page-header">
+      <h1 class="section-title">${subject.name}</h1>
+      <p class="subject-page-subtitle">
+        Choose a unit to practice.
+      </p>
+    </div>
+
+    <div class="subject-list compact-subject-list">
+      ${units.map((unit, unitIndex) => {
+        const rapidCount = unit.rapidQuestions?.length || 0;
+        const passageCount = (unit.passages || []).reduce((total, passage) => {
+          return total + (passage.questions?.length || 0);
+        }, 0);
+
+        return `
+          <button class="compact-subject-card" onclick="startUnitPractice(${subjectIndex}, ${unitIndex})">
+            <div class="compact-subject-icon">📖</div>
+
+            <div class="compact-subject-info">
+              <div class="compact-subject-title">${unit.name}</div>
+              <div class="compact-subject-desc">
+                ${passageCount} passage questions • ${rapidCount} rapid questions
+              </div>
+            </div>
+
+            <div class="compact-subject-arrow">›</div>
+          </button>
+        `;
+      }).join("")}
+    </div>
+
+    ${getBottomNav("practice")}
+  `;
+}
+
+function startUnitPractice(subjectIndex, unitIndex) {
+  stopTimer();
+  clearActiveQuiz();
+
+  const subject = subjects[subjectIndex];
+  const unit = subject.units?.[unitIndex];
+
+  if (!unit) {
+    renderUnavailableScreen(subjectIndex, "That unit could not be found.");
+    return;
+  }
+
+  currentSubject = subjectIndex;
+  currentUnitIndex = unitIndex;
+  currentMode = "unit";
+
+  currentPassage = 0;
+  currentQuestion = 0;
+  score = 0;
+  currentShuffledChoices = [];
+
+  weakPoints = {};
+  missedQuestions = [];
+  missedQuestionIndex = 0;
+
+  rapidStreak = 0;
+  bestRapidStreak = 0;
+
+  unitQuestions = getRandomQuestions(
+    getAllUnitQuestions(unit),
+    QUIZ_LIMITS.unit
+  );
+
+  unitQuestionIndex = 0;
+
+  savedProgress.lastSubjectIndex = subjectIndex;
+  savedProgress.lastMode = "unit";
+  updateRecentSubjects(subjectIndex);
+  saveProgress();
+
+  if (!unitQuestions.length) {
+    renderUnavailableScreen(subjectIndex, "No questions are available for this unit yet.");
+    return;
+  }
+
+  renderQuestionScreen();
 }
 
 function showTimedModePage(subjectIndex) {
@@ -1016,6 +1609,36 @@ saveProgress();
   renderQuestionScreen();
   return;
 }
+
+   if (mode === "focus") {
+    weakPoints = {};
+    missedQuestions = [];
+    missedQuestionIndex = 0;
+
+    const subject = subjects[subjectIndex];
+    const focusGuide = focusGuides[subject.name];
+
+    const allQuestions = [
+      ...getAllPassageQuestions(subject),
+      ...(subject.rapidQuestions || []).map((question) => ({
+        ...question,
+        sourceType: "rapid"
+      }))
+    ];
+
+    focusGuideQuestions = weightedShuffleQuestions(allQuestions, focusGuide)
+      .slice(0, Math.min(QUIZ_LIMITS.focus, allQuestions.length));
+
+    focusGuideQuestionIndex = 0;
+
+    if (!focusGuideQuestions.length) {
+      renderUnavailableScreen(subjectIndex, "Focus Guide questions are not available for this subject yet.");
+      return;
+    }
+
+    renderQuestionScreen();
+    return;
+  } 
 
   if (mode === "rapid") {
     weakPoints = {};
@@ -1146,8 +1769,24 @@ function handleAnswer(i) {
 
 recordDailyQuestionAnswered();
   
-  if (typeof trackQuestionAnswered === "function") {
+ if (typeof trackQuestionAnswered === "function") {
   trackQuestionAnswered(
+    subjects[currentSubject].name,
+    currentMode,
+    q.category,
+    selectedChoice.correct
+  );
+}
+
+trackUserQuestionAnsweredLocal(
+  subjects[currentSubject].name,
+  currentMode,
+  q.category,
+  selectedChoice.correct
+);
+
+if (typeof trackUserQuestionAnswered === "function") {
+  trackUserQuestionAnswered(
     subjects[currentSubject].name,
     currentMode,
     q.category,
@@ -1238,6 +1877,30 @@ function goToNextQuestion() {
     return;
   }
 
+  if (currentMode === "unit") {
+    unitQuestionIndex++;
+
+    if (unitQuestionIndex < unitQuestions.length) {
+      renderQuestionScreen();
+      return;
+    }
+
+    renderResultsScreen("unit");
+    return;
+  }
+
+  if (currentMode === "focus") {
+    focusGuideQuestionIndex++;
+
+    if (focusGuideQuestionIndex < focusGuideQuestions.length) {
+      renderQuestionScreen();
+      return;
+    }
+
+    renderResultsScreen("focus");
+    return;
+  }
+  
   if (currentMode === "weak") {
     weakAreaQuestionIndex++;
 
@@ -1279,6 +1942,7 @@ function renderTimedOutScreen() {
   const total = getCurrentQuestionList().length;
   clearActiveQuiz();
 recordCompletedQuiz("timed", score, total);
+  syncUserStatsToFirebase();
 
   appContainer.innerHTML = `
     <div class="subject-page-header">
@@ -1322,7 +1986,57 @@ function renderResultsScreen(mode) {
   let extraLine = "";
   let buttons = "";
 
-  if (mode === "rapid") {
+    if (mode === "unit") {
+    title = "Unit Practice Results";
+    subtitle = "Focused unit practice finished.";
+    total = unitQuestions.length;
+
+    buttons = `
+      <button class="mode-btn standard-btn end-btn" onclick="startUnitPractice(currentSubject, currentUnitIndex)">
+        📖 Retry This Unit
+      </button>
+      <button class="mode-btn standard-btn end-btn" onclick="showStudyByUnitPage(currentSubject)">
+        📚 Choose Another Unit
+      </button>
+      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
+        ❌ Review Missed Questions
+      </button>
+      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'weak')">
+        🎯 Practice Weak Areas
+      </button>
+      <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
+        📚 Choose Another Subject
+      </button>
+      <button class="mode-btn rapid-btn end-btn" onclick="showHomePage()">
+        🏠 Home
+      </button>
+    `;
+  } else if (mode === "focus") {
+    title = "Focus Guide Results";
+    subtitle = "Targeted review finished.";
+    total = focusGuideQuestions.length;
+
+    buttons = `
+      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'focus')">
+        🎯 Retry Focus Guide
+      </button>
+      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
+        ❌ Review Missed Questions
+      </button>
+      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'weak')">
+        🎯 Practice Weak Areas
+      </button>
+      <button class="mode-btn rapid-btn end-btn" onclick="startSubject(currentSubject, 'standard')">
+        📘 Standard Practice
+      </button>
+      <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
+        📚 Choose Another Subject
+      </button>
+      <button class="mode-btn rapid-btn end-btn" onclick="showHomePage()">
+        🏠 Home
+      </button>
+    `;
+  } else if (mode === "rapid") {
     title = "Rapid Fire Results";
     subtitle = "Speed round finished.";
     total = rapidQuestions.length;
@@ -1436,7 +2150,8 @@ function renderResultsScreen(mode) {
 
   clearActiveQuiz();
 recordCompletedQuiz(mode, score, total);
-
+syncUserStatsToFirebase();
+  
     appContainer.innerHTML = `
     <div class="subject-page-header">
       <h2 class="section-title">${subject.name} Complete</h2>
@@ -1551,3 +2266,13 @@ showHomePage();
 
   console.error(error);
 }
+
+window.addEventListener("beforeunload", () => {
+  syncUserStatsToFirebase();
+});
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") {
+    syncUserStatsToFirebase();
+  }
+});
