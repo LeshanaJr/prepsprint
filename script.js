@@ -142,13 +142,16 @@ const focusGuides = {
       "Unit 2: Networks of Exchange",
       "Unit 4: Transoceanic Interconnections",
       "Unit 5: Revolutions",
-      "Unit 6: Consequences of Industrialization"
+      "Unit 6: Consequences of Industrialization",
+      "Unit 8: Cold War and Decolonization"
     ],
     boostedKeywords: [
       "trade",
       "empire",
       "Mongol",
-      "Indian Ocean",
+      "Cold War",
+      "World War II",
+      "colony",
       "Columbian Exchange",
       "industrialization",
       "imperialism",
