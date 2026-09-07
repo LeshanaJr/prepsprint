@@ -1213,10 +1213,10 @@ passages: [
 
       category: "Unit 2: Cell Structure & Function"
 
-    },
-
-  {
-
+    }
+  ]
+},
+{
   title: "Surface Area and Diffusion Efficiency",
 
   text: "A scientist studies three cells with different sizes.\nCell A has a small volume and large surface area.\nCell B has a moderate volume and surface area.\nCell C has a large volume and relatively small surface area.\nAll cells rely on diffusion to exchange materials with their environment.",

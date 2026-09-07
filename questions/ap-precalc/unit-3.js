@@ -4,7 +4,7 @@ window.questionBanks.apPrecalc = window.questionBanks.apPrecalc || [];
 window.questionBanks.apPrecalc.push({
 
 rapidQuestions: [
-
+{
   prompt: "If sin(θ) = 5/13 and θ is in Quadrant II, what is cos(θ)?",
 
   choices: [
