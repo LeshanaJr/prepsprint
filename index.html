@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.gstatic.com https://www.google.com https://www.recaptcha.net; style-src 'self' 'unsafe-inline'; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.cloudfunctions.net https://www.google.com https://www.recaptcha.net; frame-src https://prepsprint-9dc9f.firebaseapp.com https://www.google.com https://recaptcha.google.com https://www.recaptcha.net; img-src 'self' data: https://www.gstatic.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="Free AP practice with unit study, passage diagrams, and private Google accounts.">
+<link rel="icon" type="image/png" href="logo-v3.PNG">
+<link rel="apple-touch-icon" href="logo-v3.PNG">
+<meta name="apple-mobile-web-app-capable" content="yes">
+  
+  
+  <title>PrepSprint</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <main id="app-container"><p role="status">Loading PrepSprint…</p></main>
+  </div>
+
+  <script type="module" src="firebase.js"></script>
+<script src="ui-safety.js"></script>
+<script src="account-ui.js"></script>
+<script src="manifest.js"></script>
+<script src="curriculum-practice.js"></script>
+<script src="curriculum.js"></script>
+<script src="passage-media.js"></script>
+<script src="load-units.js"></script>
+<script src="script.js" defer></script>
+<noscript>PrepSprint needs JavaScript enabled to load practice questions.</noscript>
+</body>
+</html>
