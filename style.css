@@ -816,3 +816,20 @@ sup {
   margin-top: 4px;
 }
 
+
+.account-card { margin-bottom: 20px; }
+.account-status, .privacy-note, .image-credit { font-size: .85rem; color: var(--text-muted); }
+.account-status { min-height: 1.5em; }
+.google-btn { background: #fff; color: #172033; border: 1px solid #cbd5e1; }
+button:disabled { cursor: not-allowed; opacity: .65; }
+button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid var(--cyan); outline-offset: 4px; }
+a { color: #7dd3fc; }
+.passage-figure { margin: 20px 0; }
+.passage-figure img { display: block; width: 100%; height: auto; border-radius: 12px; background: #fff; }
+.passage-figure [hidden] { display: none; }
+.passage-figure figcaption { margin-top: 10px; font-size: .9rem; line-height: 1.5; }
+.image-description { padding: 12px; border: 1px solid #64748b; border-radius: 10px; }
+.image-description summary { cursor: pointer; }
+.image-description p, .passage-text { white-space: pre-wrap; }
+.curriculum-note { font-size: .85rem; line-height: 1.5; color: var(--text-muted); }
+@media (min-width: 800px) { #app-container { max-width: 760px; } }

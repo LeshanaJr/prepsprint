@@ -47,27 +47,35 @@ const QUIZ_LIMITS = {
 };
 
 function buildSubject(subjectName, bankKey) {
-  const units = window.questionBanks?.[bankKey] || [];
+  const sourceUnits = window.questionBanks?.[bankKey] || [];
+  const allowed = q => savedProgress.includeLegacy || q.reviewStatus === "original-practice";
+  const units = sourceUnits.map(unit => ({...unit, rapidQuestions: (unit.rapidQuestions || []).filter(allowed), passages: (unit.passages || []).map(passage => ({...passage, questions: passage.questions.filter(allowed)})).filter(passage => passage.questions.length)}));
 
   return {
     name: subjectName,
+    bankKey,
+    curriculum: window.AP_CURRICULUM?.subjects?.[bankKey],
     units,
-    rapidQuestions: units.flatMap(unit => unit.rapidQuestions || []),
-    passages: units.flatMap(unit => unit.passages || [])
+    rapidQuestions: units.filter(unit => unit.examAssessed !== false).flatMap(unit => unit.rapidQuestions || []),
+    passages: units.filter(unit => unit.examAssessed !== false).flatMap(unit => unit.passages || [])
   };
 }
 
 function getAllPassageQuestions(subject) {
-  return subject.passages.flatMap((passage) =>
+  const passageQuestions = subject.passages.flatMap((passage) =>
     passage.questions.map((question) => ({
       ...question,
       sourceType: "standard",
       passageTitle: passage.title,
       passageText: passage.text,
       passageImage: passage.image,
-      passageImageAlt: passage.imageAlt
+      passageImageAlt: passage.imageAlt,
+      passageImageCaption: passage.imageCaption,
+      passageImageSource: passage.imageSource,
+      passageImageDescription: passage.imageDescription
     }))
   );
+  return [...passageQuestions, ...(subject.rapidQuestions || []).map(q => ({...q, sourceType: "rapid"}))];
 }
 
 function getRandomQuestions(questions, limit) {
@@ -190,7 +198,10 @@ function getUnitPassageQuestions(unit) {
       passageTitle: passage.title,
       passageText: passage.text,
       passageImage: passage.image,
-      passageImageAlt: passage.imageAlt
+      passageImageAlt: passage.imageAlt,
+      passageImageCaption: passage.imageCaption,
+      passageImageSource: passage.imageSource,
+      passageImageDescription: passage.imageDescription
     }))
   );
 }
@@ -247,8 +258,6 @@ function weightedShuffleQuestions(questions, focusGuide) {
     .map((item) => item.question);
 }
 
-const STORAGE_KEY = "prepsprint_progress_v1";
-
 const defaultProgress = {
   totalQuizzesCompleted: 0,
   lastSubjectIndex: 0,
@@ -264,261 +273,50 @@ const defaultProgress = {
   lastGoalDate: null,
   lastCompletedGoalDate: null,
 
-  userId: null,
-  displayName: ""
+  includeLegacy: false,
+  schemaVersion: 2
 };
 
-const USER_STATS_SYNC_EVERY = 15;
-
-function getUserTrackingId() {
-  let userId = localStorage.getItem("prepsprint_user_id");
-
-  if (!userId) {
-    userId = "user_" + Math.random().toString(36).slice(2, 10) + "_" + Date.now();
-    localStorage.setItem("prepsprint_user_id", userId);
+function normalizeProgress(raw) {
+  const clean = structuredClone(defaultProgress);
+  if (!raw || typeof raw !== "object") return clean;
+  clean.includeLegacy = raw.includeLegacy === true;
+  const number = (value, max = 1000000) => Number.isInteger(value) && value >= 0 ? Math.min(value, max) : 0;
+  for (const key of ["totalQuizzesCompleted", "dailyAnswered", "dailyStreak"]) clean[key] = number(raw[key]);
+  clean.dailyGoal = number(raw.dailyGoal, 200) || 20;
+  clean.dailyAnswered = Math.min(clean.dailyAnswered, clean.dailyGoal);
+  clean.lastSubjectIndex = number(raw.lastSubjectIndex, 17);
+  clean.lastMode = Object.hasOwn(MODE_CONFIG, raw.lastMode) ? raw.lastMode : "standard";
+  clean.lastTimedDuration = number(raw.lastTimedDuration, 3600) || 300;
+  clean.recentSubjectIndexes = [...new Set(Array.isArray(raw.recentSubjectIndexes) ? raw.recentSubjectIndexes : [])].filter(x => Number.isInteger(x) && x >= 0 && x < 18).slice(0, 3);
+  for (const key of ["lastGoalDate", "lastCompletedGoalDate"]) clean[key] = /^\d{4}-\d{2}-\d{2}$/.test(raw[key]) ? raw[key] : null;
+  const statFields = ["standardBestScore", "rapidBestScore", "weakBestScore", "missedBestScore", "timedBestScore", "bestRapidStreak", "quizzesCompleted"];
+  clean.subjectStats = Object.fromEntries(Object.entries(raw.subjectStats || {}).filter(([name, stats]) => name.startsWith("AP ") && name.length < 100 && stats && typeof stats === "object").slice(0, 30).map(([name, stats]) => [name, Object.fromEntries(statFields.map(key => [key, number(stats[key])]))]));
+  // Persist only references to bundled questions. Cloud/cache text never becomes quiz content.
+  const active = raw.activeQuiz;
+  if (active && typeof active === "object" && Object.hasOwn(MODE_CONFIG, active.mode) && Number.isInteger(active.subjectIndex) && active.subjectIndex >= 0 && active.subjectIndex < 18) {
+    const result = { mode: active.mode, subjectIndex: active.subjectIndex, answered: active.answered === true };
+    for (const key of ["score", "rapidStreak", "bestRapidStreak", "timedDuration", "timeRemaining", "standardQuestionIndex", "rapidQuestionIndex", "unitQuestionIndex", "currentUnitIndex", "focusGuideQuestionIndex", "weakAreaQuestionIndex", "missedQuestionIndex", "missedReviewStartTotal"]) result[key] = number(active[key], 3600);
+    result.weakPoints = Object.fromEntries(Object.entries(active.weakPoints || {}).filter(([k]) => k.length < 160 && !["__proto__", "constructor", "prototype"].includes(k)).slice(0, 150).map(([k,v]) => [k,number(v,10000)]));
+    for (const key of ["standardQuestions", "rapidQuestions", "unitQuestions", "focusGuideQuestions", "weakAreaQuestions", "missedQuestions"]) result[key] = (Array.isArray(active[key]) ? active[key] : []).slice(0, 100).map(q => typeof q === "string" ? q : q?.id).filter(q => typeof q === "string" && q.length < 180);
+    clean.activeQuiz = result;
   }
-
-  return userId;
+  return clean;
 }
 
-function loadUserStatsBuffer() {
-  try {
-    return JSON.parse(localStorage.getItem("prepsprint_user_stats_buffer")) || {
-      totalAnswered: 0,
-      totalCorrect: 0,
-      totalIncorrect: 0,
-      unsyncedAnswers: 0,
-      subjectStats: {}
-    };
-  } catch {
-    return {
-      totalAnswered: 0,
-      totalCorrect: 0,
-      totalIncorrect: 0,
-      unsyncedAnswers: 0,
-      subjectStats: {}
-    };
-  }
-}
-
-function trackUserQuestionAnsweredLocal(subjectName, mode, category, isCorrect) {
-  const buffer = loadUserStatsBuffer();
-
-  if (!buffer.subjectStats[subjectName]) {
-    buffer.subjectStats[subjectName] = {
-      answered: 0,
-      correct: 0,
-      incorrect: 0,
-      modes: {},
-      categories: {}
-    };
-  }
-
-  const subject = buffer.subjectStats[subjectName];
-
-  subject.answered++;
-  subject.correct += isCorrect ? 1 : 0;
-  subject.incorrect += isCorrect ? 0 : 1;
-
-  if (!subject.modes[mode]) {
-    subject.modes[mode] = {
-      answered: 0,
-      correct: 0,
-      incorrect: 0
-    };
-  }
-
-  subject.modes[mode].answered++;
-  subject.modes[mode].correct += isCorrect ? 1 : 0;
-  subject.modes[mode].incorrect += isCorrect ? 0 : 1;
-
-  if (!subject.categories[category]) {
-    subject.categories[category] = {
-      answered: 0,
-      correct: 0,
-      incorrect: 0
-    };
-  }
-
-  subject.categories[category].answered++;
-  subject.categories[category].correct += isCorrect ? 1 : 0;
-  subject.categories[category].incorrect += isCorrect ? 0 : 1;
-
-  buffer.totalAnswered++;
-  buffer.totalCorrect += isCorrect ? 1 : 0;
-  buffer.totalIncorrect += isCorrect ? 0 : 1;
-  buffer.unsyncedAnswers++;
-
-  buffer.lastSubject = subjectName;
-  buffer.lastMode = mode;
-  buffer.lastCategory = category;
-  buffer.lastAnsweredAt = new Date().toISOString();
-
-  saveUserStatsBuffer(buffer);
-
-  if (buffer.unsyncedAnswers >= USER_STATS_SYNC_EVERY) {
-    syncUserStatsToFirebase();
-  }
-}
-
-async function syncUserStatsToFirebase() {
-  if (typeof db === "undefined") return;
-
-  const buffer = loadUserStatsBuffer();
-
-  if (!buffer.unsyncedAnswers || buffer.unsyncedAnswers <= 0) {
-    return;
-  }
-
-  const userId = getUserTrackingId();
-  const displayName = localStorage.getItem("prepsprint_display_name") || "";
-
-  try {
-    await db.collection("users").doc(userId).set({
-      userId,
-      displayName,
-      totalAnswered: buffer.totalAnswered,
-      totalCorrect: buffer.totalCorrect,
-      totalIncorrect: buffer.totalIncorrect,
-      subjectStats: buffer.subjectStats,
-      lastSubject: buffer.lastSubject || "",
-      lastMode: buffer.lastMode || "",
-      lastCategory: buffer.lastCategory || "",
-      lastAnsweredAt: buffer.lastAnsweredAt || new Date().toISOString(),
-      lastSyncedAt: new Date().toISOString()
-    }, { merge: true });
-
-    buffer.unsyncedAnswers = 0;
-    saveUserStatsBuffer(buffer);
-  } catch (error) {
-    console.error("Failed to sync user stats:", error);
-  }
-}
-
-function saveUserStatsBuffer(buffer) {
-  localStorage.setItem("prepsprint_user_stats_buffer", JSON.stringify(buffer));
-}
-
-function generateUserId() {
-  return "user_" + Math.random().toString(36).slice(2, 10) + "_" + Date.now();
-}
-
-function getOrCreateUserId() {
-  if (!savedProgress.userId) {
-    savedProgress.userId = generateUserId();
-    saveProgress();
-  }
-
-  return savedProgress.userId;
-}
-
-function setDisplayName(name) {
-  savedProgress.displayName = name.trim();
-  saveProgress();
-
-  if (typeof saveUserProfileToFirebase === "function") {
-    saveUserProfileToFirebase();
-  }
-}
-
-function getUserTrackingId() {
-  let userId = localStorage.getItem("prepsprint_user_id");
-
-  if (!userId) {
-    userId = "user_" + Math.random().toString(36).slice(2, 10) + "_" + Date.now();
-    localStorage.setItem("prepsprint_user_id", userId);
-  }
-
-  return userId;
-}
-
-async function saveUserProfileToFirebase(displayName = "") {
-  if (typeof db === "undefined") return;
-
-  const userId = getUserTrackingId();
-
-  try {
-    await db.collection("users").doc(userId).set({
-      userId,
-      displayName,
-      lastSeenAt: new Date().toISOString()
-    }, { merge: true });
-  } catch (error) {
-    console.error("Failed to save user profile:", error);
-  }
-}
-
-async function trackUserQuestionAnswered(subjectName, mode, category, isCorrect) {
-  if (typeof db === "undefined") return;
-
-  const userId = getUserTrackingId();
-  const displayName = localStorage.getItem("prepsprint_display_name") || "";
-  const today = new Date().toISOString().split("T")[0];
-
-  const userRef = db.collection("users").doc(userId);
-  const subjectRef = userRef.collection("subjectStats").doc(subjectName);
-
-  try {
-    await db.runTransaction(async (transaction) => {
-      const subjectDoc = await transaction.get(subjectRef);
-      const current = subjectDoc.exists ? subjectDoc.data() : {};
-
-      transaction.set(userRef, {
-        userId,
-        displayName,
-        lastSeenAt: new Date().toISOString()
-      }, { merge: true });
-
-      transaction.set(subjectRef, {
-        subjectName,
-        answered: (current.answered || 0) + 1,
-        correct: (current.correct || 0) + (isCorrect ? 1 : 0),
-        incorrect: (current.incorrect || 0) + (isCorrect ? 0 : 1),
-        lastMode: mode,
-        lastCategory: category,
-        lastAnsweredDate: today,
-        lastAnsweredAt: new Date().toISOString()
-      }, { merge: true });
-    });
-  } catch (error) {
-    console.error("Failed to track user question:", error);
-  }
-}
-
-function loadProgress() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return structuredClone(defaultProgress);
-
-    const parsed = JSON.parse(raw);
-
-    return {
-      ...structuredClone(defaultProgress),
-      ...parsed,
-      subjectStats: parsed.subjectStats || {}
-    };
-  } catch (error) {
-    console.error("Failed to load progress:", error);
-    return structuredClone(defaultProgress);
-  }
-}
-
-function saveProgress() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(savedProgress));
-  } catch (error) {
-    console.error("Failed to save progress:", error);
-  }
-}
+function loadProgress() { return normalizeProgress(accountUI.load(defaultProgress)); }
+function saveProgress(options) { accountUI.save(savedProgress, options); }
+function syncUserStatsToFirebase() { return accountUI.flush(); }
 
 function getTodayKey() {
-  return new Date().toISOString().split("T")[0];
+  const date = new Date();
+  return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, "0"), String(date.getDate()).padStart(2, "0")].join("-");
 }
 
 function getYesterdayKey() {
   const date = new Date();
   date.setDate(date.getDate() - 1);
-  return date.toISOString().split("T")[0];
+  return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, "0"), String(date.getDate()).padStart(2, "0")].join("-");
 }
 
 function checkDailyGoalDate() {
@@ -527,7 +325,7 @@ function checkDailyGoalDate() {
   if (savedProgress.lastGoalDate !== today) {
     savedProgress.dailyAnswered = 0;
     savedProgress.lastGoalDate = today;
-    saveProgress();
+    saveProgress({ housekeeping: true });
   }
 }
 
@@ -569,30 +367,31 @@ function saveActiveQuiz() {
   if (!questionList.length) return;
 
    savedProgress.activeQuiz = {
+    answered: answerLocked,
     subjectIndex: currentSubject,
     mode: currentMode,
     score,
     weakPoints,
-    missedQuestions,
+    missedQuestions: missedQuestions.map(q => q.id),
     rapidStreak,
     bestRapidStreak,
     timedDuration,
     timeRemaining,
 
-    standardQuestions,
+    standardQuestions: ["standard", "timed"].includes(currentMode) ? standardQuestions.map(q => q.id) : [],
     standardQuestionIndex,
 
-    rapidQuestions,
+    rapidQuestions: currentMode === "rapid" ? rapidQuestions.map(q => q.id) : [],
     rapidQuestionIndex,
 
-    unitQuestions,
+    unitQuestions: currentMode === "unit" ? unitQuestions.map(q => q.id) : [],
     unitQuestionIndex,
     currentUnitIndex,
 
-    focusGuideQuestions,
+    focusGuideQuestions: currentMode === "focus" ? focusGuideQuestions.map(q => q.id) : [],
     focusGuideQuestionIndex,
 
-    weakAreaQuestions,
+    weakAreaQuestions: currentMode === "weak" ? weakAreaQuestions.map(q => q.id) : [],
     weakAreaQuestionIndex,
     missedQuestionIndex,
     missedReviewStartTotal
@@ -607,7 +406,18 @@ function clearActiveQuiz() {
 }
 
 function resumeActiveQuiz() {
-  const active = savedProgress.activeQuiz;
+  const stored = savedProgress.activeQuiz;
+  const active = stored ? { ...stored } : null;
+  if (active) {
+    const subject = subjects[active.subjectIndex];
+    if (!subject) { clearActiveQuiz(); showHomePage(); return; }
+    const known = new Map(subject.units.flatMap(getAllUnitQuestions).map(q => [q.id, q]));
+    for (const key of ["standardQuestions", "rapidQuestions", "unitQuestions", "focusGuideQuestions", "weakAreaQuestions", "missedQuestions"]) {
+      const refs = active[key] || [];
+      active[key] = refs.map(id => known.get(id)).filter(Boolean);
+      if (active[key].length !== refs.length) { clearActiveQuiz(); renderUnavailableScreen(active.subjectIndex, "The question bank changed. Please start a fresh practice session; your completed progress is preserved."); return; }
+    }
+  }
 
   if (!active) return;
 
@@ -623,7 +433,7 @@ function resumeActiveQuiz() {
   bestRapidStreak = active.bestRapidStreak || 0;
 
   timedDuration = active.timedDuration || 300;
-  timeRemaining = active.timeRemaining || timedDuration;
+  timeRemaining = active.timeRemaining ?? timedDuration;
 
   standardQuestions = active.standardQuestions || [];
   standardQuestionIndex = active.standardQuestionIndex || 0;
@@ -652,24 +462,25 @@ function resumeActiveQuiz() {
   missedReviewStartTotal = active.missedReviewStartTotal || missedQuestions.length;
 
   if (currentMode === "timed") {
+    if (timeRemaining <= 0) { renderTimedOutScreen(); return; }
     startTimer(timeRemaining);
   }
-
+  if (active.answered) { answerLocked = true; goToNextQuestion(); return; }
   renderQuestionScreen();
 }
 
 function formatMath(text) {
   if (!text) return "";
 
-  return String(text)
+  return escapeHTML(text)
     .replace(/([A-Za-z])_(\d+)/g, "$1<sub>$2</sub>")
     .replace(/log_(\d+)/g, "log<sub>$1</sub>")
-    .replace(/\^(\([^)]*\)|[A-Za-z0-9+\-*/π√]+)/g, "<sup>$1</sup>")
+    .replace(/\^(\([^)]*\)|[+-]?\d+(?:\.\d+)?|[A-Za-z])/g, "<sup>$1</sup>")
     .replace(/<sup>\((.*?)\)<\/sup>/g, "<sup>$1</sup>");
 }
 
 const appContainer = document.getElementById("app-container");
-const indexToLetters = ["A", "B", "C", "D"];
+const indexToLetters = ["A", "B", "C", "D", "E"];
 let subjects = [];
 
 let currentSubject = 0;
@@ -680,6 +491,7 @@ let standardQuestions = [];
 let standardQuestionIndex = 0;
 
 let score = 0;
+let answerLocked = false;
 let currentShuffledChoices = [];
 let weakPoints = {};
 
@@ -811,10 +623,10 @@ function getTotalQuestionsForCurrentSubject() {
 function getResultMessage(scoreValue, total) {
   const percent = scoreValue / total;
 
-  if (percent === 1) return "Perfect score! If these exact questions were on the real AP exam, you'd get a 5.";
-  if (percent >= 0.8) return "Good job! If these exact questions were on the real AP exam, you'd get a 4.";
-  if (percent >= 0.6) return "This is a solid start. Review the ones you missed. If these exact questions were on the real AP exam, you'd get a 3.";
-  return "Practice makes perfect. Keep answering questions and you'll improve.";
+  if (percent === 1) return "Every answer correct in this practice session. Try another unit to check your understanding.";
+  if (percent >= 0.8) return "Strong practice accuracy. Review missed questions and explain the reasoning in your own words.";
+  if (percent >= 0.6) return "A useful start. Work through the explanations for the questions you missed.";
+  return "Review the explanations, then try another practice session. These results are not an AP score prediction.";
 }
 
 function getWeakPointSummary() {
@@ -854,7 +666,10 @@ function getQuestionsByCategories(subjectIndex, categories) {
   passageTitle: passage.title,
   passageText: passage.text,
   passageImage: passage.image,
-  passageImageAlt: passage.imageAlt
+  passageImageAlt: passage.imageAlt,
+      passageImageCaption: passage.imageCaption,
+      passageImageSource: passage.imageSource,
+      passageImageDescription: passage.imageDescription
 });
       }
     });
@@ -929,16 +744,18 @@ function recordCompletedQuiz(mode, scoreValue, total) {
 
 function renderUnavailableScreen(subjectIndex, message) {
   appContainer.innerHTML = `
-    <h2>${subjects[subjectIndex].name}</h2>
-    <p>${message}</p>
-   <button class="mode-btn dark-btn" onclick="showSubjectPage()">Back to Subjects</button>
-<button class="mode-btn standard-btn" onclick="showHomePage()">Home</button>
+    <h2>${escapeHTML(subjects[subjectIndex].name)}</h2>
+    <p>${escapeHTML(message)}</p>
+   <button class="mode-btn dark-btn" data-action="showSubjectPage()">Back to Subjects</button>
+<button class="mode-btn standard-btn" data-action="showHomePage()">Home</button>
   `;
 }
 
 function stopTimer() {
   clearInterval(timerInterval);
   timerInterval = null;
+  clearTimeout(rapidTimeout);
+  rapidTimeout = null;
 }
 
 function startTimer(seconds) {
@@ -957,6 +774,7 @@ function startTimer(seconds) {
     }
 
     updateTimerDisplay();
+    if (savedProgress.activeQuiz) { savedProgress.activeQuiz.timeRemaining = timeRemaining; saveProgress(); }
   }, 1000);
 }
 
@@ -993,7 +811,7 @@ function getQuizActionButtons() {
   if (currentMode === "timed") {
     return `
       <div class="quiz-action-row">
-        <button class="top-action-btn" onclick="exitTimedPractice()">Exit Timed Practice</button>
+        <button class="top-action-btn" data-action="exitTimedPractice()">Exit Timed Practice</button>
       </div>
     `;
   }
@@ -1001,14 +819,14 @@ function getQuizActionButtons() {
   if (currentMode === "rapid") {
     return `
       <div class="quiz-action-row">
-        <button class="top-action-btn" onclick="exitRapidFire()">Exit Rapid Fire</button>
+        <button class="top-action-btn" data-action="exitRapidFire()">Exit Rapid Fire</button>
       </div>
     `;
   }
 
   return `
     <div class="quiz-action-row">
-      <button class="top-action-btn" onclick="showSubjectPage()">Back to Subjects</button>
+      <button class="top-action-btn" data-action="showSubjectPage()">Back to Subjects</button>
     </div>
   `;
 }
@@ -1018,8 +836,10 @@ function resetSavedProgress() {
 
   if (!confirmed) return;
 
-  localStorage.removeItem(STORAGE_KEY);
+  accountUI.reset();
   savedProgress = structuredClone(defaultProgress);
+  rebuildSubjects();
+  saveProgress();
 
   currentSubject = 0;
   currentPassage = 0;
@@ -1058,19 +878,19 @@ function resetSavedProgress() {
 function getBottomNav(active = "home") {
   return `
     <nav class="bottom-nav">
-      <button class="bottom-nav-btn ${active === "home" ? "active" : ""}" onclick="showHomePage()">
+      <button class="bottom-nav-btn ${active === "home" ? "active" : ""}" data-action="showHomePage()">
         <small>Home</small>
       </button>
 
-      <button class="bottom-nav-btn ${active === "practice" ? "active" : ""}" onclick="showSubjectPage()">
+      <button class="bottom-nav-btn ${active === "practice" ? "active" : ""}" data-action="showSubjectPage()">
         <small>Practice</small>
       </button>
 
-      <button class="bottom-nav-btn ${active === "progress" ? "active" : ""}" onclick="showProgressPage()">
+      <button class="bottom-nav-btn ${active === "progress" ? "active" : ""}" data-action="showProgressPage()">
         <small>Progress</small>
       </button>
 
-      <button class="bottom-nav-btn ${active === "more" ? "active" : ""}" onclick="showMorePage()">
+      <button class="bottom-nav-btn ${active === "more" ? "active" : ""}" data-action="showMorePage()">
         <span>☰</span>
         <small>More</small>
       </button>
@@ -1127,8 +947,10 @@ function showHomePage() {
   appContainer.innerHTML = `
     <div class="home-header compact-home-header">
       <h1 class="app-title">PrepSprint</h1>
-      <p class="app-subtitle">A 100% free web app that's designed to get you that 5.</p>
+      <p class="app-subtitle">Build understanding, one practice session at a time.</p>
     </div>
+
+    ${accountUI.panel()}
 
     <div class="home-stats hero-progress-card">
       <div class="goal-top-row">
@@ -1155,7 +977,7 @@ function showHomePage() {
         </div>
 
         <div class="mini-stat">
-          <span>${lastSubjectName}</span>
+          <span>${escapeHTML(lastSubjectName)}</span>
           <small>Last Subject</small>
         </div>
 
@@ -1188,8 +1010,8 @@ function showHomePage() {
     const hasRapid = subject.rapidQuestions && subject.rapidQuestions.length > 0;
 
     return `
-      <button class="quick-practice-card" onclick="startQuickPractice(${subjectIndex})">
-        <span>${getSubjectIcon(subject.name)} ${subject.name}</span>
+      <button class="quick-practice-card" data-action="startQuickPractice(${subjectIndex})">
+        <span>${getSubjectIcon(subject.name)} ${escapeHTML(subject.name)}</span>
         <small>${hasRapid ? "Rapid Fire practice" : "Standard practice"}</small>
       </button>
     `;
@@ -1230,7 +1052,7 @@ function showProgressPage() {
     <div class="subject-card">
       <div class="subject-card-title">Your Stats</div>
       <p class="home-stats-text">Total quizzes completed: ${savedProgress.totalQuizzesCompleted}</p>
-      <p class="home-stats-text">Last subject practiced: ${lastSubjectName}</p>
+      <p class="home-stats-text">Last subject practiced: ${escapeHTML(lastSubjectName)}</p>
       <p class="home-stats-text">Daily streak: 🔥 ${savedProgress.dailyStreak}</p>
       <p class="home-stats-text">Today's goal: ${savedProgress.dailyAnswered}/${savedProgress.dailyGoal}</p>
     </div>
@@ -1241,71 +1063,29 @@ function showProgressPage() {
 
 function showMorePage() {
   stopTimer();
-
   appContainer.innerHTML = `
-    <div class="subject-page-header">
-      <h1 class="section-title">More</h1>
-      <p class="subject-page-subtitle">App info and settings.</p>
+    <div class="subject-page-header"><h1 class="section-title">More</h1><p class="subject-page-subtitle">Your account and study resources.</p></div>
+    ${accountUI.panel()}
+    <div class="subject-card"><div class="subject-card-title">About PrepSprint</div>
+      <p>Free practice built by Warren Grant. Study by unit, read passages, interpret diagrams, or set a practice timer.</p>
+      <p>Course organization follows the 2026–27 frameworks. Concrete practice replaces template questions; retained legacy questions still need subject-expert review. Coverage varies by unit. Timed sessions and multiple-choice results do not predict an AP score or replace free-response practice.</p>
+      <p>AP® is a trademark of the College Board, which does not sponsor or endorse PrepSprint.</p>
+      <p><a href="CURRICULUM.md" target="_blank" rel="noopener">Course sources and coverage</a></p>
     </div>
-
-    <div class="subject-card">
-      <div class="subject-card-title">What is PrepSprint?</div>
-      <p class="home-stats-text">
-        PrepSprint is a 100% free web app that was made to help people study and prepare for their AP exams. More subjects are actively getting added, so be on the lookout for them!\n\n
-        </p>
-     <p class="home-stats-text">
-     PrepSprint currently supports passage-based questions, rapid-fire questions for memorizing FRQ concepts, and timed tests to simulate the real exams.\n\n
-</p>
-<p class="home-stats-text">
-        AP© is trademarked by CollegeBoard, who does not affiliate with or sponsor PrepSprint in any way.\n\n
-</p>
-<p class="home-stats-text">
-        App created by Warren Grant
-      </p>
-    </div>
-
-    <div class="subject-card">
-  <div class="subject-card-title">User Tracking</div>
-
-  <p class="home-stats-text">
-    Your User ID: <strong>${localStorage.getItem("prepsprint_user_id") || "Not created yet"}</strong>
-  </p>
-
-  <p class="home-stats-text">
-    Add a name or code so your progress can be identified.
-  </p>
-
-  <input
-    id="display-name-input"
-    value="${localStorage.getItem("prepsprint_display_name") || ""}"
-    placeholder="Example: Warren, WG-042, Period 3"
-    style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc;"
-  >
-
-  <button class="mode-btn standard-btn" onclick="saveDisplayNameFromInput()">
-    Save User Name / Code
-  </button>
-</div>
-
-    <button class="reset-link-btn" onclick="resetSavedProgress()">Reset Progress</button>
-
+    <div class="subject-card"><div class="subject-card-title">Practice library</div><p>Updated original questions are the default. You can also include the older questions that still need educator review. Changing this starts a fresh session and keeps completed progress.</p><button class="mode-btn dark-btn" data-action="toggleLegacyPractice()">${savedProgress.includeLegacy ? "Use original practice only" : "Include older questions (unreviewed)"}</button><p class="curriculum-note">Current selection: ${savedProgress.includeLegacy ? "Original and unreviewed legacy practice" : "Original practice"}.</p></div>
+    <button class="reset-link-btn" data-action="resetSavedProgress()">Reset current progress</button>
     ${getBottomNav("more")}
   `;
 }
 
-function saveDisplayNameFromInput() {
-  const input = document.getElementById("display-name-input");
-  if (!input) return;
-
-  const displayName = input.value.trim();
-
-  localStorage.setItem("prepsprint_display_name", displayName);
-
-  if (typeof saveUserProfileToFirebase === "function") {
-    saveUserProfileToFirebase(displayName);
-  }
-
-  alert("User tracking name saved!");
+function rebuildSubjects() {
+  subjects = subjects.map(subject => buildSubject(subject.name, subject.bankKey));
+  window.subjects = subjects;
+}
+function toggleLegacyPractice() {
+  savedProgress.includeLegacy = !savedProgress.includeLegacy;
+  clearActiveQuiz();
+  rebuildSubjects();
   showMorePage();
 }
 
@@ -1337,7 +1117,7 @@ function showSubjectPage() {
       <div class="compact-subject-icon">${getSubjectIcon(subject.name)}</div>
 
       <div class="compact-subject-info">
-        <div class="compact-subject-title">${subject.name}</div>
+        <div class="compact-subject-title">${escapeHTML(subject.name)}</div>
         <div class="compact-subject-desc">${getSubjectDescription(subject.name)}</div>
         <div class="compact-subject-stats">
           Best Streak: ${stats.bestRapidStreak || 0}
@@ -1366,7 +1146,7 @@ function showSubjectModePage(index) {
 
     <div class="selected-subject-card">
       <div class="selected-subject-title">
-        ${getSubjectIcon(subject.name)} ${subject.name}
+        ${getSubjectIcon(subject.name)} ${escapeHTML(subject.name)}
       </div>
 
       <div class="selected-subject-desc">
@@ -1392,7 +1172,10 @@ function showSubjectModePage(index) {
         </div>
       </div>
 
-            <button class="mode-btn standard-btn" id="standard-mode-btn">
+            <p class="curriculum-note">2026–27 course framework · Practice coverage varies by unit.</p>
+      <p class="curriculum-note">${escapeHTML(subject.curriculum?.revisionNote || "Includes original practice and retained questions awaiting educator review.")}</p>
+      <p><a href="${escapeHTML(subject.curriculum?.sourceUrl || "https://apstudents.collegeboard.org/courses")}" target="_blank" rel="noopener">Official course framework</a></p>
+      <button class="mode-btn standard-btn" id="standard-mode-btn">
         Standard Practice
       </button>
 
@@ -1450,10 +1233,10 @@ function showStudyByUnitPage(subjectIndex) {
   }
 
   appContainer.innerHTML = `
-    <button class="subject-back-btn" onclick="showSubjectModePage(${subjectIndex})">← Back</button>
+    <button class="subject-back-btn" data-action="showSubjectModePage(${subjectIndex})">← Back</button>
 
     <div class="subject-page-header">
-      <h1 class="section-title">${subject.name}</h1>
+      <h1 class="section-title">${escapeHTML(subject.name)}</h1>
       <p class="subject-page-subtitle">
         Choose a unit to practice.
       </p>
@@ -1467,13 +1250,14 @@ function showStudyByUnitPage(subjectIndex) {
         }, 0);
 
         return `
-          <button class="compact-subject-card" onclick="startUnitPractice(${subjectIndex}, ${unitIndex})">
+          <button class="compact-subject-card" data-action="startUnitPractice(${subjectIndex}, ${unitIndex})">
             <div class="compact-subject-icon">📖</div>
 
             <div class="compact-subject-info">
-              <div class="compact-subject-title">${unit.name}</div>
+              <div class="compact-subject-title">${escapeHTML(unit.name)}</div>
               <div class="compact-subject-desc">
-                ${passageCount} passage questions • ${rapidCount} rapid questions
+                ${passageCount} passage questions • ${rapidCount} concept questions
+                ${unit.examAssessed === false ? " · Optional extension · not on the AP Exam" : ""}
               </div>
             </div>
 
@@ -1540,7 +1324,7 @@ function showTimedModePage(subjectIndex) {
 
   appContainer.innerHTML = `
     <div class="subject-page-header">
-      <h1 class="section-title">${subject.name} Timed Practice</h1>
+      <h1 class="section-title">${escapeHTML(subject.name)} Timed Practice</h1>
       <p class="subject-page-subtitle">
         Choose how long you want your timed session to be.
       </p>
@@ -1555,16 +1339,16 @@ function showTimedModePage(subjectIndex) {
       </div>
 
       <div class="subject-mode-group">
-        <button class="mode-btn standard-btn end-btn" onclick="startTimedSubject(${subjectIndex}, 2100)">
+        <button class="mode-btn standard-btn end-btn" data-action="startTimedSubject(${subjectIndex}, 2100)">
           35 Minutes
         </button>
-        <button class="mode-btn standard-btn end-btn" onclick="startTimedSubject(${subjectIndex}, 2700)">
+        <button class="mode-btn standard-btn end-btn" data-action="startTimedSubject(${subjectIndex}, 2700)">
           45 Minutes
         </button>
-        <button class="mode-btn standard-btn end-btn" onclick="startTimedSubject(${subjectIndex}, 3600)">
+        <button class="mode-btn standard-btn end-btn" data-action="startTimedSubject(${subjectIndex}, 3600)">
           60 Minutes
         </button>
-        <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
+        <button class="mode-btn rapid-btn end-btn" data-action="showSubjectPage()">
           Back
         </button>
       </div>
@@ -1623,10 +1407,7 @@ saveProgress();
 
     const allQuestions = [
       ...getAllPassageQuestions(subject),
-      ...(subject.rapidQuestions || []).map((question) => ({
-        ...question,
-        sourceType: "rapid"
-      }))
+
     ];
 
     focusGuideQuestions = weightedShuffleQuestions(allQuestions, focusGuide)
@@ -1714,6 +1495,8 @@ function renderQuestionScreen() {
   const questionList = getCurrentQuestionList();
   const questionIndex = getCurrentQuestionIndex();
   const q = questionList[questionIndex];
+  if (!q) { renderUnavailableScreen(currentSubject, "No questions remain in this session. Choose a unit to start again."); return; }
+  answerLocked = false;
   saveActiveQuiz();
   
   const config = MODE_CONFIG[currentMode];
@@ -1721,12 +1504,12 @@ function renderQuestionScreen() {
 
   currentShuffledChoices = shuffleArray(q.choices);
 
-  const showPassage = config.showPassage && q.passageText;
+  const showPassage = config.showPassage && (q.passageText || q.passageImage);
 
   appContainer.innerHTML = `
     ${getQuizActionButtons()}
 
-    <h2>${subject.name}</h2>
+    <h2>${escapeHTML(subject.name)}</h2>
     <p class="progress-text">
       ${config.label} • Question ${questionIndex + 1} of ${questionList.length}
       ${currentMode === "rapid" ? ` • Streak: ${rapidStreak}` : ""}
@@ -1742,21 +1525,16 @@ function renderQuestionScreen() {
       <div class="progress-bar-fill" style="width: ${progressPercent}%"></div>
     </div>
 
-   ${showPassage ? `<h3>${q.passageTitle || ""}</h3>` : ""}
-${showPassage && q.passageImage ? `
-  <img 
-    src="${q.passageImage}" 
-    alt="${q.passageImageAlt || "Passage image"}" 
-    class="passage-image"
-  >
-` : ""}
-${showPassage ? `<p class="passage-text">${q.passageText}</p><hr>` : ""}
+   ${showPassage ? `<h3>${escapeHTML(q.passageTitle || "")}</h3>` : ""}
+${showPassage ? renderPassageMedia(q) : ""}
+${showPassage ? `<p class="passage-text">${escapeHTML(q.passageText)}</p><hr>` : ""}
 
-    ${currentMode === "weak" ? `<p><strong>Focus:</strong> ${q.category}</p>` : ""}
+    <p class="curriculum-note">${q.reviewStatus === "original-practice" ? "Original practice · 2026–27 course framework" : "Legacy practice · awaiting educator review"}</p>
+    ${currentMode === "weak" ? `<p><strong>Focus:</strong> ${escapeHTML(q.category)}</p>` : ""}
     <p>${formatMath(q.prompt)}</p>
 
     ${currentShuffledChoices.map((choice, i) => `
-      <button class="answer-btn" onclick="handleAnswer(${i})">
+      <button class="answer-btn" data-action="handleAnswer(${i})">
         ${indexToLetters[i]}: ${formatMath(choice.text)}
       </button>
     `).join("")}
@@ -1770,33 +1548,10 @@ function handleAnswer(i) {
   const buttons = appContainer.querySelectorAll(".answer-btn");
   const selectedChoice = currentShuffledChoices[i];
 
-recordDailyQuestionAnswered();
-  
- if (typeof trackQuestionAnswered === "function") {
-  trackQuestionAnswered(
-    subjects[currentSubject].name,
-    currentMode,
-    q.category,
-    selectedChoice.correct
-  );
-}
+  if (answerLocked || !selectedChoice || !q) return;
+  answerLocked = true;
+  recordDailyQuestionAnswered();
 
-trackUserQuestionAnsweredLocal(
-  subjects[currentSubject].name,
-  currentMode,
-  q.category,
-  selectedChoice.correct
-);
-
-if (typeof trackUserQuestionAnswered === "function") {
-  trackUserQuestionAnswered(
-    subjects[currentSubject].name,
-    currentMode,
-    q.category,
-    selectedChoice.correct
-  );
-}
-  
   let correctIndex = -1;
 
   buttons.forEach((btn, index) => {
@@ -1810,7 +1565,6 @@ if (typeof trackUserQuestionAnswered === "function") {
     btn.disabled = true;
   });
 
-  saveActiveQuiz();
   if (selectedChoice.correct) {
     score++;
 
@@ -1842,6 +1596,7 @@ if (typeof trackUserQuestionAnswered === "function") {
     missedQuestionIndex++;
   }
 
+  saveActiveQuiz();
   if (currentMode === "rapid") {
     appContainer.innerHTML += `
       <div class="feedback-box">
@@ -1860,14 +1615,16 @@ if (typeof trackUserQuestionAnswered === "function") {
     <div class="feedback-box">
       <p><strong>Your Choice:</strong> ${indexToLetters[i]}: ${formatMath(currentShuffledChoices[i].text)}</p>
       <p><strong>Answer:</strong> ${indexToLetters[correctIndex]}: ${formatMath(currentShuffledChoices[correctIndex].text)}</p>
-      <p><strong>Explanation:</strong> Answer choice ${indexToLetters[i]}${formatMath(selectedChoice.choiceExplanation)}</p>
+      <p><strong>Explanation:</strong> ${formatMath(selectedChoice.choiceExplanation).trim()}</p>
     </div>
-    <button id="next-btn" onclick="goToNextQuestion()">Next</button>
+    <button id="next-btn" data-action="goToNextQuestion()">Next</button>
   `;
 }
 
 function goToNextQuestion() {
-  saveActiveQuiz();
+  if (!answerLocked) return;
+  clearTimeout(rapidTimeout);
+  rapidTimeout = null;
   if (currentMode === "rapid") {
     rapidQuestionIndex++;
 
@@ -1949,7 +1706,7 @@ recordCompletedQuiz("timed", score, total);
 
   appContainer.innerHTML = `
     <div class="subject-page-header">
-      <h2 class="section-title">${subjects[currentSubject].name} Timed Practice Ended</h2>
+      <h2 class="section-title">${escapeHTML(subjects[currentSubject].name)} Timed Practice Ended</h2>
       <p class="subject-page-subtitle">Time ran out.</p>
     </div>
 
@@ -1960,19 +1717,19 @@ recordCompletedQuiz("timed", score, total);
       </div>
 
       <p>${getResultMessage(score, total)}</p>
-      <p><strong>Focus on:</strong> ${getWeakPointSummary()}</p>
+      <p><strong>Focus on:</strong> ${escapeHTML(getWeakPointSummary())}</p>
 
       <div class="subject-mode-group">
-        <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'timed')">
+        <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'timed')">
           ⏱ Retry Timed Practice
         </button>
-        <button class="mode-btn rapid-btn end-btn" onclick="startSubject(currentSubject, 'standard')">
+        <button class="mode-btn rapid-btn end-btn" data-action="startSubject(currentSubject, 'standard')">
           📘 Standard Practice
         </button>
-        <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
+        <button class="mode-btn rapid-btn end-btn" data-action="showSubjectPage()">
           📚 Choose Another Subject
         </button>
-        <button class="mode-btn rapid-btn end-btn" onclick="showHomePage()">
+        <button class="mode-btn rapid-btn end-btn" data-action="showHomePage()">
           🏠 Home
         </button>
       </div>
@@ -1995,22 +1752,22 @@ function renderResultsScreen(mode) {
     total = unitQuestions.length;
 
     buttons = `
-      <button class="mode-btn standard-btn end-btn" onclick="startUnitPractice(currentSubject, currentUnitIndex)">
+      <button class="mode-btn standard-btn end-btn" data-action="startUnitPractice(currentSubject, currentUnitIndex)">
         📖 Retry This Unit
       </button>
-      <button class="mode-btn standard-btn end-btn" onclick="showStudyByUnitPage(currentSubject)">
+      <button class="mode-btn standard-btn end-btn" data-action="showStudyByUnitPage(currentSubject)">
         📚 Choose Another Unit
       </button>
-      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
+      <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'missed')">
         ❌ Review Missed Questions
       </button>
-      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'weak')">
+      <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'weak')">
         🎯 Practice Weak Areas
       </button>
-      <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
+      <button class="mode-btn rapid-btn end-btn" data-action="showSubjectPage()">
         📚 Choose Another Subject
       </button>
-      <button class="mode-btn rapid-btn end-btn" onclick="showHomePage()">
+      <button class="mode-btn rapid-btn end-btn" data-action="showHomePage()">
         🏠 Home
       </button>
     `;
@@ -2020,22 +1777,22 @@ function renderResultsScreen(mode) {
     total = focusGuideQuestions.length;
 
     buttons = `
-      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'focus')">
+      <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'focus')">
         🎯 Retry Focus Guide
       </button>
-      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
+      <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'missed')">
         ❌ Review Missed Questions
       </button>
-      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'weak')">
+      <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'weak')">
         🎯 Practice Weak Areas
       </button>
-      <button class="mode-btn rapid-btn end-btn" onclick="startSubject(currentSubject, 'standard')">
+      <button class="mode-btn rapid-btn end-btn" data-action="startSubject(currentSubject, 'standard')">
         📘 Standard Practice
       </button>
-      <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
+      <button class="mode-btn rapid-btn end-btn" data-action="showSubjectPage()">
         📚 Choose Another Subject
       </button>
-      <button class="mode-btn rapid-btn end-btn" onclick="showHomePage()">
+      <button class="mode-btn rapid-btn end-btn" data-action="showHomePage()">
         🏠 Home
       </button>
     `;
@@ -2045,22 +1802,22 @@ function renderResultsScreen(mode) {
     total = rapidQuestions.length;
     extraLine = `<p><strong>Best Streak:</strong> ${bestRapidStreak}</p>`;
     buttons = `
-      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
+      <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'missed')">
         ❌ Review Missed Questions
       </button>
-      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'weak')">
+      <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'weak')">
         🎯 Practice Weak Areas
       </button>
-      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'rapid')">
+      <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'rapid')">
         ⚡ Retry Rapid Fire
       </button>
-      <button class="mode-btn rapid-btn end-btn" onclick="startSubject(currentSubject, 'standard')">
+      <button class="mode-btn rapid-btn end-btn" data-action="startSubject(currentSubject, 'standard')">
         📘 Standard Practice
       </button>
-      <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
+      <button class="mode-btn rapid-btn end-btn" data-action="showSubjectPage()">
         📚 Choose Another Subject
       </button>
-      <button class="mode-btn rapid-btn end-btn" onclick="showHomePage()">
+      <button class="mode-btn rapid-btn end-btn" data-action="showHomePage()">
         🏠 Home
       </button>
     `;
@@ -2069,16 +1826,16 @@ function renderResultsScreen(mode) {
     subtitle = "Focused review finished.";
     total = weakAreaQuestions.length;
     buttons = `
-      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'weak')">
+      <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'weak')">
         🎯 Practice Weak Areas Again
       </button>
-      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'standard')">
+      <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'standard')">
         📘 Back to Standard Practice
       </button>
-      <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
+      <button class="mode-btn rapid-btn end-btn" data-action="showSubjectPage()">
         📚 Choose Another Subject
       </button>
-      <button class="mode-btn rapid-btn end-btn" onclick="showHomePage()">
+      <button class="mode-btn rapid-btn end-btn" data-action="showHomePage()">
         🏠 Home
       </button>
     `;
@@ -2087,19 +1844,19 @@ function renderResultsScreen(mode) {
     subtitle = "Review session finished.";
     total = missedReviewStartTotal;
     buttons = `
-      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
+      <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'missed')">
         ❌ Review Missed Questions Again
       </button>
-      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'weak')">
+      <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'weak')">
         🎯 Practice Weak Areas
       </button>
-      <button class="mode-btn rapid-btn end-btn" onclick="startSubject(currentSubject, 'standard')">
+      <button class="mode-btn rapid-btn end-btn" data-action="startSubject(currentSubject, 'standard')">
         📘 Standard Practice
       </button>
-      <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
+      <button class="mode-btn rapid-btn end-btn" data-action="showSubjectPage()">
         📚 Choose Another Subject
       </button>
-      <button class="mode-btn rapid-btn end-btn" onclick="showHomePage()">
+      <button class="mode-btn rapid-btn end-btn" data-action="showHomePage()">
         🏠 Home
       </button>
     `;
@@ -2112,40 +1869,40 @@ function renderResultsScreen(mode) {
       <p><strong>Time Used:</strong> ${formatTime(timedStartTotal - timeRemaining)}</p>
     `;
     buttons = `
-      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'timed')">
+      <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'timed')">
         ⏱ Retry Timed Practice
       </button>
-      <button class="mode-btn standard-btn end-btn" onclick="showTimedModePage(currentSubject)">
+      <button class="mode-btn standard-btn end-btn" data-action="showTimedModePage(currentSubject)">
         ⏱ Choose Another Timer
       </button>
-      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
+      <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'missed')">
         ❌ Review Missed Questions
       </button>
-      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'weak')">
+      <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'weak')">
         🎯 Practice Weak Areas
       </button>
-      <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
+      <button class="mode-btn rapid-btn end-btn" data-action="showSubjectPage()">
         📚 Choose Another Subject
       </button>
-      <button class="mode-btn rapid-btn end-btn" onclick="showHomePage()">
+      <button class="mode-btn rapid-btn end-btn" data-action="showHomePage()">
         🏠 Home
       </button>
     `;
   } else {
     buttons = `
-      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'missed')">
+      <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'missed')">
         ❌ Review Missed Questions
       </button>
-      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'weak')">
+      <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'weak')">
         🎯 Practice Weak Areas
       </button>
-      <button class="mode-btn standard-btn end-btn" onclick="startSubject(currentSubject, 'standard')">
+      <button class="mode-btn standard-btn end-btn" data-action="startSubject(currentSubject, 'standard')">
         🔁 Retry Subject
       </button>
-      <button class="mode-btn rapid-btn end-btn" onclick="showSubjectPage()">
+      <button class="mode-btn rapid-btn end-btn" data-action="showSubjectPage()">
         📚 Choose Another Subject
       </button>
-      <button class="mode-btn rapid-btn end-btn" onclick="showHomePage()">
+      <button class="mode-btn rapid-btn end-btn" data-action="showHomePage()">
         🏠 Home
       </button>
     `;
@@ -2157,7 +1914,7 @@ syncUserStatsToFirebase();
   
     appContainer.innerHTML = `
     <div class="subject-page-header">
-      <h2 class="section-title">${subject.name} Complete</h2>
+      <h2 class="section-title">${escapeHTML(subject.name)} Complete</h2>
       <p class="subject-page-subtitle">${subtitle}</p>
     </div>
 
@@ -2168,7 +1925,7 @@ syncUserStatsToFirebase();
       </div>
 
       <p>${getResultMessage(score, total)}</p>
-      ${mode !== "weak" ? `<p><strong>Focus on:</strong> ${getWeakPointSummary()}</p>` : ""}
+      ${mode !== "weak" ? `<p><strong>Focus on:</strong> ${escapeHTML(getWeakPointSummary())}</p>` : ""}
       ${extraLine}
 
       <div class="subject-mode-group">
@@ -2185,41 +1942,44 @@ syncUserStatsToFirebase();
 function showReviewForm() {
   return `
     <div class="feedback-box">
+      <p id="review-status" role="status" aria-live="polite"></p>
       <p><strong>On a scale of 1 to 5, how much has PrepSprint helped you study?</strong></p>
 
       <textarea 
-        id="review-comment" 
+        id="review-comment" maxlength="2000" aria-label="Optional feedback" 
         placeholder="Optional: Tell us how we can improve..."
         style="width: 100%; margin: 10px 0; padding: 8px;"
       ></textarea>
 
-      <button class="mode-btn standard-btn" onclick="submitAppReview(5)">5 - The best study resource I've used</button>
-<button class="mode-btn rapid-btn" onclick="submitAppReview(4)">4 - A lot</button>
-<button class="mode-btn dark-btn" onclick="submitAppReview(3)">3 - A little bit</button>
-<button class="mode-btn dark-btn" onclick="submitAppReview(2)">2 - Very little</button>
-<button class="mode-btn dark-btn" onclick="submitAppReview(1)">1 - Not at all</button>
+      <button class="mode-btn standard-btn" data-action="submitAppReview(5)">5 - The best study resource I've used</button>
+<button class="mode-btn rapid-btn" data-action="submitAppReview(4)">4 - A lot</button>
+<button class="mode-btn dark-btn" data-action="submitAppReview(3)">3 - A little bit</button>
+<button class="mode-btn dark-btn" data-action="submitAppReview(2)">2 - Very little</button>
+<button class="mode-btn dark-btn" data-action="submitAppReview(1)">1 - Not at all</button>
     </div>
   `;
 }
 
-function submitAppReview(rating) {
-  const commentEl = document.getElementById("review-comment");
-  const comment = commentEl ? commentEl.value.trim() : "";
-
-  if (typeof submitReviewToFirebase === "function") {
-  submitReviewToFirebase(rating, comment);
+async function submitAppReview(rating) {
+  const status = document.getElementById("review-status");
+  if (reviewSubmitting || !status) return;
+  if (!accountUI.getState().user) { status.textContent = "Sign in with Google from Home to send feedback."; return; }
+  reviewSubmitting = true;
+  status.textContent = "Sending feedback…";
+  try {
+    await window.prepSprintAccount.submitReview(rating, document.getElementById("review-comment")?.value.trim() || "");
+    status.textContent = "Thank you. Your feedback was saved.";
+  } catch (error) { status.textContent = window.prepSprintAccount.errorMessage(error); }
+  finally { reviewSubmitting = false; }
 }
-
-  alert("Thanks for the feedback!");
-}
+let reviewSubmitting = false;
 
 try {
-  if (typeof trackUniqueUser === "function") {
-    trackUniqueUser();
-  }
-
   loadUnitFiles()
   .then(() => {
+   window.applyCurriculumUpdates?.(window.questionBanks);
+   window.applyPassageMedia?.(window.questionBanks);
+   window.validateQuestionBanks();
    window.subjects = [
      buildSubject("AP Gov", "apGov"),
      buildSubject("AP World", "apWorld"),
@@ -2248,13 +2008,19 @@ try {
 
 subjects = window.subjects;
 
+accountUI.start({
+  getProgress: () => savedProgress,
+  setProgress: value => { savedProgress = normalizeProgress(value); timedDuration = savedProgress.lastTimedDuration; rebuildSubjects(); },
+  resetSession: () => { stopTimer(); score = 0; weakPoints = {}; missedQuestions = []; currentShuffledChoices = []; standardQuestions = []; rapidQuestions = []; unitQuestions = []; focusGuideQuestions = []; weakAreaQuestions = []; answerLocked = true; },
+  render: showHomePage
+});
 showHomePage();
   })
   .catch((error) => {
     document.body.innerHTML = `
       <div style="font-family: Arial; padding: 20px;">
         <h2>PrepSprint failed to load questions</h2>
-        <p><strong>Error:</strong> ${error.message}</p>
+        <p><strong>Error:</strong> ${escapeHTML(error.message)}</p>
       </div>
     `;
     console.error(error);
@@ -2263,19 +2029,29 @@ showHomePage();
   document.body.innerHTML = `
     <div style="font-family: Arial; padding: 20px;">
       <h2>PrepSprint failed to load</h2>
-      <p><strong>Error:</strong> ${error.message}</p>
+      <p><strong>Error:</strong> ${escapeHTML(error.message)}</p>
     </div>
   `;
 
   console.error(error);
 }
 
-window.addEventListener("beforeunload", () => {
-  syncUserStatsToFirebase();
-});
 
-document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "hidden") {
-    syncUserStatsToFirebase();
+const UI_ACTIONS = { showHomePage, showSubjectPage, showProgressPage, showMorePage, toggleLegacyPractice, showSubjectModePage, showStudyByUnitPage, startQuickPractice, startUnitPractice, startTimedSubject, startSubject, showTimedModePage, handleAnswer, goToNextQuestion, resetSavedProgress, exitRapidFire, exitTimedPractice, submitAppReview, accountSignIn, accountSignOut, accountRetry, accountSync, accountKeepLocal, accountKeepCloud };
+document.addEventListener("click", event => {
+  const button = event.target.closest("button[data-action]");
+  if (!button || button.disabled) return;
+  const match = /^([a-zA-Z]+)\((.*)\)$/.exec(button.dataset.action);
+  if (!match || !Object.hasOwn(UI_ACTIONS, match[1])) return;
+  const raw = match[2].trim();
+  const tokens = raw ? raw.split(/,\s*/) : [];
+  const args = [];
+  for (const token of tokens) {
+    if (/^\d+$/.test(token)) args.push(Number(token));
+    else if (/^'[a-z]+'$/.test(token)) args.push(token.slice(1, -1));
+    else if (token === "currentSubject") args.push(currentSubject);
+    else if (token === "currentUnitIndex") args.push(currentUnitIndex);
+    else return;
   }
+  UI_ACTIONS[match[1]](...args);
 });
